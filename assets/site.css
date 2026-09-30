@@ -361,8 +361,8 @@ main { display: block; }
 /* ---------- Shared facts, as a bento ---------- */
 .facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
 .facts .fact:nth-child(1), .facts .fact:nth-child(4) { grid-column: span 2; }
-@media (max-width: 760px) { .facts { grid-template-columns: 1fr; } .facts .fact:nth-child(n) { grid-column: auto; } }
-.fact { padding: clamp(26px, 3.4vw, 40px); border-radius: var(--radius-lg); position: relative; overflow: hidden; min-height: 220px; display: flex; flex-direction: column; }
+@media (max-width: 760px) { .facts { grid-template-columns: 1fr; } .facts .fact:nth-child(n) { grid-column: auto; } .fact { min-height: 0; } .fact-icon { margin-bottom: 20px; } }
+.fact { padding: clamp(26px, 3.4vw, 40px); border-radius: var(--radius-lg); position: relative; overflow: hidden; min-height: 200px; display: flex; flex-direction: column; }
 .fact h3 { font-size: clamp(1.35rem, 2.2vw, 1.8rem); letter-spacing: -0.03em; margin: auto 0 10px; }
 .fact p { color: var(--text-2); font-size: 16px; max-width: 34em; }
 .fact-icon { width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center; margin-bottom: 28px;
