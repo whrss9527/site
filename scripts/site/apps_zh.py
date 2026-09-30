@@ -1,7 +1,7 @@
 """Simplified Chinese app pages. Same structure, facts and screenshots as the
 English data in apps.py; when one changes, change the other."""
 from common import GH
-from apps import shot, cut
+from apps import shot, cut, stox_demo, STOX_HEAD
 
 # ---------------------------------------------------------------- Pop
 POP = {
@@ -207,11 +207,11 @@ STOX = {
     "desc": "Stox 在 Mac 菜单栏里显示 A 股、港股和美股行情，还有图表、持仓盈亏、提醒和 iCloud 同步。右键一点，全部隐藏。开源免费。",
     "say": "/stɒks/ —— 就是 stocks，挤成了四个字母。",
     "lede": "A 股、港股、美股行情就在菜单栏里，还有持仓盈亏、提醒和 iCloud 同步。右键点一下，只剩一个安静的图标。",
-    "meta": ["开源免费", "macOS 13 或更新", "Apple 芯片与 Intel", "简体中文界面"],
-    "stage": lambda r: '<div class="compose">' +
-        cut(r, "stox/detail.webp", "Stox 面板：自选列表和贵州茅台展开的分时图", 376, 645, width=300, eager=True) +
-        cut(r, "stox/kline.webp", "Stox 的日 K 线图，带均线和成交量", 376, 645, width=300, eager=True) +
-        cut(r, "stox/holdings.webp", "Stox 的持仓页面，按币种汇总并显示盈亏", 376, 647, width=300, eager=True) +
+    "meta": ["开源免费", "macOS 13 或更新", "Apple 芯片与 Intel", "简体中文和英文界面"],
+    "extra_head": STOX_HEAD,
+    "stage": lambda r: '<div class="compose stox-stage">' +
+        stox_demo(r, "zh", "detail", "stox/detail.webp", "Stox 面板：自选列表和贵州茅台展开的分时图", 376, 645, desk=True) +
+        cut(r, "stox/detail.webp", "Stox 面板的真实截图：自选列表和贵州茅台展开的分时图", 376, 645, width=300, cap="真实截图") +
         "</div>",
     "features": lambda r: [
         ("看一眼，就藏起来",
@@ -219,28 +219,25 @@ STOX = {
          ["把选中的股票固定在菜单栏上，单行或双行显示，刘海屏上轮播",
           "⌃⌥S 在任何应用里打开面板；也可以固定成浮动窗口",
           "红涨绿跌、绿涨红跌，或者干脆不用红绿"],
-         cut(r, "stox/panel.webp", "Stox 自选列表，每一行都有迷你分时图", 376, 583, width=320)),
+         stox_demo(r, "zh", "list", "stox/panel.webp", "Stox 自选列表，每一行都有迷你分时图", 376, 583, desk=True)),
         ("三个市场，还不止",
          "沪深北 A 股、港股、美股（含盘前盘后价格），另外还有指数、ETF、场外基金、国际期货和外汇。",
          ["按代码、中文名或拼音首字母搜索：<code>600519</code>、<code>gzmt</code>、<code>aapl</code>",
           "一次粘贴多个代码，一起添加",
           "主数据源出问题时，自动切换到备用数据源"],
-         cut(r, "stox/search.webp", "Stox 搜索结果，边输入边显示价格和涨跌", 376, 467, width=320)),
+         stox_demo(r, "zh", "search", "stox/search.webp", "Stox 搜索结果，边输入边显示价格和涨跌", 376, 467)),
         ("图表，一看就懂",
          "展开一行，查看分时、五日、日 K、周 K 和月 K，带均线和成交量。鼠标悬停，就能看到任意一分钟的准确价格。A 股还有盘口和资金流向。",
          ["图上画出你的成本线，记录过的交易标上 B 和 S",
           "开盘、最高、最低、成交额、市盈率、市值、52 周区间",
           "A 股涨幅榜、跌幅榜和行业排行"],
-         '<div class="compose" style="gap:20px">' +
-         cut(r, "stox/orderbook.webp", "A 股五档盘口，显示五档买卖报价", 376, 645, width=250) +
-         cut(r, "stox/fundflow.webp", "A 股资金流向图，显示全天的主力净流入", 376, 645, width=250) +
-         "</div>"),
+         stox_demo(r, "zh", "kline", "stox/kline.webp", "Stox 的日 K 线图，带均线和成交量", 376, 645)),
         ("持仓与盈亏",
          "填入股数和成本，Stox 会按币种算出当日盈亏和总盈亏，持有多种货币时折算成人民币。可以记录交易和分红；日历里能看到每一天的结果。",
          ["买入时自动更新加权平均成本，卖出时记录已实现收益",
           "点一下眼睛图标，面板、菜单栏和通知里的金额都会隐藏",
           "可选的收盘总结通知"],
-         cut(r, "stox/calendar.webp", "盈亏日历，显示一个月里每天的结果", 376, 439, width=320)),
+         stox_demo(r, "zh", "holdings", "stox/holdings.webp", "Stox 的持仓页面，按币种汇总并显示盈亏", 376, 647)),
     ],
     "more_title": "还有这些",
     "tiles": [
@@ -255,7 +252,7 @@ STOX = {
         ("macOS", "13 Ventura 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel"),
         ("权限", "无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。"),
-        ("语言", "简体中文界面"),
+        ("语言", "简体中文或英文，跟随 Mac 的系统语言（0.47.0 起）"),
         ("数据", "腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。"),
         ("下载", "约 4 MB（<code>Stox.zip</code>）"),
         ("许可证", "GPL-3.0"),
@@ -271,7 +268,7 @@ STOX = {
         ("需要辅助功能权限吗？", "不需要。Stox 不申请辅助功能或屏幕录制权限。它的全局快捷键用的是标准热键接口，不需要任何权限。它只会申请发送通知（用于提醒），以及在你开启同步时使用 iCloud 云盘。"),
         ("行情从哪里来？", "来自腾讯财经的公开行情服务，新浪财经作为自动备用。港股行情延时约 15 分钟。数据仅供参考，不构成投资建议。"),
         ("我的持仓存在哪里？", '存在你的 Mac 上；开启同步后，也存在你自己的 iCloud 云盘里（<code>Stox/sync.json</code>）。不会发给我。详见<a href="../privacy/stox/">隐私政策</a>。'),
-        ("能用英文界面吗？", "目前界面是简体中文。股票代码和美股代码照常可用。"),
+        ("能用英文界面吗？", "能。从 0.47.0 起，Mac 的系统语言不是中文时，Stox 的界面就是英文。A 股、港股的名称仍是中文，和行情源给的一样。"),
     ],
 }
 

@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../assets/stox-demo.css">
+<script src="../../assets/stox-demo.js" defer></script>
 <title>Stox · 菜单栏里的 A 股、港股、美股行情</title>
 <meta name="description" content="Stox 在 Mac 菜单栏里显示 A 股、港股和美股行情，还有图表、持仓盈亏、提醒和 iCloud 同步。右键一点，全部隐藏。开源免费。">
 <meta name="color-scheme" content="light dark">
@@ -72,8 +74,8 @@
         <a class="btn btn-primary" href="https://github.com/whrss9527/stox/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Stox</a>
         <a class="btn btn-glass" href="https://github.com/whrss9527/stox"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
       </div>
-      <p class="meta"><span>开源免费</span><span>macOS 13 或更新</span><span>Apple 芯片与 Intel</span><span>简体中文界面</span></p>
-      <div class="stage"><div class="compose"><figure class="cut"><img src="../../assets/img/stox/detail.webp" alt="Stox 面板：自选列表和贵州茅台展开的分时图" width="376" height="645" decoding="async" style="width:300px"></figure><figure class="cut"><img src="../../assets/img/stox/kline.webp" alt="Stox 的日 K 线图，带均线和成交量" width="376" height="645" decoding="async" style="width:300px"></figure><figure class="cut"><img src="../../assets/img/stox/holdings.webp" alt="Stox 的持仓页面，按币种汇总并显示盈亏" width="376" height="647" decoding="async" style="width:300px"></figure></div></div>
+      <p class="meta"><span>开源免费</span><span>macOS 13 或更新</span><span>Apple 芯片与 Intel</span><span>简体中文和英文界面</span></p>
+      <div class="stage"><div class="compose stox-stage"><figure class="sxd" data-lang="zh" data-preset="detail" data-desk data-icon="../../assets/icons/stox.png"><noscript><img src="../../assets/img/stox/detail.webp" alt="Stox 面板：自选列表和贵州茅台展开的分时图" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure><figure class="cut"><img src="../../assets/img/stox/detail.webp" alt="Stox 面板的真实截图：自选列表和贵州茅台展开的分时图" width="376" height="645" loading="lazy" decoding="async" style="width:300px"><figcaption>真实截图</figcaption></figure></div></div>
     </div>
   </section>
 
@@ -86,7 +88,7 @@
           <p>左键点菜单栏图标，打开玻璃面板；再点一下、点别处或按 Esc 关闭。右键在显示行情和只显示图标之间切换，身后有人的时候正好用得上。</p>
           <ul><li>把选中的股票固定在菜单栏上，单行或双行显示，刘海屏上轮播</li><li>⌃⌥S 在任何应用里打开面板；也可以固定成浮动窗口</li><li>红涨绿跌、绿涨红跌，或者干脆不用红绿</li></ul>
         </div>
-        <div class="feature-media "><figure class="cut"><img src="../../assets/img/stox/panel.webp" alt="Stox 自选列表，每一行都有迷你分时图" width="376" height="583" loading="lazy" decoding="async" style="width:320px"></figure></div>
+        <div class="feature-media "><figure class="sxd" data-lang="zh" data-preset="list" data-desk data-icon="../../assets/icons/stox.png"><noscript><img src="../../assets/img/stox/panel.webp" alt="Stox 自选列表，每一行都有迷你分时图" width="376" height="583" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -94,7 +96,7 @@
           <p>沪深北 A 股、港股、美股（含盘前盘后价格），另外还有指数、ETF、场外基金、国际期货和外汇。</p>
           <ul><li>按代码、中文名或拼音首字母搜索：<code>600519</code>、<code>gzmt</code>、<code>aapl</code></li><li>一次粘贴多个代码，一起添加</li><li>主数据源出问题时，自动切换到备用数据源</li></ul>
         </div>
-        <div class="feature-media "><figure class="cut"><img src="../../assets/img/stox/search.webp" alt="Stox 搜索结果，边输入边显示价格和涨跌" width="376" height="467" loading="lazy" decoding="async" style="width:320px"></figure></div>
+        <div class="feature-media "><figure class="sxd" data-lang="zh" data-preset="search" data-icon="../../assets/icons/stox.png"><noscript><img src="../../assets/img/stox/search.webp" alt="Stox 搜索结果，边输入边显示价格和涨跌" width="376" height="467" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -102,7 +104,7 @@
           <p>展开一行，查看分时、五日、日 K、周 K 和月 K，带均线和成交量。鼠标悬停，就能看到任意一分钟的准确价格。A 股还有盘口和资金流向。</p>
           <ul><li>图上画出你的成本线，记录过的交易标上 B 和 S</li><li>开盘、最高、最低、成交额、市盈率、市值、52 周区间</li><li>A 股涨幅榜、跌幅榜和行业排行</li></ul>
         </div>
-        <div class="feature-media "><div class="compose" style="gap:20px"><figure class="cut"><img src="../../assets/img/stox/orderbook.webp" alt="A 股五档盘口，显示五档买卖报价" width="376" height="645" loading="lazy" decoding="async" style="width:250px"></figure><figure class="cut"><img src="../../assets/img/stox/fundflow.webp" alt="A 股资金流向图，显示全天的主力净流入" width="376" height="645" loading="lazy" decoding="async" style="width:250px"></figure></div></div>
+        <div class="feature-media "><figure class="sxd" data-lang="zh" data-preset="kline" data-icon="../../assets/icons/stox.png"><noscript><img src="../../assets/img/stox/kline.webp" alt="Stox 的日 K 线图，带均线和成交量" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -110,7 +112,7 @@
           <p>填入股数和成本，Stox 会按币种算出当日盈亏和总盈亏，持有多种货币时折算成人民币。可以记录交易和分红；日历里能看到每一天的结果。</p>
           <ul><li>买入时自动更新加权平均成本，卖出时记录已实现收益</li><li>点一下眼睛图标，面板、菜单栏和通知里的金额都会隐藏</li><li>可选的收盘总结通知</li></ul>
         </div>
-        <div class="feature-media "><figure class="cut"><img src="../../assets/img/stox/calendar.webp" alt="盈亏日历，显示一个月里每天的结果" width="376" height="439" loading="lazy" decoding="async" style="width:320px"></figure></div>
+        <div class="feature-media "><figure class="sxd" data-lang="zh" data-preset="holdings" data-icon="../../assets/icons/stox.png"><noscript><img src="../../assets/img/stox/holdings.webp" alt="Stox 的持仓页面，按币种汇总并显示盈亏" width="376" height="647" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       </div>
     </div>
@@ -128,7 +130,7 @@
       <div class="info-grid">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
-          <dl class="specs"><dt>macOS</dt><dd>13 Ventura 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel</dd><dt>权限</dt><dd>无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。</dd><dt>语言</dt><dd>简体中文界面</dd><dt>数据</dt><dd>腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。</dd><dt>下载</dt><dd>约 4 MB（<code>Stox.zip</code>）</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
+          <dl class="specs"><dt>macOS</dt><dd>13 Ventura 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel</dd><dt>权限</dt><dd>无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。</dd><dt>语言</dt><dd>简体中文或英文，跟随 Mac 的系统语言（0.47.0 起）</dd><dt>数据</dt><dd>腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。</dd><dt>下载</dt><dd>约 4 MB（<code>Stox.zip</code>）</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
         </div>
         <div class="panel-block glass">
           <h2>安装与更新</h2>
@@ -142,7 +144,7 @@
   <section class="section-tight" aria-labelledby="faq-title">
     <div class="wrap narrow">
       <div class="section-head"><h2 id="faq-title">常见问题</h2></div>
-      <div class="faq"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Stox 以 GPL-3.0 开源。行情来自免费的公开数据源，所以不用注册，也不用 API 密钥。Mac App Store 版正在准备中；GitHub 上的版本会一直免费。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。Stox 不申请辅助功能或屏幕录制权限。它的全局快捷键用的是标准热键接口，不需要任何权限。它只会申请发送通知（用于提醒），以及在你开启同步时使用 iCloud 云盘。</p></div></details><details class="glass"><summary>行情从哪里来？</summary><div class="answer"><p>来自腾讯财经的公开行情服务，新浪财经作为自动备用。港股行情延时约 15 分钟。数据仅供参考，不构成投资建议。</p></div></details><details class="glass"><summary>我的持仓存在哪里？</summary><div class="answer"><p>存在你的 Mac 上；开启同步后，也存在你自己的 iCloud 云盘里（<code>Stox/sync.json</code>）。不会发给我。详见<a href="../privacy/stox/">隐私政策</a>。</p></div></details><details class="glass"><summary>能用英文界面吗？</summary><div class="answer"><p>目前界面是简体中文。股票代码和美股代码照常可用。</p></div></details></div>
+      <div class="faq"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Stox 以 GPL-3.0 开源。行情来自免费的公开数据源，所以不用注册，也不用 API 密钥。Mac App Store 版正在准备中；GitHub 上的版本会一直免费。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。Stox 不申请辅助功能或屏幕录制权限。它的全局快捷键用的是标准热键接口，不需要任何权限。它只会申请发送通知（用于提醒），以及在你开启同步时使用 iCloud 云盘。</p></div></details><details class="glass"><summary>行情从哪里来？</summary><div class="answer"><p>来自腾讯财经的公开行情服务，新浪财经作为自动备用。港股行情延时约 15 分钟。数据仅供参考，不构成投资建议。</p></div></details><details class="glass"><summary>我的持仓存在哪里？</summary><div class="answer"><p>存在你的 Mac 上；开启同步后，也存在你自己的 iCloud 云盘里（<code>Stox/sync.json</code>）。不会发给我。详见<a href="../privacy/stox/">隐私政策</a>。</p></div></details><details class="glass"><summary>能用英文界面吗？</summary><div class="answer"><p>能。从 0.47.0 起，Mac 的系统语言不是中文时，Stox 的界面就是英文。A 股、港股的名称仍是中文，和行情源给的一样。</p></div></details></div>
       <p class="small muted" style="margin-top:24px">更多帮助：<a href="https://github.com/whrss9527/stox/issues">GitHub 上的 Stox issue</a> · <a href="../support/">支持</a> · <a href="../privacy/stox/">Stox 隐私政策</a></p>
     </div>
   </section>

@@ -13,6 +13,15 @@ def cut(r, src, alt, w, h, dark=None, width=None, cap=None, eager=False):
     fc = f"<figcaption>{cap}</figcaption>" if cap else ""
     return f'<figure class="cut">{img}{fc}</figure>'
 
+def stox_demo(r, lang, preset, fallback, alt, w, h, desk=False):
+    """The interactive Stox panel (assets/stox-demo.js, sample data), preset to one state.
+    Without JavaScript the real screenshot `fallback` shows instead."""
+    d = " data-desk" if desk else ""
+    return (f'<figure class="sxd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/stox.png">'
+            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async" style="width:300px"></noscript></figure>')
+
+STOX_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/stox-demo.css">\n<script src="{r}assets/stox-demo.js" defer></script>'
+
 def feature(title, body, bullets, media, media_cls=""):
     lis = "".join(f"<li>{b}</li>" for b in bullets)
     ul = f"<ul>{lis}</ul>" if bullets else ""
@@ -50,7 +59,8 @@ def build(key, d, lang="en"):
     t = c.t
     r = c.r
     a = APPS[key]
-    h = head(c, d["title"], d["desc"], body_class=f"app-{key}")
+    extra = d["extra_head"](r) if "extra_head" in d else ""
+    h = head(c, d["title"], d["desc"], body_class=f"app-{key}", extra_head=extra)
     h += header(c, key)
     meta = "".join(f"<span>{m}</span>" for m in d["meta"])
     feats = "".join(feature(*f) if len(f) == 4 else feature(f[0], f[1], f[2], f[3], f[4]) for f in d["features"](r))
@@ -326,11 +336,11 @@ STOX = {
     "desc": "Stox shows China A-share, Hong Kong and US stock quotes in the Mac menu bar, with charts, holdings and P&L, alerts and iCloud sync. Right-click to hide it all. Free and open source.",
     "say": "/stɒks/ — “stocks”, squeezed into four letters.",
     "lede": "China A-share, Hong Kong and US quotes in your menu bar, with holdings and P&amp;L, alerts and iCloud sync. One right-click and only a quiet icon is left.",
-    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "Interface in Simplified Chinese"],
-    "stage": lambda r: '<div class="compose">' +
-        cut(r, "stox/detail.webp", "Stox panel with a watchlist and an expanded intraday chart for Kweichow Moutai", 376, 645, width=300, eager=True) +
-        cut(r, "stox/kline.webp", "Stox daily candlestick chart with moving averages and volume", 376, 645, width=300, eager=True) +
-        cut(r, "stox/holdings.webp", "Stox holdings view with per-currency totals and profit and loss", 376, 647, width=300, eager=True) +
+    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "In English and Simplified Chinese"],
+    "extra_head": STOX_HEAD,
+    "stage": lambda r: '<div class="compose stox-stage">' +
+        stox_demo(r, "en", "detail", "stox/detail.webp", "Stox panel with a watchlist and an expanded intraday chart for Kweichow Moutai", 376, 645, desk=True) +
+        cut(r, "stox/detail.webp", "Real screenshot of the Stox panel, in Chinese, with Kweichow Moutai expanded to its intraday chart", 376, 645, width=300, cap="Real screenshot · Chinese interface") +
         "</div>",
     "features": lambda r: [
         ("Glance, then hide",
@@ -338,28 +348,25 @@ STOX = {
          ["Pin chosen tickers to the menu bar, on one line or two, rotating on notched screens",
           "⌃⌥S opens the panel from any app; pin it as a floating window",
           "Red-up, green-up, or no red and green at all"],
-         cut(r, "stox/panel.webp", "Stox watchlist with a mini intraday chart on every row", 376, 583, width=320)),
+         stox_demo(r, "en", "list", "stox/panel.webp", "Stox watchlist with a mini intraday chart on every row", 376, 583, desk=True)),
         ("Three markets, and then some",
          "Shanghai, Shenzhen and Beijing A-shares, Hong Kong and US stocks with pre- and after-hours prices, plus indexes, ETFs, mutual funds, international futures and forex.",
          ["Search by code, Chinese name or pinyin initials: <code>600519</code>, <code>gzmt</code>, <code>aapl</code>",
           "Paste several codes at once to add them together",
           "Quotes switch to a backup source automatically if the main one fails"],
-         cut(r, "stox/search.webp", "Stox search results showing prices and changes as you type", 376, 467, width=320)),
+         stox_demo(r, "en", "search", "stox/search.webp", "Stox search results showing prices and changes as you type", 376, 467)),
         ("Charts that answer the question",
          "Expand a row for intraday, five-day, daily, weekly and monthly charts with moving averages and volume. Hover for the exact price at any minute. A-shares add the order book and money flow.",
          ["Your cost line on the chart, and B and S marks for recorded trades",
           "Open, high, low, turnover, P/E, market cap, 52-week range",
           "An A-share gainers, losers and industry ranking"],
-         '<div class="compose" style="gap:20px">' +
-         cut(r, "stox/orderbook.webp", "A-share order book with five bid and ask levels", 376, 645, width=250) +
-         cut(r, "stox/fundflow.webp", "A-share money flow chart with main-force net inflow through the day", 376, 645, width=250) +
-         "</div>"),
+         stox_demo(r, "en", "kline", "stox/kline.webp", "Stox daily candlestick chart with moving averages and volume", 376, 645)),
         ("Holdings and P&amp;L",
          "Enter shares and cost, and Stox totals today’s and overall P&amp;L per currency, converted to yuan when you hold several. Log trades and dividends; a calendar shows every day’s result.",
          ["Weighted average cost updates as you buy; sells record realized gains",
           "Tap the eye to mask amounts in the panel, menu bar and notifications",
           "Optional closing summary notification"],
-         cut(r, "stox/calendar.webp", "Profit and loss calendar showing daily results for a month", 376, 439, width=320)),
+         stox_demo(r, "en", "holdings", "stox/holdings.webp", "Stox holdings view with per-currency totals and profit and loss", 376, 647)),
     ],
     "more_title": "Also inside",
     "tiles": [
@@ -374,7 +381,7 @@ STOX = {
         ("macOS", "13 Ventura or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "None required. Notifications for alerts; iCloud Drive access only if you turn on sync."),
-        ("Language", "Simplified Chinese interface"),
+        ("Language", "English or Simplified Chinese, following your Mac’s language (0.47.0 and later)"),
         ("Data", "Tencent Finance public quotes, Sina Finance as backup. Hong Kong quotes are delayed about 15 minutes."),
         ("Download", "About 4 MB (<code>Stox.zip</code>)"),
         ("License", "GPL-3.0"),
@@ -390,7 +397,7 @@ STOX = {
         ("Does it need Accessibility?", "No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync."),
         ("Where do the quotes come from?", "From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice."),
         ("Where are my holdings stored?", f'On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.'),
-        ("Can I use it in English?", "The interface is in Simplified Chinese for now. Tickers and US symbols work as you’d expect."),
+        ("Can I use it in English?", "Yes. Since 0.47.0 Stox shows its interface in English unless your Mac’s language is Chinese. Names of Chinese stocks stay in Chinese, as the quote sources give them."),
     ],
 }
 
