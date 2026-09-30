@@ -20,6 +20,14 @@ def stox_demo(r, lang, preset, fallback, alt, w, h, desk=False):
     return (f'<figure class="sxd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/stox.png">'
             f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async" style="width:300px"></noscript></figure>')
 
+def meno_demo(r, lang, preset, fallback):
+    """The interactive Meno demo (assets/meno-demo.js, sample items), preset to one state.
+    Without JavaScript the CSS illustration `fallback` shows instead."""
+    return (f'<figure class="mnd" data-lang="{lang}" data-preset="{preset}" data-icon="{r}assets/icons/meno.png">'
+            f'<noscript>{fallback}</noscript></figure>')
+
+MENO_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/meno-demo.css">\n<script src="{r}assets/meno-demo.js" defer></script>'
+
 STOX_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/stox-demo.css">\n<script src="{r}assets/stox-demo.js" defer></script>'
 
 def feature(title, body, bullets, media, media_cls=""):
@@ -279,32 +287,47 @@ MENO_RULE = """<div class="illus" role="img" aria-label="Illustration: two rules
   </div>
 </div>"""
 
+MENO_LANG = """<div class="illus" role="img" aria-label="Illustration: the Language setting in Meno’s General settings, with Follow System, English, Simplified Chinese and Traditional Chinese">
+  <div class="palette">
+    <div class="row sel"><span class="dot c"></span><span>Follow System</span><small>✓</small></div>
+    <div class="row"><span class="dot"></span><span>English</span></div>
+    <div class="row"><span class="dot"></span><span>简体中文</span></div>
+    <div class="row"><span class="dot"></span><span>繁體中文</span></div>
+  </div>
+</div>"""
+
 MENO = {
     "title": "Meno · A calm menu bar, made with glass",
     "desc": "Meno is a menu bar manager for macOS: hide and stash icons, bring them back with a click, hover, swipe or shortcut, with a Liquid Glass Shelf, Quick Open, rules, scenes and Zen mode.",
     "say": "/ˈmeː.no/ — Italian for “less”, one letter away from “menu”.",
     "lede": "Meno tucks away the menu bar icons you rarely need and brings them back with a click, a hover, a swipe or a shortcut.",
     "meta": ["Free and open source", "macOS 14 or later", "Apple silicon and Intel", "English, 简体中文, 繁體中文"],
-    "stage": lambda r: f'<div style="max-width:880px;margin:0 auto">{MENO_BAR}<p class="illus-cap">Illustration. The icons are placeholders for your apps’ menu bar items.</p></div>',
+    "extra_head": MENO_HEAD,
+    "stage": lambda r: f'<div style="max-width:880px;margin:0 auto">{meno_demo(r, "en", "layout", MENO_BAR)}</div>',
     "features": lambda r: [
         ("Visible, Hidden, and a Stash",
          "Meno adds small dividers to your menu bar. Icons left of the single chevron are hidden until you ask; icons past the double chevron go in the Stash, for things you almost never need — they appear only in the Shelf, Quick Open or with ⌥-click.",
          ["Reveal with a click on Meno, a click or hover on empty menu bar, a scroll or swipe down, or a shortcut",
           "Re-hides after a delay, when you switch apps or when the pointer leaves",
           "When an app restarts and macOS moves its icon, Meno puts it back"],
-         MENO_REVEAL),
+         meno_demo(r, "en", "reveal", MENO_REVEAL)),
         ("Shelf and Quick Open",
          "The Shelf is a glass bar below the menu bar that shows hidden items — handy next to the camera housing, where the menu bar runs out of room. Quick Open is a Spotlight-style palette that finds any item from the keyboard, pinyin and initials included.",
          ["↩ opens, ⌘↩ opens the secondary menu, ⌘1–⌘9 pick a result",
           "Also runs Meno’s own actions: apply a scene, turn on Zen",
           "Liquid Glass on macOS 26; frosted glass on macOS 14 and 15"],
-         MENO_QUICK),
+         meno_demo(r, "en", "shelf", MENO_QUICK)),
         ("A menu bar that reads the room",
          "Rules change the menu bar for you: when a microphone or camera is in use, a display is plugged in, you’re on battery, on a certain network, or at a certain time. Scenes save arrangements like Work, Home or Presenting.",
          ["Actions reveal or hide sections, apply a scene, turn on Zen or move one item",
           "Moves wait until you’re not using the mouse and keyboard",
           "Pause all rules from Meno’s menu or a shortcut"],
-         MENO_RULE),
+         meno_demo(r, "en", "rules", MENO_RULE)),
+        ("In your language",
+         "Meno speaks English, Simplified Chinese and Traditional Chinese. It follows the system language, or the one you choose in Settings › General › Language, and switches after a relaunch.",
+         ["The setting is labelled in all three languages, so it’s easy to find",
+          "Everything else in General: how items appear, when they hide again, the Stash and Zen"],
+         meno_demo(r, "en", "general", MENO_LANG)),
     ],
     "more_title": "Small things that add up",
     "tiles": [
