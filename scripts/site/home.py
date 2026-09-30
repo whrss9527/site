@@ -131,8 +131,8 @@ def page(zh):
       </div>
       <div class="cards">{cards(c)}
       </div>
-      <p class="small muted" style="margin-top:20px">{t("Languages: Meno is in English, Simplified and Traditional Chinese. Pop, Stox and Proxi currently have a Simplified Chinese interface.",
-                                                          "界面语言：Meno 支持英文、简体中文和繁体中文；Pop、Stox、Proxi 目前是简体中文界面。")}</p>
+      <p class="small muted" style="margin-top:20px">{t("Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.",
+                                                          "界面语言：Pop（0.30.0 起）和 Stox（0.47.0 起）有简体中文和英文界面，跟随 Mac 的系统语言，接下来的版本会加上语言设置；Meno 支持英文、简体中文和繁体中文，0.12.0 起可以在设置里选择语言；Proxi 只有简体中文界面。")}</p>
     </div>
   </section>
 

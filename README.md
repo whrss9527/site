@@ -2,7 +2,7 @@
 
 The website for whrss9527's Mac apps — [Pop](https://github.com/whrss9527/pop), [Meno](https://github.com/whrss9527/meno), [Stox](https://github.com/whrss9527/stox) and [Proxi](https://github.com/whrss9527/proxi) — served at **https://whrss.com**. The blog that used to live there moves to **https://blog.whrss.com**.
 
-Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, the 404 page and the interactive Stox and Meno demos; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
+Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, the 404 page and the four interactive app demos; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
 
 ## Structure
 
@@ -15,8 +15,7 @@ zh/...                  The same pages in Simplified Chinese: zh/, zh/pop/, zh/p
 404.html                Not found, for both languages; sends old blog URLs to blog.whrss.com
 assets/site.css         The only stylesheet: tokens on :root, light and dark via prefers-color-scheme
 assets/site.js          Remembers the language picked in the language menu; closes open menus
-assets/stox-demo.js/.css The interactive Stox panel on the Stox pages (sample data, loaded only there)
-assets/meno-demo.js/.css The interactive Meno menu bar on the Meno pages (sample items, loaded only there)
+assets/<app>-demo.js/.css Interactive recreations of Pop, Meno, Stox and Proxi (sample data; each loaded only on its app's pages)
 assets/icons/           App icons (256 px, from each app's repository)
 assets/img/<app>/       Screenshots (from each app's repository and CI screenshots)
 assets/favicon.svg, assets/apple-touch-icon.png
@@ -62,14 +61,22 @@ Edit the English and Chinese text together: the two versions of a page must say 
 - Each page declares `canonical` and `hreflang` alternates (`en`, `zh-CN`, `x-default` → English), and `sitemap.xml` lists both languages.
 - The 404 page is shared. It is written in English; under `/zh/...` a script switches its text and links to Chinese. Its redirect of old blog addresses is unchanged.
 
-### Screenshots
+### Interactive demos and screenshots
 
-- **Stox** — the Stox pages show an interactive recreation of the panel instead of most screenshots: `assets/stox-demo.js` and `assets/stox-demo.css`, loaded only on `/stox/` and `/zh/stox/`. It follows the layout, sizes and colors in the Stox sources (`PanelView`, `QuoteRow`, `QuoteChart`, `IntradayChart`, `OrderBookView`, `FundFlowView`, `ProfitCalendarPanel`) and the wording of its `en.lproj` / `zh-Hans.lproj` strings, so update it when those change. All numbers are made-up sample data drawn from fixed seeds; nothing is fetched. Each use is `stox_demo(r, lang, preset, …)` in `apps.py`, with a preset (`detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar`) and the real screenshot that shows when JavaScript is off. One real screenshot stays in the hero, labelled as such. The screenshots are `docs/images/*.jpg` in the Stox repository, with the black desktop around the panel made transparent (`.webp`).
-- **Pop** — CI screenshots from the `ci-screenshots/macos-26` branch of the Pop repository, cut out the same way. Pop has no screenshots in its README yet.
-- **Proxi** — `docs/hero.png` and frames of `docs/tour.gif` from the Proxi repository.
-- **Meno** — there are no Meno screenshots anywhere yet, so the Meno pages show an interactive recreation instead: `assets/meno-demo.js` and `assets/meno-demo.css`, loaded only on `/meno/` and `/zh/meno/`. A menu bar with made-up sample items (neutral glyphs, no real app logos), Meno's icon and dividers, the Shelf, Quick Open, Meno's menu and a Settings window with the General, Layout and Rules panes. It follows the Meno sources (`StatusBarController`, `MenoIconRenderer`, `ShelfView`, `QuickOpenView`, `StatusMenuBuilder`, `SettingsRootView`, `GeneralPane`, `LayoutPane`, `RulesPane`, `Glass`), and the app's own zh-Hans / zh-Hant translations are copied into the script (the block between the `APP-STRINGS` markers), so update it when those change. Each use is `meno_demo(r, lang, preset, fallback)` in `apps.py`, with a preset (`layout`, `reveal`, `shelf`, `rules`, `general`) and the CSS illustration that shows when JavaScript is off.
+Most pictures on the app pages are **interactive recreations** of the apps in HTML, CSS and JavaScript, not screenshots. Each app has its own `assets/<app>-demo.js` and `assets/<app>-demo.css`, loaded only on that app's two pages. They use made-up sample data (fixed seeds, canned results); nothing is fetched and nothing is sent anywhere. Each follows the layout, sizes, colours and wording of the app's sources (named at the top of each script), so update a demo when those change.
 
-The Pop and Proxi interfaces are in Chinese, so their screenshots are too; the English pages say so. Stox has an English interface since 0.47.0: its English page shows the demo in English, and its one real screenshot (Chinese) says so.
+In `apps.py` each use is one helper call, `<app>_demo(r, lang, preset, fallback, …)`: `lang` picks the demo's language, `preset` the state it opens in, and `fallback` is what shows when JavaScript is off (a real screenshot, or for Meno a CSS illustration). Every demo is labelled "Interactive demo · sample data".
+
+| App | Figure | Presets | Recreates | No-JavaScript fallback |
+| --- | --- | --- | --- | --- |
+| Pop | `figure.ppd` | `ring`, `translate`, `unit`, `json`, `regex`, `ai`, `history`, `actions` | A pretend document with Pop's ring and result cards (long-press to open the ring); the English page shows Pop's English strings | CI screenshots from the `ci-screenshots/macos-26` branch of the Pop repository, cut out (`.webp`) |
+| Meno | `figure.mnd` | `layout`, `reveal`, `shelf`, `rules`, `general` | A menu bar with neutral sample items, Meno's icon and dividers, the Shelf, Quick Open, Meno's menu and the Settings window (General, Layout, Rules); its zh-Hans / zh-Hant strings are copied between the `APP-STRINGS` markers | CSS illustrations (there are no Meno screenshots yet) |
+| Stox | `figure.sxd` | `detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar` | The menu bar panel: watchlist, charts, order book, holdings and the P&L calendar, in English or Chinese as the app shows them | `docs/images/*.jpg` from the Stox repository, cut out (`.webp`) |
+| Proxi | `figure.pxd` | `panel`, `profiles`, `nodes`, `share`, `sync`, `connections` | The menu bar panel and the settings window | `docs/hero.png` and frames of `docs/tour.gif` from the Proxi repository |
+
+A few real screenshots stay: Pop's ring, the Stox panel and the Proxi panel in the heroes of their pages (each captioned "Real screenshot · Chinese interface"), Pop's plugin library, and the three panels on the home page.
+
+Interface languages, as the pages state them: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow the Mac's language, with a language setting coming in the next versions; Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0; Proxi is in Simplified Chinese only, so its English page shows the demo in English and says that the app itself is in Chinese. Real screenshots of Pop, Stox and Proxi are of the Chinese interface and say so.
 
 ## Preview locally
 
