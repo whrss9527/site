@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """Check the static site: every internal link and asset resolves, every #fragment
-exists, and no page loads anything from another origin.
+exists, and no page loads anything from another origin. Also checks the two
+languages: every English page has a Chinese counterpart under zh/ and vice
+versa, pages link only to pages in their own language (except the language
+switcher, marked with hreflang), and each page declares canonical and hreflang
+alternates for the pair.
 
 Usage: python3 scripts/check_links.py   (run from the repository root)
 Exits with status 1 if a problem is found.
@@ -20,8 +24,10 @@ LOADING_TAGS = {("link", "href"), ("script", "src"), ("img", "src"), ("source", 
 class Page(HTMLParser):
     def __init__(self):
         super().__init__()
-        self.refs = []   # (tag, attr, value, rel)
+        self.refs = []   # (tag, attr, value, rel, hreflang)
         self.ids = set()
+        self.canonical = None
+        self.alternates = {}  # hreflang -> href
 
     def handle_starttag(self, tag, attrs):
         a = dict(attrs)
@@ -29,9 +35,13 @@ class Page(HTMLParser):
             self.ids.add(a["id"])
         if tag == "a" and "name" in a:
             self.ids.add(a["name"])
+        if tag == "link" and a.get("rel") == "canonical":
+            self.canonical = a.get("href")
+        if tag == "link" and a.get("rel") == "alternate" and a.get("hreflang"):
+            self.alternates[a["hreflang"]] = a.get("href")
         for attr in ("href", "src", "srcset"):
             if attr in a and a[attr] is not None:
-                self.refs.append((tag, attr, a[attr], a.get("rel", "")))
+                self.refs.append((tag, attr, a[attr], a.get("rel", ""), a.get("hreflang")))
 
 
 def html_files():
@@ -52,6 +62,57 @@ def target_file(page_path, url_path):
     return full
 
 
+ORIGIN = "https://whrss.com"
+
+
+def url_path(rel_page):
+    """zh/pop/index.html -> /zh/pop/"""
+    d = os.path.dirname(rel_page).replace(os.sep, "/")
+    return "/" + (d + "/" if d else "")
+
+
+def check_languages(parsed):
+    problems = []
+    pages = {os.path.relpath(p, ROOT).replace(os.sep, "/"): page for p, page in parsed.items()}
+    pages.pop("404.html", None)   # shared by both languages
+    zh = {p[len("zh/"):] for p in pages if p.startswith("zh/")}
+    en = {p for p in pages if not p.startswith("zh/")}
+    for p in sorted(en - zh):
+        problems.append(f"{p}: no Chinese version at zh/{p}")
+    for p in sorted(zh - en):
+        problems.append(f"zh/{p}: no English version at {p}")
+
+    for rel_page, page in pages.items():
+        is_zh = rel_page.startswith("zh/")
+        own = url_path(rel_page)
+        en_path = own[len("/zh"):] if is_zh else own
+        want = {"en": ORIGIN + en_path, "zh-CN": ORIGIN + "/zh" + en_path, "x-default": ORIGIN + en_path}
+        if page.canonical != ORIGIN + own:
+            problems.append(f"{rel_page}: canonical is {page.canonical}, expected {ORIGIN + own}")
+        for hl, href in want.items():
+            if page.alternates.get(hl) != href:
+                problems.append(f"{rel_page}: hreflang {hl} is {page.alternates.get(hl)}, expected {href}")
+
+        # Links to other pages stay in this page's language, except language switches.
+        page_file = os.path.join(ROOT, rel_page)
+        for tag, attr, value, rel, hreflang in page.refs:
+            if tag != "a" or attr != "href":
+                continue
+            parts = urlsplit(value)
+            if parts.scheme or value.startswith("//") or not parts.path:
+                continue
+            target = os.path.relpath(target_file(page_file, unquote(parts.path)), ROOT).replace(os.sep, "/")
+            if not target.endswith(".html") or target == "404.html":
+                continue
+            target_zh = target.startswith("zh/")
+            if hreflang:
+                if (hreflang == "zh-CN") != target_zh:
+                    problems.append(f"{rel_page}: link {value} marked hreflang={hreflang} goes to {target}")
+            elif target_zh != is_zh:
+                problems.append(f"{rel_page}: link {value} leaves the page's language ({target})")
+    return problems
+
+
 def main():
     parsed = {}
     for path in html_files():
@@ -64,7 +125,7 @@ def main():
     checked = 0
     for path, page in parsed.items():
         rel_page = os.path.relpath(path, ROOT)
-        for tag, attr, value, rel in page.refs:
+        for tag, attr, value, rel, _ in page.refs:
             values = [v.strip().split(" ")[0] for v in value.split(",")] if attr == "srcset" else [value]
             for v in values:
                 if not v:
@@ -104,6 +165,8 @@ def main():
                         problems.append(f"{os.path.relpath(css_path, ROOT)}: external resource {u}")
                     elif not u.startswith("data:") and not os.path.exists(os.path.normpath(os.path.join(dirpath, u))):
                         problems.append(f"{os.path.relpath(css_path, ROOT)}: broken url({u})")
+
+    problems += check_languages(parsed)
 
     print(f"{len(parsed)} pages, {checked} internal references checked")
     for p in problems:
