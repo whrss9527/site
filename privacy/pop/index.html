@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pop Privacy Policy</title>
+<meta name="description" content="How Pop for macOS handles your data: no analytics, no accounts; data stays on your Mac.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/privacy/pop/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pop Privacy Policy">
+<meta property="og:description" content="How Pop for macOS handles your data: no analytics, no accounts; data stays on your Mac.">
+<meta property="og:url" content="https://whrss.com/privacy/pop/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="app-pop">
+<a class="skip" href="#main">Skip to content</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="Main">
+    <a href="../../pop/"><img src="../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../meno/"><img src="../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../stox/"><img src="../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </nav>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="panel nav-list" aria-label="Main">
+    <a href="../../pop/"><img src="../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../meno/"><img src="../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../stox/"><img src="../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<main id="main">
+  <article class="doc">
+    <div class="wrap narrow">
+      <header class="doc-head">
+        <div class="icon-row"><img src="../../assets/icons/pop.png" alt="" width="48" height="48"><a href="../../pop/">Pop</a></div>
+        <h1>Pop Privacy Policy</h1>
+        <p>Last updated <time datetime="2026-09-30">September 30, 2026</time>. Applies to Pop for macOS, version 0.25 and later.</p>
+      </header>
+
+      <section class="summary glass" aria-labelledby="sum">
+        <h2 id="sum">The short version</h2>
+        <ul><li>No analytics, no accounts, no ads, and no server of mine. I collect nothing.</li><li>Clipboard history, settings and plugins stay on your Mac. API keys are kept in the macOS Keychain.</li><li>Your text leaves the Mac only when you use a feature that needs a service you chose: AI (your own endpoint) or DeepL.</li><li>Pop contacts GitHub to check for updates and, when you open it, to load the plugin library.</li></ul>
+      </section>
+
+      <div class="prose">
+        <h2>Who is responsible</h2>
+        <p>Pop is made and published by whrss9527, an independent developer (“I”, “me”). If you have any question about this policy or your data, email <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a>.</p>
+
+        <h2>What I collect</h2>
+        <p><strong>Nothing.</strong> Pop has no analytics, no crash reporting, no advertising, no tracking and no user accounts. I don’t run a server for Pop, so there is nowhere for your data to be sent to me. I never see what you do in the app.</p>
+
+        <h2>What stays on your Mac</h2>
+        <p>Pop keeps everything it needs locally. Apple’s on-device translation, the on-device Apple Intelligence model (macOS 26), text recognition in images, and all conversions run on your Mac.</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Data</th><th scope="col">Where it’s kept</th><th scope="col">Notes</th></tr></thead><tbody><tr><td data-label="Data">Settings (ring layout, rules, shortcuts, translation and AI settings without keys)</td><td data-label="Where it’s kept"><code>UserDefaults</code> (<code>io.github.whrss9527.pop</code>)</td><td data-label="Notes">Can be exported to a file you choose.</td></tr><tr><td data-label="Data">Custom plugins</td><td data-label="Where it’s kept"><code>~/Library/Application Support/Pop/Plugins/</code></td><td data-label="Notes">One JSON file per plugin.</td></tr><tr><td data-label="Data">Clipboard history</td><td data-label="Where it’s kept"><code>~/Library/Application Support/Pop/Clipboard/</code> (SQLite database and images)</td><td data-label="Notes">Includes text recognized in copied images, for search. Deleted automatically by age and count; items marked concealed by password managers are never recorded; you can exclude apps.</td></tr><tr><td data-label="Data">Vocabulary list</td><td data-label="Where it’s kept"><code>~/Library/Application Support/Pop/Vocabulary.json</code></td><td data-label="Notes">Words you save from translation cards.</td></tr><tr><td data-label="Data">Inbox</td><td data-label="Where it’s kept"><code>~/Documents/Pop 收集箱.md</code></td><td data-label="Notes">Only if you use the Inbox tool.</td></tr><tr><td data-label="Data">AI API key, DeepL key</td><td data-label="Where it’s kept">macOS Keychain on this Mac</td><td data-label="Notes">Never synced or exported.</td></tr><tr><td data-label="Data">Files received from your phone</td><td data-label="Where it’s kept"><code>~/Downloads</code></td><td data-label="Notes">Only when you use Send to Phone.</td></tr></tbody></table></div>
+
+        <h2>When Pop goes online</h2>
+        <p>Pop connects to the following, and only in the situations listed:</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Service</th><th scope="col">When</th><th scope="col">What is sent</th></tr></thead><tbody><tr><td data-label="Service">GitHub (<code>api.github.com</code>, <code>github.com</code> and GitHub’s download servers)</td><td data-label="When">At launch and every 6 hours if “Check for updates automatically” is on (the default; you can turn it off), and when you check manually.</td><td data-label="What is sent">A request for the latest release information and, when you install an update, the download of the release archive and its checksum file. The request identifies the app and version (<code>Pop/&lt;version&gt; (macOS)</code>). Nothing about you or your data is included.</td></tr><tr><td data-label="Service">Plugin library (<code>raw.githubusercontent.com</code>, falling back to <code>cdn.jsdelivr.net</code>)</td><td data-label="When">When you open the plugin library or install or update a plugin from it.</td><td data-label="What is sent">A request for the library index and the plugin file. Nothing about you.</td></tr><tr><td data-label="Service">The AI endpoint you configure</td><td data-label="When">Only when you use an AI feature or an AI plugin.</td><td data-label="What is sent">The selected text, your instruction and your API key, sent to the address you entered. Plain <code>http://</code> is only allowed for this Mac and your local network. If you use Apple’s on-device model on macOS 26, nothing leaves your Mac.</td></tr><tr><td data-label="Service">DeepL (<code>api.deepl.com</code> or <code>api-free.deepl.com</code>)</td><td data-label="When">Only when you choose DeepL for a translation.</td><td data-label="What is sent">The text to translate, the target language and your DeepL key.</td></tr><tr><td data-label="Service">The link you’re expanding</td><td data-label="When">Only when you use “expand short link”.</td><td data-label="What is sent">A request to that link and each redirect it leads to, so Pop can show the final address.</td></tr><tr><td data-label="Service">Your own plugins and scripts</td><td data-label="When">When you run them.</td><td data-label="What is sent">Whatever the plugin does: open a URL, run a shell script, JavaScript or a Shortcut you wrote or installed. Pop shows shell scripts from the library before installing them, and asks before a <code>pop://</code> link runs one.</td></tr><tr><td data-label="Service">Your phone, on your local network</td><td data-label="When">Only while Send to Phone is on.</td><td data-label="What is sent">Pop serves a temporary page on your Wi-Fi, protected by a random token; it stops when you turn sharing off or after 10 idle minutes. Nothing goes through the internet.</td></tr></tbody></table></div>
+        <p>Like any internet request, these connections reveal your IP address to the server you’re connecting to. Those services are run by third parties under their own privacy policies; I don’t receive anything from them about you.</p>
+
+        <h2>iCloud</h2>
+        <p>The builds published on GitHub do not include iCloud sync. In a build that includes it, and only while it’s turned on, Pop stores your settings and custom plugins in your own iCloud key-value storage so your other Macs can read them. Clipboard history, the vocabulary list and API keys are never synced. That data is held by Apple under your iCloud account, and I have no access to it.</p>
+
+        <h2>Permissions</h2>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Permission</th><th scope="col">Why</th></tr></thead><tbody><tr><td data-label="Permission">Accessibility (required)</td><td data-label="Why">To notice a long right-click, read the selected text in the app you’re using, and paste results back when you choose “Replace”.</td></tr><tr><td data-label="Permission">Screen Recording</td><td data-label="Why">Only for screenshot OCR and translate, QR scanning, annotation and the screen ruler.</td></tr><tr><td data-label="Permission">Reminders or Calendar</td><td data-label="Why">Only for “Add to Reminders”, the first time you use it.</td></tr><tr><td data-label="Permission">Notifications</td><td data-label="Why">To tell you about a new version and finished timers.</td></tr><tr><td data-label="Permission">Local Network</td><td data-label="Why">Only for Send to Phone.</td></tr></tbody></table></div>
+        <p>You can revoke any of these in System Settings › Privacy &amp; Security at any time.</p>
+
+        <h2>Web searches and links</h2><p>Search, open-link and map tools hand the text or address to your default browser. Pop itself doesn’t contact those sites.</p>
+
+        <h2>Where you got Pop</h2>
+        <p>This policy covers Pop however you obtained it — from GitHub, from this website, or through a store or subscription service such as the Mac App Store or Setapp. Such a service handles your purchase or subscription and may process data under its own privacy policy; Pop itself behaves as described here. If an edition ever works differently, this policy will be updated before that edition is released.</p>
+
+        <h2>Deleting your data</h2>
+        <p>Clear the clipboard history in Pop, delete the folder <code>~/Library/Application Support/Pop/</code>, and remove the “Pop” items from Keychain Access. Deleting Pop.app and these files removes everything Pop stored.</p>
+
+        <h2>Children</h2>
+        <p>Pop is a general-purpose utility, not directed at children, and collects no personal information from anyone.</p>
+
+        <h2>Changes</h2>
+        <p>If this policy changes, the new version will be published on this page with a new date. Pop is open source, so you can also check its behavior in the <a href="https://github.com/whrss9527/pop">source code</a>.</p>
+
+        <h2>Contact</h2>
+        <p>whrss9527 · <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a> · <a href="https://github.com/whrss9527/pop/issues">Pop issues on GitHub</a></p>
+      </div>
+    </div>
+  </article>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>Native Mac apps for the menu bar. Free and open source.</p>
+      </div>
+      <div>
+        <h2>Apps</h2>
+        <ul><li><a href="../../pop/">Pop</a></li><li><a href="../../meno/">Meno</a></li><li><a href="../../stox/">Stox</a></li><li><a href="../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>Privacy</h2>
+        <ul><li><a href="../../privacy/pop/">Pop</a></li><li><a href="../../privacy/meno/">Meno</a></li><li><a href="../../privacy/stox/">Stox</a></li><li><a href="../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul>
+          <li><a href="../../support/">Support</a></li>
+          <li><a href="https://blog.whrss.com">Blog</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+  </div>
+</footer>
+</body>
+</html>

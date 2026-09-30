@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proxi · One switch for every proxy on your Mac</title>
+<meta name="description" content="Proxi switches the system proxy, environment variables, git and npm together, with a built-in mihomo core for subscriptions, rules, LAN sharing and TUN mode. Free and open source for macOS.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/proxi/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Proxi · One switch for every proxy on your Mac">
+<meta property="og:description" content="Proxi switches the system proxy, environment variables, git and npm together, with a built-in mihomo core for subscriptions, rules, LAN sharing and TUN mode. Free and open source for macOS.">
+<meta property="og:url" content="https://whrss.com/proxi/">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../assets/site.css">
+</head>
+<body class="app-proxi">
+<a class="skip" href="#main">Skip to content</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="Main">
+    <a href="../pop/"><img src="../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../meno/"><img src="../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../stox/"><img src="../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../proxi/" aria-current="page"><img src="../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </nav>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="panel nav-list" aria-label="Main">
+    <a href="../pop/"><img src="../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../meno/"><img src="../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../stox/"><img src="../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../proxi/" aria-current="page"><img src="../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<main id="main">
+  <section class="app-hero">
+    <div class="wrap">
+      <img class="icon" src="../assets/icons/proxi.png" alt="Proxi app icon" width="128" height="128">
+      <h1>Proxi</h1>
+      <p class="say">/ˈprɒk.si/ — still “proxy”: the y becomes an i.</p>
+      <p class="lede">One switch for the system proxy, your shell’s environment variables, git and npm — plus a built-in mihomo core for subscriptions and rules, LAN sharing, and TUN or gateway mode.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Proxi</a>
+        <a class="btn btn-glass" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
+      </div>
+      <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>Interface in Simplified Chinese</span></p>
+      <div class="stage"><figure><div class="shot light"><img src="../assets/img/proxi/hero.jpg" alt="Proxi settings window with proxy profiles, next to the menu bar panel listing nodes with latency, and the menu bar speed indicator" width="1600" height="1000" loading="lazy" decoding="async"></div></figure></div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Features">
+    <div class="wrap">
+      <div class="features">
+      <div class="feature">
+        <div class="feature-text">
+          <h2>One switch, everywhere</h2>
+          <p>Make a profile — HTTP, SOCKS5 or PAC — and choose where it applies: the system proxy, environment variables for new terminals and apps, git and npm. Switch profiles with one click, or with ⌃⌥P.</p>
+          <ul><li>Notices when another app changes the proxy, and can save it as a profile</li><li>Finds proxy apps already running on your Mac and adds them</li><li>Upload and download speed right in the menu bar</li></ul>
+        </div>
+        <div class="feature-media "><div class="illus" role="img" aria-label="Illustration: one proxy profile switched on in four places at once — system proxy, environment variables, git and npm">
+  <div class="palette">
+    <div class="q">Office proxy · 127.0.0.1:7890</div>
+    <div class="row"><span>System proxy</span><small>networksetup</small><span class="sw" aria-hidden="true"></span></div>
+    <div class="row"><span>Environment variables</span><small>launchctl setenv</small><span class="sw" aria-hidden="true"></span></div>
+    <div class="row"><span>git</span><small>http.proxy</small><span class="sw" aria-hidden="true"></span></div>
+    <div class="row"><span>npm</span><small>proxy</small><span class="sw" aria-hidden="true"></span></div>
+  </div>
+</div></div>
+      </div>
+      <div class="feature">
+        <div class="feature-text">
+          <h2>Subscriptions and rules, built in</h2>
+          <p>Paste a subscription URL and its nodes appear in the panel. Pick one, let Proxi choose the fastest, and route by rules. The engine is mihomo (Clash Meta), bundled inside the app.</p>
+          <ul><li>Policy groups: manual, auto-select, fallback and load balance</li><li>Rule library with blackmatrix7, MetaCubeX, ACL4SSR and Shadowrocket rule sets</li><li>Import Clash, mihomo, Surge, Shadowrocket and Quantumult X configs, with preview and undo</li></ul>
+        </div>
+        <div class="feature-media "><figure><div class="shot light"><img src="../assets/img/proxi/nodes.jpg" alt="Proxi Nodes and Subscriptions page with two subscriptions and node settings" width="820" height="770" loading="lazy" decoding="async"></div></figure></div>
+      </div>
+      <div class="feature">
+        <div class="feature-text">
+          <h2>The whole Mac, and your console too</h2>
+          <p>Enhanced mode routes every app — terminals and games included — through the core via a virtual network interface. LAN sharing and gateway mode let a PS5, Switch or phone use the same connection as your Mac.</p>
+          <ul><li>LAN sharing on port 7892, limited to local network addresses by default</li><li>Gateway mode for devices that can’t set a proxy, including game UDP traffic</li><li>A small privileged helper, installed once with your password, only for these modes</li></ul>
+        </div>
+        <div class="feature-media "><figure><div class="shot light"><img src="../assets/img/proxi/lan.jpg" alt="Proxi LAN Sharing page showing the address to enter on a PS5 or Switch" width="820" height="770" loading="lazy" decoding="async"></div></figure></div>
+      </div>
+      <div class="feature">
+        <div class="feature-text">
+          <h2>Scripts, AI assistants and sync</h2>
+          <p>A <code>proxi</code> command-line tool, an MCP server for AI assistants and <code>proxi://</code> URL commands share one local control interface with four permission levels. Settings sync between Macs through your own iCloud Drive.</p>
+          <ul><li>Switch profiles automatically by Wi-Fi network or router</li><li>Imports and automatic switches are recorded in an activity log; imports can be undone</li></ul>
+        </div>
+        <div class="feature-media "><figure><div class="shot light"><img src="../assets/img/proxi/icloud.jpg" alt="Proxi iCloud Sync page" width="820" height="770" loading="lazy" decoding="async"></div></figure></div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="more-title">When something doesn’t connect</h2></div>
+      <div class="tiles"><div class="tile glass"><h3>Connections</h3><p>Every connection through the core: which app or device, which rule, which node, how much traffic.</p></div><div class="tile glass"><h3>Service check</h3><p>See whether ChatGPT, Claude, Gemini, Netflix, YouTube Premium or Telegram work through a node, and in which region.</p></div><div class="tile glass"><h3>URL diagnosis</h3><p>Enter a site that won’t open; Proxi walks DNS, direct and proxied paths and suggests a fix.</p></div><div class="tile glass"><h3>Exit IP</h3><p>The address and region websites see through your node, and your Mac’s own public address.</p></div><div class="tile glass"><h3>Advanced DNS</h3><p>Encrypted DNS in the core, per-domain servers, hosts, and mihomo config patches checked before saving.</p></div><div class="tile glass"><h3>Health checks</h3><p>Periodically checks the proxy port while it’s on and tells you when it stops answering.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="req-title">
+    <div class="wrap">
+      <div class="info-grid">
+        <div class="panel-block glass">
+          <h2 id="req-title">Requirements</h2>
+          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma or later; Liquid Glass on macOS 26</dd><dt>Mac</dt><dd>Universal: Apple silicon and Intel (single-architecture builds also available)</dd><dt>Permissions</dt><dd>Administrator password to change the system proxy. Privileged helper only for Enhanced and gateway modes. No Accessibility.</dd><dt>Language</dt><dd>Simplified Chinese interface</dd><dt>Download</dt><dd>About 53 MB universal (<code>Proxi-macos.zip</code>), about half for <code>-arm64</code> or <code>-x86_64</code></dd><dt>License</dt><dd>GPL-3.0; bundles mihomo (GPL-3.0)</dd></dl>
+        </div>
+        <div class="panel-block glass">
+          <h2>Install and update</h2>
+          <ol class="steps"><li>Download <code>Proxi-macos.zip</code> from the latest release and unzip it.</li><li>Drag <strong>Proxi.app</strong> into Applications and double-click it. From 0.11.1 on, releases are signed with a Developer ID and notarized by Apple.</li><li>Click the menu bar icon, add a profile or a subscription, and flip the switch.</li></ol>
+          <p class="note">Proxi checks GitHub Releases at launch and every 6 hours (you can turn it off). “Update” downloads the build for your chip, compares its SHA-256, replaces Proxi and relaunches. Signed releases only install updates signed by the same developer. Proxi used to be called ProxySwitch; updating from it moves your settings over automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="faq-title">
+    <div class="wrap narrow">
+      <div class="section-head"><h2 id="faq-title">Questions</h2></div>
+      <div class="faq"><details class="glass"><summary>Is it free?</summary><div class="answer"><p>Yes. Proxi is free and open source under GPL-3.0. It doesn’t sell or provide proxy servers — you bring your own proxy or subscription.</p></div></details><details class="glass"><summary>Does it need Accessibility?</summary><div class="answer"><p>No. The global shortcut uses the standard hot-key API. What Proxi does need: an administrator password to change the system proxy, and — only if you use Enhanced or gateway mode — a privileged helper installed once, because a virtual network interface and IP forwarding require root.</p></div></details><details class="glass"><summary>What is mihomo?</summary><div class="answer"><p>mihomo (Clash Meta) is an open-source proxy core, also GPL-3.0. Proxi bundles it as a separate program inside the app and runs it only when you use the built-in node proxy, LAN sharing or Enhanced mode.</p></div></details><details class="glass"><summary>Is LAN sharing safe?</summary><div class="answer"><p>By default only devices on private LAN ranges (10.x, 172.16–31.x, 192.168.x) may connect, and you can limit it to specific IPs. Turn it off on public Wi-Fi.</p></div></details><details class="glass"><summary>Why does it ask for Location?</summary><div class="answer"><p>Only for switching by Wi-Fi network: since macOS 14, reading the Wi-Fi name requires Location permission. Proxi doesn’t read or store your location, and you can switch by router instead.</p></div></details><details class="glass"><summary>Is there a Windows version?</summary><div class="answer"><p>Yes, <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a> for Windows. The two evolve separately.</p></div></details></div>
+      <p class="small muted" style="margin-top:24px">More help: <a href="https://github.com/whrss9527/proxi/issues">Proxi issues on GitHub</a> · <a href="../support/">Support</a> · <a href="../privacy/proxi/">Proxi privacy policy</a></p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="sib-title">
+    <div class="wrap">
+      <div class="section-head"><h2 id="sib-title">Also in the menu bar</h2></div>
+      <div class="siblings"><a class="sibling glass" href="../pop/"><img src="../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>Long-press right click: translate, convert and 80+ tools in one swipe.</span></div></a><a class="sibling glass" href="../meno/"><img src="../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>A calm menu bar, made with glass: hide, stash and call back icons.</span></div></a><a class="sibling glass" href="../stox/"><img src="../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A-share, Hong Kong and US quotes at a glance; gone in one click.</span></div></a></div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>Native Mac apps for the menu bar. Free and open source.</p>
+      </div>
+      <div>
+        <h2>Apps</h2>
+        <ul><li><a href="../pop/">Pop</a></li><li><a href="../meno/">Meno</a></li><li><a href="../stox/">Stox</a></li><li><a href="../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>Privacy</h2>
+        <ul><li><a href="../privacy/pop/">Pop</a></li><li><a href="../privacy/meno/">Meno</a></li><li><a href="../privacy/stox/">Stox</a></li><li><a href="../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul>
+          <li><a href="../support/">Support</a></li>
+          <li><a href="https://blog.whrss.com">Blog</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+  </div>
+</footer>
+</body>
+</html>

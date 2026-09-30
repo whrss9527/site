@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stox Privacy Policy</title>
+<meta name="description" content="How Stox for macOS handles your data: no analytics, no accounts; quotes from public providers, data on your Mac or in your iCloud.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/privacy/stox/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Stox Privacy Policy">
+<meta property="og:description" content="How Stox for macOS handles your data: no analytics, no accounts; quotes from public providers, data on your Mac or in your iCloud.">
+<meta property="og:url" content="https://whrss.com/privacy/stox/">
+<link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body class="app-stox">
+<a class="skip" href="#main">Skip to content</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="Main">
+    <a href="../../pop/"><img src="../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../meno/"><img src="../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../stox/"><img src="../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+    </nav>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="panel nav-list" aria-label="Main">
+    <a href="../../pop/"><img src="../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../meno/"><img src="../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../stox/"><img src="../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <a href="../../zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<main id="main">
+  <article class="doc">
+    <div class="wrap narrow">
+      <header class="doc-head">
+        <div class="icon-row"><img src="../../assets/icons/stox.png" alt="" width="48" height="48"><a href="../../stox/">Stox</a></div>
+        <h1>Stox Privacy Policy</h1>
+        <p>Last updated <time datetime="2026-09-30">September 30, 2026</time>. Applies to Stox for macOS, version 0.46 and later.</p>
+      </header>
+
+      <section class="summary glass" aria-labelledby="sum">
+        <h2 id="sum">The short version</h2>
+        <ul><li>No analytics, no accounts, no ads, and no server of mine. I collect nothing.</li><li>Your watchlist, holdings, trades and alerts stay on your Mac — and in your own iCloud Drive if you turn on sync.</li><li>To show prices, Stox requests quotes for the symbols on your watchlist from Tencent Finance, with Sina Finance as a backup. Your holdings are never sent.</li><li>Stox contacts GitHub to check for updates.</li></ul>
+      </section>
+
+      <div class="prose">
+        <h2>Who is responsible</h2>
+        <p>Stox is made and published by whrss9527, an independent developer (“I”, “me”). If you have any question about this policy or your data, email <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a>.</p>
+
+        <h2>What I collect</h2>
+        <p><strong>Nothing.</strong> Stox has no analytics, no crash reporting, no advertising, no tracking and no user accounts. I don’t run a server for Stox, so there is nowhere for your data to be sent to me. I never see what you do in the app.</p>
+
+        <h2>What stays on your Mac</h2>
+        <p>Stox keeps your data on your Mac:</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Data</th><th scope="col">Where it’s kept</th><th scope="col">Notes</th></tr></thead><tbody><tr><td data-label="Data">Watchlist, groups, notes, holdings, trades, dividends, alerts and settings</td><td data-label="Where it’s kept"><code>UserDefaults</code> (<code>io.github.whrss9527.stox</code>)</td><td data-label="Notes">Can be exported to a backup file you choose.</td></tr><tr><td data-label="Data">Log</td><td data-label="Where it’s kept"><code>~/Library/Application Support/Stox/stox.log</code> and the system log</td><td data-label="Notes">Technical messages for troubleshooting; stays on your Mac.</td></tr></tbody></table></div>
+
+        <h2>When Stox goes online</h2>
+        <p>Stox connects to the following:</p>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Service</th><th scope="col">When</th><th scope="col">What is sent</th></tr></thead><tbody><tr><td data-label="Service">Tencent Finance (<code>qt.gtimg.cn</code>, <code>smartbox.gtimg.cn</code>, <code>web.ifzq.gtimg.cn</code>, <code>proxy.finance.qq.com</code>)</td><td data-label="When">While Stox is running: every few seconds during trading hours, once a minute when markets are closed; paused while the Mac sleeps. Also when you search, open a chart or the rankings.</td><td data-label="What is sent">The stock symbols whose quotes or charts are needed, or the search text you type. No holdings, amounts or personal information.</td></tr><tr><td data-label="Service">Sina Finance (<code>hq.sinajs.cn</code>, <code>stock2.finance.sina.com.cn</code>)</td><td data-label="When">Automatically, as a backup when Tencent’s quotes can’t be reached, and for futures intraday charts.</td><td data-label="What is sent">The symbols whose quotes are needed.</td></tr><tr><td data-label="Service">Exchange rates (Tencent Finance)</td><td data-label="When">When you hold stocks in more than one currency.</td><td data-label="What is sent">A request for USD/CNY and HKD/CNY rates.</td></tr><tr><td data-label="Service">GitHub (<code>api.github.com</code>, <code>github.com</code> and GitHub’s download servers)</td><td data-label="When">At launch and every 6 hours, unless you turn automatic checks off in About &amp; Updates; and when you install an update.</td><td data-label="What is sent">A request for the latest release information and, when you install an update, the download of the release archive and its checksum file. The request identifies the app and version (<code>Stox/&lt;version&gt; (macOS)</code>). Nothing about you or your data is included.</td></tr><tr><td data-label="Service">Xueqiu and other finance sites</td><td data-label="When">Only when you choose “View on Xueqiu” (or a similar link) for a stock.</td><td data-label="What is sent">The page opens in your default browser; Stox itself doesn’t contact the site.</td></tr></tbody></table></div>
+        <p>Like any internet request, these connections reveal your IP address to the server you’re connecting to. Those services are run by third parties under their own privacy policies; I don’t receive anything from them about you.</p>
+
+        <h2>iCloud</h2>
+        <p>If you turn on iCloud sync, Stox writes your watchlist (with groups, short names, holdings and alerts) and a few display settings to a file in your own iCloud Drive, <code>Stox/sync.json</code>, together with your Mac’s name and the time of the change, so your other Macs can merge it. Settings that only concern one Mac are not synced. The file is stored by Apple under your iCloud account; I have no access to it. Turning sync off stops writing; you can delete the file in Finder.</p>
+
+        <h2>Permissions</h2>
+        <div class="table-wrap"><table><thead><tr><th scope="col">Permission</th><th scope="col">Why</th></tr></thead><tbody><tr><td data-label="Permission">Notifications</td><td data-label="Why">For price alerts, the optional closing summary and update notices.</td></tr><tr><td data-label="Permission">iCloud Drive</td><td data-label="Why">Only if you turn on sync.</td></tr><tr><td data-label="Permission">Accessibility, Screen Recording</td><td data-label="Why">Not used. Stox’s global shortcut uses the standard hot-key API, which needs no permission.</td></tr></tbody></table></div>
+        <p>You can revoke any of these in System Settings › Privacy &amp; Security at any time.</p>
+
+        <h2>Market data</h2><p>Quotes are provided by third parties for reference only. Hong Kong quotes are delayed about 15 minutes. Nothing in Stox is investment advice.</p>
+
+        <h2>Where you got Stox</h2>
+        <p>This policy covers Stox however you obtained it — from GitHub, from this website, or through a store or subscription service such as the Mac App Store or Setapp. Such a service handles your purchase or subscription and may process data under its own privacy policy; Stox itself behaves as described here. If an edition ever works differently, this policy will be updated before that edition is released.</p>
+
+        <h2>Deleting your data</h2>
+        <p>Use Settings to remove your watchlist, or delete Stox together with <code>~/Library/Preferences/io.github.whrss9527.stox.plist</code> and <code>~/Library/Application Support/Stox/</code>. If you used sync, also delete the <code>Stox</code> folder in iCloud Drive.</p>
+
+        <h2>Children</h2>
+        <p>Stox is a general-purpose utility, not directed at children, and collects no personal information from anyone.</p>
+
+        <h2>Changes</h2>
+        <p>If this policy changes, the new version will be published on this page with a new date. Stox is open source, so you can also check its behavior in the <a href="https://github.com/whrss9527/stox">source code</a>.</p>
+
+        <h2>Contact</h2>
+        <p>whrss9527 · <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a> · <a href="https://github.com/whrss9527/stox/issues">Stox issues on GitHub</a></p>
+      </div>
+    </div>
+  </article>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>Native Mac apps for the menu bar. Free and open source.</p>
+      </div>
+      <div>
+        <h2>Apps</h2>
+        <ul><li><a href="../../pop/">Pop</a></li><li><a href="../../meno/">Meno</a></li><li><a href="../../stox/">Stox</a></li><li><a href="../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>Privacy</h2>
+        <ul><li><a href="../../privacy/pop/">Pop</a></li><li><a href="../../privacy/meno/">Meno</a></li><li><a href="../../privacy/stox/">Stox</a></li><li><a href="../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul>
+          <li><a href="../../support/">Support</a></li>
+          <li><a href="https://blog.whrss.com">Blog</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+  </div>
+</footer>
+</body>
+</html>
