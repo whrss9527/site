@@ -33,7 +33,7 @@ def desk(c):
     alt_proxi = "Proxi 菜单栏面板：节点列表和延迟" if zh else "Proxi menu bar panel listing nodes and their latency"
     alt_ring = "Pop 的圆盘菜单" if zh else "Pop’s ring menu"
     cap = "真实截图：Proxi 和 Stox 的菜单栏面板，Pop 的圆盘。" if zh else "Real screenshots: the Proxi and Stox menu bar panels, and Pop’s ring."
-    return f"""<figure class="desk-wrap">
+    return f"""<figure class="desk-wrap" data-p>
         <div class="desk">
           <div class="bar" aria-hidden="true">{icons}<span>{"周三 9:41" if zh else "Wed 9:41"}</span></div>
           <div class="p proxi"><img src="{r}assets/img/proxi/panel.webp" alt="{alt_proxi}" width="384" height="722"></div>
@@ -50,17 +50,17 @@ def cards(c):
         bullets = (ZH_BULLETS if zh else EN_BULLETS)[k]
         lis = "".join(f"<li>{b}</li>" for b in bullets)
         if zh:
-            meta = f'{a["min"]} 或更新 · Apple 芯片与 Intel 通用 · GPL-3.0'
+            meta = f'{a["min"]} 或更新 · Apple 芯片与 Intel 通用 · GPL\u20113.0'
             b1, b2 = "下载", "了解更多"
             pitch = a["zh"]
         else:
-            meta = f'{a["min"]} or later · Universal (Apple silicon and Intel) · GPL-3.0'
+            meta = f'{a["min"]} or later · Universal (Apple silicon and Intel) · GPL\u20113.0'
             b1, b2 = "Download", "Learn more"
             pitch = a["pitch"]
         out.append(f"""
-      <article class="card glass app-{k}">
+      <article class="card glass app-{k}" data-p>
         <div class="card-top">
-          <img src="{r}assets/icons/{k}.png" alt="" width="64" height="64">
+          <img class="float" src="{r}assets/icons/{k}.png" alt="" width="64" height="64">
           <div>
             <h3><a href="{c.link(k + "/")}">{a["name"]}</a></h3>
             <p class="pitch">{pitch}</p>
@@ -104,53 +104,53 @@ def page(zh):
          t("All four are free software under GPL-3.0. Read the code, build it yourself, send a fix.",
            "四个应用都以 GPL-3.0 开源。可以读代码、自己编译，也欢迎提交修改。")),
     ]
-    facts_html = "".join(f'<div class="fact glass"><h3>{i}{a}</h3><p>{b}</p></div>' for i, a, b in facts)
+    facts_html = "".join(f'<div class="fact glass"><span class="fact-icon">{i}</span><h3>{a}</h3><p>{b}</p></div>' for i, a, b in facts)
     h += f"""<main id="main">
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">{t("Mac apps by whrss9527", "whrss9527 做的 Mac 应用")}</p>
-        <h1>{t("Small, quiet apps that live in your menu bar.", "安静的小工具，<br>住在你的菜单栏里。")}</h1>
-        <p class="lede">{t("Four native Swift utilities for macOS: a right-click toolbox, a menu bar manager, stock quotes and a proxy switch. They share one glass look, stay out of the way, and cost nothing.",
-                            "四个原生 Swift 写的 macOS 工具：右键工具箱、菜单栏管理、股票行情和代理开关。同一种玻璃质感，不打扰你，也不收钱。")}</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#apps">{t("See the apps", "看看这些应用")}</a>
-          <a class="btn btn-glass" href="{GH}">{ICON_GH}{t("whrss9527 on GitHub", "GitHub 主页")}</a>
-        </div>
+    <div class="wrap hero-center">
+      <p class="eyebrow hero-in">{t("Mac apps by whrss9527", "whrss9527 做的 Mac 应用")}</p>
+      <h1 class="hero-in">{t("Small, quiet apps that live in your menu bar.", "安静的小工具，<br>住在你的菜单栏里。")}</h1>
+      <p class="lede hero-in">{t("Four native Swift utilities for macOS: a right-click toolbox, a menu bar manager, stock quotes and a proxy switch. They share one glass look, stay out of the way, and cost nothing.",
+                          "四个原生 Swift 写的 macOS 工具：右键工具箱、菜单栏管理、股票行情和代理开关。同一种玻璃质感，不打扰你，也不收钱。")}</p>
+      <div class="actions hero-in">
+        <a class="btn btn-primary btn-lg" href="#apps">{t("See the apps", "看看这些应用")}</a>
+        <a class="btn btn-glass btn-lg" href="{GH}">{ICON_GH}{t("whrss9527 on GitHub", "GitHub 主页")}</a>
       </div>
+    </div>
+    <div class="wrap hero-desk">
       {desk(c)}
     </div>
   </section>
 
-  <section class="section-tight" id="apps" aria-labelledby="apps-title">
+  <section class="section" id="apps" aria-labelledby="apps-title">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head center rv">
         <h2 id="apps-title">{t("The apps", "应用")}</h2>
         <p>{t("Each one does a single job from the menu bar. Download buttons go to the latest release on GitHub.",
               "每个应用只在菜单栏里做好一件事。下载按钮会打开 GitHub 上的最新版本。")}</p>
       </div>
-      <div class="cards">{cards(c)}
+      <div class="cards rv-group">{cards(c)}
       </div>
-      <p class="small muted" style="margin-top:20px">{t("Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.",
-                                                          "界面语言：Pop（0.30.0 起）和 Stox（0.47.0 起）有简体中文和英文界面，跟随 Mac 的系统语言，接下来的版本会加上语言设置；Meno 支持英文、简体中文和繁体中文，0.12.0 起可以在设置里选择语言；Proxi 只有简体中文界面。")}</p>
+      <p class="small muted langs rv">{t("Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.",
+                                         "界面语言：Pop（0.30.0 起）和 Stox（0.47.0 起）有简体中文和英文界面，跟随 Mac 的系统语言，接下来的版本会加上语言设置；Meno 支持英文、简体中文和繁体中文，0.12.0 起可以在设置里选择语言；Proxi 只有简体中文界面。")}</p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="shared-title">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head center rv">
         <h2 id="shared-title">{t("What they have in common", "它们的共同点")}</h2>
         <p>{t("Native Swift, universal binaries for Apple silicon and Intel, and a glass interface that turns into Liquid Glass on macOS 26.",
               "原生 Swift，Apple 芯片和 Intel 通用，玻璃质感的界面在 macOS 26 上变成 Liquid Glass。")}</p>
       </div>
-      <div class="facts">{facts_html}</div>
+      <div class="facts bento rv-group">{facts_html}</div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="about-title">
-    <div class="wrap narrow">
+  <section class="section about" aria-labelledby="about-title">
+    <div class="wrap narrow rv-group">
       <h2 id="about-title">{t("About", "关于")}</h2>
-      <p class="lede" style="margin-top:16px">{t(f'I’m whrss9527, an independent developer. I build these apps for my own Mac first and publish them in the open. I write about how they’re made on <a href="{BLOG}">my blog</a>, and everything else is on <a href="{GH}">GitHub</a>.',
+      <p class="statement">{t(f'I’m whrss9527, an independent developer. I build these apps for my own Mac first and publish them in the open. I write about how they’re made on <a href="{BLOG}">my blog</a>, and everything else is on <a href="{GH}">GitHub</a>.',
                                                  f'我是 whrss9527，一名独立开发者。这些应用先是给自己的 Mac 做的，然后公开发布。做它们的过程写在<a href="{BLOG}">博客</a>里，代码都在 <a href="{GH}">GitHub</a> 上。')}</p>
       <p style="margin-top:16px" class="muted">{t(f'Questions or bugs: see <a href="{c.link("support/")}">Support</a>, or write to <a href="mailto:{EMAIL}">{EMAIL}</a>.',
                                                   f'有问题或者发现了 bug：看看<a href="{c.link("support/")}">支持页面</a>，或者写信到 <a href="mailto:{EMAIL}">{EMAIL}</a>。')}</p>

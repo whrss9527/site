@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <title>支持 · whrss 的应用</title>
 <meta name="description" content="Pop、Meno、Stox 和 Proxi 的求助方式：GitHub issue、邮件，以及常见问题的解决办法。">
 <meta name="color-scheme" content="light dark">
@@ -21,6 +22,7 @@
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <script src="../../assets/site.js" defer></script>
+<script src="../../assets/motion.js" defer></script>
 </head>
 <body class="home">
 <a class="skip" href="#main">跳到正文</a>
@@ -64,11 +66,11 @@
 <main id="main">
   <section class="doc">
     <div class="wrap">
-      <header class="doc-head narrow" style="padding:0">
+      <header class="doc-head narrow hero-copy" style="padding:0">
         <h1>支持</h1>
         <p class="lede">求助最快的办法是在 GitHub 上提 issue：它是公开的，答案也能帮到后来的人。不方便公开的事，可以给我写信。</p>
       </header>
-      <div class="help-grid">
+      <div class="help-grid rv-group">
         <div class="help glass app-pop">
           <div class="help-top"><img src="../../assets/icons/pop.png" alt="" width="40" height="40"><h3>Pop</h3></div>
           <p>更新后右键没反应？打开设置 › 通用，点“清除旧的授权记录”，再重新授予辅助功能权限。</p>
@@ -115,7 +117,7 @@
         </div>
       </div>
 
-      <div class="info-grid" style="margin-top:28px">
+      <div class="info-grid rv-group" style="margin-top:28px">
         <div class="panel-block glass">
           <h2>邮件</h2>
           <p class="muted" style="color:var(--text-2)">不想公开的问题、安全问题报告，以及和隐私、个人数据有关的事，请写信到 <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a>。每封信我都会看，回复可能要等几天。中文、英文都可以。</p>
@@ -131,7 +133,7 @@
         </div>
       </div>
 
-      <div class="panel-block glass" style="margin-top:20px">
+      <div class="panel-block glass rv" style="margin-top:20px">
         <h2>写信之前</h2>
         <ol class="steps">
           <li><strong>先更新。</strong>每个应用都能自己更新，问题可能已经修好了。</li>

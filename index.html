@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <script>try{if(localStorage.getItem("lang")==="zh")location.replace("zh/"+location.search+location.hash)}catch(e){}</script>
 <title>whrss · Mac apps for the menu bar</title>
 <meta name="description" content="Pop, Meno, Stox and Proxi: native Swift menu bar apps for macOS. Free and open source, notarized by Apple, with one-click updates.">
@@ -22,6 +23,7 @@
 <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
 <link rel="stylesheet" href="./assets/site.css">
 <script src="./assets/site.js" defer></script>
+<script src="./assets/motion.js" defer></script>
 </head>
 <body class="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -64,17 +66,17 @@
 </header>
 <main id="main">
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Mac apps by whrss9527</p>
-        <h1>Small, quiet apps that live in your menu bar.</h1>
-        <p class="lede">Four native Swift utilities for macOS: a right-click toolbox, a menu bar manager, stock quotes and a proxy switch. They share one glass look, stay out of the way, and cost nothing.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="#apps">See the apps</a>
-          <a class="btn btn-glass" href="https://github.com/whrss9527"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>whrss9527 on GitHub</a>
-        </div>
+    <div class="wrap hero-center">
+      <p class="eyebrow hero-in">Mac apps by whrss9527</p>
+      <h1 class="hero-in">Small, quiet apps that live in your menu bar.</h1>
+      <p class="lede hero-in">Four native Swift utilities for macOS: a right-click toolbox, a menu bar manager, stock quotes and a proxy switch. They share one glass look, stay out of the way, and cost nothing.</p>
+      <div class="actions hero-in">
+        <a class="btn btn-primary btn-lg" href="#apps">See the apps</a>
+        <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>whrss9527 on GitHub</a>
       </div>
-      <figure class="desk-wrap">
+    </div>
+    <div class="wrap hero-desk">
+      <figure class="desk-wrap" data-p>
         <div class="desk">
           <div class="bar" aria-hidden="true"><img src="./assets/icons/pop.png" alt="" width="18" height="18"><img src="./assets/icons/meno.png" alt="" width="18" height="18"><img src="./assets/icons/stox.png" alt="" width="18" height="18"><img src="./assets/icons/proxi.png" alt="" width="18" height="18"><span>Wed 9:41</span></div>
           <div class="p proxi"><img src="./assets/img/proxi/panel.webp" alt="Proxi menu bar panel listing nodes and their latency" width="384" height="722"></div>
@@ -86,92 +88,92 @@
     </div>
   </section>
 
-  <section class="section-tight" id="apps" aria-labelledby="apps-title">
+  <section class="section" id="apps" aria-labelledby="apps-title">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head center rv">
         <h2 id="apps-title">The apps</h2>
         <p>Each one does a single job from the menu bar. Download buttons go to the latest release on GitHub.</p>
       </div>
-      <div class="cards">
-      <article class="card glass app-pop">
+      <div class="cards rv-group">
+      <article class="card glass app-pop" data-p>
         <div class="card-top">
-          <img src="./assets/icons/pop.png" alt="" width="64" height="64">
+          <img class="float" src="./assets/icons/pop.png" alt="" width="64" height="64">
           <div>
             <h3><a href="pop/">Pop</a></h3>
             <p class="pitch">Long-press right click: translate, convert and 80+ tools in one swipe.</p>
           </div>
         </div>
         <ul><li>Translate a selection with Apple's on-device translation, AI or DeepL</li><li>A ring of tools you arrange: conversions, OCR, color, JSON, files</li><li>Clipboard history, pinned screenshots, plugins and AI with your own endpoint</li></ul>
-        <p class="meta">macOS 15 or later · Universal (Apple silicon and Intel) · GPL-3.0</p>
+        <p class="meta">macOS 15 or later · Universal (Apple silicon and Intel) · GPL‑3.0</p>
         <div class="actions">
           <a class="btn btn-primary btn-sm" href="https://github.com/whrss9527/pop/releases/latest" aria-label="Download Pop"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download</a>
           <a class="btn btn-glass btn-sm" href="pop/" aria-label="Learn more: Pop">Learn more</a>
         </div>
       </article>
-      <article class="card glass app-meno">
+      <article class="card glass app-meno" data-p>
         <div class="card-top">
-          <img src="./assets/icons/meno.png" alt="" width="64" height="64">
+          <img class="float" src="./assets/icons/meno.png" alt="" width="64" height="64">
           <div>
             <h3><a href="meno/">Meno</a></h3>
             <p class="pitch">A calm menu bar, made with glass: hide, stash and call back icons.</p>
           </div>
         </div>
         <ul><li>Visible, Hidden and a Stash for icons you almost never need</li><li>Shelf and Quick Open in Liquid Glass on macOS 26</li><li>Rules, scenes and a one-key Zen mode for talks and recordings</li></ul>
-        <p class="meta">macOS 14 or later · Universal (Apple silicon and Intel) · GPL-3.0</p>
+        <p class="meta">macOS 14 or later · Universal (Apple silicon and Intel) · GPL‑3.0</p>
         <div class="actions">
           <a class="btn btn-primary btn-sm" href="https://github.com/whrss9527/meno/releases/latest" aria-label="Download Meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download</a>
           <a class="btn btn-glass btn-sm" href="meno/" aria-label="Learn more: Meno">Learn more</a>
         </div>
       </article>
-      <article class="card glass app-stox">
+      <article class="card glass app-stox" data-p>
         <div class="card-top">
-          <img src="./assets/icons/stox.png" alt="" width="64" height="64">
+          <img class="float" src="./assets/icons/stox.png" alt="" width="64" height="64">
           <div>
             <h3><a href="stox/">Stox</a></h3>
             <p class="pitch">A-share, Hong Kong and US quotes at a glance; gone in one click.</p>
           </div>
         </div>
         <ul><li>China A-shares, Hong Kong and US stocks, plus indexes, funds and forex</li><li>Holdings and P&L, price alerts, iCloud sync</li><li>Right-click the menu bar icon to hide every number</li></ul>
-        <p class="meta">macOS 13 or later · Universal (Apple silicon and Intel) · GPL-3.0</p>
+        <p class="meta">macOS 13 or later · Universal (Apple silicon and Intel) · GPL‑3.0</p>
         <div class="actions">
           <a class="btn btn-primary btn-sm" href="https://github.com/whrss9527/stox/releases/latest" aria-label="Download Stox"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download</a>
           <a class="btn btn-glass btn-sm" href="stox/" aria-label="Learn more: Stox">Learn more</a>
         </div>
       </article>
-      <article class="card glass app-proxi">
+      <article class="card glass app-proxi" data-p>
         <div class="card-top">
-          <img src="./assets/icons/proxi.png" alt="" width="64" height="64">
+          <img class="float" src="./assets/icons/proxi.png" alt="" width="64" height="64">
           <div>
             <h3><a href="proxi/">Proxi</a></h3>
             <p class="pitch">One switch for system proxy, shell, git and npm, with a built-in mihomo core.</p>
           </div>
         </div>
         <ul><li>System proxy, environment variables, git and npm in one switch</li><li>Built-in mihomo core: subscriptions, rules, policy groups</li><li>LAN sharing for consoles and phones, TUN and gateway modes</li></ul>
-        <p class="meta">macOS 14 or later · Universal (Apple silicon and Intel) · GPL-3.0</p>
+        <p class="meta">macOS 14 or later · Universal (Apple silicon and Intel) · GPL‑3.0</p>
         <div class="actions">
           <a class="btn btn-primary btn-sm" href="https://github.com/whrss9527/proxi/releases/latest" aria-label="Download Proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download</a>
           <a class="btn btn-glass btn-sm" href="proxi/" aria-label="Learn more: Proxi">Learn more</a>
         </div>
       </article>
       </div>
-      <p class="small muted" style="margin-top:20px">Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.</p>
+      <p class="small muted langs rv">Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.</p>
     </div>
   </section>
 
   <section class="section" aria-labelledby="shared-title">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head center rv">
         <h2 id="shared-title">What they have in common</h2>
         <p>Native Swift, universal binaries for Apple silicon and Intel, and a glass interface that turns into Liquid Glass on macOS 26.</p>
       </div>
-      <div class="facts"><div class="fact glass"><h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5 4 4.8v4.6c0 3.8 2.6 6.6 6 8.1 3.4-1.5 6-4.3 6-8.1V4.8L10 2.5Z"/><path d="m7.3 10 1.9 1.9 3.6-3.8"/></svg>Signed and notarized</h3><p>Current releases are signed with a Developer ID and notarized by Apple. Download, unzip, double-click.</p></div><div class="fact glass"><h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3"/><path d="M16.2 3.5v3h-3"/><path d="M10 7v3.4l2 1.3"/></svg>Updates itself</h3><p>Each app checks GitHub Releases, verifies the SHA-256 checksum and code signature, replaces itself and relaunches.</p></div><div class="fact glass"><h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M6.8 9V6.6a3.2 3.2 0 0 1 6.4 0V9"/></svg>Private by default</h3><p>No accounts, no analytics, no servers of mine. Your data stays on your Mac or in your own iCloud.</p></div><div class="fact glass"><h3><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6-4 4 4 4M13 6l4 4-4 4"/></svg>Open source</h3><p>All four are free software under GPL-3.0. Read the code, build it yourself, send a fix.</p></div></div>
+      <div class="facts bento rv-group"><div class="fact glass"><span class="fact-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5 4 4.8v4.6c0 3.8 2.6 6.6 6 8.1 3.4-1.5 6-4.3 6-8.1V4.8L10 2.5Z"/><path d="m7.3 10 1.9 1.9 3.6-3.8"/></svg></span><h3>Signed and notarized</h3><p>Current releases are signed with a Developer ID and notarized by Apple. Download, unzip, double-click.</p></div><div class="fact glass"><span class="fact-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3"/><path d="M16.2 3.5v3h-3"/><path d="M10 7v3.4l2 1.3"/></svg></span><h3>Updates itself</h3><p>Each app checks GitHub Releases, verifies the SHA-256 checksum and code signature, replaces itself and relaunches.</p></div><div class="fact glass"><span class="fact-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="12" height="8.5" rx="2"/><path d="M6.8 9V6.6a3.2 3.2 0 0 1 6.4 0V9"/></svg></span><h3>Private by default</h3><p>No accounts, no analytics, no servers of mine. Your data stays on your Mac or in your own iCloud.</p></div><div class="fact glass"><span class="fact-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7 6-4 4 4 4M13 6l4 4-4 4"/></svg></span><h3>Open source</h3><p>All four are free software under GPL-3.0. Read the code, build it yourself, send a fix.</p></div></div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="about-title">
-    <div class="wrap narrow">
+  <section class="section about" aria-labelledby="about-title">
+    <div class="wrap narrow rv-group">
       <h2 id="about-title">About</h2>
-      <p class="lede" style="margin-top:16px">I’m whrss9527, an independent developer. I build these apps for my own Mac first and publish them in the open. I write about how they’re made on <a href="https://blog.whrss.com">my blog</a>, and everything else is on <a href="https://github.com/whrss9527">GitHub</a>.</p>
+      <p class="statement">I’m whrss9527, an independent developer. I build these apps for my own Mac first and publish them in the open. I write about how they’re made on <a href="https://blog.whrss.com">my blog</a>, and everything else is on <a href="https://github.com/whrss9527">GitHub</a>.</p>
       <p style="margin-top:16px" class="muted">Questions or bugs: see <a href="support/">Support</a>, or write to <a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a>.</p>
     </div>
   </section>

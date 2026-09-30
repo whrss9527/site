@@ -23,14 +23,14 @@ def build(key, d, lang="en"):
     h += f"""<main id="main">
   <article class="doc">
     <div class="wrap narrow">
-      <header class="doc-head">
+      <header class="doc-head hero-copy">
         <div class="icon-row"><img src="{r}assets/icons/{key}.png" alt="" width="48" height="48"><a href="{c.link(key + '/')}">{name}</a></div>
         <h1>{title}</h1>
         <p>{t(f'Last updated <time datetime="{UPDATED_ISO}">{UPDATED}</time>. Applies to {name} for macOS, version {d["version"]} and later.',
               f'最后更新于 <time datetime="{UPDATED_ISO}">{UPDATED_ZH}</time>。适用于 macOS 版 {name} {d["version"]} 及以后的版本。')}</p>
       </header>
 
-      <section class="summary glass" aria-labelledby="sum">
+      <section class="summary glass rv" aria-labelledby="sum">
         <h2 id="sum">{t("The short version", "简要说明")}</h2>
         <ul>{summary}</ul>
       </section>

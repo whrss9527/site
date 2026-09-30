@@ -114,7 +114,8 @@ def head(c, title, desc, body_class="", alternates=True, extra_head=""):
 <html lang="{c.html_lang}">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">{extra_head}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){{if(!window.__motion)document.documentElement.classList.add("rv-done")}},3000)</script>{extra_head}
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="color-scheme" content="light dark">
@@ -130,6 +131,7 @@ def head(c, title, desc, body_class="", alternates=True, extra_head=""):
 <link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
 <link rel="stylesheet" href="{r}assets/site.css">
 <script src="{r}assets/site.js" defer></script>
+<script src="{r}assets/motion.js" defer></script>
 </head>
 <body class="{body_class}">
 """
@@ -190,6 +192,23 @@ def header(c, current=""):
     </details>
   </div>
 </header>
+"""
+
+
+def local_nav(c, key):
+    """App pages: a second, sticky bar with the app's name, section links and Download
+    (like the product bars on apple.com). The global header above it scrolls away."""
+    t = c.t
+    a = APPS[key]
+    links = "".join(f'<a href="#{i}">{l}</a>' for i, l in (
+        ("features", t("Features", "功能")), ("specs", t("Specs", "规格")), ("faq", t("Questions", "常见问题"))))
+    return f"""<nav class="localnav" aria-label="{a['name']}">
+  <div class="wrap">
+    <a class="ln-title" href="#main"><img src="{c.to("assets/icons/" + key + ".png")}" alt="" width="24" height="24"><span>{a['name']}</span></a>
+    <div class="ln-links">{links}</div>
+    <a class="btn btn-primary btn-xs" href="{dl_url(key)}" aria-label="{t('Download ' + a['name'], '下载 ' + a['name'])}">{t("Download", "下载")}</a>
+  </div>
+</nav>
 """
 
 

@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <link rel="stylesheet" href="../../assets/meno-demo.css">
 <script src="../../assets/meno-demo.js" defer></script>
 <title>Meno · 安静的菜单栏，由玻璃打造</title>
@@ -23,8 +24,9 @@
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <script src="../../assets/site.js" defer></script>
+<script src="../../assets/motion.js" defer></script>
 </head>
-<body class="app-meno">
+<body class="app-meno app-page">
 <a class="skip" href="#main">跳到正文</a>
 <header class="menubar">
   <div class="wrap">
@@ -63,19 +65,28 @@
     </details>
   </div>
 </header>
+<nav class="localnav" aria-label="Meno">
+  <div class="wrap">
+    <a class="ln-title" href="#main"><img src="../../assets/icons/meno.png" alt="" width="24" height="24"><span>Meno</span></a>
+    <div class="ln-links"><a href="#features">功能</a><a href="#specs">规格</a><a href="#faq">常见问题</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/meno/releases/latest" aria-label="下载 Meno">下载</a>
+  </div>
+</nav>
 <main id="main">
   <section class="app-hero">
     <div class="wrap">
-      <img class="icon" src="../../assets/icons/meno.png" alt="Meno 应用图标" width="128" height="128">
-      <h1>Meno</h1>
-      <p class="say">/ˈmeː.no/ —— 意大利语里的“更少”，和 menu 只差一个字母。</p>
-      <p class="lede">Meno 把不常用的菜单栏图标收起来，点一下、悬停、轻扫或按快捷键，就能随时唤回。</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://github.com/whrss9527/meno/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Meno</a>
-        <a class="btn btn-glass" href="https://github.com/whrss9527/meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+      <div class="hero-copy">
+        <img class="icon" src="../../assets/icons/meno.png" alt="Meno 应用图标" width="128" height="128">
+        <h1>Meno</h1>
+        <p class="say">/ˈmeː.no/ —— 意大利语里的“更少”，和 menu 只差一个字母。</p>
+        <p class="lede">Meno 把不常用的菜单栏图标收起来，点一下、悬停、轻扫或按快捷键，就能随时唤回。</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/meno/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Meno</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+        </div>
+        <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文、繁體中文</span></p>
       </div>
-      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文、繁體中文</span></p>
-      <div class="stage"><div style="max-width:880px;margin:0 auto"><figure class="mnd" data-lang="zh" data-preset="layout" data-icon="../../assets/icons/meno.png"><noscript><div class="illus screen" role="img" aria-label="示意图：Meno 在它的尖括号分隔符右边只留三个图标，菜单栏下方挂着一条玻璃托盘，显示被隐藏的项目">
+      <div class="stage tilt" data-p="css"><div class="tilt-inner"><div style="max-width:880px;margin:0 auto"><figure class="mnd" data-lang="zh" data-preset="layout" data-icon="../../assets/icons/meno.png"><noscript><div class="illus screen" role="img" aria-label="示意图：Meno 在它的尖括号分隔符右边只留三个图标，菜单栏下方挂着一条玻璃托盘，显示被隐藏的项目">
   <div class="mb">
     <span class="menus"><b>访达</b><span>文件</span><span>编辑</span><span>显示</span><span>前往</span><span>窗口</span><span>帮助</span></span>
     <span class="right">
@@ -86,20 +97,20 @@
   </div>
   <div class="shelf" aria-hidden="true"><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot"></span><span class="dot c"></span></div>
   <div class="legend"><span>‹ Meno 的分隔符：它左边的图标都会隐藏</span><span>托盘在菜单栏正下方显示隐藏的项目</span></div>
-</div></noscript></figure></div></div>
+</div></noscript></figure></div></div></div>
     </div>
   </section>
 
-  <section class="section" aria-label="功能">
+  <section class="section features-section" id="features" aria-label="功能">
     <div class="wrap">
-      <div class="features">
+      <div class="features scrolly" style="--n:4">
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>常显、隐藏，还有暗格</h2>
           <p>Meno 在菜单栏里加几个小分隔符。单尖括号左边的图标会隐藏，需要时才出现；越过双尖括号的图标收进暗格，留给几乎用不到的东西：它们只在托盘、快速打开里，或按住 ⌥ 点击时出现。</p>
           <ul><li>点 Meno、点击或悬停在菜单栏空白处、向下滚动或轻扫，或按快捷键，都能展开</li><li>延迟一段时间、切换应用或指针离开后，自动重新隐藏</li><li>应用重启后 macOS 挪了它的图标，Meno 会放回原处</li></ul>
         </div>
-        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="reveal" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：同一条菜单栏的两种状态。先是只有尖括号分隔符和三个可见图标；展开后，隐藏的图标出现在两个分隔符之间，暗格里的图标仍然不出现在菜单栏上。">
+        <div class="feature-media rv "><figure class="mnd" data-lang="zh" data-preset="reveal" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：同一条菜单栏的两种状态。先是只有尖括号分隔符和三个可见图标；展开后，隐藏的图标出现在两个分隔符之间，暗格里的图标仍然不出现在菜单栏上。">
   <p class="tag">隐藏时</p>
   <div class="mb">
     <span class="menus"><b>邮件</b><span>文件</span><span>编辑</span></span>
@@ -114,12 +125,12 @@
 </div></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>托盘和快速打开</h2>
           <p>托盘是菜单栏下方的一条玻璃栏，显示隐藏的项目；在摄像头所在的刘海旁、菜单栏放不下时尤其好用。快速打开是类似聚焦搜索的面板，用键盘就能找到任何项目，支持拼音和首字母。</p>
           <ul><li>↩ 打开，⌘↩ 打开次级菜单，⌘1–⌘9 选择结果</li><li>也能执行 Meno 自己的操作：应用场景、打开禅模式</li><li>macOS 26 上是 Liquid Glass；macOS 14 和 15 上是磨砂玻璃</li></ul>
         </div>
-        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="shelf" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：快速打开，一个搜索面板，列出与输入文字匹配的菜单栏项目和操作">
+        <div class="feature-media rv "><figure class="mnd" data-lang="zh" data-preset="shelf" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：快速打开，一个搜索面板，列出与输入文字匹配的菜单栏项目和操作">
   <div class="palette">
     <div class="q">wi<span class="caret"></span></div>
     <div class="row sel"><span class="dot"></span><span>Wi-Fi</span><small>↩ 打开</small></div>
@@ -129,12 +140,12 @@
 </div></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>会看场合的菜单栏</h2>
           <p>规则会替你调整菜单栏：麦克风或摄像头正在使用、接上显示器、使用电池、连到某个网络，或者到了某个时间。场景可以把布局保存成“工作”“在家”“演示”等。</p>
           <ul><li>操作可以显示或隐藏分区、应用场景、打开禅模式，或移动某个项目</li><li>移动会等到你不再使用鼠标和键盘时才进行</li><li>从 Meno 的菜单或用快捷键暂停所有规则</li></ul>
         </div>
-        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="rules" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：两条规则。麦克风正在使用时，打开禅模式，结束后还原。连接外接显示器时，应用场景“工作”。">
+        <div class="feature-media rv "><figure class="mnd" data-lang="zh" data-preset="rules" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：两条规则。麦克风正在使用时，打开禅模式，结束后还原。连接外接显示器时，应用场景“工作”。">
   <div class="palette">
     <div class="row"><span class="dot c"></span><span><strong>当</strong>麦克风正在使用</span></div>
     <div class="row sel"><span class="dot"></span><span>打开禅模式</span><small>结束后还原</small><span class="sw" aria-hidden="true"></span></div>
@@ -145,12 +156,12 @@
 </div></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>用你的语言</h2>
           <p>Meno 支持英语、简体中文和繁体中文。它跟随系统语言，也可以在设置 › 通用 › 语言里另选一种，重新打开后切换。</p>
           <ul><li>这个设置用三种语言标注，哪种界面下都好找</li><li>通用里的其他设置：项目怎样出现、何时重新隐藏、暗格和禅模式</li></ul>
         </div>
-        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="general" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：Meno 通用设置里的语言选项：跟随系统、English、简体中文和繁體中文">
+        <div class="feature-media rv "><figure class="mnd" data-lang="zh" data-preset="general" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：Meno 通用设置里的语言选项：跟随系统、English、简体中文和繁體中文">
   <div class="palette">
     <div class="row sel"><span class="dot c"></span><span>跟随系统</span><small>✓</small></div>
     <div class="row"><span class="dot"></span><span>English</span></div>
@@ -165,14 +176,14 @@
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="more-title">积少成多的小细节</h2></div>
-      <div class="tiles"><div class="tile glass"><h3>禅模式</h3><p>一个快捷键清空所有应用图标，只留系统状态，适合截图、录屏和演讲。</p></div><div class="tile glass"><h3>布局编辑器</h3><p>在常显、隐藏和暗格之间拖动项目，还能重命名，配上符号。</p></div><div class="tile glass"><h3>分组</h3><p>把相关的项目收到一个图标后面；点它，就在正下方的托盘里显示出来。</p></div><div class="tile glass"><h3>变化时显示</h3><p>隐藏项目的图标或文字有变化时（比如同步失败），它会短暂出现一下。</p></div><div class="tile glass"><h3>项目快捷键和链接</h3><p>在任何地方打开 Wi-Fi、VPN 或计时器。<code>meno://</code> 链接可以在快捷指令和脚本里使用。</p></div><div class="tile glass"><h3>洞察，只在本机</h3><p>你多久展开一次、最常用哪些项目，以及该保留还是收进暗格的建议；数据从不离开你的 Mac。</p></div></div>
+      <div class="section-head rv"><h2 id="more-title">积少成多的小细节</h2></div>
+      <div class="tiles bento rv-group"><div class="tile glass"><h3>禅模式</h3><p>一个快捷键清空所有应用图标，只留系统状态，适合截图、录屏和演讲。</p></div><div class="tile glass"><h3>布局编辑器</h3><p>在常显、隐藏和暗格之间拖动项目，还能重命名，配上符号。</p></div><div class="tile glass"><h3>分组</h3><p>把相关的项目收到一个图标后面；点它，就在正下方的托盘里显示出来。</p></div><div class="tile glass"><h3>变化时显示</h3><p>隐藏项目的图标或文字有变化时（比如同步失败），它会短暂出现一下。</p></div><div class="tile glass"><h3>项目快捷键和链接</h3><p>在任何地方打开 Wi-Fi、VPN 或计时器。<code>meno://</code> 链接可以在快捷指令和脚本里使用。</p></div><div class="tile glass"><h3>洞察，只在本机</h3><p>你多久展开一次、最常用哪些项目，以及该保留还是收进暗格的建议；数据从不离开你的 Mac。</p></div></div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="req-title">
+  <section class="section-tight" id="specs" aria-labelledby="req-title">
     <div class="wrap">
-      <div class="info-grid">
+      <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
           <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel</dd><dt>权限</dt><dd>辅助功能（必需）。屏幕录制可选，用来显示隐藏项目的真实图标。</dd><dt>语言</dt><dd>英文、简体中文或繁体中文界面，跟随 Mac 的系统语言，也可以在设置 › 通用 › 语言里另选（0.12.0 起）</dd><dt>下载</dt><dd>约 5 MB（<code>Meno.zip</code>）</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
@@ -186,18 +197,31 @@
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="faq-title">
+  <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
-      <div class="section-head"><h2 id="faq-title">常见问题</h2></div>
-      <div class="faq"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Meno 以 GPL-3.0 开源，不用注册账号，也没有任何需要购买的东西。</p></div></details><details class="glass"><summary>为什么需要辅助功能权限？</summary><div class="answer"><p>Meno 通过各个应用的辅助功能接口读取菜单栏项目，从托盘、快速打开和快捷键打开它们，并替你执行 ⌘ 拖移来排列它们。这三件事，macOS 都只允许有辅助功能权限的应用去做。</p></div></details><details class="glass"><summary>屏幕录制是做什么用的？</summary><div class="answer"><p>这项权限是可选的。有了它，托盘会显示隐藏项目的真实图标，Meno 也能察觉它们的图标变化（macOS 14–26）。只截取菜单栏项目，不录制也不保存任何东西。没有这项权限时，Meno 显示应用图标。</p></div></details><details class="glass"><summary>Meno 会联网吗？</summary><div class="answer"><p>只在向 GitHub 查询最新版本时（你手动检查时，或开启后每天一次），以及下载你选择安装的版本时。没有统计，没有账号。详见<a href="../privacy/meno/">隐私政策</a>。</p></div></details><details class="glass"><summary>在 macOS 26 上少了一个图标。</summary><div class="answer"><p>macOS 只显示在系统设置 › 菜单栏里允许显示的应用项目。Meno 自己的图标也可以在设置 › 外观里关掉；要再打开设置，可以用快速打开，或者再次打开 Meno。</p></div></details><details class="glass"><summary>更新后 Meno 没反应。</summary><div class="answer"><p>打开设置 › 权限，点“清除并重新授权”。0.10.0 及以后的版本使用同一个 Developer ID 证书，之后更新都会保留权限。</p></div></details><details class="glass"><summary>支持 macOS 27 吗？</summary><div class="answer"><p>支持。macOS 27 改变了菜单栏处理宽项目的方式，所以 Meno 在上面使用“阶梯式”隐藏引擎；你可以在设置 › 通用 › 高级里选择引擎。</p></div></details></div>
+      <div class="section-head rv"><h2 id="faq-title">常见问题</h2></div>
+      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Meno 以 GPL-3.0 开源，不用注册账号，也没有任何需要购买的东西。</p></div></details><details class="glass"><summary>为什么需要辅助功能权限？</summary><div class="answer"><p>Meno 通过各个应用的辅助功能接口读取菜单栏项目，从托盘、快速打开和快捷键打开它们，并替你执行 ⌘ 拖移来排列它们。这三件事，macOS 都只允许有辅助功能权限的应用去做。</p></div></details><details class="glass"><summary>屏幕录制是做什么用的？</summary><div class="answer"><p>这项权限是可选的。有了它，托盘会显示隐藏项目的真实图标，Meno 也能察觉它们的图标变化（macOS 14–26）。只截取菜单栏项目，不录制也不保存任何东西。没有这项权限时，Meno 显示应用图标。</p></div></details><details class="glass"><summary>Meno 会联网吗？</summary><div class="answer"><p>只在向 GitHub 查询最新版本时（你手动检查时，或开启后每天一次），以及下载你选择安装的版本时。没有统计，没有账号。详见<a href="../privacy/meno/">隐私政策</a>。</p></div></details><details class="glass"><summary>在 macOS 26 上少了一个图标。</summary><div class="answer"><p>macOS 只显示在系统设置 › 菜单栏里允许显示的应用项目。Meno 自己的图标也可以在设置 › 外观里关掉；要再打开设置，可以用快速打开，或者再次打开 Meno。</p></div></details><details class="glass"><summary>更新后 Meno 没反应。</summary><div class="answer"><p>打开设置 › 权限，点“清除并重新授权”。0.10.0 及以后的版本使用同一个 Developer ID 证书，之后更新都会保留权限。</p></div></details><details class="glass"><summary>支持 macOS 27 吗？</summary><div class="answer"><p>支持。macOS 27 改变了菜单栏处理宽项目的方式，所以 Meno 在上面使用“阶梯式”隐藏引擎；你可以在设置 › 通用 › 高级里选择引擎。</p></div></details></div>
       <p class="small muted" style="margin-top:24px">更多帮助：<a href="https://github.com/whrss9527/meno/issues">GitHub 上的 Meno issue</a> · <a href="../support/">支持</a> · <a href="../privacy/meno/">Meno 隐私政策</a></p>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap rv-group">
+      <img class="cta-icon" src="../../assets/icons/meno.png" alt="" width="96" height="96">
+      <h2 id="cta-title">Meno</h2>
+      <p class="lede">安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/meno/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Meno</a>
+        <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+      </div>
+      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文、繁體中文</span></p>
     </div>
   </section>
 
   <section class="section-tight" aria-labelledby="sib-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="sib-title">菜单栏里的其他应用</h2></div>
-      <div class="siblings"><a class="sibling glass" href="../pop/"><img src="../../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>长按右键，一划即达：翻译、换算和 80 多个小工具。</span></div></a><a class="sibling glass" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a><a class="sibling glass" href="../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>一个开关管好系统代理、终端、git 和 npm，内置 mihomo 内核。</span></div></a></div>
+      <div class="section-head rv"><h2 id="sib-title">菜单栏里的其他应用</h2></div>
+      <div class="siblings rv-group"><a class="sibling glass app-pop" href="../pop/"><img src="../../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>长按右键，一划即达：翻译、换算和 80 多个小工具。</span></div></a><a class="sibling glass app-stox" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a><a class="sibling glass app-proxi" href="../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>一个开关管好系统代理、终端、git 和 npm，内置 mihomo 内核。</span></div></a></div>
     </div>
   </section>
 </main>

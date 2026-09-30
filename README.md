@@ -2,7 +2,7 @@
 
 The website for whrss9527's Mac apps — [Pop](https://github.com/whrss9527/pop), [Meno](https://github.com/whrss9527/meno), [Stox](https://github.com/whrss9527/stox) and [Proxi](https://github.com/whrss9527/proxi) — served at **https://whrss.com**. The blog that used to live there moves to **https://blog.whrss.com**.
 
-Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, the 404 page and the four interactive app demos; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
+Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, scroll motion, the 404 page and the four interactive app demos; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
 
 ## Structure
 
@@ -15,6 +15,7 @@ zh/...                  The same pages in Simplified Chinese: zh/, zh/pop/, zh/p
 404.html                Not found, for both languages; sends old blog URLs to blog.whrss.com
 assets/site.css         The only stylesheet: tokens on :root, light and dark via prefers-color-scheme
 assets/site.js          Remembers the language picked in the language menu; closes open menus
+assets/motion.js        Scroll motion: reveals, the pinned feature demos, parallax, the condensing bars
 assets/<app>-demo.js/.css Interactive recreations of Pop, Meno, Stox and Proxi (sample data; each loaded only on its app's pages)
 assets/icons/           App icons (256 px, from each app's repository)
 assets/img/<app>/       Screenshots (from each app's repository and CI screenshots)
@@ -60,6 +61,18 @@ Edit the English and Chinese text together: the two versions of a page must say 
 - Picking a language stores it in `localStorage` (`lang` = `en` or `zh`). Only the English home page reads it: with `zh` stored, `/` goes to `/zh/`. The browser language is never used to redirect.
 - Each page declares `canonical` and `hreflang` alternates (`en`, `zh-CN`, `x-default` → English), and `sitemap.xml` lists both languages.
 - The 404 page is shared. It is written in English; under `/zh/...` a script switches its text and links to Chinese. Its redirect of old blog addresses is unchanged.
+
+### Motion
+
+The pages move a little as you scroll, in the manner of Apple's product pages. Everything is in `assets/site.css` (the "Motion" section) and `assets/motion.js`; there are no libraries.
+
+- **Reveals.** Elements with `rv` fade and rise into view once; the children of an `rv-group` do the same one after another. The generator puts these classes in the HTML.
+- **App heroes.** The copy rises in on load; the panel below leans back and settles flat as it scrolls into place (a CSS scroll timeline where the browser has one, otherwise `--p` from `motion.js`).
+- **Pinned features.** On app pages at 1024 px and wider, the feature texts scroll by on the left while their demos stay pinned on the right and crossfade to the step in the middle of the screen (`.scrolly.is-pinned`, set by `motion.js`). Narrower, or without JavaScript, they are ordinary rows. Tabbing into a demo makes its step the active one.
+- **Home.** The desk of panels grows into place and its three panels drift at different speeds; each app icon in the lineup floats at its own pace.
+- **Bars.** On app pages the site header scrolls away and a local bar with the app's name, section links and Download sticks to the top, turning to glass once content passes under it. Elsewhere the header gains a hairline when the page is scrolled.
+
+Rules the motion keeps: only `opacity` and `transform` animate, scroll work is batched into one `requestAnimationFrame` with passive listeners, and nothing shifts the layout. Hidden starting states apply only under `html.js` (set by an inline script in `<head>`) and `prefers-reduced-motion: no-preference`: with JavaScript off or reduced motion, everything is visible and still. If `motion.js` hasn't run after three seconds, the inline script reveals everything.
 
 ### Interactive demos and screenshots
 

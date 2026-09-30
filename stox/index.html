@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <link rel="stylesheet" href="../assets/stox-demo.css">
 <script src="../assets/stox-demo.js" defer></script>
 <title>Stox · Menu bar stock quotes for A-shares, Hong Kong and US</title>
@@ -23,8 +24,9 @@
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../assets/site.css">
 <script src="../assets/site.js" defer></script>
+<script src="../assets/motion.js" defer></script>
 </head>
-<body class="app-stox">
+<body class="app-stox app-page">
 <a class="skip" href="#main">Skip to content</a>
 <header class="menubar">
   <div class="wrap">
@@ -63,56 +65,65 @@
     </details>
   </div>
 </header>
+<nav class="localnav" aria-label="Stox">
+  <div class="wrap">
+    <a class="ln-title" href="#main"><img src="../assets/icons/stox.png" alt="" width="24" height="24"><span>Stox</span></a>
+    <div class="ln-links"><a href="#features">Features</a><a href="#specs">Specs</a><a href="#faq">Questions</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/stox/releases/latest" aria-label="Download Stox">Download</a>
+  </div>
+</nav>
 <main id="main">
   <section class="app-hero">
     <div class="wrap">
-      <img class="icon" src="../assets/icons/stox.png" alt="Stox app icon" width="128" height="128">
-      <h1>Stox</h1>
-      <p class="say">/stɒks/ — “stocks”, squeezed into four letters.</p>
-      <p class="lede">China A-share, Hong Kong and US quotes in your menu bar, with holdings and P&amp;L, alerts and iCloud sync. One right-click and only a quiet icon is left.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://github.com/whrss9527/stox/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Stox</a>
-        <a class="btn btn-glass" href="https://github.com/whrss9527/stox"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
+      <div class="hero-copy">
+        <img class="icon" src="../assets/icons/stox.png" alt="Stox app icon" width="128" height="128">
+        <h1>Stox</h1>
+        <p class="say">/stɒks/ — “stocks”, squeezed into four letters.</p>
+        <p class="lede">China A-share, Hong Kong and US quotes in your menu bar, with holdings and P&amp;L, alerts and iCloud sync. One right-click and only a quiet icon is left.</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/stox/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Stox</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/stox"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
+        </div>
+        <p class="meta"><span>Free and open source</span><span>macOS 13 or later</span><span>Apple silicon and Intel</span><span>In English and Simplified Chinese</span></p>
       </div>
-      <p class="meta"><span>Free and open source</span><span>macOS 13 or later</span><span>Apple silicon and Intel</span><span>In English and Simplified Chinese</span></p>
-      <div class="stage"><div class="compose stox-stage"><figure class="sxd" data-lang="en" data-preset="detail" data-desk data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/detail.webp" alt="Stox panel with a watchlist and an expanded intraday chart for Kweichow Moutai" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure><figure class="cut"><img src="../assets/img/stox/detail.webp" alt="Real screenshot of the Stox panel, in Chinese, with Kweichow Moutai expanded to its intraday chart" width="376" height="645" loading="lazy" decoding="async" style="width:300px"><figcaption>Real screenshot · Chinese interface</figcaption></figure></div></div>
+      <div class="stage tilt" data-p="css"><div class="tilt-inner"><div class="compose stox-stage"><figure class="sxd" data-lang="en" data-preset="detail" data-desk data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/detail.webp" alt="Stox panel with a watchlist and an expanded intraday chart for Kweichow Moutai" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure><figure class="cut"><img src="../assets/img/stox/detail.webp" alt="Real screenshot of the Stox panel, in Chinese, with Kweichow Moutai expanded to its intraday chart" width="376" height="645" loading="lazy" decoding="async" style="width:300px"><figcaption>Real screenshot · Chinese interface</figcaption></figure></div></div></div>
     </div>
   </section>
 
-  <section class="section" aria-label="Features">
+  <section class="section features-section" id="features" aria-label="Features">
     <div class="wrap">
-      <div class="features">
+      <div class="features scrolly" style="--n:4">
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>Glance, then hide</h2>
           <p>Left-click the menu bar icon for a glass panel; click again, click elsewhere or press Esc to close it. Right-click switches the menu bar between showing quotes and showing only an icon — useful when someone is looking over your shoulder.</p>
           <ul><li>Pin chosen tickers to the menu bar, on one line or two, rotating on notched screens</li><li>⌃⌥S opens the panel from any app; pin it as a floating window</li><li>Red-up, green-up, or no red and green at all</li></ul>
         </div>
-        <div class="feature-media "><figure class="sxd" data-lang="en" data-preset="list" data-desk data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/panel.webp" alt="Stox watchlist with a mini intraday chart on every row" width="376" height="583" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="sxd" data-lang="en" data-preset="list" data-desk data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/panel.webp" alt="Stox watchlist with a mini intraday chart on every row" width="376" height="583" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>Three markets, and then some</h2>
           <p>Shanghai, Shenzhen and Beijing A-shares, Hong Kong and US stocks with pre- and after-hours prices, plus indexes, ETFs, mutual funds, international futures and forex.</p>
           <ul><li>Search by code, Chinese name or pinyin initials: <code>600519</code>, <code>gzmt</code>, <code>aapl</code></li><li>Paste several codes at once to add them together</li><li>Quotes switch to a backup source automatically if the main one fails</li></ul>
         </div>
-        <div class="feature-media "><figure class="sxd" data-lang="en" data-preset="search" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/search.webp" alt="Stox search results showing prices and changes as you type" width="376" height="467" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="sxd" data-lang="en" data-preset="search" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/search.webp" alt="Stox search results showing prices and changes as you type" width="376" height="467" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>Charts that answer the question</h2>
           <p>Expand a row for intraday, five-day, daily, weekly and monthly charts with moving averages and volume. Hover for the exact price at any minute. A-shares add the order book and money flow.</p>
           <ul><li>Your cost line on the chart, and B and S marks for recorded trades</li><li>Open, high, low, turnover, P/E, market cap, 52-week range</li><li>An A-share gainers, losers and industry ranking</li></ul>
         </div>
-        <div class="feature-media "><figure class="sxd" data-lang="en" data-preset="kline" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/kline.webp" alt="Stox daily candlestick chart with moving averages and volume" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="sxd" data-lang="en" data-preset="kline" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/kline.webp" alt="Stox daily candlestick chart with moving averages and volume" width="376" height="645" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>Holdings and P&amp;L</h2>
           <p>Enter shares and cost, and Stox totals today’s and overall P&amp;L per currency, converted to yuan when you hold several. Log trades and dividends; a calendar shows every day’s result.</p>
           <ul><li>Weighted average cost updates as you buy; sells record realized gains</li><li>Tap the eye to mask amounts in the panel, menu bar and notifications</li><li>Optional closing summary notification</li></ul>
         </div>
-        <div class="feature-media "><figure class="sxd" data-lang="en" data-preset="holdings" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/holdings.webp" alt="Stox holdings view with per-currency totals and profit and loss" width="376" height="647" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="sxd" data-lang="en" data-preset="holdings" data-icon="../assets/icons/stox.png"><noscript><img src="../assets/img/stox/holdings.webp" alt="Stox holdings view with per-currency totals and profit and loss" width="376" height="647" loading="lazy" decoding="async" style="width:300px"></noscript></figure></div>
       </div>
       </div>
     </div>
@@ -120,14 +131,14 @@
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="more-title">Also inside</h2></div>
-      <div class="tiles"><div class="tile glass"><h3>Alerts</h3><p>Price above or below, percentage moves, take-profit and stop-loss, limit up/down, 52-week highs and lows.</p></div><div class="tile glass"><h3>iCloud sync</h3><p>Watchlist, groups, holdings and alerts sync through your own iCloud Drive. Or export a backup file.</p></div><div class="tile glass"><h3>Quiet on battery</h3><p>Refreshes once a minute when markets are closed and stops while the Mac sleeps.</p></div><div class="tile glass"><h3>Groups and notes</h3><p>Group your watchlist and keep a one-line note on why you’re watching a stock.</p></div><div class="tile glass"><h3>Copy to spreadsheets</h3><p>Copy holdings, trades and P&amp;L as tables for Numbers or Excel.</p></div><div class="tile glass"><h3>Light</h3><p>About 30 MB of memory. No sign-up and no API key.</p></div></div>
+      <div class="section-head rv"><h2 id="more-title">Also inside</h2></div>
+      <div class="tiles bento rv-group"><div class="tile glass"><h3>Alerts</h3><p>Price above or below, percentage moves, take-profit and stop-loss, limit up/down, 52-week highs and lows.</p></div><div class="tile glass"><h3>iCloud sync</h3><p>Watchlist, groups, holdings and alerts sync through your own iCloud Drive. Or export a backup file.</p></div><div class="tile glass"><h3>Quiet on battery</h3><p>Refreshes once a minute when markets are closed and stops while the Mac sleeps.</p></div><div class="tile glass"><h3>Groups and notes</h3><p>Group your watchlist and keep a one-line note on why you’re watching a stock.</p></div><div class="tile glass"><h3>Copy to spreadsheets</h3><p>Copy holdings, trades and P&amp;L as tables for Numbers or Excel.</p></div><div class="tile glass"><h3>Light</h3><p>About 30 MB of memory. No sign-up and no API key.</p></div></div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="req-title">
+  <section class="section-tight" id="specs" aria-labelledby="req-title">
     <div class="wrap">
-      <div class="info-grid">
+      <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">Requirements</h2>
           <dl class="specs"><dt>macOS</dt><dd>13 Ventura or later; Liquid Glass on macOS 26</dd><dt>Mac</dt><dd>Universal: Apple silicon and Intel</dd><dt>Permissions</dt><dd>None required. Notifications for alerts; iCloud Drive access only if you turn on sync.</dd><dt>Language</dt><dd>English or Simplified Chinese interface, following your Mac’s language (0.47.0 and later); a language setting is coming</dd><dt>Data</dt><dd>Tencent Finance public quotes, Sina Finance as backup. Hong Kong quotes are delayed about 15 minutes.</dd><dt>Download</dt><dd>About 4 MB (<code>Stox.zip</code>)</dd><dt>License</dt><dd>GPL-3.0</dd></dl>
@@ -141,18 +152,31 @@
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="faq-title">
+  <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
-      <div class="section-head"><h2 id="faq-title">Questions</h2></div>
-      <div class="faq"><details class="glass"><summary>Is it free?</summary><div class="answer"><p>Yes. Stox is free and open source under GPL-3.0. Quotes come from free public sources, so there’s no sign-up and no API key. A Mac App Store edition is being prepared; the GitHub version stays free.</p></div></details><details class="glass"><summary>Does it need Accessibility?</summary><div class="answer"><p>No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync.</p></div></details><details class="glass"><summary>Where do the quotes come from?</summary><div class="answer"><p>From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice.</p></div></details><details class="glass"><summary>Where are my holdings stored?</summary><div class="answer"><p>On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.</p></div></details><details class="glass"><summary>Can I use it in English?</summary><div class="answer"><p>Yes. Since 0.47.0 Stox shows its interface in English unless your Mac’s language is Chinese; a language setting is coming in the next versions. Names of Chinese stocks stay in Chinese, as the quote sources give them.</p></div></details></div>
+      <div class="section-head rv"><h2 id="faq-title">Questions</h2></div>
+      <div class="faq rv-group"><details class="glass"><summary>Is it free?</summary><div class="answer"><p>Yes. Stox is free and open source under GPL-3.0. Quotes come from free public sources, so there’s no sign-up and no API key. A Mac App Store edition is being prepared; the GitHub version stays free.</p></div></details><details class="glass"><summary>Does it need Accessibility?</summary><div class="answer"><p>No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync.</p></div></details><details class="glass"><summary>Where do the quotes come from?</summary><div class="answer"><p>From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice.</p></div></details><details class="glass"><summary>Where are my holdings stored?</summary><div class="answer"><p>On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.</p></div></details><details class="glass"><summary>Can I use it in English?</summary><div class="answer"><p>Yes. Since 0.47.0 Stox shows its interface in English unless your Mac’s language is Chinese; a language setting is coming in the next versions. Names of Chinese stocks stay in Chinese, as the quote sources give them.</p></div></details></div>
       <p class="small muted" style="margin-top:24px">More help: <a href="https://github.com/whrss9527/stox/issues">Stox issues on GitHub</a> · <a href="../support/">Support</a> · <a href="../privacy/stox/">Stox privacy policy</a></p>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap rv-group">
+      <img class="cta-icon" src="../assets/icons/stox.png" alt="" width="96" height="96">
+      <h2 id="cta-title">Stox</h2>
+      <p class="lede">A-share, Hong Kong and US quotes at a glance; gone in one click.</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/stox/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Stox</a>
+        <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/stox"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
+      </div>
+      <p class="meta"><span>Free and open source</span><span>macOS 13 or later</span><span>Apple silicon and Intel</span><span>In English and Simplified Chinese</span></p>
     </div>
   </section>
 
   <section class="section-tight" aria-labelledby="sib-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="sib-title">Also in the menu bar</h2></div>
-      <div class="siblings"><a class="sibling glass" href="../pop/"><img src="../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>Long-press right click: translate, convert and 80+ tools in one swipe.</span></div></a><a class="sibling glass" href="../meno/"><img src="../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>A calm menu bar, made with glass: hide, stash and call back icons.</span></div></a><a class="sibling glass" href="../proxi/"><img src="../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>One switch for system proxy, shell, git and npm, with a built-in mihomo core.</span></div></a></div>
+      <div class="section-head rv"><h2 id="sib-title">Also in the menu bar</h2></div>
+      <div class="siblings rv-group"><a class="sibling glass app-pop" href="../pop/"><img src="../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>Long-press right click: translate, convert and 80+ tools in one swipe.</span></div></a><a class="sibling glass app-meno" href="../meno/"><img src="../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>A calm menu bar, made with glass: hide, stash and call back icons.</span></div></a><a class="sibling glass app-proxi" href="../proxi/"><img src="../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>One switch for system proxy, shell, git and npm, with a built-in mihomo core.</span></div></a></div>
     </div>
   </section>
 </main>

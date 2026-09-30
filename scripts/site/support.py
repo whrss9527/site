@@ -44,15 +44,15 @@ def support(zh):
     h += f"""<main id="main">
   <section class="doc">
     <div class="wrap">
-      <header class="doc-head narrow" style="padding:0">
+      <header class="doc-head narrow hero-copy" style="padding:0">
         <h1>{t("Support", "支持")}</h1>
         <p class="lede">{t("The fastest way to get help is an issue on GitHub — it’s public, so the answer helps the next person too. For anything private, write to me.",
                            "求助最快的办法是在 GitHub 上提 issue：它是公开的，答案也能帮到后来的人。不方便公开的事，可以给我写信。")}</p>
       </header>
-      <div class="help-grid">{cards}
+      <div class="help-grid rv-group">{cards}
       </div>
 
-      <div class="info-grid" style="margin-top:28px">
+      <div class="info-grid rv-group" style="margin-top:28px">
         <div class="panel-block glass">
           <h2>{t("Email", "邮件")}</h2>
           <p class="muted" style="color:var(--text-2)">{t(email_en, email_zh)}</p>
@@ -68,7 +68,7 @@ def support(zh):
         </div>
       </div>
 
-      <div class="panel-block glass" style="margin-top:20px">
+      <div class="panel-block glass rv" style="margin-top:20px">
         <h2>{t("Before you write", "写信之前")}</h2>
         <ol class="steps">
           <li>{t("<strong>Update first.</strong> Each app can update itself; the fix may already be out.",
@@ -118,7 +118,7 @@ def notfound():
     h += header(c)
     h += """<main id="main">
   <section class="lost">
-    <div class="wrap">
+    <div class="wrap hero-copy">
       <p class="code" aria-hidden="true">404</p>
       <h1>This page isn’t in the menu bar.</h1>
       <p>It may have moved, or the link is wrong. Maybe you were looking for one of these:</p>

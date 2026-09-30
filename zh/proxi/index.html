@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <link rel="stylesheet" href="../../assets/proxi-demo.css">
 <script src="../../assets/proxi-demo.js" defer></script>
 <title>Proxi · 一个开关，管好 Mac 上所有代理</title>
@@ -23,8 +24,9 @@
 <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
 <link rel="stylesheet" href="../../assets/site.css">
 <script src="../../assets/site.js" defer></script>
+<script src="../../assets/motion.js" defer></script>
 </head>
-<body class="app-proxi">
+<body class="app-proxi app-page">
 <a class="skip" href="#main">跳到正文</a>
 <header class="menubar">
   <div class="wrap">
@@ -63,56 +65,65 @@
     </details>
   </div>
 </header>
+<nav class="localnav" aria-label="Proxi">
+  <div class="wrap">
+    <a class="ln-title" href="#main"><img src="../../assets/icons/proxi.png" alt="" width="24" height="24"><span>Proxi</span></a>
+    <div class="ln-links"><a href="#features">功能</a><a href="#specs">规格</a><a href="#faq">常见问题</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/proxi/releases/latest" aria-label="下载 Proxi">下载</a>
+  </div>
+</nav>
 <main id="main">
   <section class="app-hero">
     <div class="wrap">
-      <img class="icon" src="../../assets/icons/proxi.png" alt="Proxi 应用图标" width="128" height="128">
-      <h1>Proxi</h1>
-      <p class="say">/ˈprɒk.si/ —— 还是 proxy，只是 y 换成了 i。</p>
-      <p class="lede">一个开关管好系统代理、终端环境变量、git 和 npm；还内置 mihomo 内核，支持订阅和分流规则、局域网共享，以及增强模式（TUN）和网关模式。</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Proxi</a>
-        <a class="btn btn-glass" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+      <div class="hero-copy">
+        <img class="icon" src="../../assets/icons/proxi.png" alt="Proxi 应用图标" width="128" height="128">
+        <h1>Proxi</h1>
+        <p class="say">/ˈprɒk.si/ —— 还是 proxy，只是 y 换成了 i。</p>
+        <p class="lede">一个开关管好系统代理、终端环境变量、git 和 npm；还内置 mihomo 内核，支持订阅和分流规则、局域网共享，以及增强模式（TUN）和网关模式。</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Proxi</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+        </div>
+        <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>只有简体中文界面</span></p>
       </div>
-      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>只有简体中文界面</span></p>
-      <div class="stage"><div class="compose proxi-stage"><figure class="pxd" data-lang="zh" data-preset="panel"><noscript><img src="../../assets/img/proxi/panel.webp" alt="Proxi 菜单栏面板：代理开关、带延迟的节点列表和代理配置" width="384" height="722" loading="lazy" decoding="async" style="width:300px"></noscript></figure><figure class="cut"><img src="../../assets/img/proxi/panel.webp" alt="Proxi 菜单栏面板的真实截图：代理开关、带延迟的节点列表和三个代理配置" width="384" height="722" loading="lazy" decoding="async" style="width:300px"><figcaption>真实截图</figcaption></figure></div></div>
+      <div class="stage tilt" data-p="css"><div class="tilt-inner"><div class="compose proxi-stage"><figure class="pxd" data-lang="zh" data-preset="panel"><noscript><img src="../../assets/img/proxi/panel.webp" alt="Proxi 菜单栏面板：代理开关、带延迟的节点列表和代理配置" width="384" height="722" loading="lazy" decoding="async" style="width:300px"></noscript></figure><figure class="cut"><img src="../../assets/img/proxi/panel.webp" alt="Proxi 菜单栏面板的真实截图：代理开关、带延迟的节点列表和三个代理配置" width="384" height="722" loading="lazy" decoding="async" style="width:300px"><figcaption>真实截图</figcaption></figure></div></div></div>
     </div>
   </section>
 
-  <section class="section" aria-label="功能">
+  <section class="section features-section" id="features" aria-label="功能">
     <div class="wrap">
-      <div class="features">
+      <div class="features scrolly" style="--n:4">
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>一个开关，处处生效</h2>
           <p>建一个代理配置（HTTP、SOCKS5 或 PAC），选好它作用在哪里：系统代理、新开的终端和应用的环境变量、git 和 npm。一键切换配置，或者按 ⌃⌥P。</p>
           <ul><li>发现其他应用改了代理时会提示你，还能把它存成一个配置</li><li>自动发现你 Mac 上已经在运行的代理软件并添加进来</li><li>菜单栏里直接显示上传和下载速度</li></ul>
         </div>
-        <div class="feature-media "><figure class="pxd" data-lang="zh" data-preset="profiles"><noscript><img src="../../assets/img/proxi/hero.jpg" alt="Proxi 设置窗口里的代理配置列表，旁边是列出节点和延迟的菜单栏面板" width="1600" height="1000" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="profiles"><noscript><img src="../../assets/img/proxi/hero.jpg" alt="Proxi 设置窗口里的代理配置列表，旁边是列出节点和延迟的菜单栏面板" width="1600" height="1000" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>订阅和规则，内置就有</h2>
           <p>粘贴订阅地址，节点就出现在面板里。手动选一个，或者让 Proxi 自动选最快的，再按规则分流。引擎是 mihomo（Clash Meta），打包在应用里。</p>
           <ul><li>策略组：手动选择、自动选择、故障转移和负载均衡</li><li>规则库收录 blackmatrix7、MetaCubeX、ACL4SSR 和 Shadowrocket 规则集</li><li>导入 Clash、mihomo、Surge、Shadowrocket 和 Quantumult X 配置，可以预览和撤销</li></ul>
         </div>
-        <div class="feature-media "><figure class="pxd" data-lang="zh" data-preset="nodes"><noscript><img src="../../assets/img/proxi/nodes.jpg" alt="Proxi 的节点与订阅页面，有两个订阅和节点设置" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="nodes"><noscript><img src="../../assets/img/proxi/nodes.jpg" alt="Proxi 的节点与订阅页面，有两个订阅和节点设置" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>整台 Mac，连游戏机也算上</h2>
           <p>增强模式通过虚拟网卡，让每个应用（包括终端和游戏）都经过内核。局域网共享和网关模式让 PS5、Switch 或手机和你的 Mac 用同一个连接。</p>
           <ul><li>局域网共享使用 7892 端口，默认只允许局域网地址连接</li><li>网关模式适合不能设置代理的设备，游戏的 UDP 流量也能处理</li><li>一个小小的特权助手，输一次密码安装，只在这两种模式下使用</li></ul>
         </div>
-        <div class="feature-media "><figure class="pxd" data-lang="zh" data-preset="share"><noscript><img src="../../assets/img/proxi/lan.jpg" alt="Proxi 的局域网共享页面，显示要在 PS5 或 Switch 上填写的地址" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="share"><noscript><img src="../../assets/img/proxi/lan.jpg" alt="Proxi 的局域网共享页面，显示要在 PS5 或 Switch 上填写的地址" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
       </div>
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>脚本、AI 助手和同步</h2>
           <p><code>proxi</code> 命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 网址命令，共用一个本地控制接口，有四档权限。设置可以通过你自己的 iCloud 云盘在多台 Mac 之间同步。</p>
           <ul><li>按 Wi-Fi 网络或路由器自动切换配置</li><li>导入和自动切换都记在操作记录里；导入可以撤销</li></ul>
         </div>
-        <div class="feature-media "><figure class="pxd" data-lang="zh" data-preset="sync"><noscript><img src="../../assets/img/proxi/icloud.jpg" alt="Proxi 的 iCloud 同步页面" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="sync"><noscript><img src="../../assets/img/proxi/icloud.jpg" alt="Proxi 的 iCloud 同步页面" width="820" height="770" loading="lazy" decoding="async" style="width:520px"></noscript></figure></div>
       </div>
       </div>
     </div>
@@ -120,14 +131,14 @@
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="more-title">连不上的时候</h2></div>
-      <div class="tiles"><div class="tile glass"><h3>连接</h3><p>经过内核的每一条连接：来自哪个应用或设备、命中哪条规则、走哪个节点、用了多少流量。</p></div><div class="tile glass"><h3>服务检测</h3><p>看看 ChatGPT、Claude、Gemini、Netflix、YouTube Premium 或 Telegram 通过某个节点能不能用，被识别为哪个地区。</p></div><div class="tile glass"><h3>网址诊断</h3><p>输入打不开的网站，Proxi 会逐一检查 DNS、直连和代理路径，并给出修复建议。</p></div><div class="tile glass"><h3>出口 IP</h3><p>网站通过你的节点看到的地址和地区，以及你 Mac 自己的公网地址。</p></div><div class="tile glass"><h3>进阶 DNS</h3><p>内核自带加密 DNS、按域名指定服务器、hosts，以及保存前会先检查的 mihomo 配置补丁。</p></div><div class="tile glass"><h3>健康检查</h3><p>代理开启时定期检查代理端口，没有响应时提醒你。</p></div></div>
+      <div class="section-head rv"><h2 id="more-title">连不上的时候</h2></div>
+      <div class="tiles bento rv-group"><div class="tile glass"><h3>连接</h3><p>经过内核的每一条连接：来自哪个应用或设备、命中哪条规则、走哪个节点、用了多少流量。</p></div><div class="tile glass"><h3>服务检测</h3><p>看看 ChatGPT、Claude、Gemini、Netflix、YouTube Premium 或 Telegram 通过某个节点能不能用，被识别为哪个地区。</p></div><div class="tile glass"><h3>网址诊断</h3><p>输入打不开的网站，Proxi 会逐一检查 DNS、直连和代理路径，并给出修复建议。</p></div><div class="tile glass"><h3>出口 IP</h3><p>网站通过你的节点看到的地址和地区，以及你 Mac 自己的公网地址。</p></div><div class="tile glass"><h3>进阶 DNS</h3><p>内核自带加密 DNS、按域名指定服务器、hosts，以及保存前会先检查的 mihomo 配置补丁。</p></div><div class="tile glass"><h3>健康检查</h3><p>代理开启时定期检查代理端口，没有响应时提醒你。</p></div></div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="req-title">
+  <section class="section-tight" id="specs" aria-labelledby="req-title">
     <div class="wrap">
-      <div class="info-grid">
+      <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
           <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel（也提供单一架构版本）</dd><dt>权限</dt><dd>修改系统代理需要管理员密码。特权助手只用于增强模式和网关模式。不需要辅助功能权限。</dd><dt>语言</dt><dd>只有简体中文界面</dd><dt>下载</dt><dd>通用版约 53 MB（<code>Proxi-macos.zip</code>），<code>-arm64</code> 或 <code>-x86_64</code> 版约为一半</dd><dt>许可证</dt><dd>GPL-3.0；内置 mihomo（GPL-3.0）</dd></dl>
@@ -141,18 +152,31 @@
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="faq-title">
+  <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
-      <div class="section-head"><h2 id="faq-title">常见问题</h2></div>
-      <div class="faq"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Proxi 以 GPL-3.0 开源。它不出售也不提供代理服务器，代理或订阅需要你自己准备。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。全局快捷键用的是标准热键接口。Proxi 真正需要的是：修改系统代理时的管理员密码；以及只有使用增强模式或网关模式时，要安装一次特权助手，因为虚拟网卡和 IP 转发需要 root 权限。</p></div></details><details class="glass"><summary>mihomo 是什么？</summary><div class="answer"><p>mihomo（Clash Meta）是一个开源代理内核，同样采用 GPL-3.0。Proxi 把它作为独立程序打包在应用里，只在你使用内置节点代理、局域网共享或增强模式时运行。</p></div></details><details class="glass"><summary>局域网共享安全吗？</summary><div class="answer"><p>默认只允许私有局域网网段（10.x、172.16–31.x、192.168.x）的设备连接，你也可以限定为指定的 IP。在公共 Wi-Fi 上请关闭它。</p></div></details><details class="glass"><summary>为什么要定位权限？</summary><div class="answer"><p>只用于按 Wi-Fi 网络自动切换：从 macOS 14 起，读取 Wi-Fi 名称需要定位权限。Proxi 不读取也不保存你的位置，你也可以改为按路由器切换。</p></div></details><details class="glass"><summary>有 Windows 版吗？</summary><div class="answer"><p>有，Windows 上是 <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a>。两者各自独立发展。</p></div></details></div>
+      <div class="section-head rv"><h2 id="faq-title">常见问题</h2></div>
+      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Proxi 以 GPL-3.0 开源。它不出售也不提供代理服务器，代理或订阅需要你自己准备。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。全局快捷键用的是标准热键接口。Proxi 真正需要的是：修改系统代理时的管理员密码；以及只有使用增强模式或网关模式时，要安装一次特权助手，因为虚拟网卡和 IP 转发需要 root 权限。</p></div></details><details class="glass"><summary>mihomo 是什么？</summary><div class="answer"><p>mihomo（Clash Meta）是一个开源代理内核，同样采用 GPL-3.0。Proxi 把它作为独立程序打包在应用里，只在你使用内置节点代理、局域网共享或增强模式时运行。</p></div></details><details class="glass"><summary>局域网共享安全吗？</summary><div class="answer"><p>默认只允许私有局域网网段（10.x、172.16–31.x、192.168.x）的设备连接，你也可以限定为指定的 IP。在公共 Wi-Fi 上请关闭它。</p></div></details><details class="glass"><summary>为什么要定位权限？</summary><div class="answer"><p>只用于按 Wi-Fi 网络自动切换：从 macOS 14 起，读取 Wi-Fi 名称需要定位权限。Proxi 不读取也不保存你的位置，你也可以改为按路由器切换。</p></div></details><details class="glass"><summary>有 Windows 版吗？</summary><div class="answer"><p>有，Windows 上是 <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a>。两者各自独立发展。</p></div></details></div>
       <p class="small muted" style="margin-top:24px">更多帮助：<a href="https://github.com/whrss9527/proxi/issues">GitHub 上的 Proxi issue</a> · <a href="../support/">支持</a> · <a href="../privacy/proxi/">Proxi 隐私政策</a></p>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap rv-group">
+      <img class="cta-icon" src="../../assets/icons/proxi.png" alt="" width="96" height="96">
+      <h2 id="cta-title">Proxi</h2>
+      <p class="lede">一个开关管好系统代理、终端、git 和 npm，内置 mihomo 内核。</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Proxi</a>
+        <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
+      </div>
+      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>只有简体中文界面</span></p>
     </div>
   </section>
 
   <section class="section-tight" aria-labelledby="sib-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="sib-title">菜单栏里的其他应用</h2></div>
-      <div class="siblings"><a class="sibling glass" href="../pop/"><img src="../../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>长按右键，一划即达：翻译、换算和 80 多个小工具。</span></div></a><a class="sibling glass" href="../meno/"><img src="../../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。</span></div></a><a class="sibling glass" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a></div>
+      <div class="section-head rv"><h2 id="sib-title">菜单栏里的其他应用</h2></div>
+      <div class="siblings rv-group"><a class="sibling glass app-pop" href="../pop/"><img src="../../assets/icons/pop.png" alt="" width="44" height="44"><div><strong>Pop</strong><span>长按右键，一划即达：翻译、换算和 80 多个小工具。</span></div></a><a class="sibling glass app-meno" href="../meno/"><img src="../../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。</span></div></a><a class="sibling glass app-stox" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a></div>
     </div>
   </section>
 </main>

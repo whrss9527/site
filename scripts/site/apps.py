@@ -52,12 +52,12 @@ def feature(title, body, bullets, media, media_cls=""):
     ul = f"<ul>{lis}</ul>" if bullets else ""
     return f"""
       <div class="feature">
-        <div class="feature-text">
+        <div class="feature-text rv">
           <h2>{title}</h2>
           <p>{body}</p>
           {ul}
         </div>
-        <div class="feature-media {media_cls}">{media}</div>
+        <div class="feature-media rv {media_cls}">{media}</div>
       </div>"""
 
 def tiles(items):
@@ -76,7 +76,7 @@ def siblings(c, key):
         if k == key:
             continue
         pitch = a["zh"] if c.zh else a["pitch"]
-        out.append(f'<a class="sibling glass" href="{c.link(k + "/")}"><img src="{c.r}assets/icons/{k}.png" alt="" width="44" height="44"><div><strong>{a["name"]}</strong><span>{pitch}</span></div></a>')
+        out.append(f'<a class="sibling glass app-{k}" href="{c.link(k + "/")}"><img src="{c.r}assets/icons/{k}.png" alt="" width="44" height="44"><div><strong>{a["name"]}</strong><span>{pitch}</span></div></a>')
     return "".join(out)
 
 def build(key, d, lang="en"):
@@ -85,45 +85,50 @@ def build(key, d, lang="en"):
     r = c.r
     a = APPS[key]
     extra = d["extra_head"](r) if "extra_head" in d else ""
-    h = head(c, d["title"], d["desc"], body_class=f"app-{key}", extra_head=extra)
+    h = head(c, d["title"], d["desc"], body_class=f"app-{key} app-page", extra_head=extra)
     h += header(c, key)
+    h += local_nav(c, key)
     meta = "".join(f"<span>{m}</span>" for m in d["meta"])
-    feats = "".join(feature(*f) if len(f) == 4 else feature(f[0], f[1], f[2], f[3], f[4]) for f in d["features"](r))
+    features = d["features"](r)
+    feats = "".join(feature(*f) if len(f) == 4 else feature(f[0], f[1], f[2], f[3], f[4]) for f in features)
     specs = "".join(f"<dt>{k}</dt><dd>{v}</dd>" for k, v in d["specs"])
     steps = "".join(f"<li>{s}</li>" for s in d["install"])
+    pitch = a["zh"] if c.zh else a["pitch"]
     h += f"""<main id="main">
   <section class="app-hero">
     <div class="wrap">
-      <img class="icon" src="{r}assets/icons/{key}.png" alt="{t(a['name'] + ' app icon', a['name'] + ' 应用图标')}" width="128" height="128">
-      <h1>{a['name']}</h1>
-      <p class="say">{d['say']}</p>
-      <p class="lede">{d['lede']}</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="{dl_url(key)}">{ICON_DL}{t('Download ' + a['name'], '下载 ' + a['name'])}</a>
-        <a class="btn btn-glass" href="{repo_url(key)}">{ICON_GH}{t('View on GitHub', '在 GitHub 上查看')}</a>
+      <div class="hero-copy">
+        <img class="icon" src="{r}assets/icons/{key}.png" alt="{t(a['name'] + ' app icon', a['name'] + ' 应用图标')}" width="128" height="128">
+        <h1>{a['name']}</h1>
+        <p class="say">{d['say']}</p>
+        <p class="lede">{d['lede']}</p>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="{dl_url(key)}">{ICON_DL}{t('Download ' + a['name'], '下载 ' + a['name'])}</a>
+          <a class="btn btn-glass btn-lg" href="{repo_url(key)}">{ICON_GH}{t('View on GitHub', '在 GitHub 上查看')}</a>
+        </div>
+        <p class="meta">{meta}</p>
       </div>
-      <p class="meta">{meta}</p>
-      <div class="stage">{d['stage'](r)}</div>
+      <div class="stage tilt" data-p="css"><div class="tilt-inner">{d['stage'](r)}</div></div>
     </div>
   </section>
 
-  <section class="section" aria-label="{t('Features', '功能')}">
+  <section class="section features-section" id="features" aria-label="{t('Features', '功能')}">
     <div class="wrap">
-      <div class="features">{feats}
+      <div class="features scrolly" style="--n:{len(features)}">{feats}
       </div>
     </div>
   </section>
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="more-title">{d['more_title']}</h2></div>
-      <div class="tiles">{tiles(d['tiles'])}</div>
+      <div class="section-head rv"><h2 id="more-title">{d['more_title']}</h2></div>
+      <div class="tiles bento rv-group">{tiles(d['tiles'])}</div>
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="req-title">
+  <section class="section-tight" id="specs" aria-labelledby="req-title">
     <div class="wrap">
-      <div class="info-grid">
+      <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">{t("Requirements", "系统要求")}</h2>
           <dl class="specs">{specs}</dl>
@@ -137,18 +142,31 @@ def build(key, d, lang="en"):
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="faq-title">
+  <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
-      <div class="section-head"><h2 id="faq-title">{t("Questions", "常见问题")}</h2></div>
-      <div class="faq">{faq(d['faq'])}</div>
+      <div class="section-head rv"><h2 id="faq-title">{t("Questions", "常见问题")}</h2></div>
+      <div class="faq rv-group">{faq(d['faq'])}</div>
       <p class="small muted" style="margin-top:24px">{t("More help", "更多帮助")}{t(": ", "：")}<a href="{repo_url(key)}/issues">{t(a['name'] + ' issues on GitHub', 'GitHub 上的 ' + a['name'] + ' issue')}</a> · <a href="{c.link('support/')}">{t("Support", "支持")}</a> · <a href="{c.link('privacy/' + key + '/')}">{t(a['name'] + ' privacy policy', a['name'] + ' 隐私政策')}</a></p>
+    </div>
+  </section>
+
+  <section class="section cta" aria-labelledby="cta-title">
+    <div class="wrap rv-group">
+      <img class="cta-icon" src="{r}assets/icons/{key}.png" alt="" width="96" height="96">
+      <h2 id="cta-title">{a['name']}</h2>
+      <p class="lede">{pitch}</p>
+      <div class="actions">
+        <a class="btn btn-primary btn-lg" href="{dl_url(key)}">{ICON_DL}{t('Download ' + a['name'], '下载 ' + a['name'])}</a>
+        <a class="btn btn-glass btn-lg" href="{repo_url(key)}">{ICON_GH}{t('View on GitHub', '在 GitHub 上查看')}</a>
+      </div>
+      <p class="meta">{meta}</p>
     </div>
   </section>
 
   <section class="section-tight" aria-labelledby="sib-title">
     <div class="wrap">
-      <div class="section-head"><h2 id="sib-title">{t("Also in the menu bar", "菜单栏里的其他应用")}</h2></div>
-      <div class="siblings">{siblings(c, key)}</div>
+      <div class="section-head rv"><h2 id="sib-title">{t("Also in the menu bar", "菜单栏里的其他应用")}</h2></div>
+      <div class="siblings rv-group">{siblings(c, key)}</div>
     </div>
   </section>
 </main>
