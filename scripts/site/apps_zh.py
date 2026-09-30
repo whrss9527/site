@@ -1,11 +1,9 @@
 """Simplified Chinese app pages. Same structure, facts and screenshots as the
 English data in apps.py; when one changes, change the other."""
 from common import GH
-from apps import shot, cut, stox_demo, STOX_HEAD, meno_demo, MENO_HEAD
+from apps import shot, cut, pop_demo, POP_HEAD, meno_demo, MENO_HEAD, stox_demo, STOX_HEAD, proxi_demo, PROXI_HEAD
 
 # ---------------------------------------------------------------- Pop
-from apps import pop_demo, POP_HEAD
-
 POP = {
     "title": "Pop · 长按右键，一划即达",
     "desc": "Pop 是 Mac 菜单栏里的右键工具箱：长按鼠标右键，翻译选中的文字，或打开装着 80 多个工具的圆盘。开源免费。",
@@ -291,47 +289,41 @@ STOX = {
 }
 
 # ---------------------------------------------------------------- Proxi
-PROXI_SCOPE = """<div class="illus" role="img" aria-label="示意图：一个代理配置同时在四处生效：系统代理、环境变量、git 和 npm">
-  <div class="palette">
-    <div class="q">公司代理 · 127.0.0.1:7890</div>
-    <div class="row"><span>系统代理</span><small>networksetup</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>环境变量</span><small>launchctl setenv</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>git</span><small>http.proxy</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>npm</span><small>proxy</small><span class="sw" aria-hidden="true"></span></div>
-  </div>
-</div>"""
-
 PROXI = {
     "title": "Proxi · 一个开关，管好 Mac 上所有代理",
     "desc": "Proxi 同时切换系统代理、环境变量、git 和 npm，内置 mihomo 内核，支持订阅、分流规则、局域网共享和增强模式（TUN）。macOS 上开源免费。",
     "say": "/ˈprɒk.si/ —— 还是 proxy，只是 y 换成了 i。",
     "lede": "一个开关管好系统代理、终端环境变量、git 和 npm；还内置 mihomo 内核，支持订阅和分流规则、局域网共享，以及增强模式（TUN）和网关模式。",
     "meta": ["开源免费", "macOS 14 或更新", "Apple 芯片与 Intel", "简体中文界面"],
-    "stage": lambda r: shot(r, "proxi/hero.jpg", "Proxi 设置窗口里的代理配置列表，旁边是列出节点和延迟的菜单栏面板，以及菜单栏上的网速显示", 1600, 1000, "light"),
+    "extra_head": PROXI_HEAD,
+    "stage": lambda r: '<div class="compose proxi-stage">' +
+        proxi_demo(r, "zh", "panel", "proxi/panel.webp", "Proxi 菜单栏面板：代理开关、带延迟的节点列表和代理配置", 384, 722, width=300) +
+        cut(r, "proxi/panel.webp", "Proxi 菜单栏面板的真实截图：代理开关、带延迟的节点列表和三个代理配置", 384, 722, width=300, cap="真实截图") +
+        "</div>",
     "features": lambda r: [
         ("一个开关，处处生效",
          "建一个代理配置（HTTP、SOCKS5 或 PAC），选好它作用在哪里：系统代理、新开的终端和应用的环境变量、git 和 npm。一键切换配置，或者按 ⌃⌥P。",
          ["发现其他应用改了代理时会提示你，还能把它存成一个配置",
           "自动发现你 Mac 上已经在运行的代理软件并添加进来",
           "菜单栏里直接显示上传和下载速度"],
-         PROXI_SCOPE),
+         proxi_demo(r, "zh", "profiles", "proxi/hero.jpg", "Proxi 设置窗口里的代理配置列表，旁边是列出节点和延迟的菜单栏面板", 1600, 1000)),
         ("订阅和规则，内置就有",
          "粘贴订阅地址，节点就出现在面板里。手动选一个，或者让 Proxi 自动选最快的，再按规则分流。引擎是 mihomo（Clash Meta），打包在应用里。",
          ["策略组：手动选择、自动选择、故障转移和负载均衡",
           "规则库收录 blackmatrix7、MetaCubeX、ACL4SSR 和 Shadowrocket 规则集",
           "导入 Clash、mihomo、Surge、Shadowrocket 和 Quantumult X 配置，可以预览和撤销"],
-         shot(r, "proxi/nodes.jpg", "Proxi 的节点与订阅页面，有两个订阅和节点设置", 820, 770, "light")),
+         proxi_demo(r, "zh", "nodes", "proxi/nodes.jpg", "Proxi 的节点与订阅页面，有两个订阅和节点设置", 820, 770)),
         ("整台 Mac，连游戏机也算上",
          "增强模式通过虚拟网卡，让每个应用（包括终端和游戏）都经过内核。局域网共享和网关模式让 PS5、Switch 或手机和你的 Mac 用同一个连接。",
          ["局域网共享使用 7892 端口，默认只允许局域网地址连接",
           "网关模式适合不能设置代理的设备，游戏的 UDP 流量也能处理",
           "一个小小的特权助手，输一次密码安装，只在这两种模式下使用"],
-         shot(r, "proxi/lan.jpg", "Proxi 的局域网共享页面，显示要在 PS5 或 Switch 上填写的地址", 820, 770, "light")),
+         proxi_demo(r, "zh", "share", "proxi/lan.jpg", "Proxi 的局域网共享页面，显示要在 PS5 或 Switch 上填写的地址", 820, 770)),
         ("脚本、AI 助手和同步",
          "<code>proxi</code> 命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 网址命令，共用一个本地控制接口，有四档权限。设置可以通过你自己的 iCloud 云盘在多台 Mac 之间同步。",
          ["按 Wi-Fi 网络或路由器自动切换配置",
           "导入和自动切换都记在操作记录里；导入可以撤销"],
-         shot(r, "proxi/icloud.jpg", "Proxi 的 iCloud 同步页面", 820, 770, "light")),
+         proxi_demo(r, "zh", "sync", "proxi/icloud.jpg", "Proxi 的 iCloud 同步页面", 820, 770)),
     ],
     "more_title": "连不上的时候",
     "tiles": [
