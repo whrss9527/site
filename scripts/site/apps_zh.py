@@ -335,7 +335,7 @@ PROXI = {
         ("macOS", "14 Sonoma 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel（也提供单一架构版本）"),
         ("权限", "修改系统代理需要管理员密码。特权助手只用于增强模式和网关模式。不需要辅助功能权限。"),
-        ("语言", "简体中文（英文即将推出）"),
+        ("语言", "简体中文、English"),
         ("下载", "通用版约 53 MB（<code>Proxi-macos.zip</code>），<code>-arm64</code> 或 <code>-x86_64</code> 版约为一半"),
         ("许可证", "GPL-3.0；内置 mihomo（GPL-3.0）"),
     ],

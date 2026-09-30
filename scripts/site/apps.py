@@ -502,7 +502,7 @@ PROXI = {
         ("macOS", "14 Sonoma or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel (single-architecture builds also available)"),
         ("Permissions", "Administrator password to change the system proxy. Privileged helper only for Enhanced and gateway modes. No Accessibility."),
-        ("Language", "简体中文 (English coming)"),
+        ("Language", "English, 简体中文"),
         ("Download", "About 53 MB universal (<code>Proxi-macos.zip</code>), about half for <code>-arm64</code> or <code>-x86_64</code>"),
         ("License", "GPL-3.0; bundles mihomo (GPL-3.0)"),
     ],
