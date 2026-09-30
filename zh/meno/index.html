@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../../assets/meno-demo.css">
+<script src="../../assets/meno-demo.js" defer></script>
 <title>Meno · 安静的菜单栏，由玻璃打造</title>
 <meta name="description" content="Meno 是 macOS 菜单栏管理工具：隐藏图标、收进暗格，点击、悬停、轻扫或快捷键随时唤回；还有 Liquid Glass 托盘、快速打开、规则、场景和禅模式。">
 <meta name="color-scheme" content="light dark">
@@ -73,7 +75,7 @@
         <a class="btn btn-glass" href="https://github.com/whrss9527/meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
       </div>
       <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文、繁體中文</span></p>
-      <div class="stage"><div style="max-width:880px;margin:0 auto"><div class="illus screen" role="img" aria-label="示意图：Meno 在它的尖括号分隔符右边只留三个图标，菜单栏下方挂着一条玻璃托盘，显示被隐藏的项目">
+      <div class="stage"><div style="max-width:880px;margin:0 auto"><figure class="mnd" data-lang="zh" data-preset="layout" data-icon="../../assets/icons/meno.png"><noscript><div class="illus screen" role="img" aria-label="示意图：Meno 在它的尖括号分隔符右边只留三个图标，菜单栏下方挂着一条玻璃托盘，显示被隐藏的项目">
   <div class="mb">
     <span class="menus"><b>访达</b><span>文件</span><span>编辑</span><span>显示</span><span>前往</span><span>窗口</span><span>帮助</span></span>
     <span class="right">
@@ -84,7 +86,7 @@
   </div>
   <div class="shelf" aria-hidden="true"><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot"></span><span class="dot c"></span></div>
   <div class="legend"><span>‹ Meno 的分隔符：它左边的图标都会隐藏</span><span>托盘在菜单栏正下方显示隐藏的项目</span></div>
-</div><p class="illus-cap">示意图。图标只是占位，代表你的应用在菜单栏里的项目。</p></div></div>
+</div></noscript></figure></div></div>
     </div>
   </section>
 
@@ -97,7 +99,7 @@
           <p>Meno 在菜单栏里加几个小分隔符。单尖括号左边的图标会隐藏，需要时才出现；越过双尖括号的图标收进暗格，留给几乎用不到的东西：它们只在托盘、快速打开里，或按住 ⌥ 点击时出现。</p>
           <ul><li>点 Meno、点击或悬停在菜单栏空白处、向下滚动或轻扫，或按快捷键，都能展开</li><li>延迟一段时间、切换应用或指针离开后，自动重新隐藏</li><li>应用重启后 macOS 挪了它的图标，Meno 会放回原处</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="示意图：同一条菜单栏的两种状态。先是只有尖括号分隔符和三个可见图标；展开后，隐藏的图标出现在两个分隔符之间，暗格里的图标仍然不出现在菜单栏上。">
+        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="reveal" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：同一条菜单栏的两种状态。先是只有尖括号分隔符和三个可见图标；展开后，隐藏的图标出现在两个分隔符之间，暗格里的图标仍然不出现在菜单栏上。">
   <p class="tag">隐藏时</p>
   <div class="mb">
     <span class="menus"><b>邮件</b><span>文件</span><span>编辑</span></span>
@@ -109,7 +111,7 @@
     <span class="right"><span class="div">»</span><span class="dot new"></span><span class="dot new c"></span><span class="dot new"></span><span class="dot new c"></span><span class="div">‹</span><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="time">9:41</span></span>
   </div>
   <div class="legend"><span>» 暗格：不出现在菜单栏里</span><span>‹ 隐藏：需要时才显示</span><span>常显：一直都在</span></div>
-</div></div>
+</div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -117,14 +119,14 @@
           <p>托盘是菜单栏下方的一条玻璃栏，显示隐藏的项目；在摄像头所在的刘海旁、菜单栏放不下时尤其好用。快速打开是类似聚焦搜索的面板，用键盘就能找到任何项目，支持拼音和首字母。</p>
           <ul><li>↩ 打开，⌘↩ 打开次级菜单，⌘1–⌘9 选择结果</li><li>也能执行 Meno 自己的操作：应用场景、打开禅模式</li><li>macOS 26 上是 Liquid Glass；macOS 14 和 15 上是磨砂玻璃</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="示意图：快速打开，一个搜索面板，列出与输入文字匹配的菜单栏项目和操作">
+        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="shelf" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：快速打开，一个搜索面板，列出与输入文字匹配的菜单栏项目和操作">
   <div class="palette">
     <div class="q">wi<span class="caret"></span></div>
     <div class="row sel"><span class="dot"></span><span>Wi-Fi</span><small>↩ 打开</small></div>
     <div class="row"><span class="dot c"></span><span>无线诊断</span><small>⌘2</small></div>
     <div class="row"><span class="dot"></span><span>场景：工作</span><small>⌘3</small></div>
   </div>
-</div></div>
+</div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -132,7 +134,7 @@
           <p>规则会替你调整菜单栏：麦克风或摄像头正在使用、接上显示器、使用电池、连到某个网络，或者到了某个时间。场景可以把布局保存成“工作”“在家”“演示”等。</p>
           <ul><li>操作可以显示或隐藏分区、应用场景、打开禅模式，或移动某个项目</li><li>移动会等到你不再使用鼠标和键盘时才进行</li><li>从 Meno 的菜单或用快捷键暂停所有规则</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="示意图：两条规则。麦克风正在使用时，打开禅模式，结束后还原。连接外接显示器时，应用场景“工作”。">
+        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="rules" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：两条规则。麦克风正在使用时，打开禅模式，结束后还原。连接外接显示器时，应用场景“工作”。">
   <div class="palette">
     <div class="row"><span class="dot c"></span><span><strong>当</strong>麦克风正在使用</span></div>
     <div class="row sel"><span class="dot"></span><span>打开禅模式</span><small>结束后还原</small><span class="sw" aria-hidden="true"></span></div>
@@ -140,7 +142,22 @@
     <div class="row"><span class="dot c"></span><span><strong>当</strong>连接了外接显示器</span></div>
     <div class="row sel"><span class="dot"></span><span>应用场景“工作”</span><span class="sw" aria-hidden="true"></span></div>
   </div>
-</div></div>
+</div></noscript></figure></div>
+      </div>
+      <div class="feature">
+        <div class="feature-text">
+          <h2>用你的语言</h2>
+          <p>Meno 支持英语、简体中文和繁体中文。它跟随系统语言，也可以在设置 › 通用 › 语言里另选一种，重新打开后切换。</p>
+          <ul><li>这个设置用三种语言标注，哪种界面下都好找</li><li>通用里的其他设置：项目怎样出现、何时重新隐藏、暗格和禅模式</li></ul>
+        </div>
+        <div class="feature-media "><figure class="mnd" data-lang="zh" data-preset="general" data-icon="../../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="示意图：Meno 通用设置里的语言选项：跟随系统、English、简体中文和繁體中文">
+  <div class="palette">
+    <div class="row sel"><span class="dot c"></span><span>跟随系统</span><small>✓</small></div>
+    <div class="row"><span class="dot"></span><span>English</span></div>
+    <div class="row"><span class="dot"></span><span>简体中文</span></div>
+    <div class="row"><span class="dot"></span><span>繁體中文</span></div>
+  </div>
+</div></noscript></figure></div>
       </div>
       </div>
     </div>

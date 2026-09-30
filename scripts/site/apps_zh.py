@@ -1,7 +1,7 @@
 """Simplified Chinese app pages. Same structure, facts and screenshots as the
 English data in apps.py; when one changes, change the other."""
 from common import GH
-from apps import shot, cut, stox_demo, STOX_HEAD
+from apps import shot, cut, stox_demo, STOX_HEAD, meno_demo, MENO_HEAD
 
 # ---------------------------------------------------------------- Pop
 POP = {
@@ -140,32 +140,47 @@ MENO_RULE = """<div class="illus" role="img" aria-label="示意图：两条规�
   </div>
 </div>"""
 
+MENO_LANG = """<div class="illus" role="img" aria-label="示意图：Meno 通用设置里的语言选项：跟随系统、English、简体中文和繁體中文">
+  <div class="palette">
+    <div class="row sel"><span class="dot c"></span><span>跟随系统</span><small>✓</small></div>
+    <div class="row"><span class="dot"></span><span>English</span></div>
+    <div class="row"><span class="dot"></span><span>简体中文</span></div>
+    <div class="row"><span class="dot"></span><span>繁體中文</span></div>
+  </div>
+</div>"""
+
 MENO = {
     "title": "Meno · 安静的菜单栏，由玻璃打造",
     "desc": "Meno 是 macOS 菜单栏管理工具：隐藏图标、收进暗格，点击、悬停、轻扫或快捷键随时唤回；还有 Liquid Glass 托盘、快速打开、规则、场景和禅模式。",
     "say": "/ˈmeː.no/ —— 意大利语里的“更少”，和 menu 只差一个字母。",
     "lede": "Meno 把不常用的菜单栏图标收起来，点一下、悬停、轻扫或按快捷键，就能随时唤回。",
     "meta": ["开源免费", "macOS 14 或更新", "Apple 芯片与 Intel", "English、简体中文、繁體中文"],
-    "stage": lambda r: f'<div style="max-width:880px;margin:0 auto">{MENO_BAR}<p class="illus-cap">示意图。图标只是占位，代表你的应用在菜单栏里的项目。</p></div>',
+    "extra_head": MENO_HEAD,
+    "stage": lambda r: f'<div style="max-width:880px;margin:0 auto">{meno_demo(r, "zh", "layout", MENO_BAR)}</div>',
     "features": lambda r: [
         ("常显、隐藏，还有暗格",
          "Meno 在菜单栏里加几个小分隔符。单尖括号左边的图标会隐藏，需要时才出现；越过双尖括号的图标收进暗格，留给几乎用不到的东西：它们只在托盘、快速打开里，或按住 ⌥ 点击时出现。",
          ["点 Meno、点击或悬停在菜单栏空白处、向下滚动或轻扫，或按快捷键，都能展开",
           "延迟一段时间、切换应用或指针离开后，自动重新隐藏",
           "应用重启后 macOS 挪了它的图标，Meno 会放回原处"],
-         MENO_REVEAL),
+         meno_demo(r, "zh", "reveal", MENO_REVEAL)),
         ("托盘和快速打开",
          "托盘是菜单栏下方的一条玻璃栏，显示隐藏的项目；在摄像头所在的刘海旁、菜单栏放不下时尤其好用。快速打开是类似聚焦搜索的面板，用键盘就能找到任何项目，支持拼音和首字母。",
          ["↩ 打开，⌘↩ 打开次级菜单，⌘1–⌘9 选择结果",
           "也能执行 Meno 自己的操作：应用场景、打开禅模式",
           "macOS 26 上是 Liquid Glass；macOS 14 和 15 上是磨砂玻璃"],
-         MENO_QUICK),
+         meno_demo(r, "zh", "shelf", MENO_QUICK)),
         ("会看场合的菜单栏",
          "规则会替你调整菜单栏：麦克风或摄像头正在使用、接上显示器、使用电池、连到某个网络，或者到了某个时间。场景可以把布局保存成“工作”“在家”“演示”等。",
          ["操作可以显示或隐藏分区、应用场景、打开禅模式，或移动某个项目",
           "移动会等到你不再使用鼠标和键盘时才进行",
           "从 Meno 的菜单或用快捷键暂停所有规则"],
-         MENO_RULE),
+         meno_demo(r, "zh", "rules", MENO_RULE)),
+        ("用你的语言",
+         "Meno 支持英语、简体中文和繁体中文。它跟随系统语言，也可以在设置 › 通用 › 语言里另选一种，重新打开后切换。",
+         ["这个设置用三种语言标注，哪种界面下都好找",
+          "通用里的其他设置：项目怎样出现、何时重新隐藏、暗格和禅模式"],
+         meno_demo(r, "zh", "general", MENO_LANG)),
     ],
     "more_title": "积少成多的小细节",
     "tiles": [

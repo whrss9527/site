@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../assets/meno-demo.css">
+<script src="../assets/meno-demo.js" defer></script>
 <title>Meno · A calm menu bar, made with glass</title>
 <meta name="description" content="Meno is a menu bar manager for macOS: hide and stash icons, bring them back with a click, hover, swipe or shortcut, with a Liquid Glass Shelf, Quick Open, rules, scenes and Zen mode.">
 <meta name="color-scheme" content="light dark">
@@ -73,7 +75,7 @@
         <a class="btn btn-glass" href="https://github.com/whrss9527/meno"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
       </div>
       <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>English, 简体中文, 繁體中文</span></p>
-      <div class="stage"><div style="max-width:880px;margin:0 auto"><div class="illus screen" role="img" aria-label="Illustration: a menu bar where Meno keeps only three icons visible behind its chevron divider, and a glass Shelf hanging below it that shows the hidden items">
+      <div class="stage"><div style="max-width:880px;margin:0 auto"><figure class="mnd" data-lang="en" data-preset="layout" data-icon="../assets/icons/meno.png"><noscript><div class="illus screen" role="img" aria-label="Illustration: a menu bar where Meno keeps only three icons visible behind its chevron divider, and a glass Shelf hanging below it that shows the hidden items">
   <div class="mb">
     <span class="menus"><b>Finder</b><span>File</span><span>Edit</span><span>View</span><span>Go</span><span>Window</span><span>Help</span></span>
     <span class="right">
@@ -84,7 +86,7 @@
   </div>
   <div class="shelf" aria-hidden="true"><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="dot"></span><span class="dot c"></span></div>
   <div class="legend"><span>‹ Meno’s divider: everything to its left is hidden</span><span>The Shelf shows hidden items right below the menu bar</span></div>
-</div><p class="illus-cap">Illustration. The icons are placeholders for your apps’ menu bar items.</p></div></div>
+</div></noscript></figure></div></div>
     </div>
   </section>
 
@@ -97,7 +99,7 @@
           <p>Meno adds small dividers to your menu bar. Icons left of the single chevron are hidden until you ask; icons past the double chevron go in the Stash, for things you almost never need — they appear only in the Shelf, Quick Open or with ⌥-click.</p>
           <ul><li>Reveal with a click on Meno, a click or hover on empty menu bar, a scroll or swipe down, or a shortcut</li><li>Re-hides after a delay, when you switch apps or when the pointer leaves</li><li>When an app restarts and macOS moves its icon, Meno puts it back</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="Illustration: the same menu bar twice. First with only the chevron divider and three visible icons. Then revealed, with the hidden icons shown between the dividers; stashed icons stay out of the menu bar.">
+        <div class="feature-media "><figure class="mnd" data-lang="en" data-preset="reveal" data-icon="../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="Illustration: the same menu bar twice. First with only the chevron divider and three visible icons. Then revealed, with the hidden icons shown between the dividers; stashed icons stay out of the menu bar.">
   <p class="tag">Hidden</p>
   <div class="mb">
     <span class="menus"><b>Mail</b><span>File</span><span>Edit</span></span>
@@ -109,7 +111,7 @@
     <span class="right"><span class="div">»</span><span class="dot new"></span><span class="dot new c"></span><span class="dot new"></span><span class="dot new c"></span><span class="div">‹</span><span class="dot"></span><span class="dot c"></span><span class="dot"></span><span class="time">9:41</span></span>
   </div>
   <div class="legend"><span>» Stash — stays out of the menu bar</span><span>‹ Hidden — shown on demand</span><span>Visible — always there</span></div>
-</div></div>
+</div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -117,14 +119,14 @@
           <p>The Shelf is a glass bar below the menu bar that shows hidden items — handy next to the camera housing, where the menu bar runs out of room. Quick Open is a Spotlight-style palette that finds any item from the keyboard, pinyin and initials included.</p>
           <ul><li>↩ opens, ⌘↩ opens the secondary menu, ⌘1–⌘9 pick a result</li><li>Also runs Meno’s own actions: apply a scene, turn on Zen</li><li>Liquid Glass on macOS 26; frosted glass on macOS 14 and 15</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="Illustration: Quick Open, a search palette listing menu bar items and actions that match the typed text">
+        <div class="feature-media "><figure class="mnd" data-lang="en" data-preset="shelf" data-icon="../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="Illustration: Quick Open, a search palette listing menu bar items and actions that match the typed text">
   <div class="palette">
     <div class="q">wi<span class="caret"></span></div>
     <div class="row sel"><span class="dot"></span><span>Wi-Fi</span><small>↩ Open</small></div>
     <div class="row"><span class="dot c"></span><span>Wireless Diagnostics</span><small>⌘2</small></div>
     <div class="row"><span class="dot"></span><span>Scene: Work</span><small>⌘3</small></div>
   </div>
-</div></div>
+</div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text">
@@ -132,7 +134,7 @@
           <p>Rules change the menu bar for you: when a microphone or camera is in use, a display is plugged in, you’re on battery, on a certain network, or at a certain time. Scenes save arrangements like Work, Home or Presenting.</p>
           <ul><li>Actions reveal or hide sections, apply a scene, turn on Zen or move one item</li><li>Moves wait until you’re not using the mouse and keyboard</li><li>Pause all rules from Meno’s menu or a shortcut</li></ul>
         </div>
-        <div class="feature-media "><div class="illus" role="img" aria-label="Illustration: two rules. When a microphone is in use, turn on Zen and undo it afterwards. When an external display is connected, apply the scene Work.">
+        <div class="feature-media "><figure class="mnd" data-lang="en" data-preset="rules" data-icon="../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="Illustration: two rules. When a microphone is in use, turn on Zen and undo it afterwards. When an external display is connected, apply the scene Work.">
   <div class="palette">
     <div class="row"><span class="dot c"></span><span><strong>When</strong> a microphone is in use</span></div>
     <div class="row sel"><span class="dot"></span><span>Turn on Zen</span><small>undo afterwards</small><span class="sw" aria-hidden="true"></span></div>
@@ -140,7 +142,22 @@
     <div class="row"><span class="dot c"></span><span><strong>When</strong> an external display is connected</span></div>
     <div class="row sel"><span class="dot"></span><span>Apply scene “Work”</span><span class="sw" aria-hidden="true"></span></div>
   </div>
-</div></div>
+</div></noscript></figure></div>
+      </div>
+      <div class="feature">
+        <div class="feature-text">
+          <h2>In your language</h2>
+          <p>Meno speaks English, Simplified Chinese and Traditional Chinese. It follows the system language, or the one you choose in Settings › General › Language, and switches after a relaunch.</p>
+          <ul><li>The setting is labelled in all three languages, so it’s easy to find</li><li>Everything else in General: how items appear, when they hide again, the Stash and Zen</li></ul>
+        </div>
+        <div class="feature-media "><figure class="mnd" data-lang="en" data-preset="general" data-icon="../assets/icons/meno.png"><noscript><div class="illus" role="img" aria-label="Illustration: the Language setting in Meno’s General settings, with Follow System, English, Simplified Chinese and Traditional Chinese">
+  <div class="palette">
+    <div class="row sel"><span class="dot c"></span><span>Follow System</span><small>✓</small></div>
+    <div class="row"><span class="dot"></span><span>English</span></div>
+    <div class="row"><span class="dot"></span><span>简体中文</span></div>
+    <div class="row"><span class="dot"></span><span>繁體中文</span></div>
+  </div>
+</div></noscript></figure></div>
       </div>
       </div>
     </div>
