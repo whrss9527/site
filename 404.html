@@ -67,8 +67,14 @@
         (function () {
           var p = location.pathname;
           if (p && p !== "/" && p !== "/404.html") {
+            var target = "https://blog.whrss.com" + p + location.search + location.hash;
+            // Addresses that only ever existed on the old blog go straight to it.
+            if (/^\/(posts|post|feed|rss|atom|tags?|categor(y|ies)|archives?|page|search)(\/|\.|$)/.test(p)) {
+              location.replace(target);
+              return;
+            }
             var a = document.getElementById("blog-link");
-            a.href = "https://blog.whrss.com" + p + location.search;
+            a.href = target;
             a.textContent = "blog.whrss.com" + p;
           }
         })();
