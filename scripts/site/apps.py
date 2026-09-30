@@ -133,15 +133,25 @@ def build(key, d, lang="en"):
 
 
 # ---------------------------------------------------------------- Pop
+def pop_demo(r, lang, preset, fallback, alt, w, h, desk=False):
+    """The interactive Pop demo (assets/pop-demo.js, sample text): a document with Pop's ring
+    and result cards, preset to one state. Without JavaScript the real screenshot `fallback` shows instead."""
+    d = " data-desk" if desk else ""
+    return (f'<figure class="ppd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/pop.png">'
+            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async"></noscript></figure>')
+
+POP_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/pop-demo.css">\n<script src="{r}assets/pop-demo.js" defer></script>'
+
 POP = {
     "title": "Pop · Long-press right click, swipe, done",
     "desc": "Pop is a right-click toolbox for the Mac menu bar: long-press the right mouse button to translate a selection or open a ring of 80+ tools. Free and open source.",
     "say": "/pɒp/ — like a bubble: it pops up, you swipe, it pops.",
     "lede": "Hold the right mouse button on anything you’ve selected. Pop translates it, converts it, or opens a ring of tools you pick with one swipe. A short click is still the normal context menu.",
-    "meta": ["Free and open source", "macOS 15 or later", "Apple silicon and Intel", "Interface in Simplified Chinese"],
-    "stage": lambda r: '<div class="compose">' +
-        cut(r, "pop/ring.webp", "Pop’s ring menu with Translate, Search, Dictionary, Open Link, All Functions, Clipboard, Screenshot OCR and Color Picker slots; Dictionary is highlighted", 214, 214, dark="pop/ring-dark.webp", eager=True) +
-        cut(r, "pop/unit.webp", "Pop’s unit conversion card showing 5 km in centimeters, meters, inches, feet, miles, nautical miles and Chinese units", 325, 249, eager=True) +
+    "meta": ["Free and open source", "macOS 15 or later", "Apple silicon and Intel", "In English and Simplified Chinese"],
+    "extra_head": POP_HEAD,
+    "stage": lambda r: '<div class="compose pop-stage">' +
+        pop_demo(r, "en", "ring", "pop/unit.webp", "Pop’s unit conversion card showing 5 km in centimeters, meters, inches, feet, miles, nautical miles and Chinese units", 325, 249, desk=True) +
+        cut(r, "pop/ring.webp", "Real screenshot of Pop’s ring, in Chinese, with Dictionary highlighted", 214, 214, dark="pop/ring-dark.webp", cap="Real screenshot · Chinese interface") +
         "</div>",
     "features": lambda r: [
         ("A right click, held a moment",
@@ -160,25 +170,25 @@ POP = {
          ["Replace the original text in place, or copy it",
           "Change the target language for one card, or read it aloud",
           "Save words to a vocabulary list and export it for Anki"],
-         cut(r, "pop/translate.webp", "Pop’s translation card comparing the AI and DeepL translations of an English sentence into Chinese, with Copy and Replace buttons", 325, 297)),
+         pop_demo(r, "en", "translate", "pop/translate.webp", "Pop’s translation card comparing the System, AI and DeepL translations of a sentence, with Copy and Replace for each", 325, 297)),
         ("More than 80 tools, where you want them",
          "Arrange 4 to 12 slots, give an app its own ring, and set rules that skip the ring entirely: math is calculated, units and colors are converted, images are read with on-device OCR.",
          ["Text: cleanup, case, encoding, word count, extract links and emails",
           "Developer: JSON, YAML, SQL, regex, JWT, hashes, QR codes, cron",
           "Files and screen: rename, convert images and video, PDF, color picker, ruler"],
-         '<div class="overlap">' + cut(r, "pop/json.webp", "Pop’s JSON to code card generating TypeScript interfaces", 442, 363) + cut(r, "pop/regex.webp", "Pop’s regex tester card highlighting matched dates and named groups", 442, 274) + "</div>"),
+         pop_demo(r, "en", "unit", "pop/regex.webp", "Pop’s regex tester card highlighting matched dates and named groups", 442, 274)),
         ("Clipboard history, and pins on top",
          "Pop keeps a searchable history of text, images and files — text inside images is searchable too, recognized on your Mac. Pin a screenshot, image or text above every window to compare against.",
          ["⌘1–⌘9 to paste, ⌘-click several items to paste them together",
           "Skips content that password managers mark as concealed; exclude any app",
           "Stored only on this Mac and cleaned up by age and count"],
-         cut(r, "pop/history.webp", "Pop’s clipboard history panel with search, type filters and five recent items, two of them selected", 392, 414)),
+         pop_demo(r, "en", "history", "pop/history.webp", "Pop’s clipboard history panel with search, type filters and recent items, two of them selected", 392, 414)),
         ("AI with your own endpoint",
          "Select text and ask AI to polish, summarize, explain or translate it, or ask a question. On macOS 26 with Apple Intelligence, Pop can use the built-in on-device model. Or point it at any OpenAI Chat Completions–compatible endpoint, including a model running on your Mac.",
          ["Answers stream in; copy, replace the original or pin them",
           "Selected text is only sent when you use an AI feature",
           "Your API key stays in this Mac’s Keychain"],
-         cut(r, "pop/ai.webp", "Pop’s AI card with Polish, Summarize, Explain and Translate buttons and a question field", 358, 210)),
+         pop_demo(r, "en", "ai", "pop/ai.webp", "Pop’s AI card with Polish, Summarize, Explain and Translate buttons, a question field and an answer", 358, 210)),
         ("Plugins in one JSON file",
          "Turn a URL template, a shell script, JavaScript or a Shortcut into a tool on the ring. Or install one from the plugin library — Pop checks its SHA-256 before adding it, and shows you shell scripts before they’re installed.",
          ["<code>pop://</code> links and Shortcuts actions let other tools call Pop",
@@ -198,7 +208,7 @@ POP = {
         ("macOS", "15 Sequoia or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "Accessibility (required). Screen Recording only for screenshot tools."),
-        ("Language", "Simplified Chinese interface; translation works across many languages"),
+        ("Language", "English or Simplified Chinese interface, following your Mac’s language (0.30.0 and later); translation works across many languages"),
         ("Download", "About 6 MB (<code>Pop-&lt;version&gt;.zip</code>)"),
         ("License", "GPL-3.0"),
     ],
@@ -215,7 +225,7 @@ POP = {
             "macOS only lets apps with Accessibility access watch mouse buttons system-wide, read the selection in other apps and paste into them. Pop needs exactly that: to notice a long right-click, read what you selected, and put results back when you choose “Replace”.",
             "For the same reason Pop can’t be in the Mac App Store — the sandbox doesn’t allow it — so it’s distributed on GitHub and here."]),
         ("Does it need Screen Recording?", "Only for the tools that look at the screen: screenshot OCR and translate, QR scanning, annotation and the ruler. Everything else works without it."),
-        ("Is there an English interface?", "Not yet — Pop’s interface is in Simplified Chinese. Translation itself works between many languages using Apple’s on-device translation, AI or DeepL."),
+        ("Is there an English interface?", "Yes. Since 0.30.0 Pop shows its interface in English unless your Mac’s language is Chinese. Translation itself works between many languages using Apple’s on-device translation, AI or DeepL."),
         ("Does Pop send my text anywhere?", f'Only when you ask for it: AI features send the selected text to the AI endpoint you set up, and DeepL translation sends it to DeepL. Apple’s on-device translation and model, OCR and the clipboard history stay on your Mac. See the <a href="../privacy/pop/">privacy policy</a>.'),
         ("Does it sync between Macs?", "You can export settings and plugins to a file in Settings › Sync and import them on another Mac. iCloud sync needs a build signed with iCloud access; the builds on GitHub don’t include it."),
         ("Right-click stopped working after an update.", "Open Pop’s Settings › General and use “Clear old authorization records”, then grant Accessibility again. This mostly affected older, ad-hoc–signed builds; notarized releases keep the permission."),
