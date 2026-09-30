@@ -51,10 +51,9 @@ Use a real server rather than opening the files directly, so that `/pop/` resolv
 ## Owner checklist
 
 1. **Pages source.** Repository Settings → Pages → *Build and deployment* → Source: **GitHub Actions**.
-2. **Push `main`.** The first run of *Deploy to GitHub Pages* publishes the site at `https://whrss9527.github.io/site/` until the custom domain is set.
-3. **Custom domain.** With Actions-based Pages the `CNAME` file is **ignored**. Set the domain in Settings → Pages → *Custom domain*: `whrss.com`, and save. Optionally verify the domain first in your account's Settings → Pages → *Verified domains*, which stops anyone else from claiming it.
-4. **Move the blog first.** whrss.com currently points at the blog (through Cloudflare). Before changing the apex records, note where they point today and create `blog.whrss.com` for the same server, and make sure the blog server answers for `blog.whrss.com` with a valid certificate. Otherwise the blog goes offline when the apex moves.
-5. **DNS for whrss.com** (at your DNS provider, currently Cloudflare):
+2. **Push `main`.** The first run of *Deploy to GitHub Pages* publishes the site at `https://whrss9527.github.io/site/`. Leave *Custom domain* **empty** for now: as soon as it is set, GitHub redirects the github.io address to `whrss.com`, which still shows the blog until step 4 is done.
+3. **Move the blog first.** whrss.com currently points at the blog (through Cloudflare). Before changing the apex records, note where they point today, create `blog.whrss.com` for the same server, and make sure the blog server answers for `blog.whrss.com` with a valid certificate. Otherwise the blog goes offline when the apex moves.
+4. **DNS for whrss.com** (at your DNS provider, currently Cloudflare):
 
    | Type  | Name  | Value |
    | ----- | ----- | ----- |
@@ -70,8 +69,9 @@ Use a real server rather than opening the files directly, so that `/pop/` resolv
    | A / CNAME | `blog` | the blog server (what `@` points to today) |
 
    Remove any other A, AAAA or CNAME records for `@` and `www`. On Cloudflare, set the GitHub records to **DNS only** (grey cloud): GitHub has to see its own IPs to issue the certificate. If the domain has CAA records, allow `letsencrypt.org`.
+5. **Custom domain.** Only now set Settings → Pages → *Custom domain* to `whrss.com` and save (the `CNAME` file is **ignored** for Actions-based Pages). Optionally verify the domain first in your account's Settings → Pages → *Verified domains*, which stops anyone else from claiming it.
 6. **HTTPS.** When Settings → Pages shows the certificate as issued (minutes to about an hour after DNS resolves), tick **Enforce HTTPS**. `www.whrss.com` then redirects to `whrss.com`.
-7. **Check.** `https://whrss.com`, `https://www.whrss.com`, `https://blog.whrss.com`, and an old blog URL on whrss.com: it shows the 404 page with a link to the same path on blog.whrss.com. GitHub Pages can't redirect server-side; if you want old URLs to redirect automatically, add a Cloudflare redirect rule for the old paths (only possible while the record is proxied) or keep the link on the 404 page.
+7. **Check.** `https://whrss.com`, `https://www.whrss.com`, `https://blog.whrss.com`, and an old blog URL such as `https://whrss.com/posts/<slug>`: addresses that only existed on the blog (`/posts/`, `/feed`, `/tags/`, `/archives`, `/page/`, `/search`) are sent to the same path on blog.whrss.com by the 404 page; anything else shows the 404 page with a link. RSS readers don't run that script, so feed subscribers need the new feed address `https://blog.whrss.com/feed`.
 
 ## Privacy policies
 
