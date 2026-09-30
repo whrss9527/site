@@ -26,22 +26,43 @@ ZH_BULLETS = {
     "proxi": ["系统代理、环境变量、git、npm 一个开关", "内置 mihomo 内核：订阅、分流规则、策略组", "局域网共享给游戏机和手机，增强模式与网关模式"],
 }
 
-def desk(c):
-    r, zh = c.r, c.zh
-    icons = "".join(f'<img src="{r}assets/icons/{k}.png" alt="" width="18" height="18">' for k in APPS)
-    alt_stox = "Stox 面板：自选列表和分时图" if zh else "Stox panel with a watchlist and an intraday chart"
-    alt_proxi = "Proxi 菜单栏面板：节点列表和延迟" if zh else "Proxi menu bar panel listing nodes and their latency"
-    alt_ring = "Pop 的圆盘菜单" if zh else "Pop’s ring menu"
-    cap = "真实截图：Proxi 和 Stox 的菜单栏面板，Pop 的圆盘。" if zh else "Real screenshots: the Proxi and Stox menu bar panels, and Pop’s ring."
-    return f"""<figure class="desk-wrap" data-p>
-        <div class="desk">
-          <div class="bar" aria-hidden="true">{icons}<span>{"周三 9:41" if zh else "Wed 9:41"}</span></div>
-          <div class="p proxi"><img src="{r}assets/img/proxi/panel.webp" alt="{alt_proxi}" width="384" height="722"></div>
-          <div class="p stox"><img src="{r}assets/img/stox/detail.webp" alt="{alt_stox}" width="376" height="645"></div>
-          <div class="p ring"><picture><source srcset="{r}assets/img/pop/ring-dark.webp" media="(prefers-color-scheme: dark)"><img src="{r}assets/img/pop/ring.webp" alt="{alt_ring}" width="214" height="214"></picture></div>
+def reel(c):
+    """The hero: the four apps as live demos (assets/<app>-demo.js, sample data) in a row you can swipe."""
+    from apps import pop_demo, meno_demo, stox_demo, proxi_demo
+    r, zh, t = c.r, c.zh, c.t
+    lang = "zh" if zh else "en"
+    meno_nojs = (f'<div class="demo-nojs glass"><img src="{r}assets/icons/meno.png" alt="" width="40" height="40"><p>'
+                 + t("An interactive demo of Meno with sample data appears here when JavaScript is on.",
+                     "这里是 Meno 的可交互演示（示例数据），打开 JavaScript 就能试用。") + "</p></div>")
+    demos = {
+        "pop": pop_demo(r, lang, "ring", desk=True),
+        "meno": meno_demo(r, lang, "layout", meno_nojs),
+        "stox": stox_demo(r, lang, "list", desk=True),
+        "proxi": proxi_demo(r, lang, "panel"),
+    }
+    blurbs = {
+        "pop": t("Hold the right button. Swipe to a tool.", "按住右键，一划选中工具。"),
+        "meno": t("A calm menu bar. Icons on call.", "安静的菜单栏，图标随叫随到。"),
+        "stox": t("Quotes at a glance. Gone in one click.", "一眼看盘，一键隐身。"),
+        "proxi": t("One switch for every proxy.", "一个开关，管好所有代理。"),
+    }
+    cards = "".join(f"""
+          <article class="reel-card glass app-{k}" aria-labelledby="reel-{k}">
+            <header>
+              <img src="{r}assets/icons/{k}.png" alt="" width="44" height="44">
+              <div><h2 id="reel-{k}">{a["name"]}</h2><p>{blurbs[k]}</p></div>
+              <a class="reel-more" href="{c.link(k + "/")}" aria-label="{t("Learn more about " + a["name"], "了解 " + a["name"])}">{t("Learn more", "了解更多")}<span aria-hidden="true"> ›</span></a>
+            </header>
+            <div class="reel-demo">{demos[k]}</div>
+          </article>""" for k, a in APPS.items())
+    label = t("The four apps, as interactive demos", "四个应用的可交互演示")
+    prev, nxt = t("Previous app", "上一个应用"), t("Next app", "下一个应用")
+    return f"""<div class="reel" role="region" aria-label="{label}" tabindex="-1">{cards}
         </div>
-        <figcaption class="desk-cap">{cap}</figcaption>
-      </figure>"""
+        <div class="reel-nav" hidden>
+          <button type="button" class="reel-btn" data-dir="-1" aria-label="{prev}"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3 5 8l5 5"/></svg></button>
+          <button type="button" class="reel-btn" data-dir="1" aria-label="{nxt}"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3 5 5-5 5"/></svg></button>
+        </div>"""
 
 def cards(c):
     r, zh = c.r, c.zh
@@ -87,7 +108,8 @@ def page(zh):
     # English home only: a visitor who chose Chinese in the language menu goes to /zh/.
     # Never guessed from the browser language.
     redirect = "" if zh else ('\n<script>try{if(localStorage.getItem("%s")==="zh")location.replace("zh/"+location.search+location.hash)}catch(e){}</script>' % LANG_KEY)
-    h = head(c, title, desc, body_class="home", extra_head=redirect)
+    demo_head = "".join(f'\n<link rel="stylesheet" href="{r}assets/{k}-demo.css">\n<script src="{r}assets/{k}-demo.js" defer></script>' for k in APPS)
+    h = head(c, title, desc, body_class="home", extra_head=redirect + demo_head)
     h += header(c)
     t = c.t
     facts = [
@@ -117,8 +139,8 @@ def page(zh):
         <a class="btn btn-glass btn-lg" href="{GH}">{ICON_GH}{t("whrss9527 on GitHub", "GitHub 主页")}</a>
       </div>
     </div>
-    <div class="wrap hero-desk">
-      {desk(c)}
+    <div class="hero-desk">
+      {reel(c)}
     </div>
   </section>
 
@@ -131,8 +153,6 @@ def page(zh):
       </div>
       <div class="cards rv-group">{cards(c)}
       </div>
-      <p class="small muted langs rv">{t("Languages: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow your Mac’s language; a language setting is coming in the next versions. Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0. Proxi’s interface is in Simplified Chinese only.",
-                                         "界面语言：Pop（0.30.0 起）和 Stox（0.47.0 起）有简体中文和英文界面，跟随 Mac 的系统语言，接下来的版本会加上语言设置；Meno 支持英文、简体中文和繁体中文，0.12.0 起可以在设置里选择语言；Proxi 只有简体中文界面。")}</p>
     </div>
   </section>
 

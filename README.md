@@ -16,14 +16,15 @@ zh/...                  The same pages in Simplified Chinese: zh/, zh/pop/, zh/p
 assets/site.css         The only stylesheet: tokens on :root, light and dark via prefers-color-scheme
 assets/site.js          Remembers the language picked in the language menu; closes open menus
 assets/motion.js        Scroll motion: reveals, the pinned feature demos, parallax, the condensing bars
-assets/<app>-demo.js/.css Interactive recreations of Pop, Meno, Stox and Proxi (sample data; each loaded only on its app's pages)
+assets/<app>-demo.js/.css Interactive recreations of Pop, Meno, Stox and Proxi (sample data; loaded on its app's pages and the home page)
 assets/icons/           App icons (256 px, from each app's repository)
-assets/img/<app>/       Screenshots (from each app's repository and CI screenshots)
+assets/og/              Open Graph images, 1200 × 630, per page and language (rendered by scripts/og/render.js)
 assets/favicon.svg, assets/apple-touch-icon.png
 CNAME                   whrss.com (kept for reference; see "Custom domain" below)
 robots.txt, sitemap.xml
 scripts/site/           The page generator (see "Editing pages")
 scripts/check_links.py  Checks links, #anchors, no requests to other origins, and the language pairs
+scripts/og/render.js    Renders assets/og/*.png from the site's own demos (Node + Playwright; not needed to build)
 .github/workflows/pages.yml  Deploys to GitHub Pages on every push to main
 ```
 
@@ -56,7 +57,7 @@ Edit the English and Chinese text together: the two versions of a page must say 
 
 ## Languages
 
-- Every page has a Chinese version at the same path under `/zh/`, with the same structure, facts and screenshots. Chinese pages link only to Chinese pages, English pages only to English ones; `check_links.py` fails otherwise, and when a page is missing its counterpart.
+- Every page has a Chinese version at the same path under `/zh/`, with the same structure, facts and demos. Chinese pages link only to Chinese pages, English pages only to English ones; `check_links.py` fails otherwise, and when a page is missing its counterpart.
 - The globe button in the header (and the entry at the bottom of the mobile menu, and the footer) links to the same page in the other language. It is a `<details>` menu, so it works with the keyboard and without JavaScript.
 - Picking a language stores it in `localStorage` (`lang` = `en` or `zh`). Only the English home page reads it: with `zh` stored, `/` goes to `/zh/`. The browser language is never used to redirect.
 - Each page declares `canonical` and `hreflang` alternates (`en`, `zh-CN`, `x-default` → English), and `sitemap.xml` lists both languages.
@@ -69,27 +70,39 @@ The pages move a little as you scroll, in the manner of Apple's product pages. E
 - **Reveals.** Elements with `rv` fade and rise into view once; the children of an `rv-group` do the same one after another. The generator puts these classes in the HTML.
 - **App heroes.** The copy rises in on load; the panel below leans back and settles flat as it scrolls into place (a CSS scroll timeline where the browser has one, otherwise `--p` from `motion.js`).
 - **Pinned features.** On app pages in windows at least 1024 px wide and 700 px tall, the feature texts scroll by on the left while their demos stay pinned on the right and crossfade to the step in the middle of the screen (`.scrolly.is-pinned`, set by `motion.js`). Narrower, or without JavaScript, they are ordinary rows. Tabbing into a demo makes its step the active one.
-- **Home.** The desk of panels grows into place and its three panels drift at different speeds; each app icon in the lineup floats at its own pace.
+- **Pinned demos fit.** A pinned demo taller than the window is scaled down (CSS `zoom`) to fit under the local bar.
+- **Home.** Under the headline, a reel of the four apps as live demos scrolls sideways (scroll-snap, with previous / next buttons from `site.js`); its cards slide in on load. Each app icon in the lineup below floats at its own pace.
 - **Bars.** On app pages the site header scrolls away and a local bar with the app's name, section links and Download sticks to the top, turning to glass once content passes under it. Elsewhere the header gains a hairline when the page is scrolled.
 
 Rules the motion keeps: only `opacity` and `transform` animate, scroll work is batched into one `requestAnimationFrame` with passive listeners, and nothing shifts the layout. Hidden starting states apply only under `html.js` (set by an inline script in `<head>`) and `prefers-reduced-motion: no-preference`: with JavaScript off or reduced motion, everything is visible and still. If `motion.js` hasn't run after three seconds, the inline script reveals everything.
 
-### Interactive demos and screenshots
+### Interactive demos (no screenshots)
 
-Most pictures on the app pages are **interactive recreations** of the apps in HTML, CSS and JavaScript, not screenshots. Each app has its own `assets/<app>-demo.js` and `assets/<app>-demo.css`, loaded only on that app's two pages. They use made-up sample data (fixed seeds, canned results); nothing is fetched and nothing is sent anywhere. Each follows the layout, sizes, colours and wording of the app's sources (named at the top of each script), so update a demo when those change.
+Every picture of an app on the site is an **interactive recreation** of it in HTML, CSS and JavaScript; there are no screenshots. Each app has its own `assets/<app>-demo.js` and `assets/<app>-demo.css`, loaded on that app's two pages and on the home page (for the reel). They use made-up sample data (fixed seeds, canned results); nothing is fetched and nothing is sent anywhere. Each follows the layout, sizes, colours and wording of the app's sources (named at the top of each script), so update a demo when those change.
 
-In `apps.py` each use is one helper call, `<app>_demo(r, lang, preset, fallback, …)`: `lang` picks the demo's language, `preset` the state it opens in, and `fallback` is what shows when JavaScript is off (a real screenshot, or for Meno a CSS illustration). Every demo is labelled "Interactive demo · sample data".
+In `apps.py` each use is one helper call, `<app>_demo(r, lang, preset, …)`: `lang` picks the demo's language and `preset` the state it opens in. With JavaScript off a short note with the app's icon shows in its place (for Meno, a CSS illustration). Every demo is labelled "Interactive demo · sample data".
+
+Demos are built lazily: each is built when it comes within a screen of the viewport (for a feature, when its text does; in the home reel, when its card comes within half a reel), one task per demo, and the first Tab press builds the rest so keyboard focus never skips one. Where the browser lacks scroll anchoring, a demo that grows above the viewport keeps the scroll position steady. Timers only run while needed (Proxi's speed meter pauses offscreen).
 
 | App | Figure | Presets | Recreates | No-JavaScript fallback |
 | --- | --- | --- | --- | --- |
-| Pop | `figure.ppd` | `ring`, `translate`, `unit`, `json`, `regex`, `ai`, `history`, `actions` | A pretend document with Pop's ring and result cards (long-press to open the ring); the English page shows Pop's English strings | CI screenshots from the `ci-screenshots/macos-26` branch of the Pop repository, cut out (`.webp`) |
-| Meno | `figure.mnd` | `layout`, `reveal`, `shelf`, `rules`, `general` | A menu bar with neutral sample items, Meno's icon and dividers, the Shelf, Quick Open, Meno's menu and the Settings window (General, Layout, Rules); its zh-Hans / zh-Hant strings are copied between the `APP-STRINGS` markers | CSS illustrations (there are no Meno screenshots yet) |
-| Stox | `figure.sxd` | `detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar` | The menu bar panel: watchlist, charts, order book, holdings and the P&L calendar, in English or Chinese as the app shows them | `docs/images/*.jpg` from the Stox repository, cut out (`.webp`) |
-| Proxi | `figure.pxd` | `panel`, `profiles`, `nodes`, `share`, `sync`, `connections` | The menu bar panel and the settings window | `docs/hero.png` and frames of `docs/tour.gif` from the Proxi repository |
+| Pop | `figure.ppd` | `ring`, `translate`, `unit`, `json`, `regex`, `ai`, `history`, `actions`, `library` | A pretend document with Pop's ring and result cards (long-press to open the ring); the English page shows Pop's English strings; `library` is the Settings › Plugins › Plugin Library sheet with the real plugin list (`plugins/index.json`), installs pretended | Note |
+| Meno | `figure.mnd` | `layout`, `reveal`, `shelf`, `rules`, `general` | A menu bar with neutral sample items, Meno's icon and dividers, the Shelf, Quick Open, Meno's menu and the Settings window (General, Layout, Rules); its zh-Hans / zh-Hant strings are copied between the `APP-STRINGS` markers | CSS illustrations |
+| Stox | `figure.sxd` | `detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar` | The menu bar panel: watchlist, charts, order book, holdings and the P&L calendar, in English or Chinese as the app shows them | Note |
+| Proxi | `figure.pxd` | `panel`, `profiles`, `nodes`, `share`, `sync`, `connections` | The menu bar panel and the settings window | Note |
 
-A few real screenshots stay: Pop's ring, the Stox panel and the Proxi panel in the heroes of their pages (each captioned "Real screenshot · Chinese interface"), Pop's plugin library, and the three panels on the home page.
+Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Stox "English, 简体中文"; Meno "English, 简体中文, 繁體中文"; Proxi "简体中文 (English coming)". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
 
-Interface languages, as the pages state them: Pop (0.30.0 and later) and Stox (0.47.0 and later) are in English and Simplified Chinese and follow the Mac's language, with a language setting coming in the next versions; Meno is in English, Simplified and Traditional Chinese, with a Language setting since 0.12.0; Proxi is in Simplified Chinese only, so its English page shows the demo in English and says that the app itself is in Chinese. Real screenshots of Pop, Stox and Proxi are of the Chinese interface and say so.
+### Open Graph images
+
+Each page declares `og:image` (and `twitter:card`): the app's own image on its pages, the home image elsewhere. The PNGs in `assets/og/` are rendered from the site itself, so they show the recreated UI and never a screenshot:
+
+```sh
+python3 -m http.server 8000 &
+node scripts/og/render.js http://localhost:8000   # needs Playwright and a Chromium; a Chromium path can be passed as the second argument
+```
+
+Re-run it when a hero, a pitch or a demo changes.
 
 ## Preview locally
 

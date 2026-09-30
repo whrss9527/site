@@ -110,6 +110,12 @@ def head(c, title, desc, body_class="", alternates=True, extra_head=""):
         alts = (f'\n<link rel="alternate" hreflang="en" href="{ORIGIN}{c.path_for("en")}">'
                 f'\n<link rel="alternate" hreflang="zh-CN" href="{ORIGIN}{c.path_for("zh")}">'
                 f'\n<link rel="alternate" hreflang="x-default" href="{ORIGIN}{c.path_for("en")}">')
+    # Open Graph image (assets/og/, rendered by scripts/og/render.js): the app's own for an app page,
+    # the home page's for everything else.
+    og = c.en_path.strip("/") if c.en_path.strip("/") in APPS else "home"
+    name = APPS[og]["name"] if og in APPS else "whrss"
+    og_alt = c.t(f"{name}: an interactive recreation of the app, with sample data" if og in APPS else "Pop, Meno, Stox and Proxi, Mac apps for the menu bar",
+                 f"{name}：应用界面的可交互还原，示例数据" if og in APPS else "Pop、Meno、Stox、Proxi：住在菜单栏里的 Mac 应用")
     return f"""<!doctype html>
 <html lang="{c.html_lang}">
 <head>
@@ -127,6 +133,11 @@ def head(c, title, desc, body_class="", alternates=True, extra_head=""):
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{canon}">
+<meta property="og:image" content="{ORIGIN}/assets/og/{og}-{c.lang}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{og_alt}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{r}assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="{r}assets/apple-touch-icon.png">
 <link rel="stylesheet" href="{r}assets/site.css">

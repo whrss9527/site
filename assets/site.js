@@ -1,5 +1,6 @@
-/* whrss.com: the language menu and the mobile menu. Everything works without this
-   file; it only remembers the chosen language and closes open menus. */
+/* whrss.com: the language menu, the mobile menu and the home page's reel. Everything works
+   without this file; it only remembers the chosen language, closes open menus and shows the
+   reel's previous / next buttons (without them the reel still scrolls sideways). */
 (function () {
   var KEY = "lang";
 
@@ -35,5 +36,28 @@
     Array.prototype.forEach.call(document.querySelectorAll("details.lang-menu[open]"), function (d) {
       if (!d.contains(e.target)) d.removeAttribute("open");
     });
+  });
+
+  // Home reel: previous / next buttons step one card; each is disabled at its end.
+  Array.prototype.forEach.call(document.querySelectorAll(".reel"), function (reel) {
+    var nav = reel.nextElementSibling;
+    if (!nav || !nav.classList.contains("reel-nav")) return;
+    var btns = nav.querySelectorAll(".reel-btn");
+    function sync() {
+      var max = reel.scrollWidth - reel.clientWidth - 2;
+      nav.hidden = max <= 0;
+      btns[0].disabled = reel.scrollLeft <= 2;
+      btns[1].disabled = reel.scrollLeft >= max;
+    }
+    Array.prototype.forEach.call(btns, function (b) {
+      b.addEventListener("click", function () {
+        var card = reel.firstElementChild;
+        var step = card ? card.getBoundingClientRect().width + parseFloat(getComputedStyle(reel).columnGap || 20) : reel.clientWidth;
+        reel.scrollBy({ left: step * +b.getAttribute("data-dir") });
+      });
+    });
+    reel.addEventListener("scroll", function () { window.requestAnimationFrame(sync); }, { passive: true });
+    window.addEventListener("resize", sync, { passive: true });
+    sync();
   });
 })();

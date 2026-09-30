@@ -127,7 +127,7 @@
     en: {
       demo: "Interactive demo · sample data",
       demoLabel: "Interactive demo of Proxi, with sample data",
-      note: "The app’s interface is in Chinese; this demo shows it in English.",
+      note: "",
       mb: "Proxi in the menu bar. Click to open or close the panel",
       clock: "Wed Sep 30  16:14",
       hint: "Click the switch icon in the menu bar to open the panel.",
@@ -1248,10 +1248,49 @@
     }
   };
 
+  // Each demo is built when it comes within a screen of the viewport (for a feature, when its text
+  // does), so a page doesn't build every demo at load. Where the browser has no scroll anchoring,
+  // a demo that grows above the viewport shifts the scroll position by the same amount.
+  function make(el) {
+    if (el.__built) return;
+    el.__built = 1;
+    var top = anchoring ? 0 : el.getBoundingClientRect().top, h0 = anchoring ? 0 : el.offsetHeight;
+    try { new Demo(el); } catch (err) { if (window.console) console.error(err); }
+    if (top < 0 && !anchoring) { var d = el.offsetHeight - h0; if (d) window.scrollBy(0, d); }
+  }
+  var anchoring = !!(window.CSS && CSS.supports && CSS.supports("overflow-anchor", "auto"));
   function init() {
-    Array.prototype.forEach.call(document.querySelectorAll("figure.pxd:not(.pxd-ready)"), function (el) {
-      try { new Demo(el); } catch (err) { if (window.console) console.error(err); }
+    var els = document.querySelectorAll("figure.pxd:not(.pxd-ready)");
+    if (!("IntersectionObserver" in window)) { Array.prototype.forEach.call(els, make); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        // One task per demo, so building several never adds up to one long task.
+        (e.target.__pxd || [e.target]).forEach(function (el) { setTimeout(function () { make(el); }, 0); });
+      });
+    }, { rootMargin: "100% 0px 100% 0px" });
+    var sideways = null;
+    Array.prototype.forEach.call(els, function (el) {
+      // In the home page's sideways reel, a demo is built as its card comes within half a reel of view.
+      var reel = el.closest(".reel");
+      if (reel) {
+        sideways = sideways || new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { sideways.unobserve(e.target); setTimeout(function () { make(e.target); }, 0); } });
+        }, { root: reel, rootMargin: "0px 50% 0px 50%" });
+        sideways.observe(el);
+        return;
+      }
+      var f = el.closest(".feature"), target = (f && f.querySelector(".feature-text")) || el;
+      (target.__pxd = target.__pxd || []).push(el);
+      io.observe(target);
     });
+    // Keyboard users: build the rest on the first Tab, so the tab order never skips a demo.
+    document.addEventListener("keydown", function onTab(e) {
+      if (e.key !== "Tab") return;
+      document.removeEventListener("keydown", onTab, true);
+      Array.prototype.forEach.call(els, make);
+    }, true);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

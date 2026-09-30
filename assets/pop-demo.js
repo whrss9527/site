@@ -1574,10 +1574,180 @@
     }
   };
 
+
+  // ------------------------------------------------------------------ plugin library
+  // Settings › Plugins › Plugin Library… (PluginLibraryView): the sheet that lists plugins/index.json
+  // from the Pop repository. Names, summaries and wording are the real ones; installing is pretended.
+  var LIB = {
+    en: {
+      win: "Pop Settings", title: "Plugin Library", sub: "Plugins made by others. Click Install to use one.",
+      search: "Search", install: "Install", installed: "Installed", by: "By %s", openURL: "Open URL",
+      foot: "Each download is checked against its sha256 before it’s installed. Installed plugins appear in My Plugins, where you can edit, disable or delete them.",
+      done: "Done", gh: "View on GitHub", none: "No matching plugins",
+      ok: "Installed “%s”. Find it in All Actions on the ring, or drag it into place in Ring settings.",
+      label: "Interactive demo of Pop’s plugin library, with its real plugin list"
+    },
+    zh: {
+      win: "Pop 设置", title: "插件库", sub: "别人做好的插件，点「安装」就能用",
+      search: "搜索，支持拼音首字母", install: "安装", installed: "已安装", by: "作者：%s", openURL: "打开网址",
+      foot: "下载后先核对 sha256，对得上才装。装好的插件在「我的插件」里，可以编辑、停用或者删除。",
+      done: "完成", gh: "在 GitHub 上看", none: "没有匹配的插件",
+      ok: "装好了「%s」：在圆盘的「全部功能」里能找到，也可以到「圆盘」里拖到想要的位置",
+      label: "Pop 插件库的可交互演示，列表是真实的插件"
+    }
+  };
+  // id, symbol, zh name, zh summary, en name, en summary, zh search keys (pinyin initials)
+  var PLUGINS = [
+    ["github-search", "code", "GitHub 搜索", "在 GitHub 上搜索选中的文字，找相关的仓库", "GitHub Search", "Search GitHub for the selected text to find related repositories", "github ss"],
+    ["douban", "film", "豆瓣", "在豆瓣上搜书、电影和音乐", "Douban", "Search Douban for books, movies and music", "db"],
+    ["juejin", "docsearch", "掘金", "在掘金上搜技术文章", "Juejin", "Search Juejin for tech articles", "jj"],
+    ["mdn", "globe", "MDN", "在 MDN 上查 HTML、CSS、JavaScript 和 Web API 的文档", "MDN", "Look up HTML, CSS, JavaScript and Web API docs on MDN", ""],
+    ["stack-overflow", "qbubble", "Stack Overflow", "在 Stack Overflow 上搜编程问题，报错信息可以直接选中来搜", "Stack Overflow", "Search Stack Overflow for programming questions; select an error message to search it directly", ""],
+    ["zhihu", "bubbles", "知乎", "在知乎上搜问题和回答", "Zhihu", "Search Zhihu for questions and answers", "zh"],
+    ["bilibili", "tv", "哔哩哔哩", "在哔哩哔哩上搜视频", "Bilibili", "Search Bilibili for videos", "blbl"],
+    ["wikipedia", "book", "维基百科", "在中文维基百科里查词条", "Wikipedia (Chinese)", "Look up the selection on Chinese Wikipedia", "wjbk"],
+    ["npm", "box", "npm", "在 npm 上搜 JavaScript 包", "npm", "Search npm for JavaScript packages", ""],
+    ["can-i-use", "seal", "Can I use", "查一个网页特性在各个浏览器里能不能用", "Can I use", "Check whether a web feature works in each browser", ""]
+  ];
+  var LI = {
+    code: svg('<path d="m8.5 7.5-4.5 4.5 4.5 4.5M15.5 7.5l4.5 4.5-4.5 4.5"/>'),
+    film: svg('<rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M7.5 4.5v15M16.5 4.5v15M3.5 9h4M3.5 15h4M16.5 9h4M16.5 15h4"/>'),
+    docsearch: svg('<path d="M13 3.5H7a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h4"/><path d="M13 3.5 18 8.5V11"/><circle cx="15.5" cy="16" r="3"/><path d="m17.8 18.3 2.2 2.2"/>'),
+    globe: svg('<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.3 2.4 3.4 5.2 3.4 8.5s-1.1 6.1-3.4 8.5c-2.3-2.4-3.4-5.2-3.4-8.5s1.1-6.1 3.4-8.5Z"/>'),
+    qbubble: svg('<path d="M12 3.8c4.8 0 8.4 3.2 8.4 7.3s-3.6 7.3-8.4 7.3c-.9 0-1.8-.1-2.6-.3L5 20.2l1-3.7C4.5 15.2 3.6 13.3 3.6 11.1 3.6 7 7.2 3.8 12 3.8Z"/><path d="M10 9.4a2 2 0 1 1 2.9 1.8c-.6.3-.9.8-.9 1.4M12 15.2h.01"/>'),
+    bubbles: svg('<path d="M14.5 4.5h4a2 2 0 0 1 2 2V11a2 2 0 0 1-2 2h-.5v2.5L15.5 13"/><path d="M3.5 8.5a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2V14a2 2 0 0 1-2 2H9l-3.5 3v-3a2 2 0 0 1-2-2Z"/>'),
+    tv: svg('<rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="m9 3 3 3 3-3M10.5 10v4l3.5-2Z"/>'),
+    book: svg('<path d="M12 6.5c-1.8-1.3-4.3-2-7.5-2v13c3.2 0 5.7.7 7.5 2 1.8-1.3 4.3-2 7.5-2v-13c-3.2 0-5.7.7-7.5 2Zm0 0v13"/>'),
+    box: svg('<path d="M12 3.5 20 7.5v9L12 20.5 4 16.5v-9Z"/><path d="M4 7.5 12 11.5l8-4M12 11.5v9M8 5.5l8 4"/>'),
+    seal: svg('<path d="M12 3.2 14.2 5l2.8-.3.9 2.7 2.5 1.3-.6 2.8 1.1 2.6-2.3 1.7-.3 2.8-2.8.4-1.6 2.3-2.6-1.1-2.6 1.1-1.6-2.3-2.8-.4-.3-2.8L2.8 14l1.1-2.6-.6-2.8 2.5-1.3.9-2.7 2.8.3Z"/><path d="m8.6 12.2 2.3 2.3 4.6-4.8"/>'),
+    check: svg('<path d="m5 12.5 4.5 4.5L19 7.5" stroke-width="2.2"/>')
+  };
+
+  function Library(root) {
+    this.root = root;
+    this.lang = root.getAttribute("data-lang") === "zh" ? "zh" : "en";
+    this.s = LIB[this.lang];
+    this.q = "";
+    this.done = {};
+    this.busy = {};
+    this.notice = "";
+    this.build();
+  }
+  Library.prototype = {
+    build: function () {
+      var r = this.root, s = this.s, self = this;
+      r.classList.add("ppd-ready");
+      r.setAttribute("role", "group");
+      r.setAttribute("aria-label", s.label);
+      r.setAttribute("lang", this.lang === "zh" ? "zh-CN" : "en");
+      var noscript = r.querySelector("noscript");
+      r.innerHTML = "";
+      if (noscript) r.appendChild(noscript);
+      var stage = document.createElement("div");
+      stage.className = "pp-stage pp-libstage";
+      stage.innerHTML = '<div class="pp-win pp-setwin" aria-hidden="true"><div class="pp-bar"><i></i><i></i><i></i><span>' + esc(s.win) + '</span></div><div class="pp-setbody"></div></div>' +
+        '<div class="pp-sheet" role="dialog" aria-label="' + esc(s.title) + '">' +
+        '<div class="pp-sh-head"><div><strong>' + esc(s.title) + '</strong><span>' + esc(s.sub) + '</span></div>' +
+        '<input type="search" class="pp-field pp-sh-q" placeholder="' + esc(s.search) + '" aria-label="' + esc(s.search) + '" autocomplete="off"></div>' +
+        '<div class="pp-sh-list pp-scroll" tabindex="-1"></div>' +
+        '<div class="pp-sh-foot"><span class="pp-sh-note" role="status" aria-live="polite"></span><span class="pp-link">' + esc(s.gh) + '</span><button type="button" class="pp-btn is-default" data-a="done">' + esc(s.done) + "</button></div></div>";
+      r.appendChild(stage);
+      var tag = document.createElement("figcaption");
+      tag.className = "ppd-tag";
+      tag.innerHTML = '<span class="ppd-dot" aria-hidden="true"></span>' + esc(S[this.lang].demo);
+      r.appendChild(tag);
+      this.list = stage.querySelector(".pp-sh-list");
+      this.note = stage.querySelector(".pp-sh-note");
+      stage.querySelector(".pp-sh-q").addEventListener("input", function (e) { self.q = e.target.value; self.render(); });
+      stage.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-a]");
+        if (!b) return;
+        var a = b.getAttribute("data-a");
+        if (a === "install") self.install(b.getAttribute("data-id"));
+        if (a === "done") { self.q = ""; stage.querySelector(".pp-sh-q").value = ""; self.notice = ""; self.render(); }
+      });
+      this.render();
+    },
+    rows: function () {
+      var q = this.q.trim().toLowerCase(), zh = this.lang === "zh";
+      return PLUGINS.filter(function (p) {
+        if (!q) return true;
+        return [p[2], p[3], p[4], p[5], p[6], "pop"].join(" ").toLowerCase().indexOf(q) >= 0;
+      }).map(function (p) { return { id: p[0], icon: p[1], name: zh ? p[2] : p[4], sum: zh ? p[3] : p[5] }; });
+    },
+    render: function () {
+      var s = this.s, self = this, rows = this.rows();
+      this.list.innerHTML = rows.length ? '<ul class="pp-sh-group">' + rows.map(function (p) {
+        var trail = self.busy[p.id] ? '<span class="pp-spin" aria-label="…"></span>'
+          : self.done[p.id] ? '<span class="pp-sh-ok">' + LI.check + esc(s.installed) + "</span>"
+          : '<button type="button" class="pp-btn" data-a="install" data-id="' + p.id + '" aria-label="' + esc(s.install + " " + p.name) + '">' + esc(s.install) + "</button>";
+        return '<li class="pp-sh-row"><span class="pp-sh-ic">' + LI[p.icon] + '</span><span class="pp-sh-t"><span>' + esc(p.name) + "</span><small>" + esc(p.sum) +
+          "</small><em>" + esc(s.openURL + " · " + fmt(s.by, "Pop")) + "</em></span>" + trail + "</li>";
+      }).join("") + "</ul>" : '<p class="pp-empty">' + esc(s.none) + "</p>";
+      this.note.textContent = this.notice || s.foot;
+    },
+    install: function (id) {
+      var self = this, p = PLUGINS.filter(function (x) { return x[0] === id; })[0];
+      if (!p || this.busy[id] || this.done[id]) return;
+      var ae = document.activeElement, hadFocus = !!(ae && ae.getAttribute && ae.getAttribute("data-id") === id);
+      this.busy[id] = true;
+      this.render();
+      if (hadFocus) this.list.focus({ preventScroll: true });
+      setTimeout(function () {
+        self.busy[id] = false; self.done[id] = true;
+        self.notice = fmt(self.s.ok, self.lang === "zh" ? p[2] : p[4]);
+        self.render();
+        if (hadFocus && document.activeElement === self.list) {
+          var next = self.list.querySelector('[data-a="install"]');
+          if (next) next.focus({ preventScroll: true });
+        }
+      }, reduced() ? 0 : 650);
+    }
+  };
+
+  // Each demo is built when it comes within a screen of the viewport (for a feature, when its text
+  // does), so a page doesn't build every demo at load. Where the browser has no scroll anchoring,
+  // a demo that grows above the viewport shifts the scroll position by the same amount.
+  function make(el) {
+    if (el.__built) return;
+    el.__built = 1;
+    var top = anchoring ? 0 : el.getBoundingClientRect().top, h0 = anchoring ? 0 : el.offsetHeight;
+    try { if (el.getAttribute("data-preset") === "library") new Library(el); else new Demo(el); } catch (err) { if (window.console) console.error(err); }
+    if (top < 0 && !anchoring) { var d = el.offsetHeight - h0; if (d) window.scrollBy(0, d); }
+  }
+  var anchoring = !!(window.CSS && CSS.supports && CSS.supports("overflow-anchor", "auto"));
   function init() {
-    Array.prototype.forEach.call(document.querySelectorAll("figure.ppd:not(.ppd-ready)"), function (el) {
-      try { new Demo(el); } catch (err) { if (window.console) console.error(err); }
+    var els = document.querySelectorAll("figure.ppd:not(.ppd-ready)");
+    if (!("IntersectionObserver" in window)) { Array.prototype.forEach.call(els, make); return; }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        // One task per demo, so building several never adds up to one long task.
+        (e.target.__ppd || [e.target]).forEach(function (el) { setTimeout(function () { make(el); }, 0); });
+      });
+    }, { rootMargin: "100% 0px 100% 0px" });
+    var sideways = null;
+    Array.prototype.forEach.call(els, function (el) {
+      // In the home page's sideways reel, a demo is built as its card comes within half a reel of view.
+      var reel = el.closest(".reel");
+      if (reel) {
+        sideways = sideways || new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { sideways.unobserve(e.target); setTimeout(function () { make(e.target); }, 0); } });
+        }, { root: reel, rootMargin: "0px 50% 0px 50%" });
+        sideways.observe(el);
+        return;
+      }
+      var f = el.closest(".feature"), target = (f && f.querySelector(".feature-text")) || el;
+      (target.__ppd = target.__ppd || []).push(el);
+      io.observe(target);
     });
+    // Keyboard users: build the rest on the first Tab, so the tab order never skips a demo.
+    document.addEventListener("keydown", function onTab(e) {
+      if (e.key !== "Tab") return;
+      document.removeEventListener("keydown", onTab, true);
+      Array.prototype.forEach.call(els, make);
+    }, true);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
   else init();

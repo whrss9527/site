@@ -1,7 +1,7 @@
-"""Simplified Chinese app pages. Same structure, facts and screenshots as the
+"""Simplified Chinese app pages. Same structure, facts and demos as the
 English data in apps.py; when one changes, change the other."""
 from common import GH
-from apps import shot, cut, pop_demo, POP_HEAD, meno_demo, MENO_HEAD, stox_demo, STOX_HEAD, proxi_demo, PROXI_HEAD
+from apps import pop_demo, POP_HEAD, meno_demo, MENO_HEAD, stox_demo, STOX_HEAD, proxi_demo, PROXI_HEAD
 
 # ---------------------------------------------------------------- Pop
 POP = {
@@ -9,11 +9,10 @@ POP = {
     "desc": "Pop 是 Mac 菜单栏里的右键工具箱：长按鼠标右键，翻译选中的文字，或打开装着 80 多个工具的圆盘。开源免费。",
     "say": "/pɒp/ —— 像个气泡：弹出来，一划，啪一下就没了。",
     "lede": "在选中的任何内容上按住鼠标右键，Pop 就会翻译它、换算它，或者打开一个工具圆盘，一划就选好。轻点一下仍然是平常的右键菜单。",
-    "meta": ["开源免费", "macOS 15 或更新", "Apple 芯片与 Intel", "简体中文和英文界面"],
+    "meta": ["开源免费", "macOS 15 或更新", "Apple 芯片与 Intel", "简体中文、English"],
     "extra_head": POP_HEAD,
     "stage": lambda r: '<div class="compose pop-stage">' +
-        pop_demo(r, "zh", "ring", "pop/unit.webp", "Pop 的单位换算卡片，把 5 千米换算成厘米、米、英寸、英尺、英里、海里和市制单位", 325, 249, desk=True) +
-        cut(r, "pop/ring.webp", "Pop 圆盘的真实截图，词典处于高亮", 214, 214, dark="pop/ring-dark.webp", cap="真实截图") +
+        pop_demo(r, "zh", "ring", desk=True) +
         "</div>",
     "features": lambda r: [
         ("按住右键，停一下",
@@ -32,30 +31,30 @@ POP = {
          ["直接替换原文，或者复制译文",
           "单张卡片临时换目标语言，或者朗读出来",
           "把单词存进生词本，还能导出到 Anki"],
-         pop_demo(r, "zh", "translate", "pop/translate.webp", "Pop 的翻译卡片，对照显示一句英文的系统、AI 和 DeepL 译文，每段都能复制和替换原文", 325, 297)),
+         pop_demo(r, "zh", "translate")),
         ("80 多个工具，放在你想要的位置",
          "摆放 4 到 12 个格子，给某个应用单独配一个圆盘，还能设置跳过圆盘的直达规则：算式直接算出结果，单位和颜色直接换算，图片用本机 OCR 识别文字。",
          ["文本：清理格式、大小写、编码、字数统计、提取链接和邮箱",
           "开发：JSON、YAML、SQL、正则、JWT、哈希、二维码、cron",
           "文件和屏幕：重命名、图片和视频转换、PDF、取色器、标尺"],
-         pop_demo(r, "zh", "unit", "pop/regex.webp", "Pop 的正则测试卡片，高亮匹配到的日期和命名分组", 442, 274)),
+         pop_demo(r, "zh", "unit")),
         ("剪贴板历史，还能置顶贴图",
          "Pop 会保存可搜索的文字、图片和文件历史；图片里的文字也能搜，识别在你的 Mac 上完成。截图、图片或文字可以贴在所有窗口之上，方便对照。",
          ["⌘1–⌘9 直接粘贴，按住 ⌘ 点选多条一起粘贴",
           "跳过密码管理器标记为隐藏的内容；任何应用都可以排除",
           "只存在这台 Mac 上，按时间和条数自动清理"],
-         pop_demo(r, "zh", "history", "pop/history.webp", "Pop 的剪贴板历史面板，带搜索、类型筛选和最近的记录，其中两条已选中", 392, 414)),
+         pop_demo(r, "zh", "history")),
         ("AI，用你自己的接口",
          "选中文字，让 AI 润色、总结、解释或翻译，也可以直接提问。在开启了 Apple 智能的 macOS 26 上，Pop 可以用系统自带的本机模型；也可以接入任何兼容 OpenAI Chat Completions 的接口，包括在你 Mac 上运行的模型。",
          ["回答流式输出；可以复制、替换原文或贴在屏幕上",
           "只有使用 AI 功能时才会发送选中的文字",
           "API 密钥保存在这台 Mac 的钥匙串里"],
-         pop_demo(r, "zh", "ai", "pop/ai.webp", "Pop 的 AI 卡片，带润色、总结、解释和翻译按钮、提问输入框和一段回答", 358, 210)),
+         pop_demo(r, "zh", "ai")),
         ("插件就是一个 JSON 文件",
          "把网址模板、shell 脚本、JavaScript 或快捷指令变成圆盘上的工具。也可以从插件库安装：Pop 添加前会校验 SHA-256，安装 shell 脚本前会先给你看内容。",
          ["<code>pop://</code> 链接和快捷指令操作，让其他工具也能调用 Pop",
           "导入、导出插件，或者直接分享 JSON 文件"],
-         shot(r, "pop/library.jpg", "Pop 设置里的插件库，列出可安装的插件", 640, 481, "light")),
+         pop_demo(r, "zh", "library")),
     ],
     "more_title": "还有这些",
     "tiles": [
@@ -70,7 +69,7 @@ POP = {
         ("macOS", "15 Sequoia 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel"),
         ("权限", "辅助功能（必需）。屏幕录制只用于截图类工具。"),
-        ("语言", "简体中文或英文界面，跟随 Mac 的系统语言（0.30.0 起），语言设置即将加入；翻译支持多种语言"),
+        ("语言", "简体中文、English"),
         ("下载", "约 6 MB（<code>Pop-&lt;version&gt;.zip</code>）"),
         ("许可证", "GPL-3.0"),
     ],
@@ -87,7 +86,7 @@ POP = {
             "macOS 只允许有辅助功能权限的应用在全局监听鼠标按键、读取其他应用里选中的内容并粘贴进去。Pop 需要的正是这些：察觉长按右键，读取你选中的内容，以及在你选择“替换原文”时把结果放回去。",
             "也正因为这样，Pop 无法上架 Mac App Store（沙盒不允许这么做），所以通过 GitHub 和本网站发布。"]),
         ("需要屏幕录制权限吗？", "只有要看屏幕的工具需要：截图识字和翻译、扫描二维码、截图标注和标尺。其他功能都不需要。"),
-        ("有英文界面吗？", "有。从 0.30.0 起，Mac 的系统语言不是中文时，Pop 的界面就是英文；接下来的版本会加上语言设置。翻译本身支持多种语言，可以用苹果的系统翻译、AI 或 DeepL。"),
+        ("有英文界面吗？", "有。Pop 的界面有简体中文和英文，跟随 Mac 的系统语言。翻译本身支持多种语言，可以用苹果的系统翻译、AI 或 DeepL。"),
         ("Pop 会把我的文字发到别处吗？", '只在你要求时：AI 功能会把选中的文字发到你设置的 AI 接口，DeepL 翻译会把它发给 DeepL。苹果的系统翻译和本机模型、文字识别以及剪贴板历史都留在你的 Mac 上。详见<a href="../privacy/pop/">隐私政策</a>。'),
         ("能在多台 Mac 之间同步吗？", "可以在设置 › 同步里把设置和插件导出为文件，再到另一台 Mac 上导入。iCloud 同步需要带 iCloud 权限签名的版本，GitHub 上的版本不包含这项功能。"),
         ("更新后右键不管用了。", "打开 Pop 的设置 › 通用，点“清除旧的授权记录”，再重新授予辅助功能权限。这种情况主要出现在以前本地签名（ad-hoc）的版本上；经过公证的版本更新后会保留权限。"),
@@ -196,7 +195,7 @@ MENO = {
         ("macOS", "14 Sonoma 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel"),
         ("权限", "辅助功能（必需）。屏幕录制可选，用来显示隐藏项目的真实图标。"),
-        ("语言", "英文、简体中文或繁体中文界面，跟随 Mac 的系统语言，也可以在设置 › 通用 › 语言里另选（0.12.0 起）"),
+        ("语言", "English、简体中文、繁體中文"),
         ("下载", "约 5 MB（<code>Meno.zip</code>）"),
         ("许可证", "GPL-3.0"),
     ],
@@ -223,11 +222,10 @@ STOX = {
     "desc": "Stox 在 Mac 菜单栏里显示 A 股、港股和美股行情，还有图表、持仓盈亏、提醒和 iCloud 同步。右键一点，全部隐藏。开源免费。",
     "say": "/stɒks/ —— 就是 stocks，挤成了四个字母。",
     "lede": "A 股、港股、美股行情就在菜单栏里，还有持仓盈亏、提醒和 iCloud 同步。右键点一下，只剩一个安静的图标。",
-    "meta": ["开源免费", "macOS 13 或更新", "Apple 芯片与 Intel", "简体中文和英文界面"],
+    "meta": ["开源免费", "macOS 13 或更新", "Apple 芯片与 Intel", "简体中文、English"],
     "extra_head": STOX_HEAD,
     "stage": lambda r: '<div class="compose stox-stage">' +
-        stox_demo(r, "zh", "detail", "stox/detail.webp", "Stox 面板：自选列表和贵州茅台展开的分时图", 376, 645, desk=True) +
-        cut(r, "stox/detail.webp", "Stox 面板的真实截图：自选列表和贵州茅台展开的分时图", 376, 645, width=300, cap="真实截图") +
+        stox_demo(r, "zh", "detail", desk=True) +
         "</div>",
     "features": lambda r: [
         ("看一眼，就藏起来",
@@ -235,25 +233,25 @@ STOX = {
          ["把选中的股票固定在菜单栏上，单行或双行显示，刘海屏上轮播",
           "⌃⌥S 在任何应用里打开面板；也可以固定成浮动窗口",
           "红涨绿跌、绿涨红跌，或者干脆不用红绿"],
-         stox_demo(r, "zh", "list", "stox/panel.webp", "Stox 自选列表，每一行都有迷你分时图", 376, 583, desk=True)),
+         stox_demo(r, "zh", "list", desk=True)),
         ("三个市场，还不止",
          "沪深北 A 股、港股、美股（含盘前盘后价格），另外还有指数、ETF、场外基金、国际期货和外汇。",
          ["按代码、中文名或拼音首字母搜索：<code>600519</code>、<code>gzmt</code>、<code>aapl</code>",
           "一次粘贴多个代码，一起添加",
           "主数据源出问题时，自动切换到备用数据源"],
-         stox_demo(r, "zh", "search", "stox/search.webp", "Stox 搜索结果，边输入边显示价格和涨跌", 376, 467)),
+         stox_demo(r, "zh", "search")),
         ("图表，一看就懂",
          "展开一行，查看分时、五日、日 K、周 K 和月 K，带均线和成交量。鼠标悬停，就能看到任意一分钟的准确价格。A 股还有盘口和资金流向。",
          ["图上画出你的成本线，记录过的交易标上 B 和 S",
           "开盘、最高、最低、成交额、市盈率、市值、52 周区间",
           "A 股涨幅榜、跌幅榜和行业排行"],
-         stox_demo(r, "zh", "kline", "stox/kline.webp", "Stox 的日 K 线图，带均线和成交量", 376, 645)),
+         stox_demo(r, "zh", "kline")),
         ("持仓与盈亏",
          "填入股数和成本，Stox 会按币种算出当日盈亏和总盈亏，持有多种货币时折算成人民币。可以记录交易和分红；日历里能看到每一天的结果。",
          ["买入时自动更新加权平均成本，卖出时记录已实现收益",
           "点一下眼睛图标，面板、菜单栏和通知里的金额都会隐藏",
           "可选的收盘总结通知"],
-         stox_demo(r, "zh", "holdings", "stox/holdings.webp", "Stox 的持仓页面，按币种汇总并显示盈亏", 376, 647)),
+         stox_demo(r, "zh", "holdings")),
     ],
     "more_title": "还有这些",
     "tiles": [
@@ -268,7 +266,7 @@ STOX = {
         ("macOS", "13 Ventura 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel"),
         ("权限", "无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。"),
-        ("语言", "简体中文或英文界面，跟随 Mac 的系统语言（0.47.0 起），语言设置即将加入"),
+        ("语言", "简体中文、English"),
         ("数据", "腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。"),
         ("下载", "约 4 MB（<code>Stox.zip</code>）"),
         ("许可证", "GPL-3.0"),
@@ -284,7 +282,7 @@ STOX = {
         ("需要辅助功能权限吗？", "不需要。Stox 不申请辅助功能或屏幕录制权限。它的全局快捷键用的是标准热键接口，不需要任何权限。它只会申请发送通知（用于提醒），以及在你开启同步时使用 iCloud 云盘。"),
         ("行情从哪里来？", "来自腾讯财经的公开行情服务，新浪财经作为自动备用。港股行情延时约 15 分钟。数据仅供参考，不构成投资建议。"),
         ("我的持仓存在哪里？", '存在你的 Mac 上；开启同步后，也存在你自己的 iCloud 云盘里（<code>Stox/sync.json</code>）。不会发给我。详见<a href="../privacy/stox/">隐私政策</a>。'),
-        ("能用英文界面吗？", "能。从 0.47.0 起，Mac 的系统语言不是中文时，Stox 的界面就是英文；接下来的版本会加上语言设置。A 股、港股的名称仍是中文，和行情源给的一样。"),
+        ("能用英文界面吗？", "能。Stox 的界面有简体中文和英文，跟随 Mac 的系统语言。A 股、港股的名称仍是中文，和行情源给的一样。"),
     ],
 }
 
@@ -294,11 +292,10 @@ PROXI = {
     "desc": "Proxi 同时切换系统代理、环境变量、git 和 npm，内置 mihomo 内核，支持订阅、分流规则、局域网共享和增强模式（TUN）。macOS 上开源免费。",
     "say": "/ˈprɒk.si/ —— 还是 proxy，只是 y 换成了 i。",
     "lede": "一个开关管好系统代理、终端环境变量、git 和 npm；还内置 mihomo 内核，支持订阅和分流规则、局域网共享，以及增强模式（TUN）和网关模式。",
-    "meta": ["开源免费", "macOS 14 或更新", "Apple 芯片与 Intel", "只有简体中文界面"],
+    "meta": ["开源免费", "macOS 14 或更新", "Apple 芯片与 Intel"],
     "extra_head": PROXI_HEAD,
     "stage": lambda r: '<div class="compose proxi-stage">' +
-        proxi_demo(r, "zh", "panel", "proxi/panel.webp", "Proxi 菜单栏面板：代理开关、带延迟的节点列表和代理配置", 384, 722, width=300) +
-        cut(r, "proxi/panel.webp", "Proxi 菜单栏面板的真实截图：代理开关、带延迟的节点列表和三个代理配置", 384, 722, width=300, cap="真实截图") +
+        proxi_demo(r, "zh", "panel") +
         "</div>",
     "features": lambda r: [
         ("一个开关，处处生效",
@@ -306,24 +303,24 @@ PROXI = {
          ["发现其他应用改了代理时会提示你，还能把它存成一个配置",
           "自动发现你 Mac 上已经在运行的代理软件并添加进来",
           "菜单栏里直接显示上传和下载速度"],
-         proxi_demo(r, "zh", "profiles", "proxi/hero.jpg", "Proxi 设置窗口里的代理配置列表，旁边是列出节点和延迟的菜单栏面板", 1600, 1000)),
+         proxi_demo(r, "zh", "profiles")),
         ("订阅和规则，内置就有",
          "粘贴订阅地址，节点就出现在面板里。手动选一个，或者让 Proxi 自动选最快的，再按规则分流。引擎是 mihomo（Clash Meta），打包在应用里。",
          ["策略组：手动选择、自动选择、故障转移和负载均衡",
           "规则库收录 blackmatrix7、MetaCubeX、ACL4SSR 和 Shadowrocket 规则集",
           "导入 Clash、mihomo、Surge、Shadowrocket 和 Quantumult X 配置，可以预览和撤销"],
-         proxi_demo(r, "zh", "nodes", "proxi/nodes.jpg", "Proxi 的节点与订阅页面，有两个订阅和节点设置", 820, 770)),
+         proxi_demo(r, "zh", "nodes")),
         ("整台 Mac，连游戏机也算上",
          "增强模式通过虚拟网卡，让每个应用（包括终端和游戏）都经过内核。局域网共享和网关模式让 PS5、Switch 或手机和你的 Mac 用同一个连接。",
          ["局域网共享使用 7892 端口，默认只允许局域网地址连接",
           "网关模式适合不能设置代理的设备，游戏的 UDP 流量也能处理",
           "一个小小的特权助手，输一次密码安装，只在这两种模式下使用"],
-         proxi_demo(r, "zh", "share", "proxi/lan.jpg", "Proxi 的局域网共享页面，显示要在 PS5 或 Switch 上填写的地址", 820, 770)),
+         proxi_demo(r, "zh", "share")),
         ("脚本、AI 助手和同步",
          "<code>proxi</code> 命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 网址命令，共用一个本地控制接口，有四档权限。设置可以通过你自己的 iCloud 云盘在多台 Mac 之间同步。",
          ["按 Wi-Fi 网络或路由器自动切换配置",
           "导入和自动切换都记在操作记录里；导入可以撤销"],
-         proxi_demo(r, "zh", "sync", "proxi/icloud.jpg", "Proxi 的 iCloud 同步页面", 820, 770)),
+         proxi_demo(r, "zh", "sync")),
     ],
     "more_title": "连不上的时候",
     "tiles": [
@@ -338,7 +335,7 @@ PROXI = {
         ("macOS", "14 Sonoma 或更新；macOS 26 上为 Liquid Glass"),
         ("Mac", "通用：Apple 芯片与 Intel（也提供单一架构版本）"),
         ("权限", "修改系统代理需要管理员密码。特权助手只用于增强模式和网关模式。不需要辅助功能权限。"),
-        ("语言", "只有简体中文界面"),
+        ("语言", "简体中文（英文即将推出）"),
         ("下载", "通用版约 53 MB（<code>Proxi-macos.zip</code>），<code>-arm64</code> 或 <code>-x86_64</code> 版约为一半"),
         ("许可证", "GPL-3.0；内置 mihomo（GPL-3.0）"),
     ],

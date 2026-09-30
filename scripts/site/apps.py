@@ -1,24 +1,20 @@
 from common import *
 
-def shot(r, src, alt, w, h, cls="", cap=None):
-    fc = f"<figcaption>{cap}</figcaption>" if cap else ""
-    return f'<figure><div class="shot {cls}"><img src="{r}assets/img/{src}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async"></div>{fc}</figure>'
+def nojs(r, key, lang):
+    """What shows in place of a demo when JavaScript is off: a short note, no screenshot."""
+    name = APPS[key]["name"]
+    if lang == "zh":
+        text = f"这里是 {name} 的可交互演示（示例数据），打开 JavaScript 就能试用。"
+    else:
+        text = f"An interactive demo of {name} with sample data appears here when JavaScript is on."
+    return (f'<noscript><div class="demo-nojs glass"><img src="{r}assets/icons/{key}.png" alt="" width="40" height="40">'
+            f'<p>{text}</p></div></noscript>')
 
-def cut(r, src, alt, w, h, dark=None, width=None, cap=None, eager=False):
-    style = f' style="width:{width}px"' if width else ""
-    load = "" if eager else ' loading="lazy"'
-    img = f'<img src="{r}assets/img/{src}" alt="{alt}" width="{w}" height="{h}"{load} decoding="async"{style}>'
-    if dark:
-        img = f'<picture><source srcset="{r}assets/img/{dark}" media="(prefers-color-scheme: dark)">{img}</picture>'
-    fc = f"<figcaption>{cap}</figcaption>" if cap else ""
-    return f'<figure class="cut">{img}{fc}</figure>'
-
-def stox_demo(r, lang, preset, fallback, alt, w, h, desk=False):
-    """The interactive Stox panel (assets/stox-demo.js, sample data), preset to one state.
-    Without JavaScript the real screenshot `fallback` shows instead."""
+def stox_demo(r, lang, preset, desk=False):
+    """The interactive Stox panel (assets/stox-demo.js, sample data), preset to one state."""
     d = " data-desk" if desk else ""
     return (f'<figure class="sxd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/stox.png">'
-            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async" style="width:300px"></noscript></figure>')
+            f'{nojs(r, "stox", lang)}</figure>')
 
 def meno_demo(r, lang, preset, fallback):
     """The interactive Meno demo (assets/meno-demo.js, sample items), preset to one state.
@@ -30,20 +26,19 @@ MENO_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/meno-demo.css">
 
 STOX_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/stox-demo.css">\n<script src="{r}assets/stox-demo.js" defer></script>'
 
-def pop_demo(r, lang, preset, fallback, alt, w, h, desk=False):
+def pop_demo(r, lang, preset, desk=False):
     """The interactive Pop demo (assets/pop-demo.js, sample text): a document with Pop's ring
-    and result cards, preset to one state. Without JavaScript the real screenshot `fallback` shows instead."""
+    and result cards, preset to one state; the "library" preset is the Plugin Library sheet."""
     d = " data-desk" if desk else ""
     return (f'<figure class="ppd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/pop.png">'
-            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async"></noscript></figure>')
+            f'{nojs(r, "pop", lang)}</figure>')
 
 POP_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/pop-demo.css">\n<script src="{r}assets/pop-demo.js" defer></script>'
 
-def proxi_demo(r, lang, preset, fallback, alt, w, h, width=520):
-    """The interactive Proxi panel and settings window (assets/proxi-demo.js, sample data),
-    preset to one state. Without JavaScript the real screenshot `fallback` shows instead."""
+def proxi_demo(r, lang, preset):
+    """The interactive Proxi panel and settings window (assets/proxi-demo.js, sample data), preset to one state."""
     return (f'<figure class="pxd" data-lang="{lang}" data-preset="{preset}">'
-            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async" style="width:{width}px"></noscript></figure>')
+            f'{nojs(r, "proxi", lang)}</figure>')
 
 PROXI_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/proxi-demo.css">\n<script src="{r}assets/proxi-demo.js" defer></script>'
 
@@ -181,11 +176,10 @@ POP = {
     "desc": "Pop is a right-click toolbox for the Mac menu bar: long-press the right mouse button to translate a selection or open a ring of 80+ tools. Free and open source.",
     "say": "/pɒp/ — like a bubble: it pops up, you swipe, it pops.",
     "lede": "Hold the right mouse button on anything you’ve selected. Pop translates it, converts it, or opens a ring of tools you pick with one swipe. A short click is still the normal context menu.",
-    "meta": ["Free and open source", "macOS 15 or later", "Apple silicon and Intel", "In English and Simplified Chinese"],
+    "meta": ["Free and open source", "macOS 15 or later", "Apple silicon and Intel", "English, 简体中文"],
     "extra_head": POP_HEAD,
     "stage": lambda r: '<div class="compose pop-stage">' +
-        pop_demo(r, "en", "ring", "pop/unit.webp", "Pop’s unit conversion card showing 5 km in centimeters, meters, inches, feet, miles, nautical miles and Chinese units", 325, 249, desk=True) +
-        cut(r, "pop/ring.webp", "Real screenshot of Pop’s ring, in Chinese, with Dictionary highlighted", 214, 214, dark="pop/ring-dark.webp", cap="Real screenshot · Chinese interface") +
+        pop_demo(r, "en", "ring", desk=True) +
         "</div>",
     "features": lambda r: [
         ("A right click, held a moment",
@@ -204,30 +198,30 @@ POP = {
          ["Replace the original text in place, or copy it",
           "Change the target language for one card, or read it aloud",
           "Save words to a vocabulary list and export it for Anki"],
-         pop_demo(r, "en", "translate", "pop/translate.webp", "Pop’s translation card comparing the System, AI and DeepL translations of a sentence, with Copy and Replace for each", 325, 297)),
+         pop_demo(r, "en", "translate")),
         ("More than 80 tools, where you want them",
          "Arrange 4 to 12 slots, give an app its own ring, and set rules that skip the ring entirely: math is calculated, units and colors are converted, images are read with on-device OCR.",
          ["Text: cleanup, case, encoding, word count, extract links and emails",
           "Developer: JSON, YAML, SQL, regex, JWT, hashes, QR codes, cron",
           "Files and screen: rename, convert images and video, PDF, color picker, ruler"],
-         pop_demo(r, "en", "unit", "pop/regex.webp", "Pop’s regex tester card highlighting matched dates and named groups", 442, 274)),
+         pop_demo(r, "en", "unit")),
         ("Clipboard history, and pins on top",
          "Pop keeps a searchable history of text, images and files — text inside images is searchable too, recognized on your Mac. Pin a screenshot, image or text above every window to compare against.",
          ["⌘1–⌘9 to paste, ⌘-click several items to paste them together",
           "Skips content that password managers mark as concealed; exclude any app",
           "Stored only on this Mac and cleaned up by age and count"],
-         pop_demo(r, "en", "history", "pop/history.webp", "Pop’s clipboard history panel with search, type filters and recent items, two of them selected", 392, 414)),
+         pop_demo(r, "en", "history")),
         ("AI with your own endpoint",
          "Select text and ask AI to polish, summarize, explain or translate it, or ask a question. On macOS 26 with Apple Intelligence, Pop can use the built-in on-device model. Or point it at any OpenAI Chat Completions–compatible endpoint, including a model running on your Mac.",
          ["Answers stream in; copy, replace the original or pin them",
           "Selected text is only sent when you use an AI feature",
           "Your API key stays in this Mac’s Keychain"],
-         pop_demo(r, "en", "ai", "pop/ai.webp", "Pop’s AI card with Polish, Summarize, Explain and Translate buttons, a question field and an answer", 358, 210)),
+         pop_demo(r, "en", "ai")),
         ("Plugins in one JSON file",
          "Turn a URL template, a shell script, JavaScript or a Shortcut into a tool on the ring. Or install one from the plugin library — Pop checks its SHA-256 before adding it, and shows you shell scripts before they’re installed.",
          ["<code>pop://</code> links and Shortcuts actions let other tools call Pop",
           "Import and export plugins, or share the JSON file"],
-         shot(r, "pop/library.jpg", "Pop Settings showing the plugin library with installable plugins", 640, 481, "light")),
+         pop_demo(r, "en", "library")),
     ],
     "more_title": "Also inside",
     "tiles": [
@@ -242,7 +236,7 @@ POP = {
         ("macOS", "15 Sequoia or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "Accessibility (required). Screen Recording only for screenshot tools."),
-        ("Language", "English or Simplified Chinese interface, following your Mac’s language (0.30.0 and later); a language setting is coming. Translation works across many languages"),
+        ("Language", "English, 简体中文"),
         ("Download", "About 6 MB (<code>Pop-&lt;version&gt;.zip</code>)"),
         ("License", "GPL-3.0"),
     ],
@@ -259,7 +253,7 @@ POP = {
             "macOS only lets apps with Accessibility access watch mouse buttons system-wide, read the selection in other apps and paste into them. Pop needs exactly that: to notice a long right-click, read what you selected, and put results back when you choose “Replace”.",
             "For the same reason Pop can’t be in the Mac App Store — the sandbox doesn’t allow it — so it’s distributed on GitHub and here."]),
         ("Does it need Screen Recording?", "Only for the tools that look at the screen: screenshot OCR and translate, QR scanning, annotation and the ruler. Everything else works without it."),
-        ("Is there an English interface?", "Yes. Since 0.30.0 Pop shows its interface in English unless your Mac’s language is Chinese; a language setting is coming in the next versions. Translation itself works between many languages using Apple’s on-device translation, AI or DeepL."),
+        ("Is there an English interface?", "Yes. Pop’s interface is in English and Simplified Chinese and follows your Mac’s language. Translation itself works between many languages using Apple’s on-device translation, AI or DeepL."),
         ("Does Pop send my text anywhere?", f'Only when you ask for it: AI features send the selected text to the AI endpoint you set up, and DeepL translation sends it to DeepL. Apple’s on-device translation and model, OCR and the clipboard history stay on your Mac. See the <a href="../privacy/pop/">privacy policy</a>.'),
         ("Does it sync between Macs?", "You can export settings and plugins to a file in Settings › Sync and import them on another Mac. iCloud sync needs a build signed with iCloud access; the builds on GitHub don’t include it."),
         ("Right-click stopped working after an update.", "Open Pop’s Settings › General and use “Clear old authorization records”, then grant Accessibility again. This mostly affected older, ad-hoc–signed builds; notarized releases keep the permission."),
@@ -368,7 +362,7 @@ MENO = {
         ("macOS", "14 Sonoma or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "Accessibility (required). Screen Recording optional, for the real artwork of hidden items."),
-        ("Language", "English, Simplified Chinese or Traditional Chinese interface, following your Mac’s language or the one chosen in Settings › General › Language (0.12.0 and later)"),
+        ("Language", "English, 简体中文, 繁體中文"),
         ("Download", "About 5 MB (<code>Meno.zip</code>)"),
         ("License", "GPL-3.0"),
     ],
@@ -395,11 +389,10 @@ STOX = {
     "desc": "Stox shows China A-share, Hong Kong and US stock quotes in the Mac menu bar, with charts, holdings and P&L, alerts and iCloud sync. Right-click to hide it all. Free and open source.",
     "say": "/stɒks/ — “stocks”, squeezed into four letters.",
     "lede": "China A-share, Hong Kong and US quotes in your menu bar, with holdings and P&amp;L, alerts and iCloud sync. One right-click and only a quiet icon is left.",
-    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "In English and Simplified Chinese"],
+    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "English, 简体中文"],
     "extra_head": STOX_HEAD,
     "stage": lambda r: '<div class="compose stox-stage">' +
-        stox_demo(r, "en", "detail", "stox/detail.webp", "Stox panel with a watchlist and an expanded intraday chart for Kweichow Moutai", 376, 645, desk=True) +
-        cut(r, "stox/detail.webp", "Real screenshot of the Stox panel, in Chinese, with Kweichow Moutai expanded to its intraday chart", 376, 645, width=300, cap="Real screenshot · Chinese interface") +
+        stox_demo(r, "en", "detail", desk=True) +
         "</div>",
     "features": lambda r: [
         ("Glance, then hide",
@@ -407,25 +400,25 @@ STOX = {
          ["Pin chosen tickers to the menu bar, on one line or two, rotating on notched screens",
           "⌃⌥S opens the panel from any app; pin it as a floating window",
           "Red-up, green-up, or no red and green at all"],
-         stox_demo(r, "en", "list", "stox/panel.webp", "Stox watchlist with a mini intraday chart on every row", 376, 583, desk=True)),
+         stox_demo(r, "en", "list", desk=True)),
         ("Three markets, and then some",
          "Shanghai, Shenzhen and Beijing A-shares, Hong Kong and US stocks with pre- and after-hours prices, plus indexes, ETFs, mutual funds, international futures and forex.",
          ["Search by code, Chinese name or pinyin initials: <code>600519</code>, <code>gzmt</code>, <code>aapl</code>",
           "Paste several codes at once to add them together",
           "Quotes switch to a backup source automatically if the main one fails"],
-         stox_demo(r, "en", "search", "stox/search.webp", "Stox search results showing prices and changes as you type", 376, 467)),
+         stox_demo(r, "en", "search")),
         ("Charts that answer the question",
          "Expand a row for intraday, five-day, daily, weekly and monthly charts with moving averages and volume. Hover for the exact price at any minute. A-shares add the order book and money flow.",
          ["Your cost line on the chart, and B and S marks for recorded trades",
           "Open, high, low, turnover, P/E, market cap, 52-week range",
           "An A-share gainers, losers and industry ranking"],
-         stox_demo(r, "en", "kline", "stox/kline.webp", "Stox daily candlestick chart with moving averages and volume", 376, 645)),
+         stox_demo(r, "en", "kline")),
         ("Holdings and P&amp;L",
          "Enter shares and cost, and Stox totals today’s and overall P&amp;L per currency, converted to yuan when you hold several. Log trades and dividends; a calendar shows every day’s result.",
          ["Weighted average cost updates as you buy; sells record realized gains",
           "Tap the eye to mask amounts in the panel, menu bar and notifications",
           "Optional closing summary notification"],
-         stox_demo(r, "en", "holdings", "stox/holdings.webp", "Stox holdings view with per-currency totals and profit and loss", 376, 647)),
+         stox_demo(r, "en", "holdings")),
     ],
     "more_title": "Also inside",
     "tiles": [
@@ -440,7 +433,7 @@ STOX = {
         ("macOS", "13 Ventura or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "None required. Notifications for alerts; iCloud Drive access only if you turn on sync."),
-        ("Language", "English or Simplified Chinese interface, following your Mac’s language (0.47.0 and later); a language setting is coming"),
+        ("Language", "English, 简体中文"),
         ("Data", "Tencent Finance public quotes, Sina Finance as backup. Hong Kong quotes are delayed about 15 minutes."),
         ("Download", "About 4 MB (<code>Stox.zip</code>)"),
         ("License", "GPL-3.0"),
@@ -456,7 +449,7 @@ STOX = {
         ("Does it need Accessibility?", "No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync."),
         ("Where do the quotes come from?", "From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice."),
         ("Where are my holdings stored?", f'On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.'),
-        ("Can I use it in English?", "Yes. Since 0.47.0 Stox shows its interface in English unless your Mac’s language is Chinese; a language setting is coming in the next versions. Names of Chinese stocks stay in Chinese, as the quote sources give them."),
+        ("Can I use it in English?", "Yes. Stox’s interface is in English and Simplified Chinese and follows your Mac’s language. Names of Chinese stocks stay in Chinese, as the quote sources give them."),
     ],
 }
 
@@ -466,11 +459,10 @@ PROXI = {
     "desc": "Proxi switches the system proxy, environment variables, git and npm together, with a built-in mihomo core for subscriptions, rules, LAN sharing and TUN mode. Free and open source for macOS.",
     "say": "/ˈprɒk.si/ — still “proxy”: the y becomes an i.",
     "lede": "One switch for the system proxy, your shell’s environment variables, git and npm — plus a built-in mihomo core for subscriptions and rules, LAN sharing, and TUN or gateway mode.",
-    "meta": ["Free and open source", "macOS 14 or later", "Apple silicon and Intel", "Simplified Chinese interface only"],
+    "meta": ["Free and open source", "macOS 14 or later", "Apple silicon and Intel"],
     "extra_head": PROXI_HEAD,
     "stage": lambda r: '<div class="compose proxi-stage">' +
-        proxi_demo(r, "en", "panel", "proxi/panel.webp", "Proxi menu bar panel with the proxy switch, the node list with latencies and the proxy profiles", 384, 722, width=300) +
-        cut(r, "proxi/panel.webp", "Real screenshot of the Proxi menu bar panel, in Chinese: the proxy switch, nodes with latencies and three profiles", 384, 722, width=300, cap="Real screenshot · Chinese interface") +
+        proxi_demo(r, "en", "panel") +
         "</div>",
     "features": lambda r: [
         ("One switch, everywhere",
@@ -478,24 +470,24 @@ PROXI = {
          ["Notices when another app changes the proxy, and can save it as a profile",
           "Finds proxy apps already running on your Mac and adds them",
           "Upload and download speed right in the menu bar"],
-         proxi_demo(r, "en", "profiles", "proxi/hero.jpg", "Proxi settings window with proxy profiles, next to the menu bar panel listing nodes with latency", 1600, 1000)),
+         proxi_demo(r, "en", "profiles")),
         ("Subscriptions and rules, built in",
          "Paste a subscription URL and its nodes appear in the panel. Pick one, let Proxi choose the fastest, and route by rules. The engine is mihomo (Clash Meta), bundled inside the app.",
          ["Policy groups: manual, auto-select, fallback and load balance",
           "Rule library with blackmatrix7, MetaCubeX, ACL4SSR and Shadowrocket rule sets",
           "Import Clash, mihomo, Surge, Shadowrocket and Quantumult X configs, with preview and undo"],
-         proxi_demo(r, "en", "nodes", "proxi/nodes.jpg", "Proxi Nodes and Subscriptions page with two subscriptions and node settings", 820, 770)),
+         proxi_demo(r, "en", "nodes")),
         ("The whole Mac, and your console too",
          "Enhanced mode routes every app — terminals and games included — through the core via a virtual network interface. LAN sharing and gateway mode let a PS5, Switch or phone use the same connection as your Mac.",
          ["LAN sharing on port 7892, limited to local network addresses by default",
           "Gateway mode for devices that can’t set a proxy, including game UDP traffic",
           "A small privileged helper, installed once with your password, only for these modes"],
-         proxi_demo(r, "en", "share", "proxi/lan.jpg", "Proxi LAN Sharing page showing the address to enter on a PS5 or Switch", 820, 770)),
+         proxi_demo(r, "en", "share")),
         ("Scripts, AI assistants and sync",
          "A <code>proxi</code> command-line tool, an MCP server for AI assistants and <code>proxi://</code> URL commands share one local control interface with four permission levels. Settings sync between Macs through your own iCloud Drive.",
          ["Switch profiles automatically by Wi-Fi network or router",
           "Imports and automatic switches are recorded in an activity log; imports can be undone"],
-         proxi_demo(r, "en", "sync", "proxi/icloud.jpg", "Proxi iCloud Sync page", 820, 770)),
+         proxi_demo(r, "en", "sync")),
     ],
     "more_title": "When something doesn’t connect",
     "tiles": [
@@ -510,7 +502,7 @@ PROXI = {
         ("macOS", "14 Sonoma or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel (single-architecture builds also available)"),
         ("Permissions", "Administrator password to change the system proxy. Privileged helper only for Enhanced and gateway modes. No Accessibility."),
-        ("Language", "Simplified Chinese interface only"),
+        ("Language", "简体中文 (English coming)"),
         ("Download", "About 53 MB universal (<code>Proxi-macos.zip</code>), about half for <code>-arm64</code> or <code>-x86_64</code>"),
         ("License", "GPL-3.0; bundles mihomo (GPL-3.0)"),
     ],

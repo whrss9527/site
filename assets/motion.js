@@ -90,12 +90,27 @@
     if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", function () { vh = window.innerHeight; onScroll(); }, { passive: true });
+  window.addEventListener("resize", function () { vh = window.innerHeight; each(medias, fit); onScroll(); }, { passive: true });
+
+  // A pinned demo taller than the screen is scaled down (CSS zoom) to fit under the local bar.
+  var medias = scrolly ? scrolly.querySelectorAll(":scope > .feature > .feature-media") : [];
+  function fit(media) {
+    var fig = media.firstElementChild;
+    if (!fig) return;
+    fig.style.zoom = "";
+    if (!scrolly.classList.contains("is-pinned")) return;
+    var avail = media.clientHeight - 32, h = fig.getBoundingClientRect().height;
+    if (h > avail && avail > 0) fig.style.zoom = Math.max(0.7, avail / h).toFixed(3);
+  }
+  var fitter = "ResizeObserver" in window ? new ResizeObserver(function (entries) {
+    entries.forEach(function (e) { var m = e.target.parentElement; if (m && !m.__fitting) { m.__fitting = 1; fit(m); m.__fitting = 0; } });
+  }) : null;
 
   function scrollyMode() {
     if (!scrolly) return;
     scrolly.classList.toggle("is-pinned", mqScrolly.matches);
     if (!mqScrolly.matches) { active = -1; each(steps, function (s) { s.classList.remove("is-active"); }); }
+    each(medias, fit);
     onScroll();
   }
   if (scrolly) {
@@ -113,6 +128,7 @@
         }
       });
     });
+    if (fitter) each(medias, function (m) { if (m.firstElementChild) fitter.observe(m.firstElementChild); });
     if (mqScrolly.addEventListener) mqScrolly.addEventListener("change", scrollyMode);
     else if (mqScrolly.addListener) mqScrolly.addListener(scrollyMode);
     scrollyMode();
