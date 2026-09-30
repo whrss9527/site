@@ -15,7 +15,7 @@
   window.__motion = 1;
   var root = document.documentElement;
   var mqReduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : { matches: false };
-  var mqScrolly = window.matchMedia ? window.matchMedia("(min-width: 1024px) and (min-height: 640px) and (prefers-reduced-motion: no-preference)") : { matches: false };
+  var mqScrolly = window.matchMedia ? window.matchMedia("(min-width: 1024px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)") : { matches: false };
   var cssTimeline = !!(window.CSS && CSS.supports && CSS.supports("animation-timeline: view()"));
   var each = function (list, fn) { Array.prototype.forEach.call(list, fn); };
 

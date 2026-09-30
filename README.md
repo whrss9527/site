@@ -68,7 +68,7 @@ The pages move a little as you scroll, in the manner of Apple's product pages. E
 
 - **Reveals.** Elements with `rv` fade and rise into view once; the children of an `rv-group` do the same one after another. The generator puts these classes in the HTML.
 - **App heroes.** The copy rises in on load; the panel below leans back and settles flat as it scrolls into place (a CSS scroll timeline where the browser has one, otherwise `--p` from `motion.js`).
-- **Pinned features.** On app pages at 1024 px and wider, the feature texts scroll by on the left while their demos stay pinned on the right and crossfade to the step in the middle of the screen (`.scrolly.is-pinned`, set by `motion.js`). Narrower, or without JavaScript, they are ordinary rows. Tabbing into a demo makes its step the active one.
+- **Pinned features.** On app pages in windows at least 1024 px wide and 700 px tall, the feature texts scroll by on the left while their demos stay pinned on the right and crossfade to the step in the middle of the screen (`.scrolly.is-pinned`, set by `motion.js`). Narrower, or without JavaScript, they are ordinary rows. Tabbing into a demo makes its step the active one.
 - **Home.** The desk of panels grows into place and its three panels drift at different speeds; each app icon in the lineup floats at its own pace.
 - **Bars.** On app pages the site header scrolls away and a local bar with the app's name, section links and Download sticks to the top, turning to glass once content passes under it. Elsewhere the header gains a hairline when the page is scrolled.
 

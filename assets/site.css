@@ -416,11 +416,13 @@ main { display: block; }
 .ln-links a { color: var(--text-2); font-size: 13.5px; padding: 5px 10px; border-radius: 8px; transition: color 0.2s var(--ease), background-color 0.2s var(--ease); }
 .ln-links a:hover { color: var(--text); text-decoration: none; background: var(--code-bg); }
 .localnav .btn-xs { margin-left: 4px; }
-.localnav.is-stuck {
+/* Glass by default (no JavaScript); with motion.js it starts clear and turns to glass once stuck. */
+.localnav, .js .localnav.is-stuck {
   background: color-mix(in srgb, var(--bg) 86%, transparent);
   -webkit-backdrop-filter: blur(24px) saturate(180%); backdrop-filter: blur(24px) saturate(180%);
-  box-shadow: 0 10px 30px -22px rgba(15, 20, 30, 0.4);
 }
+.js .localnav.is-stuck { box-shadow: 0 10px 30px -22px rgba(15, 20, 30, 0.4); }
+.js:not(.rv-done) .localnav:not(.is-stuck) { background: transparent; -webkit-backdrop-filter: none; backdrop-filter: none; }
 .localnav.is-stuck .ln-title { transform: scale(0.86); }
 @media (max-width: 600px) {
   .ln-links { display: none; }
@@ -881,7 +883,7 @@ th:first-child, td:first-child { width: 27%; }
 .js .scrolly.is-pinned .feature-media {
   grid-column: 2; grid-row: 1 / -1; align-self: start;
   position: sticky; top: 52px; height: calc(100vh - 52px);
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: safe center; padding: 16px 0;
   opacity: 0; transform: translate3d(0, 36px, 0) scale(0.95); pointer-events: none;
   transition: opacity 0.6s var(--ease), transform 0.9s var(--ease-out);
 }
@@ -896,3 +898,10 @@ th:first-child, td:first-child { width: 27%; }
 .btn:focus-visible, .ln-links a:focus-visible, .sibling:focus-visible { outline-offset: 3px; }
 .sibling { transition: transform 0.5s var(--ease-out), background-color 0.3s var(--ease); }
 .sibling:hover { transform: translateY(-3px); }
+
+/* In-page links land below the sticky bars, and glide there when motion is allowed. */
+section[id], [id$="-title"] { scroll-margin-top: 72px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+@media (prefers-reduced-motion: no-preference) {
+  .js .feature-media.rv.in { animation-delay: 0.14s; }
+}
