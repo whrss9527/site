@@ -203,10 +203,48 @@ kbd { border: 1px solid var(--stroke); }
 .nav-menu .panel a[aria-current="page"] { background: var(--code-bg); }
 .nav-menu .panel img { width: 20px; height: 20px; display: inline-block; }
 .nav-menu .panel .sep { display: block; height: 1px; width: auto; background: var(--stroke); margin: 6px 8px; }
+.nav-menu .panel svg.globe { width: 20px; height: 20px; flex: none; }
+
+/* Language menu: a globe button in the header, a small list with the current language checked. */
+.lang-menu { position: relative; margin-left: -12px; }
+.lang-menu summary {
+  list-style: none; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 30px; padding: 0 9px; border-radius: 8px;
+  color: var(--text); font-size: 13px; font-weight: 550;
+}
+.lang-menu summary::-webkit-details-marker { display: none; }
+.lang-menu summary::after {
+  content: ""; width: 5px; height: 5px; margin: -3px 1px 0 1px;
+  border-right: 1.5px solid var(--text-3); border-bottom: 1.5px solid var(--text-3); transform: rotate(45deg);
+  transition: transform 0.15s ease;
+}
+.lang-menu[open] summary::after { transform: rotate(-135deg); margin-top: 3px; }
+.lang-menu summary:hover, .lang-menu[open] summary { background: var(--code-bg); }
+.lang-menu svg.globe { width: 17px; height: 17px; flex: none; }
+.lang-menu .lang-code { color: var(--text-2); }
+.lang-menu .panel {
+  position: absolute; right: 0; top: calc(100% + 9px); min-width: 184px; z-index: 60;
+  display: flex; flex-direction: column; padding: 6px;
+  /* Opaque, like the mobile menu: a nested backdrop-filter can't see the page. */
+  background: var(--bg);
+  border: 1px solid var(--stroke-strong); border-radius: 14px;
+  box-shadow: var(--shadow-lg), inset 0 1px 0 var(--rim);
+}
+.lang-list a {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 8px 10px 8px 12px; border-radius: 9px; color: var(--text); font-size: 14.5px;
+}
+.lang-list a:hover { background: var(--code-bg); text-decoration: none; }
+.lang-list a[aria-current] { font-weight: 600; }
+.lang-list .check { width: 16px; height: 16px; flex: none; color: var(--link); visibility: hidden; }
+.lang-list a[aria-current] .check { visibility: visible; }
+
 @media (max-width: 860px) {
   .nav { display: none; }
-  .nav-menu { display: block; }
+  .nav-menu { display: block; margin-left: 0; }
   .nav-menu .nav-list { display: flex; flex-direction: column; }
+  .lang-menu { margin-left: auto; margin-right: -10px; }
 }
 
 /* ---------- Glass surfaces ---------- */
@@ -573,7 +611,16 @@ th:first-child, td:first-child { width: 27%; }
 .footer h2 { font-size: 13px; letter-spacing: 0.02em; color: var(--text); margin-bottom: 12px; font-weight: 600; }
 .footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
 .footer a { color: var(--text-2); }
-.footer .fine { margin-top: 36px; }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; margin-top: 36px;
+}
+.footer-lang { display: flex; align-items: center; gap: 6px; }
+.footer-lang svg.globe { width: 16px; height: 16px; flex: none; }
+.footer-lang ul { display: flex; gap: 2px; }
+.footer-lang a { display: inline-flex; padding: 3px 10px; border-radius: 999px; }
+.footer-lang a:hover { background: var(--code-bg); text-decoration: none; }
+.footer-lang a[aria-current] { background: var(--code-bg); color: var(--text); font-weight: 600; }
+.footer-lang .check { display: none; }
 
 /* ---------- 404 ---------- */
 .lost { min-height: 62vh; display: grid; place-items: center; text-align: center; padding: 80px 0; }

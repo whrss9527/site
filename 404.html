@@ -16,6 +16,7 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/site.js" defer></script>
 </head>
 <body class="home">
 <a class="skip" href="#main">Skip to content</a>
@@ -31,8 +32,14 @@
     <a href="https://blog.whrss.com">Blog</a>
     <a href="/support/">Support</a>
     <a href="https://github.com/whrss9527">GitHub</a>
-    <a href="/zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
     </nav>
+    <details class="lang-menu">
+      <summary aria-label="Language: English" title="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">EN</span></summary>
+      <div class="panel lang-list" role="group" aria-label="Language">
+        <a href="/" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="/zh/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
     <details class="nav-menu">
       <summary>Menu</summary>
       <nav class="panel nav-list" aria-label="Main">
@@ -44,7 +51,8 @@
     <a href="https://blog.whrss.com">Blog</a>
     <a href="/support/">Support</a>
     <a href="https://github.com/whrss9527">GitHub</a>
-    <a href="/zh/" lang="zh-CN" hreflang="zh-CN">中文</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="/zh/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>简体中文</a>
       </nav>
     </details>
   </div>
@@ -107,8 +115,42 @@
         </ul>
       </div>
     </div>
-    <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+      <nav class="footer-lang" aria-label="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="/" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="/zh/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
   </div>
 </footer>
+<script>
+        (function () {
+          // Under /zh/, show this page in Chinese: swap the text and point links at the Chinese pages.
+          if (!/^\/zh(\/|$)/.test(location.pathname)) return;
+          var T = {"Skip to content": "跳到正文", "Blog": "博客", "Support": "支持", "Menu": "菜单", "EN": "中文", "This page isn’t in the menu bar.": "菜单栏里没有这一页。", "It may have moved, or the link is wrong. Maybe you were looking for one of these:": "它可能搬走了，也可能是链接写错了。你也许在找这些：", "Home": "首页", "Looking for an old blog post? The blog now lives at": "在找以前的博客文章？博客已经搬到了", ".": "。", "Native Mac apps for the menu bar. Free and open source.": "住在菜单栏里的原生 Mac 小工具，开源免费。", "Apps": "应用", "Privacy": "隐私政策", "More": "更多", "© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.": "© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。"}, A = {"Main": "主导航", "Language": "语言", "Language: English": "语言：简体中文"};
+          document.documentElement.lang = "zh-CN";
+          document.title = "找不到页面 · whrss";
+          var w = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT), n, s;
+          while ((n = w.nextNode())) {
+            s = n.nodeValue.trim();
+            if (n.parentNode.nodeName !== "SCRIPT" && Object.prototype.hasOwnProperty.call(T, s)) n.nodeValue = n.nodeValue.replace(s, T[s]);
+          }
+          document.querySelectorAll("[aria-label],[title]").forEach(function (e) {
+            ["aria-label", "title"].forEach(function (k) {
+              var v = e.getAttribute(k);
+              if (v !== null && Object.prototype.hasOwnProperty.call(A, v)) e.setAttribute(k, A[v]);
+            });
+          });
+          document.querySelectorAll("a[href^='/']").forEach(function (a) {
+            var l = a.getAttribute("data-lang"), href = a.getAttribute("href");
+            if (l === "en") { a.removeAttribute("aria-current"); return; }
+            if (l === "zh") { a.setAttribute("aria-current", "true"); return; }
+            if (!/^\/(zh\/|assets\/)/.test(href)) a.setAttribute("href", "/zh" + href);
+          });
+          var m = document.querySelector(".nav-list .lang-link");
+          if (m) {
+            m.setAttribute("href", "/"); m.setAttribute("hreflang", "en"); m.setAttribute("lang", "en");
+            m.setAttribute("data-lang", "en"); m.lastChild.nodeValue = "English";
+          }
+        })();
+</script>
 </body>
 </html>
