@@ -402,15 +402,13 @@ STOX = {
 }
 
 # ---------------------------------------------------------------- Proxi
-PROXI_SCOPE = """<div class="illus" role="img" aria-label="Illustration: one proxy profile switched on in four places at once — system proxy, environment variables, git and npm">
-  <div class="palette">
-    <div class="q">Office proxy · 127.0.0.1:7890</div>
-    <div class="row"><span>System proxy</span><small>networksetup</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>Environment variables</span><small>launchctl setenv</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>git</span><small>http.proxy</small><span class="sw" aria-hidden="true"></span></div>
-    <div class="row"><span>npm</span><small>proxy</small><span class="sw" aria-hidden="true"></span></div>
-  </div>
-</div>"""
+def proxi_demo(r, lang, preset, fallback, alt, w, h, width=520):
+    """The interactive Proxi panel and settings window (assets/proxi-demo.js, sample data),
+    preset to one state. Without JavaScript the real screenshot `fallback` shows instead."""
+    return (f'<figure class="pxd" data-lang="{lang}" data-preset="{preset}">'
+            f'<noscript><img src="{r}assets/img/{fallback}" alt="{alt}" width="{w}" height="{h}" loading="lazy" decoding="async" style="width:{width}px"></noscript></figure>')
+
+PROXI_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/proxi-demo.css">\n<script src="{r}assets/proxi-demo.js" defer></script>'
 
 PROXI = {
     "title": "Proxi · One switch for every proxy on your Mac",
@@ -418,31 +416,35 @@ PROXI = {
     "say": "/ˈprɒk.si/ — still “proxy”: the y becomes an i.",
     "lede": "One switch for the system proxy, your shell’s environment variables, git and npm — plus a built-in mihomo core for subscriptions and rules, LAN sharing, and TUN or gateway mode.",
     "meta": ["Free and open source", "macOS 14 or later", "Apple silicon and Intel", "Interface in Simplified Chinese"],
-    "stage": lambda r: shot(r, "proxi/hero.jpg", "Proxi settings window with proxy profiles, next to the menu bar panel listing nodes with latency, and the menu bar speed indicator", 1600, 1000, "light"),
+    "extra_head": PROXI_HEAD,
+    "stage": lambda r: '<div class="compose proxi-stage">' +
+        proxi_demo(r, "en", "panel", "proxi/panel.webp", "Proxi menu bar panel with the proxy switch, the node list with latencies and the proxy profiles", 384, 722, width=300) +
+        cut(r, "proxi/panel.webp", "Real screenshot of the Proxi menu bar panel, in Chinese: the proxy switch, nodes with latencies and three profiles", 384, 722, width=300, cap="Real screenshot · Chinese interface") +
+        "</div>",
     "features": lambda r: [
         ("One switch, everywhere",
          "Make a profile — HTTP, SOCKS5 or PAC — and choose where it applies: the system proxy, environment variables for new terminals and apps, git and npm. Switch profiles with one click, or with ⌃⌥P.",
          ["Notices when another app changes the proxy, and can save it as a profile",
           "Finds proxy apps already running on your Mac and adds them",
           "Upload and download speed right in the menu bar"],
-         PROXI_SCOPE),
+         proxi_demo(r, "en", "profiles", "proxi/hero.jpg", "Proxi settings window with proxy profiles, next to the menu bar panel listing nodes with latency", 1600, 1000)),
         ("Subscriptions and rules, built in",
          "Paste a subscription URL and its nodes appear in the panel. Pick one, let Proxi choose the fastest, and route by rules. The engine is mihomo (Clash Meta), bundled inside the app.",
          ["Policy groups: manual, auto-select, fallback and load balance",
           "Rule library with blackmatrix7, MetaCubeX, ACL4SSR and Shadowrocket rule sets",
           "Import Clash, mihomo, Surge, Shadowrocket and Quantumult X configs, with preview and undo"],
-         shot(r, "proxi/nodes.jpg", "Proxi Nodes and Subscriptions page with two subscriptions and node settings", 820, 770, "light")),
+         proxi_demo(r, "en", "nodes", "proxi/nodes.jpg", "Proxi Nodes and Subscriptions page with two subscriptions and node settings", 820, 770)),
         ("The whole Mac, and your console too",
          "Enhanced mode routes every app — terminals and games included — through the core via a virtual network interface. LAN sharing and gateway mode let a PS5, Switch or phone use the same connection as your Mac.",
          ["LAN sharing on port 7892, limited to local network addresses by default",
           "Gateway mode for devices that can’t set a proxy, including game UDP traffic",
           "A small privileged helper, installed once with your password, only for these modes"],
-         shot(r, "proxi/lan.jpg", "Proxi LAN Sharing page showing the address to enter on a PS5 or Switch", 820, 770, "light")),
+         proxi_demo(r, "en", "share", "proxi/lan.jpg", "Proxi LAN Sharing page showing the address to enter on a PS5 or Switch", 820, 770)),
         ("Scripts, AI assistants and sync",
          "A <code>proxi</code> command-line tool, an MCP server for AI assistants and <code>proxi://</code> URL commands share one local control interface with four permission levels. Settings sync between Macs through your own iCloud Drive.",
          ["Switch profiles automatically by Wi-Fi network or router",
           "Imports and automatic switches are recorded in an activity log; imports can be undone"],
-         shot(r, "proxi/icloud.jpg", "Proxi iCloud Sync page", 820, 770, "light")),
+         proxi_demo(r, "en", "sync", "proxi/icloud.jpg", "Proxi iCloud Sync page", 820, 770)),
     ],
     "more_title": "When something doesn’t connect",
     "tiles": [
