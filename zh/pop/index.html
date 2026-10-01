@@ -138,7 +138,7 @@
       <div class="feature">
         <div class="feature-text rv">
           <h2>AI，用你自己的接口</h2>
-          <p>选中文字，让 AI 润色、总结、解释或翻译，也可以直接提问。在开启了 Apple 智能的 macOS 26 上，Pop 可以用系统自带的本机模型；也可以接入任何兼容 OpenAI Chat Completions 的接口，包括在你 Mac 上运行的模型。</p>
+          <p>选中文字，让 AI 润色、总结、解释或翻译，也可以直接提问。在开启了 Apple 智能的 macOS 26 上，Pop 可以用系统自带的本机模型；也可以接入任何兼容 Chat Completions 接口的服务，包括在你 Mac 上运行的模型。</p>
           <ul><li>回答流式输出；可以复制、替换原文或贴在屏幕上</li><li>只有使用 AI 功能时才会发送选中的文字</li><li>API 密钥保存在这台 Mac 的钥匙串里</li></ul>
         </div>
         <div class="feature-media rv "><figure class="ppd" data-lang="zh" data-preset="ai" data-icon="../../assets/icons/pop.png"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/pop.png" alt="" width="40" height="40"><p>这里是 Pop 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
@@ -183,7 +183,7 @@
   <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
       <div class="section-head rv"><h2 id="faq-title">常见问题</h2></div>
-      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Pop 以 GPL-3.0 开源，不用注册账号，没有订阅，也没有应用内购买。</p></div></details><details class="glass"><summary>为什么需要辅助功能权限？</summary><div class="answer"><p>macOS 只允许有辅助功能权限的应用在全局监听鼠标按键、读取其他应用里选中的内容并粘贴进去。Pop 需要的正是这些：察觉长按右键，读取你选中的内容，以及在你选择“替换原文”时把结果放回去。</p><p>也正因为这样，Pop 无法上架 Mac App Store（沙盒不允许这么做），所以通过 GitHub 和本网站发布。</p></div></details><details class="glass"><summary>需要屏幕录制权限吗？</summary><div class="answer"><p>只有要看屏幕的工具需要：截图识字和翻译、扫描二维码、截图标注和标尺。其他功能都不需要。</p></div></details><details class="glass"><summary>有英文界面吗？</summary><div class="answer"><p>有。Pop 的界面有简体中文和英文，跟随 Mac 的系统语言。翻译本身支持多种语言，可以用苹果的系统翻译、AI 或 DeepL。</p></div></details><details class="glass"><summary>Pop 会把我的文字发到别处吗？</summary><div class="answer"><p>只在你要求时：AI 功能会把选中的文字发到你设置的 AI 接口，DeepL 翻译会把它发给 DeepL。苹果的系统翻译和本机模型、文字识别以及剪贴板历史都留在你的 Mac 上。详见<a href="../privacy/pop/">隐私政策</a>。</p></div></details><details class="glass"><summary>能在多台 Mac 之间同步吗？</summary><div class="answer"><p>可以在设置 › 同步里把设置和插件导出为文件，再到另一台 Mac 上导入。iCloud 同步需要带 iCloud 权限签名的版本，GitHub 上的版本不包含这项功能。</p></div></details><details class="glass"><summary>更新后右键不管用了。</summary><div class="answer"><p>打开 Pop 的设置 › 通用，点“清除旧的授权记录”，再重新授予辅助功能权限。这种情况主要出现在以前本地签名（ad-hoc）的版本上；经过公证的版本更新后会保留权限。</p></div></details></div>
+      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Pop 以 GPL-3.0 开源，不用注册账号，不按月收费，也没有应用内购买。</p></div></details><details class="glass"><summary>为什么需要辅助功能权限？</summary><div class="answer"><p>macOS 只允许有辅助功能权限的应用在全局监听鼠标按键、读取其他应用里选中的内容并粘贴进去。Pop 需要的正是这些：察觉长按右键，读取你选中的内容，以及在你选择“替换原文”时把结果放回去。</p><p>也正因为这样，Pop 无法上架 Mac App Store（沙盒不允许这么做），所以通过 GitHub 和本网站发布。</p></div></details><details class="glass"><summary>需要屏幕录制权限吗？</summary><div class="answer"><p>只有要看屏幕的工具需要：截图识字和翻译、扫描二维码、截图标注和标尺。其他功能都不需要。</p></div></details><details class="glass"><summary>有英文界面吗？</summary><div class="answer"><p>有。Pop 的界面有简体中文和英文，跟随 Mac 的系统语言。翻译本身支持多种语言，可以用苹果的系统翻译、AI 或 DeepL。</p></div></details><details class="glass"><summary>Pop 会把我的文字发到别处吗？</summary><div class="answer"><p>只在你要求时：AI 功能会把选中的文字发到你设置的 AI 接口，DeepL 翻译会把它发给 DeepL。苹果的系统翻译和本机模型、文字识别以及剪贴板历史都留在你的 Mac 上。详见<a href="../privacy/pop/">隐私政策</a>。</p></div></details><details class="glass"><summary>能在多台 Mac 之间同步吗？</summary><div class="answer"><p>可以在设置 › 同步里把设置和插件导出为文件，再到另一台 Mac 上导入。iCloud 同步需要带 iCloud 权限签名的版本，GitHub 上的版本不包含这项功能。</p></div></details><details class="glass"><summary>更新后右键不管用了。</summary><div class="answer"><p>打开 Pop 的设置 › 通用，点“清除旧的授权记录”，再重新授予辅助功能权限。这种情况主要出现在以前本地签名（ad-hoc）的版本上；经过公证的版本更新后会保留权限。</p></div></details></div>
       <p class="small muted" style="margin-top:24px">更多帮助：<a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a> · <a href="../support/">支持</a> · <a href="../privacy/pop/">Pop 隐私政策</a></p>
     </div>
   </section>
@@ -204,7 +204,7 @@
   <section class="section-tight" aria-labelledby="sib-title">
     <div class="wrap">
       <div class="section-head rv"><h2 id="sib-title">菜单栏里的其他应用</h2></div>
-      <div class="siblings rv-group"><a class="sibling glass app-meno" href="../meno/"><img src="../../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。</span></div></a><a class="sibling glass app-stox" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a><a class="sibling glass app-proxi" href="../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>一个开关管好系统代理、终端、git 和 npm，内置 mihomo 内核。</span></div></a></div>
+      <div class="siblings rv-group"><a class="sibling glass app-meno" href="../meno/"><img src="../../assets/icons/meno.png" alt="" width="44" height="44"><div><strong>Meno</strong><span>安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。</span></div></a><a class="sibling glass app-stox" href="../stox/"><img src="../../assets/icons/stox.png" alt="" width="44" height="44"><div><strong>Stox</strong><span>A 股、港股、美股，一眼看盘，一键隐身。</span></div></a><a class="sibling glass app-proxi" href="../proxi/"><img src="../../assets/icons/proxi.png" alt="" width="44" height="44"><div><strong>Proxi</strong><span>一个开关管好系统代理、终端、git 和 npm。</span></div></a></div>
     </div>
   </section>
 </main>

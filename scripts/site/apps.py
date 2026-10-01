@@ -223,7 +223,7 @@ POP = {
           "Stored only on this Mac and cleaned up by age and count"],
          pop_demo(r, "en", "history")),
         ("AI with your own endpoint",
-         "Select text and ask AI to polish, summarize, explain or translate it, or ask a question. On macOS 26 with Apple Intelligence, Pop can use the built-in on-device model. Or point it at any OpenAI Chat Completions–compatible endpoint, including a model running on your Mac.",
+         "Select text and ask AI to polish, summarize, explain or translate it, or ask a question. On macOS 26 with Apple Intelligence, Pop can use the built-in on-device model. Or point it at any endpoint compatible with the Chat Completions API, including a model running on your Mac.",
          ["Answers stream in; copy, replace the original or pin them",
           "Selected text is only sent when you use an AI feature",
           "Your API key stays in this Mac’s Keychain"],
@@ -366,7 +366,7 @@ MENO = {
         ("Layout editor", "Drag items between Visible, Hidden and Stash. Rename them and give them a symbol."),
         ("Groups", "Put related items behind one icon; click it to show them in a Shelf right below."),
         ("Show when it changes", "A hidden item appears for a moment when its icon or text changes, like a failed sync."),
-        ("Item shortcuts and links", "Open Wi-Fi, a VPN or a timer from anywhere. <code>meno://</code> links work in Shortcuts and scripts."),
+        ("Item shortcuts and links", "Open Wi-Fi, Bluetooth or a timer from anywhere. <code>meno://</code> links work in Shortcuts and scripts."),
         ("Insights, on device", "How often you reveal, your most used items, and suggestions to keep or stash — never leaves your Mac."),
     ],
     "specs": [

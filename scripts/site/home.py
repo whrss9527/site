@@ -16,14 +16,14 @@ EN_BULLETS = {
              "Holdings and P&L, price alerts, iCloud sync",
              "Right-click the menu bar icon to hide every number"],
     "proxi": ["System proxy, environment variables, git and npm in one switch",
-              "Built-in mihomo core: subscriptions, rules, policy groups",
-              "LAN sharing for consoles and phones, TUN and gateway modes"],
+              "HTTP, SOCKS5 and PAC profiles, switched with a click or ⌃⌥P",
+              "Command line, MCP for AI assistants, switching by Wi-Fi"],
 }
 ZH_BULLETS = {
     "pop": ["选中外文直接翻译：系统离线翻译、AI 或 DeepL", "圆盘里的功能随你摆：换算、识字、取色、JSON、文件", "剪贴板历史、贴图、插件，AI 用你自己的接口"],
     "meno": ["显示、隐藏，再加一个放几乎用不到图标的暗格", "托盘和快速打开，macOS 26 上是 Liquid Glass", "规则、场景，一键禅模式，演示录屏更干净"],
     "stox": ["A 股、港股、美股，还有指数、基金和外汇", "持仓与盈亏、价格提醒、iCloud 同步", "右键点一下菜单栏图标，数字全部藏起来"],
-    "proxi": ["系统代理、环境变量、git、npm 一个开关", "内置 mihomo 内核：订阅、分流规则、策略组", "局域网共享给游戏机和手机，增强模式与网关模式"],
+    "proxi": ["系统代理、环境变量、git、npm 一个开关", "HTTP、SOCKS5、PAC 配置，点一下或按 ⌃⌥P 切换", "命令行、给 AI 助手用的 MCP，按 Wi-Fi 自动切换"],
 }
 
 def reel(c):

@@ -64,7 +64,7 @@ def build(key, d, lang="en"):
 
         <h2>{t(f"Where you got {name}", f"你从哪里获得 {name}")}</h2>
         <p>{t(f"This policy covers {name} however you obtained it — from GitHub, from this website, or through a store or subscription service such as the Mac App Store or Setapp. Such a service handles your purchase or subscription and may process data under its own privacy policy; {name} itself behaves as described here. If an edition ever works differently, this policy will be updated before that edition is released.",
-              f"无论你是从 GitHub、本网站，还是通过 Mac App Store、Setapp 等商店或订阅服务获得 {name}，本政策都适用。这类服务负责处理你的购买或订阅，可能按它们自己的隐私政策处理数据；{name} 本身的行为与本页描述一致。如果将来某个版本的行为有所不同，本政策会在该版本发布之前更新。")}</p>
+              f"无论你是从 GitHub、本网站，还是通过 Mac App Store、Setapp 等商店或按期付费的软件服务获得 {name}，本政策都适用。这类服务负责处理你的购买或付费，可能按它们自己的隐私政策处理数据；{name} 本身的行为与本页描述一致。如果将来某个版本的行为有所不同，本政策会在该版本发布之前更新。")}</p>
 
         <h2>{t("Deleting your data", "删除你的数据")}</h2>
         <p>{d['delete']}</p>

@@ -261,7 +261,7 @@
       g: ["refraction", "Light bending between materials.",
         "**Refraction** is the bending of a wave, such as light, when it passes from one material into another — it’s why a straw looks broken in a glass of water.", "折射"],
       other: "Here Pop streams the answer from the AI service you set up in Settings → AI. (This demo shows sample answers only.)",
-      ask: "This is a sample answer: the demo doesn’t send your question anywhere. In Pop, your question and the selected text go to the AI service you set up — Apple’s on-device model or any OpenAI-compatible endpoint — and the answer streams in here."
+      ask: "This is a sample answer: the demo doesn’t send your question anywhere. In Pop, your question and the selected text go to the AI service you set up — Apple’s on-device model or any Chat Completions–compatible endpoint — and the answer streams in here."
     },
     zh: {
       a: ["在选中的内容上按住鼠标右键，Pop 就会在指针周围弹出一个工具圆盘。",
@@ -284,7 +284,7 @@
       f: [LINK, "Pop 的 GitHub 仓库。", "这是 Pop 在 **GitHub** 上的页面，源代码、发布版本和问题反馈都在这里。", LINK],
       g: ["折射", "光在两种介质之间偏折。", "**折射**是光、声波等从一种介质斜着进入另一种介质时，传播方向发生偏折的现象。插在水杯里的吸管看起来像折断了，就是折射造成的。", "refraction"],
       other: "在 Pop 里，回答会从你在「设置 → AI」里填写的服务流式输出。（这个演示只显示示例回答。）",
-      ask: "这是示例回答：这个演示不会把你的问题发到任何地方。在 Pop 里，问题和选中的文字会发给你设置的 AI 服务（系统自带的本机模型，或任何兼容 OpenAI 的接口），回答会在这里流式显示。"
+      ask: "这是示例回答：这个演示不会把你的问题发到任何地方。在 Pop 里，问题和选中的文字会发给你设置的 AI 服务（系统自带的本机模型，或任何兼容 Chat Completions 的接口），回答会在这里流式显示。"
     }
   };
 

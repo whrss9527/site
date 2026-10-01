@@ -64,7 +64,7 @@ function compose(key) {
   for (const lang of ["en", "zh"]) {
     for (const [key, p] of PAGES) {
       const page = await browser.newPage({ viewport: { width: 1200, height: 630 }, deviceScaleFactor: 1, colorScheme: "light", reducedMotion: "reduce" });
-      await page.goto(base + (lang === "zh" ? "/zh" : "") + p, { waitUntil: "load" });
+      await page.goto(base + (lang === "zh" ? "/zh" : "") + p);   // resolves on the load event
       // Build the demo (they are built as they near the viewport) and let fonts and layout settle.
       await page.evaluate(() => { const f = document.querySelector(".stage figure, .reel"); if (f) f.scrollIntoView({ block: "center", behavior: "instant" }); });
       await page.waitForTimeout(700);

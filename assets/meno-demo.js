@@ -90,7 +90,7 @@
     picker: '<path d="M11.9 1.9a1.5 1.5 0 0 1 2.2 2.2l-1.7 1.7-2.2-2.2zM10.2 3.6l2.2 2.2M11.3 4.7l-6.6 6.6-2.4.6.6-2.4 6.6-6.6"/>',
     translate: '<path d="M1.8 3.6h6.6M5.1 2v1.6M3.4 3.6c.6 2.2 2 3.9 4.2 4.8M6.9 3.6c-.6 2.5-2.2 4.4-4.9 5.5"/><path d="M8.6 14l2.7-6.6L14 14M9.6 11.8h3.4"/>',
     clip: '<rect x="3.2" y="2.9" width="9.6" height="11.3" rx="1.9"/><rect x="5.9" y="1.6" width="4.2" height="2.6" rx="1" fill="currentColor"/><path d="M5.6 7.4h4.8M5.6 10.2h3.2"/>',
-    vpn: '<path d="M8 1.7l5.1 2v3.9c0 3.1-2.1 5.3-5.1 6.6-3-1.3-5.1-3.5-5.1-6.6V3.7z"/><path d="M5.9 7.9l1.5 1.5 2.8-2.9"/>',
+    bt: '<path d="M4.6 5.1l6.6 5.7L8 13.7V2.3l3.2 2.8-6.6 5.7"/>',
     weather: '<circle cx="5.4" cy="5.4" r="2.1"/><path d="M5.4 1.3v.8M1.3 5.4h.8M2.5 2.5l.6.6M8.3 2.5l-.6.6"/><path d="M6 14h5.9a2.4 2.4 0 0 0 .3-4.8 3 3 0 0 0-5.7.7A2.1 2.1 0 0 0 6 14z"/>',
     sync: '<path d="M13 6.3A5.2 5.2 0 0 0 3.5 4.5M3 9.7a5.2 5.2 0 0 0 9.5 1.8"/><path d="M3.2 2.1v2.6h2.6M12.8 13.9v-2.6h-2.6"/>',
     timer: '<circle cx="8" cy="9.1" r="5.1"/><path d="M8 9.1V6.5M6.6 1.8h2.8M12.2 4.3l.9-.9"/>',
@@ -171,7 +171,7 @@
     { id: "picker", icon: "picker", n: ["Color Picker", "取色器", "取色器"] },
     { id: "translate", icon: "translate", n: ["Translator", "翻译", "翻譯"] },
     { id: "clip", icon: "clip", n: ["Clipboard", "剪贴板", "剪貼簿"] },
-    { id: "vpn", icon: "vpn", n: ["VPN", "VPN", "VPN"] },
+    { id: "bt", icon: "bt", n: ["Bluetooth", "蓝牙", "藍牙"] },
     { id: "weather", icon: "weather", text: "18°", n: ["Weather", "天气", "天氣"] },
     { id: "sync", icon: "sync", n: ["Sync", "同步", "同步"] },
     { id: "timer", icon: "timer", text: "24:12", n: ["Focus Timer", "专注计时", "專注計時"] },
@@ -183,12 +183,12 @@
   ];
   var BY_ID = {};
   ITEMS.forEach(function (it) { BY_ID[it.id] = it; });
-  var DEFAULT_ORD = { stash: ["backup", "picker", "translate"], hidden: ["clip", "vpn", "weather", "sync"], visible: ["timer", "coffee", "wifi", "battery"] };
+  var DEFAULT_ORD = { stash: ["backup", "picker", "translate"], hidden: ["clip", "bt", "weather", "sync"], visible: ["timer", "coffee", "wifi", "battery"] };
   // Scenes remember the section and order of every movable item.
   var SCENES = [
-    { symbol: "stack", ord: { stash: ["backup", "picker", "translate"], hidden: ["weather", "sync", "coffee"], visible: ["clip", "vpn", "timer", "wifi", "battery"] } },
-    { symbol: "stack", ord: { stash: ["backup", "translate", "vpn"], hidden: ["clip", "picker", "timer", "sync"], visible: ["weather", "coffee", "wifi", "battery"] } },
-    { symbol: "stack", ord: { stash: ["backup", "picker", "translate", "sync"], hidden: ["clip", "vpn", "weather", "timer", "coffee"], visible: ["wifi", "battery"] } }
+    { symbol: "stack", ord: { stash: ["backup", "picker", "translate"], hidden: ["weather", "sync", "coffee"], visible: ["clip", "bt", "timer", "wifi", "battery"] } },
+    { symbol: "stack", ord: { stash: ["backup", "translate", "bt"], hidden: ["clip", "picker", "timer", "sync"], visible: ["weather", "coffee", "wifi", "battery"] } },
+    { symbol: "stack", ord: { stash: ["backup", "picker", "translate", "sync"], hidden: ["clip", "bt", "weather", "timer", "coffee"], visible: ["wifi", "battery"] } }
   ];
   var LANG_IDX = { en: 0, "zh-Hans": 1, "zh-Hant": 2 };
   var PANES = [

@@ -19,7 +19,7 @@ APPS = {
     "pop":   {"name": "Pop",   "repo": "pop",   "min": "macOS 15", "pitch": "Long-press right click: translate, convert and 80+ tools in one swipe.", "zh": "长按右键，一划即达：翻译、换算和 80 多个小工具。"},
     "meno":  {"name": "Meno",  "repo": "meno",  "min": "macOS 14", "pitch": "A calm menu bar, made with glass: hide, stash and call back icons.", "zh": "安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。"},
     "stox":  {"name": "Stox",  "repo": "stox",  "min": "macOS 13", "pitch": "A-share, Hong Kong and US quotes at a glance; gone in one click.", "zh": "A 股、港股、美股，一眼看盘，一键隐身。"},
-    "proxi": {"name": "Proxi", "repo": "proxi", "min": "macOS 14", "pitch": "One switch for system proxy, shell, git and npm, with a built-in mihomo core.", "zh": "一个开关管好系统代理、终端、git 和 npm，内置 mihomo 内核。"},
+    "proxi": {"name": "Proxi", "repo": "proxi", "min": "macOS 14", "pitch": "One switch for the system proxy, Terminal, git and npm.", "zh": "一个开关管好系统代理、终端、git 和 npm。"},
 }
 
 ICON_DL = '<svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>'
