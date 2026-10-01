@@ -15,15 +15,15 @@ EN_BULLETS = {
     "stox": ["China A-shares, Hong Kong and US stocks, plus indexes, funds and forex",
              "Holdings and P&L, price alerts, iCloud sync",
              "Right-click the menu bar icon to hide every number"],
-    "proxi": ["System proxy, environment variables, git and npm in one switch",
-              "HTTP, SOCKS5 and PAC profiles, switched with a click or ⌃⌥P",
+    "proxi": ["System proxy, Terminal, git and npm in one switch",
+              "Your corporate proxy, or Charles, Proxyman and mitmproxy",
               "Command line, MCP for AI assistants, switching by Wi-Fi"],
 }
 ZH_BULLETS = {
     "pop": ["选中外文直接翻译：系统离线翻译、AI 或 DeepL", "圆盘里的功能随你摆：换算、识字、取色、JSON、文件", "剪贴板历史、贴图、插件，AI 用你自己的接口"],
     "meno": ["显示、隐藏，再加一个放几乎用不到图标的暗格", "托盘和快速打开，macOS 26 上是 Liquid Glass", "规则、场景，一键禅模式，演示录屏更干净"],
     "stox": ["A 股、港股、美股，还有指数、基金和外汇", "持仓与盈亏、价格提醒、iCloud 同步", "右键点一下菜单栏图标，数字全部藏起来"],
-    "proxi": ["系统代理、环境变量、git、npm 一个开关", "HTTP、SOCKS5、PAC 配置，点一下或按 ⌃⌥P 切换", "命令行、给 AI 助手用的 MCP，按 Wi-Fi 自动切换"],
+    "proxi": ["系统代理、终端、git、npm 一个开关", "公司代理，或者 Charles、Proxyman、mitmproxy", "命令行、给 AI 助手用的 MCP，按 Wi-Fi 自动切换"],
 }
 
 def reel(c):
@@ -44,7 +44,7 @@ def reel(c):
         "pop": t("Hold the right button. Swipe to a tool.", "按住右键，一划选中工具。"),
         "meno": t("A calm menu bar. Icons on call.", "安静的菜单栏，图标随叫随到。"),
         "stox": t("Quotes at a glance. Gone in one click.", "一眼看盘，一键隐身。"),
-        "proxi": t("One switch for every proxy.", "一个开关，管好所有代理。"),
+        "proxi": t("A proxy switch for developers.", "开发者的代理开关。"),
     }
     cards = "".join(f"""
           <article class="reel-card glass app-{k}" aria-labelledby="reel-{k}">

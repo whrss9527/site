@@ -6,8 +6,8 @@
 <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <link rel="stylesheet" href="../../assets/proxi-demo.css">
 <script src="../../assets/proxi-demo.js" defer></script>
-<title>Proxi · 一个开关，管好 Mac 上所有代理</title>
-<meta name="description" content="Proxi 同时切换系统代理、环境变量、git 和 npm，内置 mihomo 内核，支持订阅、分流规则、局域网共享和增强模式（TUN）。macOS 上开源免费。">
+<title>Proxi · 开发者的代理开关</title>
+<meta name="description" content="Proxi 是住在菜单栏里的开发者代理开关：一键把系统代理、终端、git 和 npm 指向你自己的代理服务器，比如公司代理，或者 Charles、Proxyman、mitmproxy。macOS 上开源免费。">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
@@ -17,8 +17,8 @@
 <link rel="alternate" hreflang="x-default" href="https://whrss.com/proxi/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:title" content="Proxi · 一个开关，管好 Mac 上所有代理">
-<meta property="og:description" content="Proxi 同时切换系统代理、环境变量、git 和 npm，内置 mihomo 内核，支持订阅、分流规则、局域网共享和增强模式（TUN）。macOS 上开源免费。">
+<meta property="og:title" content="Proxi · 开发者的代理开关">
+<meta property="og:description" content="Proxi 是住在菜单栏里的开发者代理开关：一键把系统代理、终端、git 和 npm 指向你自己的代理服务器，比如公司代理，或者 Charles、Proxyman、mitmproxy。macOS 上开源免费。">
 <meta property="og:url" content="https://whrss.com/zh/proxi/">
 <meta property="og:image" content="https://whrss.com/assets/og/proxi-zh.png">
 <meta property="og:image:width" content="1200">
@@ -84,12 +84,12 @@
         <img class="icon" src="../../assets/icons/proxi.png" alt="Proxi 应用图标" width="128" height="128">
         <h1>Proxi</h1>
         <p class="say">/ˈprɒk.si/ —— 还是 proxy，只是 y 换成了 i。</p>
-        <p class="lede">一个开关管好系统代理、终端环境变量、git 和 npm；还内置 mihomo 内核，支持订阅和分流规则、局域网共享，以及增强模式（TUN）和网关模式。</p>
+        <p class="lede">一键把系统代理、终端、git 和 npm 指向你自己的代理服务器：公司代理、内网网关，或者 Charles 这样的调试代理。再点一下，全部恢复。Proxi 只负责切换设置，自己不提供代理服务，也不转发流量。</p>
         <div class="actions">
           <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Proxi</a>
           <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
         </div>
-        <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span></p>
+        <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文</span></p>
       </div>
       <div class="stage tilt" data-p="css"><div class="tilt-inner"><div class="compose proxi-stage"><figure class="pxd" data-lang="zh" data-preset="panel"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div></div></div>
     </div>
@@ -100,33 +100,33 @@
       <div class="features scrolly" style="--n:4">
       <div class="feature">
         <div class="feature-text rv">
-          <h2>一个开关，处处生效</h2>
-          <p>建一个代理配置（HTTP、SOCKS5 或 PAC），选好它作用在哪里：系统代理、新开的终端和应用的环境变量、git 和 npm。一键切换配置，或者按 ⌃⌥P。</p>
-          <ul><li>发现其他应用改了代理时会提示你，还能把它存成一个配置</li><li>自动发现你 Mac 上已经在运行的代理软件并添加进来</li><li>菜单栏里直接显示上传和下载速度</li></ul>
+          <h2>一个开关，四个地方</h2>
+          <p>代理往往要在系统设置、终端、git 和 npm 里各设一遍，换个网络又得挨个改回来。Proxi 的每套配置自己选作用在哪里；打开开关全部设好，关掉就全部恢复。</p>
+          <ul><li>系统代理（通过 <code>networksetup</code>），浏览器和大多数软件都走它</li><li><code>http_proxy</code>、<code>https_proxy</code>、<code>all_proxy</code>、<code>no_proxy</code>，之后新开的终端生效；已经打开的终端复制一行命令就行</li><li>git 的全局 <code>http.proxy</code>，以及 npm、pnpm 和 yarn 1 都读的 <code>~/.npmrc</code></li></ul>
         </div>
         <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="profiles"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>订阅和规则，内置就有</h2>
-          <p>粘贴订阅地址，节点就出现在面板里。手动选一个，或者让 Proxi 自动选最快的，再按规则分流。引擎是 mihomo（Clash Meta），打包在应用里。</p>
-          <ul><li>策略组：手动选择、自动选择、故障转移和负载均衡</li><li>规则库收录 blackmatrix7、MetaCubeX、ACL4SSR 和 Shadowrocket 规则集</li><li>导入 Clash、mihomo、Surge、Shadowrocket 和 Quantumult X 配置，可以预览和撤销</li></ul>
+          <h2>指向你自己的代理</h2>
+          <p>每套配置就是一个你已经在用的代理服务器：公司代理、内网网关，或者本机的调试代理。支持 HTTP、SOCKS5 和 PAC，可以填登录信息，每套配置有自己的例外列表。</p>
+          <ul><li>「自动检测」能找出本机正在运行的 Charles（8888）、Proxyman（9090）、mitmproxy（8080）等</li><li>密码只存在这台 Mac 的钥匙串里</li><li>「测试连接」经代理访问苹果的检测页，显示延迟</li></ul>
         </div>
-        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="nodes"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="detect"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>整台 Mac，连游戏机也算上</h2>
-          <p>增强模式通过虚拟网卡，让每个应用（包括终端和游戏）都经过内核。局域网共享和网关模式让 PS5、Switch 或手机和你的 Mac 用同一个连接。</p>
-          <ul><li>局域网共享使用 7892 端口，默认只允许局域网地址连接</li><li>网关模式适合不能设置代理的设备，游戏的 UDP 流量也能处理</li><li>一个小小的特权助手，输一次密码安装，只在这两种模式下使用</li></ul>
+          <h2>脚本、AI 助手，换网络自动切</h2>
+          <p><code>proxi</code> 命令、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> URL 命令，共用一个本机控制接口，权限由你决定。换了网络，规则会替你切换。</p>
+          <ul><li><code>proxi on</code>、<code>proxi use &lt;配置名&gt;</code>、<code>proxi off</code>、<code>proxi status</code>、<code>proxi test</code></li><li>连上公司 Wi-Fi 自动开公司代理，回家自动关掉</li><li>AI 助手只能查看状态、切换配置和测试连接，别的都做不了</li></ul>
         </div>
-        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="share"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="automation"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>脚本、AI 助手和同步</h2>
-          <p><code>proxi</code> 命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 网址命令，共用一个本地控制接口，有四档权限。设置可以通过你自己的 iCloud 云盘在多台 Mac 之间同步。</p>
-          <ul><li>按 Wi-Fi 网络或路由器自动切换配置</li><li>导入和自动切换都记在操作记录里；导入可以撤销</li></ul>
+          <h2>每台 Mac，始终最新</h2>
+          <p>配置和设置通过你自己的 iCloud 云盘在多台 Mac 之间同步；密码不会离开输入它的那台 Mac。有新版本，点一下就装好。</p>
+          <ul><li>第二台 Mac 加入时，可以合并、用本机的或者用 iCloud 的</li><li>更新先校验 SHA-256 和代码签名，再替换程序</li></ul>
         </div>
         <div class="feature-media rv "><figure class="pxd" data-lang="zh" data-preset="sync"><noscript><div class="demo-nojs glass"><img src="../../assets/icons/proxi.png" alt="" width="40" height="40"><p>这里是 Proxi 的可交互演示（示例数据），打开 JavaScript 就能试用。</p></div></noscript></figure></div>
       </div>
@@ -136,8 +136,8 @@
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head rv"><h2 id="more-title">连不上的时候</h2></div>
-      <div class="tiles bento rv-group"><div class="tile glass"><h3>连接</h3><p>经过内核的每一条连接：来自哪个应用或设备、命中哪条规则、走哪个节点、用了多少流量。</p></div><div class="tile glass"><h3>服务检测</h3><p>看看 ChatGPT、Claude、Gemini、Netflix、YouTube Premium 或 Telegram 通过某个节点能不能用，被识别为哪个地区。</p></div><div class="tile glass"><h3>网址诊断</h3><p>输入打不开的网站，Proxi 会逐一检查 DNS、直连和代理路径，并给出修复建议。</p></div><div class="tile glass"><h3>出口 IP</h3><p>网站通过你的节点看到的地址和地区，以及你 Mac 自己的公网地址。</p></div><div class="tile glass"><h3>进阶 DNS</h3><p>内核自带加密 DNS、按域名指定服务器、hosts，以及保存前会先检查的 mihomo 配置补丁。</p></div><div class="tile glass"><h3>健康检查</h3><p>代理开启时定期检查代理端口，没有响应时提醒你。</p></div></div>
+      <div class="section-head rv"><h2 id="more-title">积少成多的小细节</h2></div>
+      <div class="tiles bento rv-group"><div class="tile glass"><h3>⌃⌥P</h3><p>在任何程序里开关代理。点菜单栏图标打开面板，右键弹出简洁菜单。</p></div><div class="tile glass"><h3>连接检查</h3><p>代理开着时，Proxi 会定期看看代理服务器还能不能连上，连不上就提醒你。</p></div><div class="tile glass"><h3>别的程序改了代理</h3><p>系统代理被别的程序改了，Proxi 会发现，还能把它存成一套配置。</p></div><div class="tile glass"><h3>诊断</h3><p>系统代理、环境变量、git 和 npm 现在的设置，以及 Proxi 的日志。</p></div><div class="tile glass"><h3>菜单栏网速</h3><p>开关旁边显示上传和下载速度，代理开着时用配置的颜色。</p></div><div class="tile glass"><h3>中文或英文</h3><p>界面跟着系统语言，也可以在设置 › 通用里选。</p></div></div>
     </div>
   </section>
 
@@ -146,14 +146,14 @@
       <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
-          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel（也提供单一架构版本）</dd><dt>权限</dt><dd>修改系统代理需要管理员密码。特权助手只用于增强模式和网关模式。不需要辅助功能权限。</dd><dt>语言</dt><dd>简体中文、English</dd><dt>下载</dt><dd>通用版约 53 MB（<code>Proxi-macos.zip</code>），<code>-arm64</code> 或 <code>-x86_64</code> 版约为一半</dd><dt>许可证</dt><dd>GPL-3.0；内置 mihomo（GPL-3.0）</dd></dl>
+          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel（也提供单一架构版本）</dd><dt>权限</dt><dd>安装命令行工具需要管理员密码，修改系统代理时 macOS 也可能要求输入。定位权限只用于读取 Wi-Fi 名称、按网络自动切换。不需要辅助功能权限。</dd><dt>语言</dt><dd>English、简体中文</dd><dt>下载</dt><dd><code>Proxi-macos.zip</code>（通用版），或 <code>-arm64</code> / <code>-x86_64</code> 版</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
         </div>
         <div class="panel-block glass">
           <h2>安装与更新</h2>
-          <ol class="steps"><li>从最新版本下载 <code>Proxi-macos.zip</code> 并解压。</li><li>把 <strong>Proxi.app</strong> 拖进“应用程序”文件夹，双击打开。从 0.11.1 起，发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>点菜单栏图标，添加一个代理配置或订阅，打开开关。</li></ol>
+          <ol class="steps"><li>从最新版本下载 <code>Proxi-macos.zip</code> 并解压。</li><li>把 <strong>Proxi.app</strong> 拖进“应用程序”文件夹，双击打开。发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>在设置 › 代理配置里添加你的代理服务器（或者点“自动检测”），选好生效范围，打开开关。</li></ol>
           <p class="install-way">也可以用 Homebrew 代替第 1、2 步：</p>
           <div class="cmd"><code>brew install --cask whrss9527/tap/proxi</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/proxi" data-done="已复制" hidden>复制</button></div>
-          <p class="note">Proxi 在启动时和之后每 6 小时检查一次 GitHub Releases（可以关闭）。点“更新”会下载适合你芯片的版本，比对 SHA-256，替换 Proxi 并重新打开。签名版本只会安装同一开发者签名的更新。Proxi 以前叫 ProxySwitch；从 ProxySwitch 更新时，设置会自动迁移过来。</p>
+          <p class="note">Proxi 在启动时和之后每 6 小时检查一次 GitHub Releases（可以关闭）。点“更新”会下载适合你芯片的版本，比对 SHA-256，替换 Proxi 并重新打开；只会安装同一开发者签名的更新。配置和设置都会保留。</p>
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@
   <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
       <div class="section-head rv"><h2 id="faq-title">常见问题</h2></div>
-      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Proxi 以 GPL-3.0 开源。它不出售也不提供代理服务器，代理或订阅需要你自己准备。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。全局快捷键用的是标准热键接口。Proxi 真正需要的是：修改系统代理时的管理员密码；以及只有使用增强模式或网关模式时，要安装一次特权助手，因为虚拟网卡和 IP 转发需要 root 权限。</p></div></details><details class="glass"><summary>mihomo 是什么？</summary><div class="answer"><p>mihomo（Clash Meta）是一个开源代理内核，同样采用 GPL-3.0。Proxi 把它作为独立程序打包在应用里，只在你使用内置节点代理、局域网共享或增强模式时运行。</p></div></details><details class="glass"><summary>局域网共享安全吗？</summary><div class="answer"><p>默认只允许私有局域网网段（10.x、172.16–31.x、192.168.x）的设备连接，你也可以限定为指定的 IP。在公共 Wi-Fi 上请关闭它。</p></div></details><details class="glass"><summary>为什么要定位权限？</summary><div class="answer"><p>只用于按 Wi-Fi 网络自动切换：从 macOS 14 起，读取 Wi-Fi 名称需要定位权限。Proxi 不读取也不保存你的位置，你也可以改为按路由器切换。</p></div></details><details class="glass"><summary>有 Windows 版吗？</summary><div class="answer"><p>有，Windows 上是 <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a>。两者各自独立发展。</p></div></details></div>
+      <div class="faq rv-group"><details class="glass"><summary>免费吗？</summary><div class="answer"><p>免费。Proxi 以 GPL-3.0 开源。它不提供代理服务，也不转发任何流量：它只修改你 Mac 上的设置，让它们指向你已经在用的代理服务器。</p></div></details><details class="glass"><summary>它具体会改哪些设置？</summary><div class="answer"><p>只改配置的生效范围里选中的：各个网络服务的系统代理、登录会话里的 <code>http_proxy</code> / <code>https_proxy</code> / <code>all_proxy</code> / <code>no_proxy</code> 环境变量、git 全局的 <code>http.proxy</code> 和 <code>https.proxy</code>，以及 <code>~/.npmrc</code> 里的代理设置。关闭代理时把它们清掉；系统代理也可以选择恢复成开启前的样子。</p></div></details><details class="glass"><summary>代理密码存在哪里？</summary><div class="answer"><p>存在这台 Mac 的钥匙串里，不写进 Proxi 的配置文件，也不跟 iCloud 同步；别的 Mac 第一次用时会请你输入一次。配置开启期间，密码会按这些工具的要求写进 Proxi 设置的代理地址里。</p></div></details><details class="glass"><summary>需要辅助功能权限吗？</summary><div class="answer"><p>不需要。全局快捷键用的是标准热键接口。安装命令行工具时 Proxi 会请求管理员密码；修改系统代理时 macOS 也可能要求输入。</p></div></details><details class="glass"><summary>为什么要定位权限？</summary><div class="answer"><p>只用于按 Wi-Fi 网络自动切换：从 macOS 14 起，读取 Wi-Fi 名称需要定位权限。Proxi 不读取也不保存你的位置，你也可以改为按路由器切换。</p></div></details><details class="glass"><summary>有 Windows 版吗？</summary><div class="answer"><p>有，Windows 上是 <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a>。两者各自独立发展。</p></div></details></div>
       <p class="small muted" style="margin-top:24px">更多帮助：<a href="https://github.com/whrss9527/proxi/issues">GitHub 上的 Proxi issue</a> · <a href="../support/">支持</a> · <a href="../privacy/proxi/">Proxi 隐私政策</a></p>
     </div>
   </section>
@@ -171,12 +171,12 @@
     <div class="wrap rv-group">
       <img class="cta-icon" src="../../assets/icons/proxi.png" alt="" width="96" height="96">
       <h2 id="cta-title">Proxi</h2>
-      <p class="lede">一个开关管好系统代理、终端、git 和 npm。</p>
+      <p class="lede">开发者的代理开关：系统代理、终端、git 和 npm，一键切换。</p>
       <div class="actions">
         <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Proxi</a>
         <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>在 GitHub 上查看</a>
       </div>
-      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span></p>
+      <p class="meta"><span>开源免费</span><span>macOS 14 或更新</span><span>Apple 芯片与 Intel</span><span>English、简体中文</span></p>
     </div>
   </section>
 

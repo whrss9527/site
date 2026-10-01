@@ -20,14 +20,15 @@ def build(key, d, lang="en"):
     h += header(c, "")
     summary = "".join(f"<li>{s}</li>" for s in d["summary"])
     L = ZH_LABELS if c.zh else EN_LABELS
+    when, iso, when_zh = d.get("updated", (UPDATED, UPDATED_ISO, UPDATED_ZH))   # a policy changed on its own keeps its own date
     h += f"""<main id="main">
   <article class="doc">
     <div class="wrap narrow">
       <header class="doc-head hero-copy">
         <div class="icon-row"><img src="{r}assets/icons/{key}.png" alt="" width="48" height="48"><a href="{c.link(key + '/')}">{name}</a></div>
         <h1>{title}</h1>
-        <p>{t(f'Last updated <time datetime="{UPDATED_ISO}">{UPDATED}</time>. Applies to {name} for macOS, version {d["version"]} and later.',
-              f'最后更新于 <time datetime="{UPDATED_ISO}">{UPDATED_ZH}</time>。适用于 macOS 版 {name} {d["version"]} 及以后的版本。')}</p>
+        <p>{t(f'Last updated <time datetime="{iso}">{when}</time>. Applies to {name} for macOS, version {d["version"]} and later.',
+              f'最后更新于 <time datetime="{iso}">{when_zh}</time>。适用于 macOS 版 {name} {d["version"]} 及以后的版本。')}</p>
       </header>
 
       <section class="summary glass rv" aria-labelledby="sum">
@@ -208,47 +209,51 @@ STOX = {
 }
 
 PROXI = {
-    "version": "0.11",
-    "meta_desc": "no analytics, no accounts; connects only to the proxies, subscriptions and rule lists you configure.",
+    "version": "0.13",
+    "updated": ("October 1, 2026", "2026-10-01", "2026 年 10 月 1 日"),
+    "meta_desc": "no analytics, no accounts; it only changes proxy settings on your Mac, and goes online for connection tests and updates.",
     "summary": [
         "No analytics, no accounts, no ads, and no server of mine. I collect nothing.",
-        "Profiles, subscriptions, rules and traffic statistics stay on your Mac — and in your own iCloud Drive if you turn on sync.",
-        "Proxi downloads the subscriptions and rule lists you add, tests proxies against a test address, and contacts GitHub for updates.",
-        "Your traffic goes wherever your proxy settings send it. Proxi doesn’t provide proxy servers and doesn’t see or log your traffic anywhere but on your Mac.",
+        "Proxi provides no proxy service and relays no traffic. It only changes settings on your Mac — the system proxy, Terminal’s environment variables, git and npm — so that they point at a proxy server you choose.",
+        "Your profiles and settings stay on your Mac, and in your own iCloud Drive if you turn on sync. Proxy passwords stay in this Mac’s Keychain and are never synced.",
+        "Proxi itself goes online only to test a connection through your proxy (by default against apple.com) and to check GitHub for updates.",
     ],
-    "local_intro": "Proxi keeps its data in folders on your Mac:",
+    "local_intro": "Proxi keeps its data in these places on your Mac:",
     "local": [
-        ["Profiles, subscriptions (URLs and nodes), policy groups, rules, settings", "<code>~/Library/Application Support/Proxi/config.json</code>", "Subscription URLs can contain access tokens from your provider; they stay in this file (and in iCloud Drive if you sync)."],
-        ["State, traffic statistics, activity log, imports", "<code>~/Library/Application Support/Proxi/</code> (<code>state.json</code>, <code>journal.json</code>, <code>imports/</code>)", "Traffic totals per node, app and day are counted on your Mac only."],
-        ["Log", "<code>~/Library/Application Support/Proxi/proxi.log</code>", "Technical messages and core logs for troubleshooting."],
-        ["Core configuration and rule files", "<code>~/Library/Application Support/Proxi/core/</code>", ""],
-        ["Privileged helper (only for Enhanced and gateway modes)", "<code>/Library/PrivilegedHelperTools/</code>, <code>/Library/LaunchDaemons/</code>, <code>/Library/Application Support/ProxySwitch/</code>", "A copy of the core configuration in folders only root can write to; removed when you uninstall the helper."],
+        ["Profiles (name, color, type, server address, user name, scope, bypass lists) and settings", "<code>~/Library/Application Support/Proxi/config.json</code>", "Passwords are not in this file, only a note that a profile has one."],
+        ["Proxy passwords", "Your login Keychain (a generic password for the service <code>com.whrss9527.proxyswitch</code>)", "Stored on this Mac only, not in iCloud Keychain."],
+        ["State and log", "<code>~/Library/Application Support/Proxi/</code> (<code>state.json</code>, <code>proxi.log</code>, and the socket <code>control.sock</code> while Proxi runs)", "The state remembers the last profile and the proxy settings from before Proxi turned one on, so they can be restored. Passwords are hidden in the log."],
+        ["Small preferences (interface language, skipped update)", "<code>~/Library/Preferences/com.whrss9527.proxyswitch.plist</code>", ""],
+        ["Command-line tool, if you install it", "<code>/usr/local/bin/proxi</code> (and <code>/usr/local/bin/proxyswitch</code> if an older version installed it)", "A small script that starts Proxi’s own executable."],
     ],
-    "net_intro": "Apart from the traffic you route through your proxy, Proxi itself connects to the following:",
+    "extra": """<h2>Settings Proxi changes</h2>
+        <p>When you turn a profile on, Proxi writes its proxy address into the places you chose for it, and clears them again when you turn it off (for the system proxy, you can choose to restore the previous settings instead):</p>
+        <ul>
+          <li>the system proxy of your network services (with <code>networksetup</code>; macOS keeps a sign-in password for it in the System keychain);</li>
+          <li>the <code>http_proxy</code>, <code>https_proxy</code>, <code>all_proxy</code> and <code>no_proxy</code> variables (and their upper-case forms) in your login session (<code>launchctl setenv</code>), which apps and Terminal windows opened afterwards read;</li>
+          <li>git’s global <code>http.proxy</code> and <code>https.proxy</code> in <code>~/.gitconfig</code>; for a profile with a password, the address is kept in <code>~/Library/Application Support/Proxi/git-proxy.inc</code>, readable only by you, and <code>~/.gitconfig</code> includes that file;</li>
+          <li>the <code>proxy</code> and <code>https-proxy</code> lines in <code>~/.npmrc</code>, read by npm, pnpm and yarn 1.</li>
+        </ul>
+        <p>For a profile with a sign-in, the user name and password are part of that address, as those tools expect. Apps that use these settings then connect through your proxy server; Proxi doesn’t see that traffic.</p>
+        <h2>Local control</h2>
+        <p>The command-line tool, the MCP server for AI assistants and <code>proxi://</code> commands use a local socket on your Mac (<code>control.sock</code>) that only your own account can connect to, with a permission level you choose, including “off”. They can view the status and profiles, turn the proxy on or off, switch profiles and test connections; they can’t change settings or read passwords.</p>""",
+    "net_intro": "Apart from the connections your own apps make through the proxy you set, Proxi itself connects to the following:",
     "network": [
-        ["Your subscription URLs", "When you add a subscription and at its update interval.", "A request to the address you entered, to download the node list."],
-        ["Rule lists you add (for the built-in library: <code>raw.githubusercontent.com</code>, falling back to <code>cdn.jsdelivr.net</code>)", "When you add a rule set and at its update interval.", "A request for the list file."],
-        ["Speed-test address (default <code>cp.cloudflare.com/generate_204</code>, changeable)", "When you test latency, and periodically for auto-select groups.", "An empty request through the proxy or node being tested."],
-        ["IP lookup services (<code>api.ip.sb</code>, falling back to <code>ipinfo.io</code>, <code>ipapi.co</code>)", "While the built-in node proxy is on and the node changes, and when you check your direct exit IP.", "A request through the node (the service sees the node’s address) or directly (the service sees your public IP), to show the exit IP and region."],
-        ["Service check sites (ChatGPT, Claude, Gemini, Netflix, YouTube, Google, GitHub, Telegram)", "Only when you run a service check.", "Ordinary page requests through the node you’re checking."],
-        ["DNS servers", "When you turn on the core’s own DNS (defaults: <code>doh.pub</code>, <code>dns.alidns.com</code>, <code>1.1.1.1</code>, <code>dns.google</code>, changeable), and <code>cloudflare-dns.com</code> during a URL diagnosis.", "The domain names being resolved."],
+        ["The test address (default <code>https://www.apple.com/library/test/success.html</code>, changeable in Settings › General)", "When you test a connection, and when Detect checks which ports on this Mac answer as a proxy.", "An ordinary request for that page, sent through the proxy being tested."],
+        ["Your proxy server", "Every 20 seconds while a proxy is on, if “Regularly check that the proxy server is reachable” is on.", "A TCP connection to the proxy’s address and port, closed straight away; no request is sent."],
+        ["The PAC address of a PAC profile", "When the profile is on or tested; macOS fetches it as it does for any PAC setting.", "A request for the PAC file at the address you entered."],
         GITHUB_UPDATE("Proxi", "At launch and every 6 hours, unless you turn automatic checks off; and when you install an update.", "Proxi/&lt;version&gt; (macOS)"),
     ],
     "icloud": """<h2>iCloud</h2>
-        <p>If you turn on iCloud sync, Proxi writes your configuration — profiles, subscriptions, rules and settings — to a file in your own iCloud Drive, <code>Proxi/config.json</code>, with your Mac’s name and the time of the change. LAN sharing, Enhanced mode and traffic statistics stay on each Mac. The file is stored by Apple under your iCloud account; I have no access to it.</p>""",
+        <p>If you turn on iCloud sync, Proxi writes your profiles and the settings on the General and Hotkey pages to a file in your own iCloud Drive, <code>Proxi/config.json</code>, with your Mac’s name and the time of the change. Passwords are not included: each Mac keeps its own in its Keychain and asks for it once. The file is stored by Apple under your iCloud account; I have no access to it.</p>""",
     "permissions": [
-        ["Administrator password", "To change the system proxy (standard accounts), to install the command-line tool, and to install or remove the privileged helper."],
-        ["Privileged helper", "Only for Enhanced and gateway modes: a virtual network interface and IP forwarding need root. It only accepts requests from the user who installed it."],
+        ["Administrator password", "To install the command-line tool, when macOS asks for it to change the system proxy, and to remove the background helper an earlier version installed."],
+        ["Keychain", "To store and read the passwords of profiles that sign in to their proxy server."],
         ["Location", "Only for switching by Wi-Fi network: macOS requires it to read the Wi-Fi name. Proxi doesn’t read or store your location."],
-        ["Screen Recording", "Only to scan a QR code on screen for a node."],
-        ["Notifications", "For connection problems and new versions."],
+        ["Notifications", "For switching, connection problems and new versions."],
         ["iCloud Drive", "Only if you turn on sync."],
     ],
-    "extra": f"""<h2>Local control and LAN sharing</h2>
-        <p>The command-line tool, MCP server for AI assistants and <code>proxi://</code> commands use a local socket on your Mac (<code>control.sock</code>) with a permission level you choose, including “off”. LAN sharing, when you turn it on, accepts connections from local network devices only (or the IPs you allow); those devices’ traffic is handled like your own and shown in the Connections page on your Mac.</p>
-        <h2>The mihomo core</h2>
-        <p>Proxi bundles <a href="https://github.com/MetaCubeX/mihomo">mihomo</a>, an open-source proxy core, and configures it not to fetch anything beyond your configuration: GeoIP data ships inside the app and automatic geo updates are off. The core connects to the nodes, subscriptions, rule lists, speed-test address and DNS servers in your configuration, and nothing else.</p>""",
-    "delete": "Delete <code>~/Library/Application Support/Proxi/</code> and Proxi.app. If you installed the privileged helper, uninstall it first in Settings › Advanced (or <code>sudo proxi helper uninstall</code>). If you used sync, also delete the <code>Proxi</code> folder in iCloud Drive.",
+    "delete": "Turn the proxy off (so the settings above are cleared), quit Proxi, then delete Proxi.app, <code>~/Library/Application Support/Proxi/</code> and <code>~/Library/Preferences/com.whrss9527.proxyswitch.plist</code>. Remove the command-line tool on the Automation page first (or delete <code>/usr/local/bin/proxi</code>). Saved passwords can be removed in Keychain Access (search for <code>com.whrss9527.proxyswitch</code>). If you used sync, also delete the <code>Proxi</code> folder in iCloud Drive.",
 }
 
 def build_all():

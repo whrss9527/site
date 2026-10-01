@@ -89,9 +89,9 @@ Demos are built lazily: each is built when it comes within a screen of the viewp
 | Pop | `figure.ppd` | `ring`, `translate`, `unit`, `json`, `regex`, `ai`, `history`, `actions`, `library` | A pretend document with Pop's ring and result cards (long-press to open the ring); the English page shows Pop's English strings; `library` is the Settings › Plugins › Plugin Library sheet with the real plugin list (`plugins/index.json`), installs pretended | Note |
 | Meno | `figure.mnd` | `layout`, `reveal`, `shelf`, `rules`, `general` | A menu bar with neutral sample items, Meno's icon and dividers, the Shelf, Quick Open, Meno's menu and the Settings window (General, Layout, Rules); its zh-Hans / zh-Hant strings are copied between the `APP-STRINGS` markers | CSS illustrations |
 | Stox | `figure.sxd` | `detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar` | The menu bar panel: watchlist, charts, order book, holdings and the P&L calendar, in English or Chinese as the app shows them | Note |
-| Proxi | `figure.pxd` | `panel`, `profiles`, `nodes`, `share`, `sync`, `connections` | The menu bar panel and the settings window | Note |
+| Proxi | `figure.pxd` | `panel`, `profiles`, `detect`, `automation`, `general`, `sync`, `diagnostics` | The menu bar panel with sample profiles (a corporate proxy, Charles, Proxyman, mitmproxy), the right-click menu, and the settings window: Proxy Profiles with the Detect sheet, Automation, General, Hotkey, iCloud Sync, Diagnose and About, in English or Chinese as the app shows them | Note |
 
-Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Stox "English, 简体中文"; Meno "English, 简体中文, 繁體中文"; Proxi "简体中文 (English coming)". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
+Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Stox "English, 简体中文"; Meno "English, 简体中文, 繁體中文"; Proxi "English, 简体中文". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
 
 ### Open Graph images
 

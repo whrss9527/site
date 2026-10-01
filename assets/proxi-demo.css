@@ -224,28 +224,6 @@
 .px-seg.wide button { flex: 1 1 auto; min-width: 0; padding: 6px 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; }
 @container (max-width: 420px) { .px-seg.wide button { padding: 6px 4px; font-size: 12px; } }
 
-/* node card */
-.px-nodes { padding: 10px; display: flex; flex-direction: column; gap: 6px; }
-.px-nodehead { display: flex; align-items: center; gap: 10px; }
-.px-ant { width: 20px; flex: none; display: grid; place-items: center; color: var(--px-l2); }
-.px-ant svg { width: 16px; height: 16px; }
-.px-ant.is-on { color: var(--px-accent); }
-.px-link {
-  appearance: none; border: 0; background: none; padding: 2px 0; cursor: pointer;
-  display: inline-flex; align-items: center; gap: 2px; flex: none;
-  font-size: 10px; color: var(--px-accent-ink);
-}
-.px-link svg { width: 10px; height: 10px; stroke-width: 2; }
-.px-nodelist { padding-top: 4px; display: flex; flex-direction: column; gap: 4px; }
-.px-searchrow { display: flex; align-items: center; gap: 6px; }
-.px-field {
-  flex: 1; min-width: 0; height: 22px; padding: 0 7px;
-  font: 12px var(--px-font); color: var(--px-l1);
-  background: var(--px-field); border: 0; border-radius: 5px;
-  box-shadow: inset 0 0 0 0.5px var(--px-btn-edge), 0 0.5px 1px rgba(0, 0, 0, 0.06);
-}
-.px-field::placeholder { color: var(--px-l3); }
-.px-field:focus { outline: 3px solid color-mix(in srgb, var(--px-accent) 45%, transparent); outline-offset: 0; }
 .px-iconbtn {
   appearance: none; border: 0; cursor: default; flex: none;
   width: 30px; height: 30px; border-radius: 50%;
@@ -256,7 +234,6 @@
 .px-iconbtn:active { background: var(--px-fill-3); }
 .px-iconbtn:disabled { color: var(--px-l3); }
 .px-iconbtn svg { width: 15px; height: 15px; }
-.px-scroll { overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 1px; scrollbar-width: thin; }
 .px-row {
   appearance: none; border: 0; background: transparent; color: inherit; text-align: left; cursor: default;
   display: flex; align-items: center; gap: 8px; width: 100%;
@@ -265,37 +242,11 @@
 }
 .px-row:hover:not(:disabled) { background: var(--px-fill-2); }
 .px-row:active:not(:disabled) { background: var(--px-fill-3); }
-.px-noderow { min-height: 35px; flex: none; }
-.px-nname { display: block; font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.px-noderow.is-sel .px-nname { font-weight: 600; }
-.px-nsub { display: block; font-size: 9px; color: var(--px-l2); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.px-type {
-  flex: none; font-size: 8px; font-weight: 500; letter-spacing: 0.02em; color: var(--px-l2);
-  padding: 1px 4px; border-radius: 99px; background: var(--px-fill-2);
-}
-.px-delay { flex: none; font-size: 10px; font-weight: 600; font-variant-numeric: tabular-nums; font-family: ui-rounded, var(--px-font); }
-.px-delay.good { color: var(--px-green); }
-.px-delay.warn { color: var(--px-orange); }
-.px-delay.bad { color: var(--px-red); }
-.px-delay.is-pending { opacity: 0.35; }
-.px-delay.wide { width: 60px; text-align: right; font-size: 11px; }
 .px-radio { flex: none; width: 16px; height: 16px; color: color-mix(in srgb, var(--px-l2) 60%, transparent); }
 .px-radio svg { width: 16px; height: 16px; }
 .px-radio.is-on { color: var(--c, var(--px-accent)); }
 
-/* policy groups */
-.px-groups { padding: 6px; }
-.px-grow-row { display: flex; align-items: center; gap: 8px; padding: 5px 8px; font-size: 11px; }
-.px-gicon { width: 16px; flex: none; color: var(--px-l2); display: grid; place-items: center; }
-.px-gicon svg { width: 13px; height: 13px; }
-.px-gname { flex: 1; min-width: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.px-gnow { color: var(--px-l2); white-space: nowrap; }
 .px-menuwrap { position: relative; display: inline-flex; }
-.px-menubtn {
-  appearance: none; border: 0; background: none; cursor: default; padding: 1px 2px; border-radius: 4px;
-  display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: var(--px-accent-ink); white-space: nowrap;
-}
-.px-menubtn svg { width: 9px; height: 9px; stroke-width: 2; }
 .px-menu {
   position: absolute; z-index: 5; right: 0; top: calc(100% + 4px);
   min-width: 190px; max-height: 250px; overflow-y: auto;
@@ -313,10 +264,6 @@
 .px-mi:hover, .px-mi:focus-visible { background: var(--px-accent); color: #fff; outline: none; }
 .px-mi-check { width: 14px; flex: none; }
 .px-mi-check svg { width: 12px; height: 12px; stroke-width: 2; }
-
-/* share card */
-.px-share { display: flex; align-items: center; gap: 10px; padding: 10px; }
-.px-plain { appearance: none; border: 0; background: none; padding: 0; margin: 0; color: inherit; text-align: left; cursor: pointer; font: inherit; display: block; }
 
 /* profiles */
 .px-profiles { padding: 6px; display: flex; flex-direction: column; gap: 2px; }
@@ -425,28 +372,7 @@
 .px-dim { color: var(--px-l2); flex: none; }
 .px-dim svg { width: 14px; height: 14px; }
 
-.px-subrow { align-items: center; }
-.px-subname { display: block; font-size: 12px; font-weight: 500; margin-bottom: 1px; }
-.px-addrow { color: var(--px-l3); }
 .px-ghost { font-size: 13px; color: var(--px-l3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.px-filterbar .px-field { height: 24px; font-size: 13px; }
-.px-select {
-  font: 12px var(--px-font); color: var(--px-l1); background: var(--px-btn); border: 0; border-radius: 5px;
-  padding: 3px 4px; height: 24px; max-width: 120px;
-  box-shadow: 0 0 0 0.5px var(--px-btn-edge), 0 0.5px 1.5px rgba(0, 0, 0, 0.1);
-}
-.px-pnode { padding: 5px 0; gap: 6px; }
-.px-pnbtn { display: flex; align-items: center; gap: 10px; }
-.px-pnbtn:disabled { cursor: default; }
-.px-pnname { display: block; font-size: 12px; }
-.px-pnname.is-on { font-weight: 600; }
-.px-pnode .px-type { font-size: 9px; padding: 1px 5px; letter-spacing: 0; }
-.px-star {
-  appearance: none; border: 0; background: none; padding: 0; width: 18px; height: 18px; flex: none; cursor: default;
-  color: color-mix(in srgb, var(--px-l2) 75%, transparent); display: grid; place-items: center;
-}
-.px-star svg { width: 14px; height: 14px; }
-.px-star.is-on { color: #f5b800; }
 .px-log {
   margin: 0; padding: 10px 12px; font: 11px/1.5 var(--px-mono); color: var(--px-l1);
   white-space: pre-wrap; word-break: break-all;
@@ -479,30 +405,8 @@
   .px-profpage { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* share page */
-.px-fwd { display: flex; flex-direction: column; align-items: flex-end; text-align: right; color: var(--px-l1); }
-.px-warn { display: block; font-size: 11px; color: var(--px-orange); margin-top: 2px; }
-.px-bigaddr { display: block; font: 600 26px/1.2 var(--px-mono); letter-spacing: -0.01em; color: var(--px-l1); white-space: nowrap; }
-.px-addr .px-caption { margin-top: 4px; }
-.px-client { gap: 10px; }
-.px-accent { color: var(--px-accent-ink); flex: none; }
-.px-accent svg { width: 17px; height: 17px; }
-
-/* connections */
-.px-chart { position: relative; height: 120px; padding-left: 62px; }
-.px-chart svg { width: 100%; height: 100%; overflow: visible; }
-.px-grid line { stroke: var(--px-sep); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.px-line { fill: none; stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-linejoin: round; }
-.px-line.down { stroke: var(--px-accent); }
-.px-line.up { stroke: var(--px-orange-ink); }
-.px-ylab { position: absolute; left: 0; top: 0; bottom: 0; width: 58px; font-size: 9px; color: var(--px-l2); }
-.px-ylab span { position: absolute; left: 0; transform: translateY(-50%); white-space: nowrap; }
-.px-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 11px; }
-.px-legend .up { color: var(--px-orange); }
-.px-legend .down { color: var(--px-accent-ink); }
-
 /* confirmation dialog (SyncPage) */
-.px-dlg-back { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.12); display: grid; place-items: center; z-index: 4; padding: 16px; }
+.px-dlg-back { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.12); display: grid; grid-template-columns: minmax(0, 1fr); place-items: center; z-index: 4; padding: 16px; }
 .px-dlg {
   width: 260px; max-width: 100%; padding: 18px 16px 14px; border-radius: 14px;
   background: var(--px-win-bg); box-shadow: 0 0 0 0.5px var(--px-panel-edge), 0 20px 50px -10px rgba(0, 0, 0, 0.45);
@@ -512,6 +416,63 @@
 .px-dlg p { margin: 0 0 8px; font-size: 11px; line-height: 1.45; color: var(--px-l1); }
 .px-dlg .px-btn { width: 100%; justify-content: center; white-space: normal; }
 .px-appicon.big { width: 48px; height: 48px; }
+
+/* right-click menu (StatusItemController) */
+.px-cmenu {
+  margin: 0 4% 0 auto; align-self: flex-start;
+  min-width: 220px; max-width: calc(100% - 8px); padding: 5px; border-radius: 10px;
+  background: var(--px-win-bg);
+  box-shadow: 0 0 0 0.5px var(--px-panel-edge), 0 12px 30px -6px rgba(0, 0, 0, 0.35);
+  display: flex; flex-direction: column;
+}
+.px-mh { padding: 4px 8px 4px 22px; font-size: 12px; font-weight: 600; color: var(--px-l2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.px-msep { height: 1px; margin: 4px 8px; background: var(--px-sep); }
+.px-cmenu .px-mi { gap: 6px; }
+.px-cdot.sm { width: 8px; height: 8px; box-shadow: none; }
+
+/* pop-up buttons, code rows, rules */
+.px-popup {
+  appearance: none; border: 0; cursor: default; flex: none; max-width: 60%;
+  display: inline-flex; align-items: center; gap: 6px; padding: 3px 6px 3px 9px; border-radius: 6px;
+  font: 13px var(--px-font); color: var(--px-l1); background: var(--px-btn);
+  box-shadow: 0 0 0 0.5px var(--px-btn-edge), 0 0.5px 1.5px rgba(0, 0, 0, 0.1);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.px-popchev { display: inline-grid; transform: rotate(90deg); color: var(--px-l2); }
+.px-popchev svg { width: 10px; height: 10px; stroke-width: 2; }
+.px-coderow code { flex: 1 1 auto; min-width: 0; overflow-wrap: anywhere; color: var(--px-l1); }
+.px-code { border-radius: 8px; background: var(--px-fill); }
+.px-wrap { overflow-wrap: anywhere; white-space: normal; text-align: inherit; }
+.px-fval .px-wrap { text-align: right; }
+.px-disclose {
+  appearance: none; border: 0; background: none; padding: 0; cursor: default; color: var(--px-l1);
+  display: inline-flex; align-items: center; gap: 4px; font: 13px var(--px-font); text-align: left;
+}
+.px-chev { display: inline-grid; color: var(--px-l2); }
+.px-chev svg { width: 11px; height: 11px; stroke-width: 2; }
+.px-chev.is-open { transform: rotate(90deg); }
+.px-rule { gap: 8px; font-size: 12px; flex-wrap: wrap; }
+.px-rmatch { min-width: 0; }
+.px-raction { font-weight: 600; }
+.px-hkbox {
+  flex: 1 1 auto; padding: 5px 10px; border-radius: 6px; text-align: center;
+  font: 600 14px var(--px-font); letter-spacing: 0.08em;
+  background: var(--px-field); box-shadow: inset 0 0 0 0.5px var(--px-btn-edge), 0 0 0 3px color-mix(in srgb, var(--px-accent) 35%, transparent);
+}
+.px-bad { display: inline-flex; align-items: center; gap: 5px; color: var(--px-red); }
+.px-bad svg, .px-ok svg { width: 14px; height: 14px; flex: none; }
+.px-about { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 14px 0 4px; text-align: center; }
+.px-about strong { font-size: 18px; }
+.px-about .px-caption { max-width: 360px; }
+
+/* Detect sheet (ProfilesPage.DetectSheet) */
+.px-dlg.px-sheet { width: 340px; align-items: stretch; text-align: left; }
+.px-sheet p { color: var(--px-l2); }
+.px-detwait { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 120px; font-size: 12px; color: var(--px-l2); }
+.px-detlist .px-frow { gap: 10px; }
+.px-detlist .px-dim svg { width: 16px; height: 16px; }
+.px-sheetfoot { margin-top: 8px; align-items: center; }
+.px-sheet .px-btn { width: auto; flex: none; }
 
 /* narrow window: an icon-only sidebar */
 @container (max-width: 560px) {
@@ -525,7 +486,6 @@
   .px-ph { padding: 18px 16px 6px; }
   .px-form { padding: 0 12px; }
   .px-profpage { padding: 8px 12px 0; }
-  .px-bigaddr { font-size: 20px; }
 }
 @supports not (container-type: inline-size) {
   @media (max-width: 600px) {
@@ -537,7 +497,6 @@
 @media (prefers-reduced-motion: no-preference) {
   .px-switch, .px-knob { transition: left 0.18s ease-out, background-color 0.18s ease-out; }
   .px-row, .px-iconbtn, .px-side-item, .px-mb-proxi, .px-seg button { transition: background-color 0.12s ease-out; }
-  .px-delay { transition: opacity 0.2s ease-out; }
 }
 @media (prefers-reduced-motion: reduce) {
   .px-spin { animation-duration: 2.4s; }

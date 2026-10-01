@@ -111,47 +111,51 @@ STOX = {
 }
 
 PROXI = {
-    "version": "0.11",
-    "meta_desc": "没有统计，没有账号；只连接你配置的代理、订阅和规则列表。",
+    "version": "0.13",
+    "updated": ("October 1, 2026", "2026-10-01", "2026 年 10 月 1 日"),
+    "meta_desc": "没有统计，没有账号；只修改你 Mac 上的代理设置，只在测试连接和检查更新时联网。",
     "summary": [
         "没有统计分析，没有账号，没有广告，也没有我的服务器。我什么都不收集。",
-        "配置、订阅、规则和流量统计都留在你的 Mac 上；开启同步后，也会存到你自己的 iCloud 云盘。",
-        "Proxi 会下载你添加的订阅和规则列表，用测速地址测试代理，并连接 GitHub 检查更新。",
-        "你的流量按你的代理设置走向各处。Proxi 不提供代理服务器，除了在你的 Mac 上，它不会在任何地方查看或记录你的流量。",
+        "Proxi 不提供代理服务，也不转发任何流量。它只修改你 Mac 上的设置（系统代理、终端的环境变量、git 和 npm），让它们指向你选择的代理服务器。",
+        "你的代理配置和设置留在你的 Mac 上；开启同步后，也会存到你自己的 iCloud 云盘。代理密码只存在这台 Mac 的钥匙串里，从不同步。",
+        "Proxi 自身只在两种情况下联网：经你的代理测试连接（默认访问 apple.com），以及到 GitHub 检查更新。",
     ],
-    "local_intro": "Proxi 把数据存放在你 Mac 上的这些文件夹里：",
+    "local_intro": "Proxi 把数据存放在你 Mac 上的这些位置：",
     "local": [
-        ["代理配置、订阅（地址和节点）、策略组、规则、设置", "<code>~/Library/Application Support/Proxi/config.json</code>", "订阅地址里可能含有服务商给你的访问令牌；它们留在这个文件里（开启同步时也在 iCloud 云盘里）。"],
-        ["状态、流量统计、操作记录、导入记录", "<code>~/Library/Application Support/Proxi/</code>（<code>state.json</code>、<code>journal.json</code>、<code>imports/</code>）", "按节点、应用和日期统计的流量只在你的 Mac 上计算。"],
-        ["日志", "<code>~/Library/Application Support/Proxi/proxi.log</code>", "用于排查问题的技术信息和内核日志。"],
-        ["内核配置和规则文件", "<code>~/Library/Application Support/Proxi/core/</code>", ""],
-        ["特权助手（只用于增强模式和网关模式）", "<code>/Library/PrivilegedHelperTools/</code>、<code>/Library/LaunchDaemons/</code>、<code>/Library/Application Support/ProxySwitch/</code>", "内核配置的副本，放在只有 root 能写入的文件夹里；卸载助手时一并删除。"],
+        ["代理配置（名称、颜色、类型、服务器地址、用户名、生效范围、例外列表）和设置", "<code>~/Library/Application Support/Proxi/config.json</code>", "密码不在这个文件里，只记着某个配置有密码。"],
+        ["代理密码", "你的登录钥匙串（服务名为 <code>com.whrss9527.proxyswitch</code> 的通用密码）", "只存在这台 Mac 上，不进 iCloud 钥匙串。"],
+        ["状态和日志", "<code>~/Library/Application Support/Proxi/</code>（<code>state.json</code>、<code>proxi.log</code>，以及 Proxi 运行时的套接字 <code>control.sock</code>）", "状态里记着上次用的配置，以及 Proxi 开启代理之前的代理设置，用来恢复。日志里的密码一律隐藏。"],
+        ["少量偏好设置（界面语言、跳过的版本）", "<code>~/Library/Preferences/com.whrss9527.proxyswitch.plist</code>", ""],
+        ["命令行工具（如果你安装了）", "<code>/usr/local/bin/proxi</code>（旧版本装过的还有 <code>/usr/local/bin/proxyswitch</code>）", "一个启动 Proxi 自身可执行文件的小脚本。"],
     ],
-    "net_intro": "除了你通过代理转发的流量，Proxi 自身会连接下列地址：",
+    "extra": """<h2>Proxi 会修改的设置</h2>
+        <p>开启一套配置时，Proxi 把它的代理地址写进你为它选择的地方；关闭时再清掉（系统代理也可以选择恢复成开启前的设置）：</p>
+        <ul>
+          <li>各个网络服务的系统代理（通过 <code>networksetup</code>；需要登录时，macOS 会把密码保存在系统钥匙串里）；</li>
+          <li>登录会话里的 <code>http_proxy</code>、<code>https_proxy</code>、<code>all_proxy</code>、<code>no_proxy</code> 环境变量（以及大写形式，通过 <code>launchctl setenv</code>），之后打开的程序和终端会读到它们；</li>
+          <li><code>~/.gitconfig</code> 里 git 全局的 <code>http.proxy</code> 和 <code>https.proxy</code>；带密码的配置，地址放在只有你能读的 <code>~/Library/Application Support/Proxi/git-proxy.inc</code> 里，由 <code>~/.gitconfig</code> 引用；</li>
+          <li><code>~/.npmrc</code> 里的 <code>proxy</code> 和 <code>https-proxy</code>，npm、pnpm 和 yarn 1 都读它。</li>
+        </ul>
+        <p>需要登录的配置，用户名和密码会按这些工具的要求写在地址里。使用这些设置的程序随后经你的代理服务器联网；Proxi 看不到这些流量。</p>
+        <h2>本机控制</h2>
+        <p>命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 命令，都通过你 Mac 上一个只有你自己的账户能连的本地套接字（<code>control.sock</code>）工作，权限级别由你选择，也可以设为“关闭”。它们能查看状态和配置、开关代理、切换配置和测试连接，不能修改设置，也读不到密码。</p>""",
+    "net_intro": "除了你自己的程序经你设置的代理发出的连接，Proxi 自身会连接下列地址：",
     "network": [
-        ["你的订阅地址", "添加订阅时，以及按订阅的更新间隔。", "请求你填写的地址，下载节点列表。"],
-        ["你添加的规则列表（内置规则库使用 <code>raw.githubusercontent.com</code>，连不上时改用 <code>cdn.jsdelivr.net</code>）", "添加规则集时，以及按它的更新间隔。", "请求列表文件。"],
-        ["测速地址（默认 <code>cp.cloudflare.com/generate_204</code>，可修改）", "测试延迟时，以及自动选择策略组定期测速时。", "一个空请求，经由被测试的代理或节点发出。"],
-        ["IP 查询服务（<code>api.ip.sb</code>，连不上时改用 <code>ipinfo.io</code>、<code>ipapi.co</code>）", "内置节点代理开启且节点切换时，以及你查看直连出口 IP 时。", "经由节点发出（服务看到的是节点的地址）或直接发出（服务看到的是你的公网 IP），用来显示出口 IP 和地区。"],
-        ["服务检测网站（ChatGPT、Claude、Gemini、Netflix、YouTube、Google、GitHub、Telegram）", "只在你运行服务检测时。", "经由被检测节点发出的普通网页请求。"],
-        ["DNS 服务器", "开启内核自带的 DNS 时（默认：<code>doh.pub</code>、<code>dns.alidns.com</code>、<code>1.1.1.1</code>、<code>dns.google</code>，可修改）；网址诊断期间还会使用 <code>cloudflare-dns.com</code>。", "要解析的域名。"],
+        ["测速地址（默认 <code>https://www.apple.com/library/test/success.html</code>，可以在设置 › 通用里修改）", "测试连接时，以及“自动检测”检查本机哪些端口能当代理用时。", "对这个页面的普通请求，经被测试的代理发出。"],
+        ["你的代理服务器", "开启了“定期检查代理服务器能否连上”时，代理开着期间每 20 秒一次。", "向代理的地址和端口建立一次 TCP 连接后立即断开，不发送任何请求。"],
+        ["PAC 配置的 PAC 地址", "这套配置开启或测试时；和任何 PAC 设置一样由 macOS 获取。", "请求你填写的地址上的 PAC 文件。"],
         GITHUB_UPDATE("启动时和之后每 6 小时，除非你关闭了自动检查；以及安装更新时。", "Proxi/&lt;version&gt; (macOS)"),
     ],
     "icloud": """<h2>iCloud</h2>
-        <p>开启 iCloud 同步后，Proxi 会把你的配置（代理配置、订阅、规则和设置），连同你这台 Mac 的名称和修改时间，写入你自己 iCloud 云盘里的文件 <code>Proxi/config.json</code>。局域网共享、增强模式和流量统计留在各自的 Mac 上。这个文件由苹果在你的 iCloud 账号下保存，我无法访问。</p>""",
+        <p>开启 iCloud 同步后，Proxi 会把你的代理配置以及“通用”和“快捷键”页里的设置，连同你这台 Mac 的名称和修改时间，写入你自己 iCloud 云盘里的文件 <code>Proxi/config.json</code>。密码不在其中：每台 Mac 的密码各自存在自己的钥匙串里，第一次用时请你输入一次。这个文件由苹果在你的 iCloud 账号下保存，我无法访问。</p>""",
     "permissions": [
-        ["管理员密码", "用于修改系统代理（标准账户）、安装命令行工具，以及安装或移除特权助手。"],
-        ["特权助手", "只用于增强模式和网关模式：虚拟网卡和 IP 转发需要 root 权限。它只接受安装它的那个用户的请求。"],
+        ["管理员密码", "用于安装命令行工具、macOS 要求时修改系统代理，以及移除以前版本安装的后台助手。"],
+        ["钥匙串", "保存和读取需要登录的代理配置的密码。"],
         ["定位", "只用于按 Wi-Fi 网络自动切换：macOS 要求有这项权限才能读取 Wi-Fi 名称。Proxi 不读取也不保存你的位置。"],
-        ["屏幕录制", "只用于扫描屏幕上的节点二维码。"],
-        ["通知", "用于连接问题和新版本提示。"],
+        ["通知", "用于切换、连接问题和新版本提示。"],
         ["iCloud 云盘", "只在你开启同步时。"],
     ],
-    "extra": """<h2>本机控制和局域网共享</h2>
-        <p>命令行工具、给 AI 助手用的 MCP 服务器和 <code>proxi://</code> 命令，都通过你 Mac 上的一个本地套接字（<code>control.sock</code>）工作，权限级别由你选择，也可以设为“关闭”。开启局域网共享后，只接受局域网设备（或你允许的 IP）的连接；这些设备的流量和你自己的流量一样处理，并显示在你 Mac 上的“连接”页面里。</p>
-        <h2>mihomo 内核</h2>
-        <p>Proxi 内置了开源代理内核 <a href="https://github.com/MetaCubeX/mihomo">mihomo</a>，并把它配置为不获取配置以外的任何东西：GeoIP 数据随应用附带，自动更新地理数据已关闭。内核只连接你配置里的节点、订阅、规则列表、测速地址和 DNS 服务器，不连接其他任何地方。</p>""",
-    "delete": "删除 <code>~/Library/Application Support/Proxi/</code> 和 Proxi.app。如果安装过特权助手，先在设置 › 高级里卸载它（或运行 <code>sudo proxi helper uninstall</code>）。如果用过同步，再删除 iCloud 云盘里的 <code>Proxi</code> 文件夹。",
+    "delete": "先关闭代理（这样上面那些设置会被清掉），退出 Proxi，再删除 Proxi.app、<code>~/Library/Application Support/Proxi/</code> 和 <code>~/Library/Preferences/com.whrss9527.proxyswitch.plist</code>。命令行工具请先在“自动化”页卸载（或删除 <code>/usr/local/bin/proxi</code>）。保存的密码可以在“钥匙串访问”里删除（搜索 <code>com.whrss9527.proxyswitch</code>）。如果用过同步，再删除 iCloud 云盘里的 <code>Proxi</code> 文件夹。",
 }
 
 ZH = {"pop": POP, "meno": MENO, "stox": STOX, "proxi": PROXI}

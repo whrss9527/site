@@ -6,8 +6,8 @@
 <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
 <link rel="stylesheet" href="../assets/proxi-demo.css">
 <script src="../assets/proxi-demo.js" defer></script>
-<title>Proxi · One switch for every proxy on your Mac</title>
-<meta name="description" content="Proxi switches the system proxy, environment variables, git and npm together, with a built-in mihomo core for subscriptions, rules, LAN sharing and TUN mode. Free and open source for macOS.">
+<title>Proxi · A proxy switch for developers</title>
+<meta name="description" content="Proxi is a menu bar proxy switch for developers: one click points the system proxy, Terminal, git and npm at your own proxy server, such as a corporate proxy or Charles, Proxyman or mitmproxy. Free and open source for macOS.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
@@ -17,8 +17,8 @@
 <link rel="alternate" hreflang="x-default" href="https://whrss.com/proxi/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Proxi · One switch for every proxy on your Mac">
-<meta property="og:description" content="Proxi switches the system proxy, environment variables, git and npm together, with a built-in mihomo core for subscriptions, rules, LAN sharing and TUN mode. Free and open source for macOS.">
+<meta property="og:title" content="Proxi · A proxy switch for developers">
+<meta property="og:description" content="Proxi is a menu bar proxy switch for developers: one click points the system proxy, Terminal, git and npm at your own proxy server, such as a corporate proxy or Charles, Proxyman or mitmproxy. Free and open source for macOS.">
 <meta property="og:url" content="https://whrss.com/proxi/">
 <meta property="og:image" content="https://whrss.com/assets/og/proxi-en.png">
 <meta property="og:image:width" content="1200">
@@ -84,12 +84,12 @@
         <img class="icon" src="../assets/icons/proxi.png" alt="Proxi app icon" width="128" height="128">
         <h1>Proxi</h1>
         <p class="say">/ˈprɒk.si/ — still “proxy”: the y becomes an i.</p>
-        <p class="lede">One switch for the system proxy, your shell’s environment variables, git and npm — plus a built-in mihomo core for subscriptions and rules, LAN sharing, and TUN or gateway mode.</p>
+        <p class="lede">One click points the system proxy, Terminal, git and npm at your own proxy server — a corporate proxy, an intranet gateway, or a debugging proxy such as Charles. Click again and it all goes back. Proxi only switches settings: it provides no proxy service and relays no traffic.</p>
         <div class="actions">
           <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Proxi</a>
           <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
         </div>
-        <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span></p>
+        <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>English, 简体中文</span></p>
       </div>
       <div class="stage tilt" data-p="css"><div class="tilt-inner"><div class="compose proxi-stage"><figure class="pxd" data-lang="en" data-preset="panel"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div></div></div>
     </div>
@@ -100,33 +100,33 @@
       <div class="features scrolly" style="--n:4">
       <div class="feature">
         <div class="feature-text rv">
-          <h2>One switch, everywhere</h2>
-          <p>Make a profile — HTTP, SOCKS5 or PAC — and choose where it applies: the system proxy, environment variables for new terminals and apps, git and npm. Switch profiles with one click, or with ⌃⌥P.</p>
-          <ul><li>Notices when another app changes the proxy, and can save it as a profile</li><li>Finds proxy apps already running on your Mac and adds them</li><li>Upload and download speed right in the menu bar</li></ul>
+          <h2>One switch, four places</h2>
+          <p>A proxy usually has to be set in System Settings, in Terminal, for git and for npm — and undone in all four when you change networks. A Proxi profile chooses where it applies; the switch sets them all, and turning it off puts everything back.</p>
+          <ul><li>System proxy, through <code>networksetup</code>, for browsers and most apps</li><li><code>http_proxy</code>, <code>https_proxy</code>, <code>all_proxy</code> and <code>no_proxy</code> for Terminal windows opened afterwards, plus a one-line command for the ones already open</li><li>git’s global <code>http.proxy</code>, and <code>~/.npmrc</code> for npm, pnpm and yarn 1</li></ul>
         </div>
         <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="profiles"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>Subscriptions and rules, built in</h2>
-          <p>Paste a subscription URL and its nodes appear in the panel. Pick one, let Proxi choose the fastest, and route by rules. The engine is mihomo (Clash Meta), bundled inside the app.</p>
-          <ul><li>Policy groups: manual, auto-select, fallback and load balance</li><li>Rule library with blackmatrix7, MetaCubeX, ACL4SSR and Shadowrocket rule sets</li><li>Import Clash, mihomo, Surge, Shadowrocket and Quantumult X configs, with preview and undo</li></ul>
+          <h2>Points at your own proxy</h2>
+          <p>Each profile is a proxy server you already use: the corporate proxy, an intranet gateway, or a debugging proxy on your Mac. HTTP, SOCKS5 and PAC, an optional sign-in, and a bypass list of its own.</p>
+          <ul><li>Detect finds Charles (8888), Proxyman (9090), mitmproxy (8080) and others running on this Mac</li><li>Passwords stay in this Mac’s Keychain</li><li>Test Connection fetches Apple’s test page through the proxy and shows the latency</li></ul>
         </div>
-        <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="nodes"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="detect"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>The whole Mac, and your console too</h2>
-          <p>Enhanced mode routes every app — terminals and games included — through the core via a virtual network interface. LAN sharing and gateway mode let a PS5, Switch or phone use the same connection as your Mac.</p>
-          <ul><li>LAN sharing on port 7892, limited to local network addresses by default</li><li>Gateway mode for devices that can’t set a proxy, including game UDP traffic</li><li>A small privileged helper, installed once with your password, only for these modes</li></ul>
+          <h2>Scripts, AI assistants and the right network</h2>
+          <p>A <code>proxi</code> command, an MCP server for AI assistants and <code>proxi://</code> URL commands share one local control interface, with a permission level you choose. Rules switch for you when the network changes.</p>
+          <ul><li><code>proxi on</code>, <code>proxi use &lt;profile&gt;</code>, <code>proxi off</code>, <code>proxi status</code>, <code>proxi test</code></li><li>Turn on the corporate proxy on the office Wi-Fi, off at home</li><li>AI assistants can check the status, switch profiles and run tests, and nothing more</li></ul>
         </div>
-        <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="share"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
+        <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="automation"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
       </div>
       <div class="feature">
         <div class="feature-text rv">
-          <h2>Scripts, AI assistants and sync</h2>
-          <p>A <code>proxi</code> command-line tool, an MCP server for AI assistants and <code>proxi://</code> URL commands share one local control interface with four permission levels. Settings sync between Macs through your own iCloud Drive.</p>
-          <ul><li>Switch profiles automatically by Wi-Fi network or router</li><li>Imports and automatic switches are recorded in an activity log; imports can be undone</li></ul>
+          <h2>Every Mac, always current</h2>
+          <p>Profiles and settings sync between your Macs through your own iCloud Drive; passwords don’t leave the Mac they were typed on. New versions install with one click.</p>
+          <ul><li>Merge, keep this Mac’s or use iCloud’s when a second Mac joins</li><li>Updates are verified (SHA-256 and code signature) before Proxi replaces itself</li></ul>
         </div>
         <div class="feature-media rv "><figure class="pxd" data-lang="en" data-preset="sync"><noscript><div class="demo-nojs glass"><img src="../assets/icons/proxi.png" alt="" width="40" height="40"><p>An interactive demo of Proxi with sample data appears here when JavaScript is on.</p></div></noscript></figure></div>
       </div>
@@ -136,8 +136,8 @@
 
   <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
-      <div class="section-head rv"><h2 id="more-title">When something doesn’t connect</h2></div>
-      <div class="tiles bento rv-group"><div class="tile glass"><h3>Connections</h3><p>Every connection through the core: which app or device, which rule, which node, how much traffic.</p></div><div class="tile glass"><h3>Service check</h3><p>See whether ChatGPT, Claude, Gemini, Netflix, YouTube Premium or Telegram work through a node, and in which region.</p></div><div class="tile glass"><h3>URL diagnosis</h3><p>Enter a site that won’t open; Proxi walks DNS, direct and proxied paths and suggests a fix.</p></div><div class="tile glass"><h3>Exit IP</h3><p>The address and region websites see through your node, and your Mac’s own public address.</p></div><div class="tile glass"><h3>Advanced DNS</h3><p>Encrypted DNS in the core, per-domain servers, hosts, and mihomo config patches checked before saving.</p></div><div class="tile glass"><h3>Health checks</h3><p>Periodically checks the proxy port while it’s on and tells you when it stops answering.</p></div></div>
+      <div class="section-head rv"><h2 id="more-title">Small things that add up</h2></div>
+      <div class="tiles bento rv-group"><div class="tile glass"><h3>⌃⌥P</h3><p>Turn the proxy on or off from any app. The menu bar icon opens the panel; right-click for a compact menu.</p></div><div class="tile glass"><h3>Connection checks</h3><p>While a proxy is on, Proxi checks now and then that the server still answers and tells you when it doesn’t.</p></div><div class="tile glass"><h3>Another app’s proxy</h3><p>When something else changes the system proxy, Proxi notices and can save it as a profile.</p></div><div class="tile glass"><h3>Diagnose</h3><p>The system proxy, the environment variables, git and npm as they are right now, and Proxi’s log.</p></div><div class="tile glass"><h3>Speed in the menu bar</h3><p>Upload and download speed beside the switch, in the profile’s color while it’s on.</p></div><div class="tile glass"><h3>English or Chinese</h3><p>The interface follows your system language, or pick one in Settings › General.</p></div></div>
     </div>
   </section>
 
@@ -146,14 +146,14 @@
       <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">Requirements</h2>
-          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma or later; Liquid Glass on macOS 26</dd><dt>Mac</dt><dd>Universal: Apple silicon and Intel (single-architecture builds also available)</dd><dt>Permissions</dt><dd>Administrator password to change the system proxy. Privileged helper only for Enhanced and gateway modes. No Accessibility.</dd><dt>Language</dt><dd>English, 简体中文</dd><dt>Download</dt><dd>About 53 MB universal (<code>Proxi-macos.zip</code>), about half for <code>-arm64</code> or <code>-x86_64</code></dd><dt>License</dt><dd>GPL-3.0; bundles mihomo (GPL-3.0)</dd></dl>
+          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma or later; Liquid Glass on macOS 26</dd><dt>Mac</dt><dd>Universal: Apple silicon and Intel (single-architecture builds also available)</dd><dt>Permissions</dt><dd>Administrator password to install the command-line tool, and when macOS asks for it to change the system proxy. Location only to read the Wi-Fi name for switching by network. No Accessibility.</dd><dt>Language</dt><dd>English, 简体中文</dd><dt>Download</dt><dd><code>Proxi-macos.zip</code> (universal), or <code>-arm64</code> / <code>-x86_64</code></dd><dt>License</dt><dd>GPL-3.0</dd></dl>
         </div>
         <div class="panel-block glass">
           <h2>Install and update</h2>
-          <ol class="steps"><li>Download <code>Proxi-macos.zip</code> from the latest release and unzip it.</li><li>Drag <strong>Proxi.app</strong> into Applications and double-click it. From 0.11.1 on, releases are signed with a Developer ID and notarized by Apple.</li><li>Click the menu bar icon, add a profile or a subscription, and flip the switch.</li></ol>
+          <ol class="steps"><li>Download <code>Proxi-macos.zip</code> from the latest release and unzip it.</li><li>Drag <strong>Proxi.app</strong> into Applications and double-click it. Releases are signed with a Developer ID and notarized by Apple.</li><li>In Settings › Proxy Profiles, add your proxy server (or click Detect), choose where it applies, and flip the switch.</li></ol>
           <p class="install-way">Or let Homebrew do steps 1 and 2:</p>
           <div class="cmd"><code>brew install --cask whrss9527/tap/proxi</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/proxi" data-done="Copied" hidden>Copy</button></div>
-          <p class="note">Proxi checks GitHub Releases at launch and every 6 hours (you can turn it off). “Update” downloads the build for your chip, compares its SHA-256, replaces Proxi and relaunches. Signed releases only install updates signed by the same developer. Proxi used to be called ProxySwitch; updating from it moves your settings over automatically.</p>
+          <p class="note">Proxi checks GitHub Releases at launch and every 6 hours (you can turn it off). “Update” downloads the build for your chip, compares its SHA-256, replaces Proxi and relaunches; it only installs updates signed by the same developer. Your profiles and settings are kept.</p>
         </div>
       </div>
     </div>
@@ -162,7 +162,7 @@
   <section class="section-tight" id="faq" aria-labelledby="faq-title">
     <div class="wrap narrow">
       <div class="section-head rv"><h2 id="faq-title">Questions</h2></div>
-      <div class="faq rv-group"><details class="glass"><summary>Is it free?</summary><div class="answer"><p>Yes. Proxi is free and open source under GPL-3.0. It doesn’t sell or provide proxy servers — you bring your own proxy or subscription.</p></div></details><details class="glass"><summary>Does it need Accessibility?</summary><div class="answer"><p>No. The global shortcut uses the standard hot-key API. What Proxi does need: an administrator password to change the system proxy, and — only if you use Enhanced or gateway mode — a privileged helper installed once, because a virtual network interface and IP forwarding require root.</p></div></details><details class="glass"><summary>What is mihomo?</summary><div class="answer"><p>mihomo (Clash Meta) is an open-source proxy core, also GPL-3.0. Proxi bundles it as a separate program inside the app and runs it only when you use the built-in node proxy, LAN sharing or Enhanced mode.</p></div></details><details class="glass"><summary>Is LAN sharing safe?</summary><div class="answer"><p>By default only devices on private LAN ranges (10.x, 172.16–31.x, 192.168.x) may connect, and you can limit it to specific IPs. Turn it off on public Wi-Fi.</p></div></details><details class="glass"><summary>Why does it ask for Location?</summary><div class="answer"><p>Only for switching by Wi-Fi network: since macOS 14, reading the Wi-Fi name requires Location permission. Proxi doesn’t read or store your location, and you can switch by router instead.</p></div></details><details class="glass"><summary>Is there a Windows version?</summary><div class="answer"><p>Yes, <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a> for Windows. The two evolve separately.</p></div></details></div>
+      <div class="faq rv-group"><details class="glass"><summary>Is it free?</summary><div class="answer"><p>Yes. Proxi is free and open source under GPL-3.0. It doesn’t provide a proxy service and doesn’t relay any traffic: it only changes settings on your Mac so that they point at a proxy server you already use.</p></div></details><details class="glass"><summary>What exactly does it change?</summary><div class="answer"><p>Only what the profile’s scope says: the system proxy for each network service, the <code>http_proxy</code> / <code>https_proxy</code> / <code>all_proxy</code> / <code>no_proxy</code> variables in your login session, git’s global <code>http.proxy</code> and <code>https.proxy</code>, and the proxy lines in <code>~/.npmrc</code>. Turning the proxy off clears them; for the system proxy you can choose to restore what it was before instead.</p></div></details><details class="glass"><summary>Where is my proxy password kept?</summary><div class="answer"><p>In this Mac’s Keychain. It isn’t written to Proxi’s configuration file or synced with iCloud; another Mac asks for it once. While the profile is on, the password is part of the proxy settings Proxi writes, as those tools expect.</p></div></details><details class="glass"><summary>Does it need Accessibility?</summary><div class="answer"><p>No. The global shortcut uses the standard hot-key API. Proxi asks for the administrator password to install the command-line tool, and macOS may ask for it when the system proxy changes.</p></div></details><details class="glass"><summary>Why does it ask for Location?</summary><div class="answer"><p>Only for switching by Wi-Fi network: since macOS 14, reading the Wi-Fi name requires Location permission. Proxi doesn’t read or store your location, and you can switch by router instead.</p></div></details><details class="glass"><summary>Is there a Windows version?</summary><div class="answer"><p>Yes, <a href="https://github.com/whrss9527/proxyswitch">ProxySwitch</a> for Windows. The two evolve separately.</p></div></details></div>
       <p class="small muted" style="margin-top:24px">More help: <a href="https://github.com/whrss9527/proxi/issues">Proxi issues on GitHub</a> · <a href="../support/">Support</a> · <a href="../privacy/proxi/">Proxi privacy policy</a></p>
     </div>
   </section>
@@ -171,12 +171,12 @@
     <div class="wrap rv-group">
       <img class="cta-icon" src="../assets/icons/proxi.png" alt="" width="96" height="96">
       <h2 id="cta-title">Proxi</h2>
-      <p class="lede">One switch for the system proxy, Terminal, git and npm.</p>
+      <p class="lede">A proxy switch for developers: system proxy, Terminal, git and npm in one click.</p>
       <div class="actions">
         <a class="btn btn-primary btn-lg" href="https://github.com/whrss9527/proxi/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Proxi</a>
         <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/proxi"><svg viewBox="0 0 16 16" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>View on GitHub</a>
       </div>
-      <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span></p>
+      <p class="meta"><span>Free and open source</span><span>macOS 14 or later</span><span>Apple silicon and Intel</span><span>English, 简体中文</span></p>
     </div>
   </section>
 

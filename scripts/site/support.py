@@ -9,8 +9,8 @@ TIPS = {
              "更新后没反应？打开设置 › 权限，点“清除并重新授权”。反馈问题时，可以用设置 › 关于 › 复制诊断报告。"),
     "stox": ("Quotes not updating? Check the note at the bottom of the panel; Stox switches to its backup source automatically.",
              "行情不刷新？看看面板底部的提示；主数据源出问题时，Stox 会自动切换到备用数据源。"),
-    "proxi": ("A site won’t open? Try the URL diagnosis page. The Diagnostics page opens the folder with <code>proxi.log</code>.",
-              "某个网站打不开？试试网址诊断页面。诊断页面可以打开存放 <code>proxi.log</code> 的文件夹。"),
+    "proxi": ("Proxy not working? Click the speedometer in the panel to test every profile. Settings › Diagnose shows the proxy settings across the system and opens the folder with <code>proxi.log</code>.",
+              "代理不好用？点面板里的测速按钮测试全部配置。设置 › 诊断会列出系统里各处的代理设置，还能打开存放 <code>proxi.log</code> 的文件夹。"),
 }
 
 
