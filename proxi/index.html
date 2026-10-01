@@ -151,6 +151,8 @@
         <div class="panel-block glass">
           <h2>Install and update</h2>
           <ol class="steps"><li>Download <code>Proxi-macos.zip</code> from the latest release and unzip it.</li><li>Drag <strong>Proxi.app</strong> into Applications and double-click it. From 0.11.1 on, releases are signed with a Developer ID and notarized by Apple.</li><li>Click the menu bar icon, add a profile or a subscription, and flip the switch.</li></ol>
+          <p class="install-way">Or let Homebrew do steps 1 and 2:</p>
+          <div class="cmd"><code>brew install --cask whrss9527/tap/proxi</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/proxi" data-done="Copied" hidden>Copy</button></div>
           <p class="note">Proxi checks GitHub Releases at launch and every 6 hours (you can turn it off). “Update” downloads the build for your chip, compares its SHA-256, replaces Proxi and relaunches. Signed releases only install updates signed by the same developer. Proxi used to be called ProxySwitch; updating from it moves your settings over automatically.</p>
         </div>
       </div>

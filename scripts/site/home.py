@@ -150,6 +150,8 @@ def page(zh):
         <h2 id="apps-title">{t("The apps", "应用")}</h2>
         <p>{t("Each one does a single job from the menu bar. Download buttons go to the latest release on GitHub.",
               "每个应用只在菜单栏里做好一件事。下载按钮会打开 GitHub 上的最新版本。")}</p>
+        <p>{t("With Homebrew: <code>brew install --cask whrss9527/tap/pop</code> (or <code>meno</code>, <code>stox</code>, <code>proxi</code>).",
+              "也可以用 Homebrew 安装：<code>brew install --cask whrss9527/tap/pop</code>（或者 <code>meno</code>、<code>stox</code>、<code>proxi</code>）。")}</p>
       </div>
       <div class="cards rv-group">{cards(c)}
       </div>

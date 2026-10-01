@@ -481,6 +481,11 @@ dl.specs dd { margin: 0; color: var(--text); }
 @media (max-width: 420px) { dl.specs { grid-template-columns: 1fr; gap: 2px; } dl.specs dd { margin-bottom: 10px; } }
 ol.steps { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; color: var(--text-2); font-size: 15.5px; }
 ol.steps li::marker { color: var(--text-3); font-variant-numeric: tabular-nums; }
+.install-way { margin: 18px 0 8px; font-size: 15px; color: var(--text-2); }
+.cmd { display: flex; align-items: center; gap: 8px; padding: 6px 6px 6px 14px; border-radius: 12px; background: var(--code-bg); border: 1px solid var(--stroke); }
+.cmd code { flex: 1 1 auto; min-width: 0; padding: 4px 0; background: none; font-size: 14px; color: var(--text); white-space: nowrap; overflow-x: auto; user-select: all; -webkit-user-select: all; }
+.cmd .copy { flex: none; }
+.cmd .copy[hidden] { display: none; }
 .note { margin-top: 16px; font-size: 14.5px; color: var(--text-2); padding: 12px 14px; border-radius: 12px; background: var(--code-bg); }
 
 /* ---------- FAQ ---------- */

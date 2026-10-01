@@ -1,6 +1,7 @@
-/* whrss.com: the language menu, the mobile menu and the home page's reel. Everything works
-   without this file; it only remembers the chosen language, closes open menus and shows the
-   reel's previous / next buttons (without them the reel still scrolls sideways). */
+/* whrss.com: the language menu, the mobile menu, the home page's reel and the Copy buttons.
+   Everything works without this file; it only remembers the chosen language, closes open
+   menus, shows the reel's previous / next buttons (without them the reel still scrolls
+   sideways) and shows Copy next to install commands (without it they select in one click). */
 (function () {
   var KEY = "lang";
 
@@ -60,4 +61,20 @@
     window.addEventListener("resize", sync, { passive: true });
     sync();
   });
+
+  // Copy buttons next to commands: shown only where the clipboard API is available.
+  if (navigator.clipboard && window.isSecureContext) {
+    Array.prototype.forEach.call(document.querySelectorAll("button.copy[data-copy]"), function (b) {
+      var label = b.textContent;
+      var timer;
+      b.hidden = false;
+      b.addEventListener("click", function () {
+        navigator.clipboard.writeText(b.getAttribute("data-copy")).then(function () {
+          b.textContent = b.getAttribute("data-done") || label;
+          clearTimeout(timer);
+          timer = setTimeout(function () { b.textContent = label; }, 1600);
+        }, function () { /* denied: the command can still be selected by hand */ });
+      });
+    });
+  }
 })();

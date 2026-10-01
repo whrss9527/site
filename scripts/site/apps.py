@@ -65,6 +65,15 @@ def faq(items):
         out.append(f'<details class="glass"><summary>{q}</summary><div class="answer">{paras}</div></details>')
     return "".join(out)
 
+def brew_cmd(c, key):
+    """The Homebrew install command for an app, with a Copy button (shown by site.js
+    when the clipboard is available; without it the command selects in one click)."""
+    cmd = f"brew install --cask whrss9527/tap/{key}"
+    t = c.t
+    return (f'<div class="cmd"><code>{cmd}</code>'
+            f'<button type="button" class="btn btn-glass btn-xs copy" data-copy="{cmd}" '
+            f'data-done="{t("Copied", "已复制")}" hidden>{t("Copy", "复制")}</button></div>')
+
 def siblings(c, key):
     out = []
     for k, a in APPS.items():
@@ -131,6 +140,8 @@ def build(key, d, lang="en"):
         <div class="panel-block glass">
           <h2>{t("Install and update", "安装与更新")}</h2>
           <ol class="steps">{steps}</ol>
+          <p class="install-way">{t("Or let Homebrew do steps 1 and 2:", "也可以用 Homebrew 代替第 1、2 步：")}</p>
+          {brew_cmd(c, key)}
           <p class="note">{d['update_note']}</p>
         </div>
       </div>

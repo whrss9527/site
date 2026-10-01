@@ -151,6 +151,8 @@
         <div class="panel-block glass">
           <h2>安装与更新</h2>
           <ol class="steps"><li>从最新版本下载 <code>Proxi-macos.zip</code> 并解压。</li><li>把 <strong>Proxi.app</strong> 拖进“应用程序”文件夹，双击打开。从 0.11.1 起，发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>点菜单栏图标，添加一个代理配置或订阅，打开开关。</li></ol>
+          <p class="install-way">也可以用 Homebrew 代替第 1、2 步：</p>
+          <div class="cmd"><code>brew install --cask whrss9527/tap/proxi</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/proxi" data-done="已复制" hidden>复制</button></div>
           <p class="note">Proxi 在启动时和之后每 6 小时检查一次 GitHub Releases（可以关闭）。点“更新”会下载适合你芯片的版本，比对 SHA-256，替换 Proxi 并重新打开。签名版本只会安装同一开发者签名的更新。Proxi 以前叫 ProxySwitch；从 ProxySwitch 更新时，设置会自动迁移过来。</p>
         </div>
       </div>
