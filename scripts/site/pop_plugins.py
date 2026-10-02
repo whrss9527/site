@@ -7,6 +7,10 @@ adds, renames or removes a plugin, and add the plugin's page content in plugin_d
 """
 import re
 
+# The Pop version this catalog and the plugin pages were last checked against (the top section of Pop's
+# CHANGELOG.md). A daily routine compares it with Pop's latest release and opens a pull request to catch up.
+SYNCED_WITH = "0.59.0"
+
 SLUGS = {"airDrop": "airdrop"}
 
 
