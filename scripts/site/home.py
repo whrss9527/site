@@ -1,4 +1,5 @@
 from common import *
+from pop_plugins import PLUGINS as POP_PLUGINS
 
 ICON_SHIELD = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2.5 4 4.8v4.6c0 3.8 2.6 6.6 6 8.1 3.4-1.5 6-4.3 6-8.1V4.8L10 2.5Z"/><path d="m7.3 10 1.9 1.9 3.6-3.8"/></svg>'
 ICON_UPDATE = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a6 6 0 1 1-1.8-4.3"/><path d="M16.2 3.5v3h-3"/><path d="M10 7v3.4l2 1.3"/></svg>'
@@ -7,7 +8,7 @@ ICON_CODE = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-w
 
 EN_BULLETS = {
     "pop": ["Translate a selection with Apple's on-device translation, AI or DeepL",
-            "A ring of tools you arrange: conversions, OCR, color, JSON, files",
+            f"A ring of tools you arrange, and {len(POP_PLUGINS)} plugins to add when you need them",
             "Clipboard history, pinned screenshots, plugins and AI with your own endpoint"],
     "meno": ["Visible, Hidden and a Stash for icons you almost never need",
              "Shelf and Quick Open in Liquid Glass on macOS 26",
@@ -20,7 +21,7 @@ EN_BULLETS = {
               "Command line, MCP for AI assistants, switching by Wi-Fi"],
 }
 ZH_BULLETS = {
-    "pop": ["选中外文直接翻译：系统离线翻译、AI 或 DeepL", "圆盘里的功能随你摆：换算、识字、取色、JSON、文件", "剪贴板历史、贴图、插件，AI 用你自己的接口"],
+    "pop": ["选中外文直接翻译：系统离线翻译、AI 或 DeepL", f"圆盘里的功能随你摆，还有 {len(POP_PLUGINS)} 个插件，要用时再装", "剪贴板历史、贴图、插件，AI 用你自己的接口"],
     "meno": ["显示、隐藏，再加一个放几乎用不到图标的暗格", "托盘和快速打开，macOS 26 上是 Liquid Glass", "规则、场景，一键禅模式，演示录屏更干净"],
     "stox": ["A 股、港股、美股，还有指数、基金和外汇", "持仓与盈亏、价格提醒、iCloud 同步", "右键点一下菜单栏图标，数字全部藏起来"],
     "proxi": ["系统代理、终端、git、npm 一个开关", "公司代理，或者 Charles、Proxyman、mitmproxy", "命令行、给 AI 助手用的 MCP，按 Wi-Fi 自动切换"],

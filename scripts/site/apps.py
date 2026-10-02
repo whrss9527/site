@@ -33,7 +33,14 @@ def pop_demo(r, lang, preset, desk=False):
     return (f'<figure class="ppd" data-lang="{lang}" data-preset="{preset}"{d} data-icon="{r}assets/icons/pop.png">'
             f'{nojs(r, "pop", lang)}</figure>')
 
-POP_HEAD = lambda r: f'\n<link rel="stylesheet" href="{r}assets/pop-demo.css">\n<script src="{r}assets/pop-demo.js" defer></script>'
+POP_HEAD = lambda r: (f'\n<link rel="stylesheet" href="{r}assets/pop-demo.css">\n<script src="{r}assets/pop-demo.js" defer></script>'
+                      f'\n<link rel="stylesheet" href="{r}assets/pop-plugins.css">\n<script src="{r}assets/pop-plugins.js" defer></script>')
+
+
+def pop_plugins_section(c):
+    """The plugins section on the Pop page (pop_plugin_pages.py)."""
+    import pop_plugin_pages
+    return pop_plugin_pages.pop_section(c)
 
 def proxi_demo(r, lang, preset):
     """The interactive Proxi panel and settings window (assets/proxi-demo.js, sample data), preset to one state."""
@@ -123,7 +130,7 @@ def build(key, d, lang="en"):
     </div>
   </section>
 
-  <section class="section-tight" aria-labelledby="more-title">
+{d['after_features'](c) if 'after_features' in d else ''}  <section class="section-tight" aria-labelledby="more-title">
     <div class="wrap">
       <div class="section-head rv"><h2 id="more-title">{d['more_title']}</h2></div>
       <div class="tiles bento rv-group">{tiles(d['tiles'])}</div>
@@ -184,11 +191,12 @@ def build(key, d, lang="en"):
 # ---------------------------------------------------------------- Pop
 POP = {
     "title": "Pop · Long-press right click, swipe, done",
-    "desc": "Pop is a right-click toolbox for the Mac menu bar: long-press the right mouse button to translate a selection or open a ring of 80+ tools. Free and open source.",
+    "desc": "Pop is a right-click toolbox for the Mac menu bar: long-press the right mouse button to translate a selection or open a ring of 120+ tools. Free and open source.",
     "say": "/pɒp/ — like a bubble: it pops up, you swipe, it pops.",
     "lede": "Hold the right mouse button on anything you’ve selected. Pop translates it, converts it, or opens a ring of tools you pick with one swipe. A short click is still the normal context menu.",
     "meta": ["Free and open source", "macOS 15 or later", "Apple silicon and Intel", "English, 简体中文"],
     "extra_head": POP_HEAD,
+    "after_features": pop_plugins_section,
     "stage": lambda r: '<div class="compose pop-stage">' +
         pop_demo(r, "en", "ring", desk=True) +
         "</div>",
@@ -210,7 +218,7 @@ POP = {
           "Change the target language for one card, or read it aloud",
           "Save words to a vocabulary list and export it for Anki"],
          pop_demo(r, "en", "translate")),
-        ("More than 80 tools, where you want them",
+        ("More than 120 tools, where you want them",
          "Arrange 4 to 12 slots, give an app its own ring, and set rules that skip the ring entirely: math is calculated, units and colors are converted, images are read with on-device OCR.",
          ["Text: cleanup, case, encoding, word count, extract links and emails",
           "Developer: JSON, YAML, SQL, regex, JWT, hashes, QR codes, cron",
@@ -228,7 +236,7 @@ POP = {
           "Selected text is only sent when you use an AI feature",
           "Your API key stays in this Mac’s Keychain"],
          pop_demo(r, "en", "ai")),
-        ("Plugins in one JSON file",
+        ("Your own plugins, in one JSON file",
          "Turn a URL template, a shell script, JavaScript or a Shortcut into a tool on the ring. Or install one from the plugin library — Pop checks its SHA-256 before adding it, and shows you shell scripts before they’re installed.",
          ["<code>pop://</code> links and Shortcuts actions let other tools call Pop",
           "Import and export plugins, or share the JSON file"],

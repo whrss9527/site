@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>SQL 格式化 · Pop 插件</title>
+<meta name="description" content="把选中的 SQL 按子句分行、关键字大写、子查询缩进，也可以压成一行">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/format-sql/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/format-sql/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/format-sql/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/format-sql/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="SQL 格式化 · Pop 插件">
+<meta property="og:description" content="把选中的 SQL 按子句分行、关键字大写、子查询缩进，也可以压成一行">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/format-sql/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-convert">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/format-sql/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/format-sql/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#convert">转换</a></nav>
+        <p class="plp-cat">Pop 插件 · 转换</p>
+        <h1>SQL 格式化</h1>
+        <p class="lede">把选中的 SQL 按子句分行、关键字大写、子查询缩进，也可以压成一行。</p>
+        <div class="plp-meta"><span><b>处理</b> 选中的文字</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-convert" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.8" rx="7.4" ry="2.8"/><path d="M4.6 5.8v12.4c0 1.5 3.3 2.8 7.4 2.8s7.4-1.3 7.4-2.8V5.8M4.6 12c0 1.5 3.3 2.8 7.4 2.8s7.4-1.3 7.4-2.8"/></svg></span><span class="pa-chip c1"><i></i>Format SQL</span><span class="pa-chip c2"><i></i>Pop 插件</span><span class="pa-chip c3"><i></i>免费</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-convert"><ol class="pla-steps"><li><span class="pla-st"><span><strong>选中文字</strong></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「SQL 格式化」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>看结果</strong></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"SQL 格式化","glyph":"<ellipse cx=\"12\" cy=\"5.8\" rx=\"7.4\" ry=\"2.8\"/><path d=\"M4.6 5.8v12.4c0 1.5 3.3 2.8 7.4 2.8s7.4-1.3 7.4-2.8V5.8M4.6 12c0 1.5 3.3 2.8 7.4 2.8s7.4-1.3 7.4-2.8\"/>","scene":{"src":{"kind":"text","app":"Notes","lines":["# 笔记","一段[[示例文字]]。"]},"card":{"body":[{"t":"text","text":"把选中的 SQL 按子句分行、关键字大写、子查询缩进，也可以压成一行"}]},"steps":[{"acts":[]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「SQL 格式化」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>把选中的 SQL 按子句分行、关键字大写、子查询缩进，也可以压成一行。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「SQL 格式化」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「SQL 格式化」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=formatSQL</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=formatSQL" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多转换</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-convert" href="../number-stats/" data-cat="convert" data-k="Number Statistics 数字统计 Get the sum, average, median, max and min of a list of numbers 选中一列或一串数字，算出合计、平均、中位数、最大、最小 numberStats number-stats Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M17.6 5.2V4H6.2l6.2 8-6.2 8h11.4v-1.2"/></svg></span><div><h3>数字统计</h3><p>选中一列或一串数字，算出合计、平均、中位数、最大、最小</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-convert" href="../chart/" data-cat="convert" data-k="Chart 生成图表 Turn a selected table, lines of “name value” or a list of numbers into a column, bar, line or pie chart, then copy it as an image or save it to Downloads 选中表格、一行一个「名字 数值」或者一串数，画成柱状图、条形图、折线图或者饼图，复制成图片或者存到「下载」 chart chart Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 3.6v16.8h16.8"/><rect x="7" y="12" width="3" height="5.6" rx=".8"/><rect x="12" y="7.4" width="3" height="10.2" rx=".8"/><rect x="17" y="10" width="3" height="7.6" rx=".8"/></svg></span><div><h3>生成图表</h3><p>选中表格、一行一个「名字 数值」或者一串数，画成柱状图、条形图、折线图或者饼图，复制成图片或者存到「下载」</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-convert" href="../change-case/" data-cat="convert" data-k="Case 大小写 Convert between uppercase, lowercase, camelCase, snake_case and more 大写、小写、驼峰、下划线等写法互相转换 changeCase change-case Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2.8 16.6 3.9-10.4 3.9 10.4M4.2 13.1h5"/><path d="M19.6 10.4v6.2M19.6 12.3a2.5 2.5 0 1 0 0 2.5"/><path d="M12.6 7.2c1.9-1.8 4.6-1.9 6.6-.2M17.4 4.8l1.9 2.3-2.4 1.6"/></svg></span><div><h3>大小写</h3><p>大写、小写、驼峰、下划线等写法互相转换</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-convert" href="../encode-decode/" data-cat="convert" data-k="Encode & Decode 编码转换 Encode and decode Base64, URL, Unicode and HTML entities Base64、URL、Unicode、HTML 实体的编码和解码 encodeDecode encode-decode Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m7.8 6.4-5 5.6 5 5.6M16.2 6.4l5 5.6-5 5.6"/><circle cx="9.9" cy="9.2" r="1.4"/><circle cx="14.1" cy="14.8" r="1.4"/><path d="m14.6 8.6-5.2 6.8"/></svg></span><div><h3>编码转换</h3><p>Base64、URL、Unicode、HTML 实体的编码和解码</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-convert" href="../yaml-json/" data-cat="convert" data-k="YAML ↔ JSON YAML 和 JSON Convert selected JSON to YAML or YAML to JSON, keeping key order 选中 JSON 转成 YAML，选中 YAML 转成 JSON，键的顺序不变 yamlJSON yaml-json Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M7.4 9.4h9.2M14 6.8l2.6 2.6-2.6 2.6M16.6 14.6H7.4M10 12l-2.6 2.6 2.6 2.6"/></svg></span><div><h3>YAML 和 JSON</h3><p>选中 JSON 转成 YAML，选中 YAML 转成 JSON，键的顺序不变</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-convert" href="../format-xml/" data-cat="convert" data-k="Format XML XML 格式化 Format or minify the selected XML (SVG, plist and XHTML too) 格式化或压缩选中的 XML（也认 SVG、plist、XHTML） formatXML format-xml Convert 转换"><span class="ptile cat-convert" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7.2-4.8 4.8L8 16.8M16 7.2l4.8 4.8-4.8 4.8M13.6 5l-3.2 14"/></svg></span><div><h3>XML 格式化</h3><p>格式化或压缩选中的 XML（也认 SVG、plist、XHTML）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-convert" href="../format-xml/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-convert is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7.2-4.8 4.8L8 16.8M16 7.2l4.8 4.8-4.8 4.8M13.6 5l-3.2 14"/></svg></span><span><small>上一个</small><strong>XML 格式化</strong></span></a>
+        <a class="glass next cat-convert" href="../table-convert/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-convert is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.6" width="18" height="16.8" rx="2.6"/><path d="M3 9.2h18M3 14.8h18M9.4 3.6v16.8M15 3.6v16.8"/></svg></span><span><small>下一个</small><strong>表格转换</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 101 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/format-sql/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

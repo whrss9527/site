@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../assets/pop-plugins.css">
+<script src="../../../assets/pop-plugins.js" defer></script>
+<title>Cron Expression · a Pop plugin</title>
+<meta name="description" content="Explain a cron expression (e.g. */15 9-17 * * 1-5) in words and list the next run times">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/pop/plugins/cron/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/cron/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/cron/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/cron/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Cron Expression · a Pop plugin">
+<meta property="og:description" content="Explain a cron expression (e.g. */15 9-17 * * 1-5) in words and list the next run times">
+<meta property="og:url" content="https://whrss.com/pop/plugins/cron/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop: an interactive recreation of the app, with sample data">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<script src="../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-developer">
+<a class="skip" href="#main">Skip to content</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="Main">
+    <a href="../../" aria-current="page"><img src="../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="Language: English" title="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">EN</span></summary>
+      <div class="panel lang-list" role="group" aria-label="Language">
+        <a href="./" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="../../../zh/pop/plugins/cron/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="panel nav-list" aria-label="Main">
+    <a href="../../" aria-current="page"><img src="../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../zh/pop/plugins/cron/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>简体中文</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop plugins">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">Plugins</a>
+    <div class="ln-links"><a href="#how">How to use</a><a href="#details">Details</a><a href="#install">Install</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="Download Pop">Download</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">Plugins</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#developer">Developer</a></nav>
+        <p class="plp-cat">Pop plugin · Developer</p>
+        <h1>Cron Expression</h1>
+        <p class="lede">Explain a cron expression (e.g. */15 9-17 * * 1-5) in words and list the next run times.</p>
+        <div class="plp-meta"><span><b>Works with</b> Selected text</span><span>Free</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">See how it works</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-developer" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.4 12a7.6 7.6 0 1 0 2.4-5.6"/><path d="M3.8 3.6v3.6h3.6"/><path d="M12 8v4.4l3 1.8"/></svg></span><span class="pa-chip c1"><i></i>Cron Expression</span><span class="pa-chip c2"><i></i>Pop plugin</span><span class="pa-chip c3"><i></i>Free</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">How to use it</h2>
+        <p>Select something, hold the right mouse button, swipe. The animation plays the steps one after another; click a step to see it again.</p></div>
+      <div class="howto cat-developer"><ol class="pla-steps"><li><span class="pla-st"><span><strong>Select the text</strong></span></span></li><li><span class="pla-st"><span><strong>Hold the right mouse button</strong><small>About a quarter of a second. A short click still opens the usual menu.</small></span></span></li><li><span class="pla-st"><span><strong>Swipe to “Cron Expression” and let go</strong><small>It sits on the ring where you put it, and it’s always in All Actions.</small></span></span></li><li><span class="pla-st"><span><strong>See the result</strong></span></span></li></ol><figure class="pla" data-lang="en" data-icon="../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"Cron Expression","glyph":"<path d=\"M4.4 12a7.6 7.6 0 1 0 2.4-5.6\"/><path d=\"M3.8 3.6v3.6h3.6\"/><path d=\"M12 8v4.4l3 1.8\"/>","scene":{"src":{"kind":"text","app":"Notes","lines":["# Notes","Some [[sample text]] to work on."]},"card":{"body":[{"t":"text","text":"Explain a cron expression (e.g. */15 9-17 * * 1-5) in words and list the next run times"}]},"steps":[{"acts":[]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../assets/icons/pop.png" alt="" width="40" height="40"><p>An animated demo of Cron Expression appears here when JavaScript is on; the steps beside it say the same.</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">What it does</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>Explain a cron expression (e.g. */15 9-17 * * 1-5) in words and list the next run times.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">Install it</h2>
+        <p>Plugins aren’t part of the Pop download. Install this one when you need it.</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>From Settings</h3>
+          <p>In Pop’s Settings › Actions, find “Cron Expression” under Plugins at the top and click Install. It downloads from Pop’s GitHub release in a few seconds and works right away, without a restart.</p></div>
+        <div class="plp-way glass"><h3><span>2</span>Or from the ring</h3>
+          <p>Open All Actions on the ring and search for “Cron Expression”. Plugins that aren’t installed are listed after your actions: click it to install, and it runs right away if it can handle what you selected.</p></div>
+        <div class="plp-way glass"><h3><span>3</span>Then use it your way</h3>
+          <p>Put it on the ring in Settings › Ring, give it a shortcut, or run it from Shortcuts and scripts with its link:</p>
+          <div class="cmd"><code>pop://run?plugin=cron</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=cron" data-done="Copied" hidden>Copy</button></div></div>
+      </div>
+      <p class="note rv">Uninstall it from the same list when you no longer need it: the plugin and its settings are deleted. After Pop updates, installed plugins are updated with it, and with iCloud sync on, what you install syncs to your other Macs.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">More in Developer</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-developer" href="../hash/" data-cat="developer" data-k="Hash 哈希 Compute MD5, SHA-1, SHA-256 and SHA-512 of text or files 计算文字或文件的 MD5、SHA-1、SHA-256、SHA-512 hash hash Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10.4 7.2 9.2 16.8M14.8 7.2l-1.2 9.6M7.4 10.2h9.6M7 13.8h9.6"/></svg></span><div><h3>Hash</h3><p>Compute MD5, SHA-1, SHA-256 and SHA-512 of text or files</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../qr-code/" data-cat="developer" data-k="QR Code 二维码 Generate a QR code from text or a link (letters and digits can also become a barcode); with an image selected, read the QR codes and barcodes in it 把文字或链接生成二维码（英文字母和数字还能生成条形码）；选中图片时识别里面的二维码和条形码 qrCode qr-code Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="6.6" height="6.6" rx="1.4"/><rect x="13.8" y="3.6" width="6.6" height="6.6" rx="1.4"/><rect x="3.6" y="13.8" width="6.6" height="6.6" rx="1.4"/><rect x="6" y="6" width="1.8" height="1.8" fill="currentColor" stroke="none"/><rect x="16.2" y="6" width="1.8" height="1.8" fill="currentColor" stroke="none"/><rect x="6" y="16.2" width="1.8" height="1.8" fill="currentColor" stroke="none"/><path d="M13.8 13.8h2.6v2.6M20.4 13.8v.1M13.8 20.4h.1M17.6 17.6h2.8v2.8h-2.8z"/></svg></span><div><h3>QR Code</h3><p>Generate a QR code from text or a link (letters and digits can also become a barcode); with an image selected, read the QR codes and barcodes in it</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../base64-image/" data-cat="developer" data-k="Base64 Image Base64 图片 Show Base64 or data: image data as an image to copy, save or pin 把 Base64 或 data: 开头的图片数据显示成图片，可以复制、保存、贴到屏幕 base64Image base64-image Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4" width="18.8" height="16" rx="2.4"/><rect x="5.4" y="6.8" width="13.2" height="10.4" rx="1"/><path d="m5.8 15.6 3.4-3.2 2.6 2.4 1.8-1.6 4.6 3.6"/><circle cx="14.6" cy="9.6" r="1.1"/></svg></span><div><h3>Base64 Image</h3><p>Show Base64 or data: image data as an image to copy, save or pin</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../random/" data-cat="developer" data-k="Random 随机生成 Generate UUIDs, passwords and random numbers to paste into the current field 生成 UUID、密码和随机数字，可以直接粘贴到当前输入框 random random Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="4"/><circle cx="8.2" cy="8.2" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.8" cy="8.2" r="1.25" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.25" fill="currentColor" stroke="none"/><circle cx="8.2" cy="15.8" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.8" cy="15.8" r="1.25" fill="currentColor" stroke="none"/></svg></span><div><h3>Random</h3><p>Generate UUIDs, passwords and random numbers to paste into the current field</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../link-inspect/" data-cat="developer" data-k="Parse Link 链接解析 Split a link into scheme, host, path and decoded parameters, and remove tracking parameters such as utm_source 拆开链接的协议、主机、路径和每个参数（解码后），去掉 utm_source 这类跟踪参数 linkInspect link-inspect Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 13.8a4.2 4.2 0 0 0 6 .2l3-3a4.2 4.2 0 0 0-6-6l-1.6 1.6"/><path d="M13.8 10.2a4.2 4.2 0 0 0-6-.2l-3 3a4.2 4.2 0 0 0 6 6l1.6-1.6"/></svg></span><div><h3>Parse Link</h3><p>Split a link into scheme, host, path and decoded parameters, and remove tracking parameters such as utm_source</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../jwt-decode/" data-cat="developer" data-k="Decode JWT JWT 解码 Decode the selected JWT and list claims such as issuer and expiry (decoding only; the signature isn’t verified) 解码选中的 JWT，列出签发者、过期时间等声明（只解码，不验证签名） jwtDecode jwt-decode Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.6" cy="12" r="4.2"/><path d="M11.8 12h9.2M18.2 12v3.6M15.4 12v2.6"/><circle cx="7.6" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></span><div><h3>Decode JWT</h3><p>Decode the selected JWT and list claims such as issuer and expiry (decoding only; the signature isn’t verified)</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="Previous and next plugin" style="margin-top:28px">
+        <a class="glass prev cat-developer" href="../regex-test/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-developer is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M12 7v10M7.7 9.5l8.6 5M16.3 9.5l-8.6 5"/></svg></span><span><small>Previous</small><strong>Regex Tester</strong></span></a>
+        <a class="glass next cat-developer" href="../code-image/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-developer is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4" width="18.8" height="16" rx="3"/><path d="M2.6 8h18.8"/><circle cx="5.2" cy="6" r=".5" fill="currentColor" stroke="none"/><circle cx="7" cy="6" r=".5" fill="currentColor" stroke="none"/><path d="m9.4 11.2-2.6 2.6 2.6 2.6M14.6 11.2l2.6 2.6-2.6 2.6M12.8 10.6l-1.6 6.4"/></svg></span><span><small>Next</small><strong>Code Screenshot</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">All 101 plugins</a> · <a href="../../">About Pop</a> · <a href="https://github.com/whrss9527/pop/issues">Pop issues on GitHub</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>Native Mac apps for the menu bar. Free and open source.</p>
+      </div>
+      <div>
+        <h2>Apps</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>Privacy</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul>
+          <li><a href="../../../support/">Support</a></li>
+          <li><a href="https://blog.whrss.com">Blog</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+      <nav class="footer-lang" aria-label="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="./" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="../../../zh/pop/plugins/cron/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

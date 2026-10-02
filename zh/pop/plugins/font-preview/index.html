@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>字体预览 · Pop 插件</title>
+<meta name="description" content="用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/font-preview/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/font-preview/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/font-preview/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/font-preview/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="字体预览 · Pop 插件">
+<meta property="og:description" content="用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/font-preview/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-text">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/font-preview/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/font-preview/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#text">文字</a></nav>
+        <p class="plp-cat">Pop 插件 · 文字</p>
+        <h1>字体预览</h1>
+        <p class="lede">用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装。</p>
+        <div class="plp-meta"><span><b>处理</b> 随时可用，不用选中内容</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-text" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 18.5 4.8-13 4.8 13M5.3 14h6"/><path d="M20.5 11.2v7.3M20.5 13.4a3 3 0 1 0 0 3"/></svg></span><span class="pa-chip c1"><i></i>Font Preview</span><span class="pa-chip c2"><i></i>Pop 插件</span><span class="pa-chip c3"><i></i>免费</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-text"><ol class="pla-steps"><li><span class="pla-st"><span><strong>什么都不用选</strong><small>在哪儿都能用。</small></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「字体预览」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>看结果</strong></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"字体预览","glyph":"<path d=\"m3.5 18.5 4.8-13 4.8 13M5.3 14h6\"/><path d=\"M20.5 11.2v7.3M20.5 13.4a3 3 0 1 0 0 3\"/>","scene":{"src":{"kind":"desk"},"card":{"body":[{"t":"text","text":"用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装"}]},"steps":[{"acts":[]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「字体预览」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「字体预览」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「字体预览」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=fontPreview</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=fontPreview" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多文字</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-text" href="../screenshot-translate/" data-cat="text" data-k="Translate Screenshot 截图翻译 Select an area of the screen, recognize its text and translate it (offline) 框选屏幕上的一块区域，识别里面的文字并翻译（离线） screenshotTranslate screenshot-translate Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8V5.5a2 2 0 0 1 2-2H8M16 3.5h2.5a2 2 0 0 1 2 2V8M20.5 16v2.5a2 2 0 0 1-2 2H16M8 20.5H5.5a2 2 0 0 1-2-2V16"/><path d="m6.6 15.4 2.3-6.6 2.3 6.6M7.4 13.2h3"/><path d="M15.4 8v1.2M12.8 9.6h5.4M17 9.6c-.5 2.4-1.9 4.4-4 5.6M13.8 11.6c.8 1.6 2.2 2.9 4.2 3.6"/></svg></span><div><h3>截图翻译</h3><p>框选屏幕上的一块区域，识别里面的文字并翻译（离线）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../speak/" data-cat="text" data-k="Speak 朗读 Read the selected text aloud with a system voice; use it again while speaking to stop. It can also save the speech as an audio file 用系统语音朗读选中的文字，朗读中再用一次就停止；也能读出来存成音频文件 speak speak Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 9.4h3.3l4.6-4.1v13.4l-4.6-4.1H3.8Z"/><path d="M15.2 9.2a4 4 0 0 1 0 5.6M18 6.6a7.7 7.7 0 0 1 0 10.8"/></svg></span><div><h3>朗读</h3><p>用系统语音朗读选中的文字，朗读中再用一次就停止；也能读出来存成音频文件</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../web-capture/" data-cat="text" data-k="Save Web Page 网页存档 Save the whole page at the selected URL to Downloads as one long PDF (with selectable, searchable text) or a long image, or save just the article text as Markdown 把选中的网址整页存成一页长 PDF（文字能选、能搜）、一张长图，或者只把正文存成 Markdown，放在「下载」里 webCapture web-capture Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h7.3l4.8 4.8v11.7a1.5 1.5 0 0 1-1.5 1.5H6.2a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 6.2 3Z"/><path d="M13.3 3v4.9h4.9"/><path d="M11.5 10.2v6.6M8.8 14.2l2.7 2.7 2.7-2.7"/></svg></span><div><h3>网页存档</h3><p>把选中的网址整页存成一页长 PDF（文字能选、能搜）、一张长图，或者只把正文存成 Markdown，放在「下载」里</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../text-image/" data-cat="text" data-k="Text to Image 文字转图片 Lay out the selected text as a long image that reads well on a phone (1080 pixels wide) on a white, cream or dark background; copy it, save it or pin it to the screen 把选中的文字排成一张手机上看着舒服的长图（宽 1080 像素），白底、米黄、深色三种底色，可以复制、存储或贴到屏幕上 textImage text-image Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="11" rx="2.2"/><path d="m4.4 12.2 4.3-4 3.4 3.1 2.2-1.9 5.3 4.2"/><circle cx="15.6" cy="6.8" r="1.3"/><path d="M5 17.6h14M5 20.8h9"/></svg></span><div><h3>文字转图片</h3><p>把选中的文字排成一张手机上看着舒服的长图（宽 1080 像素），白底、米黄、深色三种底色，可以复制、存储或贴到屏幕上</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../large-type/" data-cat="text" data-k="Large Type 大字显示 Show the selected text across the whole screen, handy for showing someone a phone number, Wi-Fi password or pickup code; click or press any key to close 把选中的文字铺满整个屏幕，给别人看电话号码、Wi-Fi 密码、取件码都方便；点一下或按任意键关闭 largeType large-type Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2.8 19 5.2-14 5.2 14M4.7 14.2h6.6"/><path d="m14.2 19 3.4-8.8L21 19M15.4 16.1h4.4"/></svg></span><div><h3>大字显示</h3><p>把选中的文字铺满整个屏幕，给别人看电话号码、Wi-Fi 密码、取件码都方便；点一下或按任意键关闭</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../text-cleanup/" data-cat="text" data-k="Clean Up Text 文字整理 Join lines, remove blank lines and extra spaces, space Chinese and Latin text, full-width to half-width, Simplified ↔ Traditional Chinese, Pinyin, sort and deduplicate lines 合并换行、去掉空行和多余空格、中英文之间加空格、全角转半角、简繁转换、拼音、按行排序去重 textCleanup text-cleanup Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h11M4 9.5h8M4 13.5h11M4 17.5h7"/><path d="m18.2 10.4.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9Z"/><path d="m16.4 3.6.5 1.1 1.1.5-1.1.5-.5 1.1-.5-1.1-1.1-.5 1.1-.5Z"/></svg></span><div><h3>文字整理</h3><p>合并换行、去掉空行和多余空格、中英文之间加空格、全角转半角、简繁转换、拼音、按行排序去重</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-text" href="../large-type/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-text is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2.8 19 5.2-14 5.2 14M4.7 14.2h6.6"/><path d="m14.2 19 3.4-8.8L21 19M15.4 16.1h4.4"/></svg></span><span><small>上一个</small><strong>大字显示</strong></span></a>
+        <a class="glass next cat-text" href="../text-cleanup/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-text is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5h11M4 9.5h8M4 13.5h11M4 17.5h7"/><path d="m18.2 10.4.9 2.3 2.3.9-2.3.9-.9 2.3-.9-2.3-2.3-.9 2.3-.9Z"/><path d="m16.4 3.6.5 1.1 1.1.5-1.1.5-.5 1.1-.5-1.1-1.1-.5 1.1-.5Z"/></svg></span><span><small>下一个</small><strong>文字整理</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 101 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/font-preview/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,16 +1,17 @@
 """Simplified Chinese app pages. Same structure, facts and demos as the
 English data in apps.py; when one changes, change the other."""
 from common import GH
-from apps import pop_demo, POP_HEAD, meno_demo, MENO_HEAD, stox_demo, STOX_HEAD, proxi_demo, PROXI_HEAD
+from apps import pop_demo, POP_HEAD, pop_plugins_section, meno_demo, MENO_HEAD, stox_demo, STOX_HEAD, proxi_demo, PROXI_HEAD
 
 # ---------------------------------------------------------------- Pop
 POP = {
     "title": "Pop · 长按右键，一划即达",
-    "desc": "Pop 是 Mac 菜单栏里的右键工具箱：长按鼠标右键，翻译选中的文字，或打开装着 80 多个工具的圆盘。开源免费。",
+    "desc": "Pop 是 Mac 菜单栏里的右键工具箱：长按鼠标右键，翻译选中的文字，或打开装着 120 多个工具的圆盘。开源免费。",
     "say": "/pɒp/ —— 像个气泡：弹出来，一划，啪一下就没了。",
     "lede": "在选中的任何内容上按住鼠标右键，Pop 就会翻译它、换算它，或者打开一个工具圆盘，一划就选好。轻点一下仍然是平常的右键菜单。",
     "meta": ["开源免费", "macOS 15 或更新", "Apple 芯片与 Intel", "简体中文、English"],
     "extra_head": POP_HEAD,
+    "after_features": pop_plugins_section,
     "stage": lambda r: '<div class="compose pop-stage">' +
         pop_demo(r, "zh", "ring", desk=True) +
         "</div>",
@@ -32,7 +33,7 @@ POP = {
           "单张卡片临时换目标语言，或者朗读出来",
           "把单词存进生词本，还能导出到 Anki"],
          pop_demo(r, "zh", "translate")),
-        ("80 多个工具，放在你想要的位置",
+        ("120 多个工具，放在你想要的位置",
          "摆放 4 到 12 个格子，给某个应用单独配一个圆盘，还能设置跳过圆盘的直达规则：算式直接算出结果，单位和颜色直接换算，图片用本机 OCR 识别文字。",
          ["文本：清理格式、大小写、编码、字数统计、提取链接和邮箱",
           "开发：JSON、YAML、SQL、正则、JWT、哈希、二维码、cron",
@@ -50,7 +51,7 @@ POP = {
           "只有使用 AI 功能时才会发送选中的文字",
           "API 密钥保存在这台 Mac 的钥匙串里"],
          pop_demo(r, "zh", "ai")),
-        ("插件就是一个 JSON 文件",
+        ("自己的插件，一个 JSON 文件就够",
          "把网址模板、shell 脚本、JavaScript 或快捷指令变成圆盘上的工具。也可以从插件库安装：Pop 添加前会校验 SHA-256，安装 shell 脚本前会先给你看内容。",
          ["<code>pop://</code> 链接和快捷指令操作，让其他工具也能调用 Pop",
           "导入、导出插件，或者直接分享 JSON 文件"],

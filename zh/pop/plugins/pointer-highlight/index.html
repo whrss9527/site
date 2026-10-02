@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>突出显示指针 · Pop 插件</title>
+<meta name="description" content="演示、录教程时在指针周围加一圈黄色光圈，按下鼠标时泛起波纹，让人一眼看到指针在哪；再用一次关闭">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/pointer-highlight/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/pointer-highlight/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/pointer-highlight/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/pointer-highlight/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="突出显示指针 · Pop 插件">
+<meta property="og:description" content="演示、录教程时在指针周围加一圈黄色光圈，按下鼠标时泛起波纹，让人一眼看到指针在哪；再用一次关闭">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/pointer-highlight/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-recording">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/pointer-highlight/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/pointer-highlight/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#recording">录屏和演示</a></nav>
+        <p class="plp-cat">Pop 插件 · 录屏和演示</p>
+        <h1>突出显示指针</h1>
+        <p class="lede">演示、录教程时在指针周围加一圈黄色光圈，按下鼠标时泛起波纹，让人一眼看到指针在哪；再用一次关闭。</p>
+        <div class="plp-meta"><span><b>处理</b> 随时可用，不用选中内容</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-recording" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m10.4 9.6 9 3.6-3.8 1.4-1.4 3.8Z"/><path d="M7.2 3.4 8 6M3.4 7.2 6 8M3.6 12.6l2.2-1.2M12.6 3.6l-1.2 2.2"/></svg></span><span class="pa-chip c1"><i></i>黄色光圈</span><span class="pa-chip c2"><i></i>点击泛起波纹</span><span class="pa-chip c3"><i></i>演示时用</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-recording"><ol class="pla-steps"><li><span class="pla-st"><span><strong>什么都不用选</strong><small>在哪儿都能用。</small></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「突出显示指针」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>指针周围多了一圈光</strong></span></span></li><li><span class="pla-st"><span><strong>点击泛起波纹</strong></span></span></li><li><span class="pla-st"><span><strong>再用一次关闭</strong></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"突出显示指针","glyph":"<path d=\"m10.4 9.6 9 3.6-3.8 1.4-1.4 3.8Z\"/><path d=\"M7.2 3.4 8 6M3.4 7.2 6 8M3.6 12.6l2.2-1.2M12.6 3.6l-1.2 2.2\"/>","scene":{"src":{"kind":"desk","title":"季度回顾","lines":["这个季度各地区的**收入**都在增长。","涨得最多的是{{亚太区，+38%}}","接下来：招聘计划和第四季度目标。"]},"steps":[{"acts":[["move",".pl-tgt"],["move",0.3,0.6]]},{"acts":[["click",".pl-tgt"],["wait",500],["click",".pl-doc p"]]},{"acts":[["wait",600],["fx","end"]]}],"fx":{"name":"pointer"}}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「突出显示指针」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>演示、录教程时在指针周围加一圈<b>黄色光圈</b>，让人一眼看到指针在哪。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>按下鼠标时泛起波纹。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>再用一次关闭。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「突出显示指针」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「突出显示指针」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=pointerHighlight</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=pointerHighlight" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多录屏和演示</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-recording" href="../screen-record/" data-cat="recording" data-k="Record Screen 录屏 Drag out an area, click a window or press Return to record the whole screen as MP4; can include the Mac’s sound or the microphone and show clicks and keystrokes, and the recording can then be turned into a GIF. Use it again while recording to stop 拖出一块区域、单击选一个窗口或者按回车录整个屏幕，存成 MP4；可以录上电脑里的声音或者麦克风、显示鼠标点击和按下的键，录好能接着转成 GIF。正在录的时候再用一次就停止 screenRecord screen-record Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="12" r="4.4" fill="currentColor" stroke="none"/></svg></span><div><h3>录屏</h3><p>拖出一块区域、单击选一个窗口或者按回车录整个屏幕，存成 MP4；可以录上电脑里的声音或者麦克风、显示鼠标点击和按下的键，录好能接着转成 GIF。正在录的时候再用一次就停止</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-recording" href="../voice-recorder/" data-cat="recording" data-k="Voice Recorder 录音 Record sound from the microphone and save it as an .m4a file in Downloads; while recording, a small bar at the top of the screen shows the time and level and can pause, and you can transcribe the recording afterwards. Use it again while recording to stop 用麦克风录一段声音，存成 .m4a 放进「下载」；录的时候屏幕上方有个小条，看得到时长和音量，可以暂停，录好能接着转成文字。正在录的时候再用一次就停止 voiceRecorder voice-recorder Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="8.6" y="2.8" width="6.8" height="11.6" rx="3.4"/><path d="M5.4 11a6.6 6.6 0 0 0 13.2 0M12 17.6v3.6M8.6 21.2h6.8"/></svg></span><div><h3>录音</h3><p>用麦克风录一段声音，存成 .m4a 放进「下载」；录的时候屏幕上方有个小条，看得到时长和音量，可以暂停，录好能接着转成文字。正在录的时候再用一次就停止</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-recording" href="../scroll-capture/" data-cat="recording" data-k="Scrolling Screenshot 滚动截图 Select an area, then scroll down while Pop captures it into one long image: whole web pages, chat histories and long documents, with text recognition afterwards if you like. Use it again while capturing to finish 框选一块区域，一边往下滚动一边截，拼成一张长图；网页、聊天记录、长文档都能截全，还能接着识别文字。正在截的时候再用一次就是完成 scrollCapture scroll-capture Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2.8" width="16" height="12.4" rx="2.2"/><path d="M4 18.4v.6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-.6" stroke-dasharray="2 2"/><path d="M12 6.4v5.6M9.4 9.6 12 12.2l2.6-2.6"/></svg></span><div><h3>滚动截图</h3><p>框选一块区域，一边往下滚动一边截，拼成一张长图；网页、聊天记录、长文档都能截全，还能接着识别文字。正在截的时候再用一次就是完成</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-recording" href="../show-keystrokes/" data-cat="recording" data-k="Show Keystrokes 显示按键 Show the shortcuts you press (⌘C, ⇧⌘4, arrow keys and so on) at the bottom of the screen for demos and tutorials; ordinary typing isn’t shown. Use it again to turn it off. Screen recordings can include them too 演示、录教程时在屏幕下方显示按下的组合键（⌘C、⇧⌘4、方向键这些），普通打字不显示；再用一次关闭。录屏时也可以勾选一起录进去 showKeystrokes show-keystrokes Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 10V8.6a1.6 1.6 0 1 0-1.6 1.6H10Zm0 0h4m-4 0v4m4-4V8.6a1.6 1.6 0 1 1 1.6 1.6H14Zm0 0v4m0 0h-4m4 0v1.4a1.6 1.6 0 1 0 1.6-1.6H14Zm-4 0v1.4a1.6 1.6 0 1 1-1.6-1.6H10Z"/></svg></span><div><h3>显示按键</h3><p>演示、录教程时在屏幕下方显示按下的组合键（⌘C、⇧⌘4、方向键这些），普通打字不显示；再用一次关闭。录屏时也可以勾选一起录进去</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-recording" href="../screen-pen/" data-cat="recording" data-k="Draw on Screen 屏幕画笔 Draw right on the screen for demos and tutorials: pen, highlighter, arrow, rectangle and ellipse. Strokes can fade after a few seconds or stay while you use the windows underneath, and screen recordings include them. Press Esc or use it again to finish 演示、录教程时直接在屏幕上画：画笔、荧光笔、箭头、方框、椭圆，笔迹可以几秒后自动消失，也可以留着去操作下面的窗口，录屏时一起录进去；Esc 或再用一次结束 screenPen screen-pen Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15.6c2.6-6.6 5.2-9.8 6.6-9 1.8 1-3.6 9.6-1.4 10.6 1.8.8 4.4-6.4 6.6-5.6 1.6.6-1 5 .6 5.6 1 .4 2.6-1 4.6-3.4"/></svg></span><div><h3>屏幕画笔</h3><p>演示、录教程时直接在屏幕上画：画笔、荧光笔、箭头、方框、椭圆，笔迹可以几秒后自动消失，也可以留着去操作下面的窗口，录屏时一起录进去；Esc 或再用一次结束</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-recording" href="../camera-bubble/" data-cat="recording" data-k="Camera Bubble 摄像头小窗 Show the camera in a small round window in a corner of the screen, so you appear in tutorials and demos. Drag to move it, scroll or double-click to resize, right-click to change the shape or camera. Use it again to close 在屏幕角落用一个圆形小窗显示摄像头画面，录教程、演示时把自己也放进画面；拖动换位置，滚动或双击换大小，右键换形状和摄像头。再用一次关闭 cameraBubble camera-bubble Recording & Presenting 录屏和演示"><span class="ptile cat-recording" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="9.8" r="3"/><path d="M6.4 18.6c1.2-2.4 3.2-3.6 5.6-3.6s4.4 1.2 5.6 3.6"/></svg></span><div><h3>摄像头小窗</h3><p>在屏幕角落用一个圆形小窗显示摄像头画面，录教程、演示时把自己也放进画面；拖动换位置，滚动或双击换大小，右键换形状和摄像头。再用一次关闭</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-recording" href="../camera-bubble/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-recording is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><circle cx="12" cy="9.8" r="3"/><path d="M6.4 18.6c1.2-2.4 3.2-3.6 5.6-3.6s4.4 1.2 5.6 3.6"/></svg></span><span><small>上一个</small><strong>摄像头小窗</strong></span></a>
+        <a class="glass next cat-recording" href="../spotlight/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-recording is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.6h8l-1 5.6H9Z"/><path d="M9 9.2h6v3.4l-1.2 1.6v6.2h-3.6v-6.2L9 12.6Z"/><path d="M12 15.6v1.8"/><path d="M5 2.6 6.2 4M19 2.6 17.8 4" /></svg></span><span><small>下一个</small><strong>聚光灯</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 101 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/pointer-highlight/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

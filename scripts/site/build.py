@@ -13,11 +13,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import apps      # noqa: E402
 import home      # noqa: E402
+import pop_plugin_pages  # noqa: E402
 import privacy   # noqa: E402
 import support   # noqa: E402
 from common import APPS, ORIGIN, SITE  # noqa: E402
 
-PAGES = ["/"] + [f"/{k}/" for k in APPS] + [f"/privacy/{k}/" for k in APPS] + ["/support/"]
+PAGES = ["/"] + [f"/{k}/" for k in APPS] + pop_plugin_pages.pages() + [f"/privacy/{k}/" for k in APPS] + ["/support/"]
 
 
 def sitemap(lastmod):
@@ -35,6 +36,7 @@ def sitemap(lastmod):
 def main():
     home.build()
     apps.build_all()
+    pop_plugin_pages.build_all()
     privacy.build_all()
     support.build()
     lastmod = os.environ.get("LASTMOD") or datetime.date.today().isoformat()
