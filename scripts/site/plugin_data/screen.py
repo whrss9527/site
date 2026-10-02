@@ -195,7 +195,8 @@ def swipe(old, new):
 
 def side_by_side(old, new):
     one = lambda over: f'<div class="pl-img" style="--ar:16/10">{ART["screen"]}<div class="pl-img-o">{over}</div></div>'
-    return f'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">{one(tag(old))}{one(changes() + tag(new))}</div>'
+    return ('<div style="aspect-ratio:16/9;box-sizing:border-box;padding:0 6px;border-radius:10px;background:var(--pl-fill);'
+            f'display:grid;grid-template-columns:1fr 1fr;gap:6px;align-items:center">{one(tag(old))}{one(changes() + tag(new))}</div>')
 
 
 # ---------------------------------------------------------------- Make App Icon: the icon in the Dock, on iPhone and in a tab
@@ -443,8 +444,8 @@ DATA = {
                      "body": [{"t": "list", "dense": True, "items": [{"file": {"kind": "photo", "art": "screen"}, "title": T("Chat 1.png", "聊天 1.png")},
                                                                     {"file": {"kind": "photo", "art": "screen"}, "title": T("Chat 2.png", "聊天 2.png")},
                                                                     {"file": {"kind": "photo", "art": "screen"}, "title": T("Chat 3.png", "聊天 3.png")}]},
-                              {"t": "note", "text": T("3 images are stitched in the order above; if widths differ, they’re scaled to the smallest. Animated images show each frame for 1 s.",
-                                                      "3 张图片按上面的顺序拼接；宽度不一样时按最小的那张缩放。合成动图时每张停 1 秒")}]},
+                              {"t": "note", "text": T("3 images are stitched in the order above; if widths (heights when horizontal) differ, they’re scaled to the smallest. Animated images show each frame for 1 s at the size of the first image.",
+                                                      "3 张图片按上面的顺序拼接；宽度（横着拼时是高度）不一样时按最小的那张缩放。合成动图时每张停 1 秒，画面大小按第一张")}]},
             "steps": [
                 {"cap": T("Check the order", "看一下顺序"), "sub": T("File name order: for screenshots, the order they were taken.", "按文件名排，截图就是先后顺序。"),
                  "acts": [], "hold": 1500},
@@ -693,7 +694,7 @@ DATA = {
                               {"t": "note", "text": T("Found Faces: 1, Phone numbers: 1, Email: 1. The preview is already pixelated; saving makes a copy and leaves the original untouched.",
                                                       "找到人脸 1 处、电话号码 1 处、邮箱 1 处，预览里已经打上马赛克；存的时候另存一份，原图不动")}]},
             "steps": [
-                {"cap": T("The face and contact details are found", "找出人脸和联系方式"), "sub": T("Recognized on your Mac.", "在本机识别。"),
+                {"cap": T("Face and contact details found", "找出人脸和联系方式"), "sub": T("Recognized on your Mac.", "在本机识别。"),
                  "acts": [["wait", 700], ["swap", 0, 1]], "hold": 1500},
                 {"cap": T("Save a pixelated copy", "另存一份打好码的"), "sub": T("Without capture info or location.", "不带拍摄信息和位置。"),
                  "acts": [["click", "btn:0"], ["close"], ["file", {"name": T("Delivery redacted.png", "外卖 打码.png"), "kind": "photo", "art": "doc", "at": 1}],
@@ -714,7 +715,7 @@ DATA = {
             "slot": 3,
             "card": {"w": 420,
                      "body": [{"t": "swatches", "items": [[c, ""] for c, p in SUNSET]},
-                              {"t": "rows", "rows": [[f"{p}%", c] for c, p in SUNSET]},
+                              {"t": "rows", "rows": [[T(f"{p}%", f"占 {p}%"), c] for c, p in SUNSET]},
                               {"t": "note", "text": T("Largest area first; click a swatch to copy its value", "按面积从大到小；点色块复制色值")}]},
             "steps": [
                 {"cap": T("The main colors, largest first", "主要颜色，按面积排好"), "acts": [], "hold": 1600},

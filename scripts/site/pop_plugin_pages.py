@@ -96,7 +96,7 @@ def captions(c, p, d):
     sub = src.get("sub") or (SEL_SUB_DESK if kind in ("desk", "none") and not src.get("cap") else None)
     caps.append((L(c, sel), L(c, sub) if sub else ""))
     caps.append((L(c, HOLD_CAP), L(c, HOLD_SUB)))
-    caps.append((L(c, RING_CAP).replace("%s", p.name(c.lang)), L(c, sc.get("ring_sub") or RING_SUB)))
+    caps.append((L(c, RING_CAP).replace("%s", L(c, sc["label"]) if sc.get("label") else p.name(c.lang)), L(c, sc.get("ring_sub") or RING_SUB)))
     for st in sc.get("steps") or [{"cap": T("See the result", "看结果")}]:
         caps.append((L(c, st.get("cap", "")), L(c, st.get("sub", "")) if st.get("sub") else ""))
     return caps

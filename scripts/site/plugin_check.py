@@ -104,8 +104,6 @@ def check(pid, d, plugin):
     fx = sc.get("fx")
     if fx and fx.get("name") not in FX:
         out.append(f"fx {fx.get('name')!r}")
-    if not card and not fx:
-        out.append("scene: needs a card or an fx")
     walk_strings(d, "entry", out)
     return [f"plugin_data[{pid}]: {m}" for m in out]
 

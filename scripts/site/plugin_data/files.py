@@ -117,7 +117,7 @@ DATA = {
         "points": [
             T("Select a folder and Pop writes out what’s inside as a <b>tree</b> (├── └──) or a Markdown list, ready to paste into docs, a README or a message.",
               "选中一个文件夹，Pop 把里面的目录结构写成<b>树形</b>（├── └──）或者 Markdown 列表，贴进文档、README 或者发给别人。"),
-            T("Folders come first, it goes up to 3 levels deep, and hidden files aren’t listed.", "文件夹排在前面，最多展开 3 层，隐藏文件不列。"),
+            T("Folders are listed first, up to 3 levels deep; hidden files are left out.", "文件夹排在前面，最多展开 3 层，隐藏文件不列。"),
             T("Folders such as node_modules, build and Pods are <b>listed by name only</b>, with “…” when they aren’t empty.",
               "node_modules、build、Pods 这类依赖和编译产物的文件夹<b>只列名字</b>，里面有东西时后面加「…」。"),
             T("The card says how many folders and files it found; copy the one you want.", "卡片上写着一共几个文件夹、几个文件，要哪种复制哪种。"),
@@ -256,13 +256,12 @@ DATA = {
             "src": {"kind": "files", "app": T("Trip plan", "旅行计划"), "cap": T("Select files or folders", "选中文件或文件夹"),
                     "files": [{"name": T("Itinerary.pdf", "行程.pdf"), "sel": True}, {"name": T("Hotel booking.pdf", "酒店预订.pdf"), "sel": True},
                               {"name": T("Map.png", "地图.png"), "kind": "photo", "art": "landscape", "sel": True}, {"name": T("Budget.csv", "预算.csv")}]},
-            # Pop shows no card here: the zip appears in Finder with a short notice. The (invisible)
-            # keys effect stands in for a card so the scene has something to start.
-            "fx": {"name": "keys"},
+            # Pop shows no card here: the zip appears in Finder with a short notice.
+            "label": T("Compress", "压缩"),
             "steps": [
                 {"cap": T("A zip appears next to them", "旁边多了一个 zip"), "sub": T("Several items make “Archive.zip”.", "选了好几个时叫「归档.zip」。"),
                  "acts": [["wait", 400], ["file", {"name": T("Archive.zip", "归档.zip"), "kind": "zip", "at": 3}],
-                          ["toast", T("Compressed to Archive.zip", "已压缩成 归档.zip")], ["fx", "end"]], "hold": 1600},
+                          ["toast", T("Compressed to Archive.zip", "已压缩成 归档.zip")]], "hold": 1600},
             ],
         },
     },
@@ -298,7 +297,7 @@ DATA = {
               "只选了一个 PDF 时，卡片上可以把每页存成图片、复制全部文字、取出几页或者拆成单页、加页码、加密码或者去掉密码、压缩。"),
             T("<b>Page numbers</b> come in four styles (1, Page 1, 1 / 12, - 1 -) at the bottom center, bottom right or top right; the cover can be skipped, and the little preview shows the result.",
               "<b>加页码</b>有「1」「第 1 页」「1 / 12」「- 1 -」四种样式，放在底部居中、右下角或右上角，封面可以不标，左边的小图就是加好的样子。"),
-            T("For a scan, <b>Recognize Text</b> saves a copy that looks the same but can be searched and copied from, recognized on your Mac. The original is never changed.",
+            T("For a scan, <b>Recognize Text</b> reads the text on your Mac and saves a copy that looks the same but can be searched and copied from. The original is never changed.",
               "扫描件可以「<b>识别文字</b>」，在本机认出文字，另存一份看起来一样、能搜索和复制的 PDF；原文件都不动。"),
         ],
         "scene": {
@@ -312,7 +311,7 @@ DATA = {
                      "body": [{"t": "text", "text": T("Lease 2026.pdf", "租房合同.pdf")},
                               {"t": "note", "text": T("12 pages, 9860 characters", "12 页，9860 个字")}]},
             "steps": [
-                {"cap": T("Everything you can do with it", "能做的都在卡片上"), "sub": T("Images, text, pages, numbers, password, compress.", "存图片、复制文字、取页、加页码、加密码、压缩。"),
+                {"cap": T("Everything you can do with it", "能做的都在卡片上"), "sub": T("Save pages, copy text, add numbers or a password…", "存图片、复制文字、取页、加页码、加密码、压缩。"),
                  "acts": [], "hold": 1500},
                 {"cap": T("Add page numbers", "加页码"),
                  "acts": [["click", "btn:3", ["card", {"title": T("Add Page Numbers", "加页码"), "sub": T("Lease 2026.pdf", "租房合同.pdf"), "w": 380,
@@ -395,7 +394,7 @@ DATA = {
         "points": [
             T("Select a recording or a video, choose the language spoken, and Pop turns the speech into <b>text and SRT subtitles</b>, saved next to the original.",
               "选中录音或视频，选说的是哪种话，Pop 把里面说的话转成<b>文字和 SRT 字幕</b>，存在原文件旁边。"),
-            T("Mandarin, English, Cantonese and Japanese. When this Mac can recognize the language itself, the audio <b>stays on your Mac</b>.",
+            T("It understands Mandarin, English, Cantonese and Japanese. When this Mac can recognize the language itself, the audio <b>stays on your Mac</b>.",
               "普通话、英语、粤语、日语都行；这台 Mac 能在本机识别时只在本机识别，<b>不上传音频</b>。"),
             T("Subtitles are split by sentences and pauses, with times. On macOS 26 it uses the system’s new transcription, which handles long recordings in full.",
               "字幕按句子和停顿分好条、带时间；macOS 26 上用系统新的转写，长录音也能完整识别。"),
@@ -523,7 +522,7 @@ DATA = {
                  "acts": [["click", "b:2", [["text", '.pl-card [data-b="1"] p', T("‹ Documents › Videos · 18.4 GB, 212 files", "‹ 文稿 › 视频 · 18.4 GB，212 个文件")]] +
                            _slide(_VIDEOS, 18.4)], ["wait", 700]],
                  "hold": 1000},
-                {"cap": T("Move what you don’t need to the Trash", "不要的移到废纸篓"), "sub": T("Right-click it. You can put it back from the Trash.", "右键就行，还能从废纸篓放回。"),
+                {"cap": T("Trash what you don’t need", "不要的移到废纸篓"), "sub": T("Right-click it. You can put it back from the Trash.", "右键就行，还能从废纸篓放回。"),
                  "acts": [["click", "b:2"], ["hide", 6]] + _slide(_VIDEOS[1:], 11.6) +
                          [["text", '.pl-card [data-b="1"] p', T("‹ Documents › Videos · 11.6 GB, 211 files", "‹ 文稿 › 视频 · 11.6 GB，211 个文件")], ["show", 7]],
                  "hold": 1800},
@@ -557,7 +556,7 @@ DATA = {
                 {"cap": T("Pick a kind", "选一种文件"), "sub": T("The extension follows.", "扩展名跟着变。"),
                  "acts": [["click", "opt:2.1", [["set", 2, {"t": "chips", "items": [T("Plain Text", "纯文本"), "Markdown", T("Rich Text", "富文本"), "JSON", "HTML", "CSV", "Python", T("Shell Script", "Shell 脚本")], "on": [1]}],
                                                 ["text", '.pl-card [data-b="4"] .pl-fv', T("Untitled.md", "未命名.md")]]]], "hold": 900},
-                {"cap": T("Or save the clipboard text", "或者把剪贴板里的文字存下来"), "acts": [["click", "opt:1.1"], ["show", 3]], "hold": 900},
+                {"cap": T("Or save the clipboard text", "或者存剪贴板里的文字"), "acts": [["click", "opt:1.1"], ["show", 3]], "hold": 900},
                 {"cap": T("Name it and create it", "起个名字，新建"), "sub": T("It’s selected in Finder.", "新文件在访达里选中。"),
                  "acts": [["type", 4, T("Weekly sync.md", "周会.md")], ["click", "btn:0"], ["close"],
                           ["file", {"name": T("Weekly sync.md", "周会.md")}], ["toast", T("Created “Weekly sync.md”", "新建了「周会.md」")]], "hold": 1400},
@@ -591,7 +590,7 @@ DATA = {
             "steps": [
                 {"cap": T("See each file’s encoding", "看每个文件是什么编码"), "sub": T("The first line shows whether it reads right.", "第一行没乱码，就是认对了。"),
                  "acts": [["hover", "row:0.0"]], "hold": 1500},
-                {"cap": T("Pick UTF-8 with BOM for Excel", "要给 Excel 用，选带 BOM 的"),
+                {"cap": T("Pick UTF-8 with BOM for Excel", "给 Excel 用，选带 BOM 的"),
                  "acts": [["click", "opt:1.1", ["text", '.pl-card [data-b="3"] p', T("Excel opens CSV files saved as UTF-8 with a BOM correctly. Converts 3 files to UTF-8 with BOM. The original contents are kept so you can undo",
                                                                                "带 BOM 的 UTF-8 用 Excel 打开 CSV 不会乱码；会把 3 个文件转成 UTF-8 带 BOM，原来的内容记着，转完可以撤销")]]], "hold": 1200},
                 {"cap": T("Convert, and undo if you like", "转换，还能撤销"),
@@ -640,11 +639,11 @@ DATA = {
     "mediaInfo": {
         "chips": ["4K · HDR", T("Audio and subtitle tracks", "音轨和字幕"), T("Remove the location", "去掉拍摄地点")],
         "points": [
-            T("Select a video or audio file and see its <b>codec</b> (H.264, HEVC, ProRes, AV1…), its resolution named as 4K or 1080p, frame rate and bit rate.",
+            T("Select a video or audio file and see its <b>codec</b> (H.264, HEVC, ProRes, AV1…), resolution (labeled 4K, 1080p and so on), frame rate and bit rate.",
               "选中一个视频或音频，看它的<b>编码</b>（H.264、HEVC、ProRes、AV1……）、分辨率（标出 4K、1080p 这些叫法）、帧率和码率。"),
-            T("Whether it’s HDR (HDR10, HLG, Dolby Vision), its color space and bit depth; each audio track’s codec, channels, sample rate and language; and the subtitle languages.",
-              "是不是 HDR（HDR10、HLG、Dolby Vision）、色域和色深；每条音轨的编码、声道、采样率和语言；有哪些语言的字幕。"),
-            T("Also which device shot it, when and where. Before sharing, <b>save a copy without the location</b>: the picture and sound are copied as they are.",
+            T("It also shows whether a video is HDR (HDR10, HLG, Dolby Vision), its color space and bit depth, each audio track’s codec, channels, sample rate and language, and the subtitle languages.",
+              "也能看出是不是 HDR（HDR10、HLG、Dolby Vision）、色域和色深；每条音轨的编码、声道、采样率和语言；有哪些语言的字幕。"),
+            T("And which device shot it, when and where. Before sharing, <b>save a copy without the location</b>: the picture and sound are copied as they are.",
               "还有拍摄设备、拍摄时间和拍摄地点；发给别人前可以<b>去掉位置另存一份</b>，画面和声音原样复制，不重新编码。"),
             T("Copy all the information at once.", "可以一键复制全部信息。"),
         ],

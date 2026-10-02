@@ -6,7 +6,7 @@ from . import T
 
 # ---------------------------------------------------------------- Code Screenshot
 # The picture CodeImage.render draws: Pop's dark editor theme (CodeImage.Theme) in a window with
-# three dots, on the "sky" gradient (AnnotationBackground.sky). Colours are fixed: it is an image.
+# three dots, on the "sky" gradient (AnnotationBackground.sky). Colors are fixed: it is an image.
 _CI_COLORS = {"k": "#cc8cff", "s": "#99de8a", "n": "#ffb373", "c": "#808799", "t": "#fad980"}
 _CI_KEYWORDS = {"func", "let", "var", "if", "else", "for", "while", "return", "struct", "class", "enum", "import",
                 "true", "false", "nil", "self", "guard", "in", "switch", "case", "default"}
@@ -15,7 +15,7 @@ _CI_TOKEN = re.compile(r'(//[^\n]*)|("(?:\\.|[^"\\\n])*")|\b(\d[\d_]*(?:\.\d+)?)
 
 def _ci_tint(code):
     """Code as HTML, tinted the way CodeImage.tokens does: comments and strings first, then numbers,
-    keywords and capitalised type names."""
+    keywords and capitalized type names."""
     out, at = [], 0
     for m in _CI_TOKEN.finditer(code):
         kind = "c" if m.group(1) else "s" if m.group(2) else "n" if m.group(3) else None
@@ -172,7 +172,7 @@ DATA = {
                          ["SHA-512", "0ca5f6ebd6ec44970229618d2edd3b5b80442da81f8d7b2e0ca30f4ceeb25ba4d8a36700d26a4d83889a9f14489651de0a899890105fd721c28d69fac33ad237"],
                      ]}]},
             "steps": [
-                {"cap": T("Four hashes at once", "四种哈希一次算好"), "sub": T("Big files are read bit by bit.", "大文件分块读，不占内存。"), "acts": [["wait", 600]]},
+                {"cap": T("Four hashes at once", "四种哈希一次算好"), "sub": T("Big files are read in chunks.", "大文件分块读，不会一次读进内存。"), "acts": [["wait", 600]]},
                 {"cap": T("Copy the one you need", "复制要用的那一个"), "sub": T("Compare it with the checksum on the download page.", "和下载页上写的校验值对一对。"),
                  "acts": [["click", '.pl-card .pl-row[data-i="2"] .pl-ib', ["toast", T("Copied", "已复制")]]]},
             ],
@@ -209,7 +209,8 @@ DATA = {
               "什么都不用选：给出大写和小写的 <b>UUID</b>、两种密码和一个 6 位数字。"),
             T("One password is 16 characters with symbols, the other 20 without. Each has lowercase letters, capitals and digits, and none of the easily confused l, I, O, 0 and 1.",
               "一种密码 16 位、带符号，一种 20 位、不带符号；大写、小写、数字都有，不用 l、I、O、0、1 这些容易看错的字符。"),
-            T("Copy a value, or <b>paste it straight into the field</b> you’re typing in.", "每一项都能复制，也能<b>直接粘贴到正在输入的地方</b>。"),
+            T("Copy a value, or <b>paste it straight into the field</b> you’re typing in; that leaves the clipboard as it was.",
+              "每一项都能复制，也能<b>直接粘贴到正在输入的地方</b>，剪贴板里原来的内容不受影响。"),
             T("The values are new every time.", "每次用都重新生成。"),
         ],
         "scene": {
@@ -240,7 +241,7 @@ DATA = {
             T("Tracking parameters such as utm_source, fbclid and spm are removed: <b>copy the clean link</b> or replace the original with it. The other parameters keep their encoding.",
               "utm_source、fbclid、spm 这类跟踪参数会去掉，<b>干净的链接</b>可以复制，也可以直接替换原文；留下的参数保持原来的编码。"),
             T("Some are only removed where they track, such as si on YouTube and Spotify links.", "有些参数只在特定网站上才去掉，比如 YouTube、Spotify 链接里的 si。"),
-            T("For short links such as bit.ly or t.cn, <b>Expand Short Link</b> follows each redirect to where it ends up. Only then does Pop go online.",
+            T("For short links such as bit.ly or t.cn, <b>Expand Short Link</b> follows each redirect to where it ends up; Pop only goes online when you click it.",
               "t.cn、bit.ly 这类短链接多一个「<b>展开短链接</b>」，一跳一跳跟过去，看最后到了哪个网址；只有点了它才会联网。"),
         ],
         "scene": {
@@ -272,9 +273,9 @@ DATA = {
     "jwtDecode": {
         "chips": [T("Expiry at a glance", "过期时间一眼看到"), T("Local dates", "换成本地时间"), T("Decode only", "只解码")],
         "points": [
-            T("Select a JWT to list its <b>algorithm, issuer, subject and audience</b>, and when it was issued, starts and expires, as local dates.",
+            T("Select a JWT to list its <b>algorithm, issuer, subject and audience</b>, and when it was issued, becomes valid and expires, in local time.",
               "选中一个 JWT，列出<b>算法、签发者、主题、受众</b>，签发时间、生效时间、过期时间都换成本地时间。"),
-            T("The expiry says whether the token has <b>already expired</b>, or when it will.", "过期时间后面标着<b>是否已经过期</b>，没过期的写着还有多久。"),
+            T("The expiry says whether the token has <b>already expired</b>, or how soon it will.", "过期时间后面标着<b>是否已经过期</b>，没过期的写着还有多久。"),
             T("The decoded payload is shown in full and neatly formatted. Copy it, or copy the header.", "完整显示解码后的内容，排好了版，可以复制，也可以复制头部。"),
             T("It only decodes: the signature isn’t verified.", "只解码，不验证签名。"),
         ],
@@ -302,12 +303,12 @@ DATA = {
         },
     },
     "regexTest": {
-        "chips": [T("Live highlighting", "边输入边标出"), T("Groups by name", "分组和命名分组"), "$3/$2/$1"],
+        "chips": [T("Live highlighting", "边输入边标出"), T("Groups and named groups", "分组和命名分组"), "$3/$2/$1"],
         "points": [
             T("Select some text and type a regular expression: matches are <b>highlighted as you type</b>, and each one is listed with its groups (named groups by name).",
               "选中一段文字，输入正则表达式，<b>边输入边标出</b>每处匹配，逐条列出匹配到的文字和每个分组（命名分组显示名字）。"),
-            T("Turn on Ignore case, ^ $ match each line or . matches newlines. Presets has ready-made expressions for numbers, email addresses, URLs, IP addresses, dates, blank lines and more.",
-              "可以打开「忽略大小写」「^ $ 匹配每一行」「. 也匹配换行」；「常用」里有数字、中文、邮箱、手机号、网址、IP 地址、日期、空行这些现成的表达式。"),
+            T("Toggle Ignore case, <code>^ $</code> match each line and <code>.</code> matches newlines. Presets has ready-made expressions for numbers, email addresses, URLs, IP addresses, dates, blank lines and more.",
+              "可以切换「忽略大小写」「^ $ 匹配每一行」「. 也匹配换行」；「常用」里有数字、中文、邮箱、手机号、网址、IP 地址、日期、空行这些现成的表达式。"),
             T("Type a replacement ($1 for the first group) to see the <b>replaced text</b> right away, then copy it or replace the original.",
               "填上替换内容（$1 引用第一个分组），马上看到<b>替换后的全文</b>，可以复制，也可以直接替换原文。"),
             T("An expression that would take forever stops after 1.5 seconds, so nothing hangs.", "写出回溯很慢的表达式时，匹配到 1.5 秒会自己停下，不会卡住。"),
@@ -398,8 +399,8 @@ DATA = {
     "charInfo": {
         "chips": ["U+200B", "UTF-8 · UTF-16", T("Invisible characters", "看不见的字符")],
         "points": [
-            T("Select a few characters to see each one’s <b>Unicode code point, name and UTF-8 bytes</b>, plus UTF-16 for emoji. Emoji with a skin tone are split into their parts.",
-              "选中几个字符，看每个字符的 <b>Unicode 码点、名称和 UTF-8 编码</b>，表情还有 UTF-16；带肤色的表情会拆开列出。"),
+            T("Select a few characters to see each one’s <b>Unicode code point, name and UTF-8 bytes</b>, plus UTF-16 for emoji and other characters beyond U+FFFF. Emoji with a skin tone are split into their parts.",
+              "选中几个字符，看每个字符的 <b>Unicode 码点、名称和 UTF-8 编码</b>，表情这类 U+FFFF 以外的字符还有 UTF-16；带肤色的表情会拆开列出。"),
             T("It finds <b>invisible characters</b> such as zero-width spaces, no-break spaces, BOMs and bidirectional controls, which often come along when you copy from web pages and chats.",
               "能找出零宽空格、不换行空格、BOM、双向控制符这类<b>看不见的字符</b>，从网页、聊天软件复制的文字里常有。"),
             T("Remove them and replace the original, or copy the cleaned text; no-break spaces become ordinary spaces.",

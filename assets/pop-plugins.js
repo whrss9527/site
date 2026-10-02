@@ -232,6 +232,8 @@
     this.s = S[this.lang];
     this.icon = fig.getAttribute("data-icon") || "";
     this.name = data.name;
+    // The action on the ring, when the plugin has several (Zip and Unzip → Compress).
+    if (data.scene && data.scene.label) this.name = data.scene.label;
     this.glyph = svg(data.glyph);
     this.sc = data.scene || {};
     this.steps = this.sc.steps || [];
@@ -395,6 +397,7 @@
     // Plays from chapter k: earlier chapters are applied instantly (fast-forward), then it runs and loops.
     start: function (k) {
       this.started = true;
+      this.stillTo = null;
       this.cancel();
       var gen = this.gen, self = this;
       this.playing = this.visible && !D.hidden && !this.userPaused;
@@ -428,6 +431,7 @@
       this.ff = true;
       this.stage.classList.add("is-ff");
       this.keepRing = k === 2;
+      this.stillTo = k;
       (async function () {
         for (var i = 0; i <= k; i++) await self.chapter(i);
         self.check(gen);
@@ -562,6 +566,7 @@
 
     // -------------------------------------------------------------- chapters
     chapter: function (k) {
+      this.chNow = k;
       if (k === 0) return this.chSelect();
       if (k === 1) return this.chHold();
       if (k === 2) return this.chRing();
@@ -928,7 +933,7 @@
           }
         }).catch(function () {});
       }
-      if (t === "chart" || t === "hours" || t === "img" || t === "thumbs" || t === "qr" || t === "barcode" || t === "wave" || t === "swatches" || t === "grid" || t === "list" || t === "rows" || t === "diff" || t === "table") {
+      if (t === "chart" || t === "hours" || t === "img" || t === "thumbs" || t === "qr" || t === "barcode" || t === "wave" || t === "swatches" || t === "grid" || t === "list" || t === "rows" || t === "diff" || t === "table" || t === "html") {
         if (!this.ff) { n.classList.remove("is-in"); void n.offsetWidth; }
         n.classList.add("is-in");
       }
@@ -980,7 +985,11 @@
         case "type":
           var blk = this.find("b:" + a[1]);
           var fv = blk && (blk.querySelector(".pl-fv") || blk.querySelector("p"));
-          if (fv) { blk.classList.add("is-focus"); await this.typeInto(fv, a[2], a[3]); }
+          if (fv) {
+            each(this.stage.querySelectorAll(".pl-b.is-focus"), function (x) { x.classList.remove("is-focus"); });
+            blk.classList.add("is-focus");
+            await this.typeInto(fv, a[2], a[3]);
+          }
           break;
         case "key": await this.key(a[1]); if (a[2]) await this.effects(a[2]); break;
         default: await this.effects([a]);
@@ -1012,7 +1021,7 @@
       if (!Array.isArray(list[0])) list = [list];
       for (var i = 0; i < list.length; i++) {
         var e = list[i], op = e[0];
-        if (op === "toast") await this.toast(e[1]);
+        if (op === "toast") await this.toast(e[1], e[2]);
         else if (op === "show") { this.reveal(e[1]); await this.wait(e[2] == null ? 300 : e[2]); }
         else if (op === "hide") { var hn = this.find("b:" + e[1]); if (hn) hn.classList.add("is-hidden"); }
         else if (op === "swap") { this.swap(e[1], e[2]); await this.wait(360); }
@@ -1087,15 +1096,21 @@
       c.remove();
       this.card = null;
     },
-    toast: async function (text) {
+    toast: async function (text, ms) {
       var t = el("div", "pl-toast", esc(text));
-      var r = this.card ? this.rel(this.card) : { x: this.W / 2 - 60, y: this.H / 2, w: 120, h: 0 };
+      var r = this.card ? this.rel(this.card) : { x: 0, y: this.H * 0.42, w: this.W, h: 0 };
       t.style.left = (r.x + r.w / 2) + "px";
       t.style.top = clamp(r.y + r.h / 2, 60, this.H - 40) + "px";
+      // Reduced motion: the chapter's last notice stays up, so a step that is only a toast still shows something.
+      if (this.ff && this.stillTo != null) {
+        each(this.layer.querySelectorAll(".pl-toast"), function (x) { x.remove(); });
+        if (this.chNow === this.stillTo) { t.classList.add("is-on"); this.layer.appendChild(t); }
+        return;
+      }
       this.layer.appendChild(t);
       void t.offsetWidth;
       t.classList.add("is-on");
-      await this.wait(900);
+      await this.wait(ms || clamp(700 + Array.from(String(text)).length * 32, 900, 2600));
       t.classList.remove("is-on");
       await this.wait(200);
       t.remove();

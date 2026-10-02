@@ -122,7 +122,7 @@ DATA = {
         ],
         "scene": {
             "src": {"kind": "web", "app": T("Safari", "Safari浏览器"), "url": T("marche.example.fr/samedi", "market.example.com/saturday"),
-                    "cap": T("Open what you want to read", "打开要看的内容"), "sub": T("No need to select anything.", "什么都不用选。"),
+                    "cap": T("Open what you want to read", "打开要看的内容"), "sub": T("No need to select anything.", "什么都不用选。"), "sum": T("Nothing selected", "未选中内容"),
                     "lines": [T("Marché du samedi", "Saturday Market"),
                               T("Le marché ouvre à 8 h place de la Mairie, avec du pain, des fromages et des fleurs.",
                                 "The market opens at 8 am on Town Hall Square, with bread, cheese and flowers."),
@@ -166,14 +166,15 @@ DATA = {
                                 "[[大家早上好，欢迎收听今天的晨间简报。今天晴，有微风，农贸市场八点开门。]]"),
                               T("Traffic is light on the ring road this morning.", "今天早上环路上车不多。")],
                     "pic": "sunset"},
-            "card": {"title": T("Speaking…", "正在朗读…"), "sub": T("English · system voice", "普通话 · 系统语音"), "w": 270,
-                     "body": [{"t": "wave", "live": True, "n": 34}]},
+            # Pop shows no card here, only a short notice: the voice is the result.
+            "label": T("Speak", "朗读"),
             "steps": [
-                {"cap": T("It reads the text aloud", "读出来"), "sub": T("In a system voice for the text’s language.", "用对应语言的系统语音。"), "acts": [["wait", 1400]], "hold": 1200},
-                {"cap": T("Use it again to stop", "再用一次就停"), "acts": [["close"], ["toast", T("Stopped speaking", "已停止朗读")]], "hold": 700},
+                {"cap": T("It reads the text aloud", "读出来"), "sub": T("In a system voice for the text’s language.", "用对应语言的系统语音。"),
+                 "acts": [["toast", T("Speaking…", "正在朗读…"), 2400]], "hold": 900},
+                {"cap": T("Use it again to stop", "再用一次就停"), "acts": [["toast", T("Stopped speaking", "已停止朗读"), 1500]], "hold": 700},
                 {"cap": T("Or save it as audio", "或者存成音频"), "sub": T("Save Speech as Audio puts an .m4a in Downloads.", "「朗读存成音频」存一个 .m4a 放进「下载」。"),
-                 "acts": [["toast", T("Saving as audio…", "正在存成音频…")], ["wait", 300],
-                          ["toast", T("Saved “Speech Good morning….m4a” (8 s long)", "存好了「朗读 大家早上好，欢迎收听今天….m4a」，长 8 秒")]], "hold": 900},
+                 "acts": [["toast", T("Saving as audio…", "正在存成音频…"), 1300], ["wait", 200],
+                          ["toast", T("Saved “Speech Good morning….m4a” (8 s long)", "存好了「朗读 大家早上好，欢迎收听今天….m4a」，长 8 秒"), 2600]], "hold": 900},
             ],
         },
     },
@@ -300,6 +301,7 @@ DATA = {
             ],
         },
     },
+
     # ------------------------------------------------------------------ Clean Up Text
     "textCleanup": {
         "chips": [T("Join broken lines", "合并换行"), T("Simplified ↔ Traditional", "简繁转换"), T("Pinyin", "拼音")],
@@ -319,9 +321,9 @@ DATA = {
                                ["# 项目周报", "[[我们用React重写了前端，", "页面加载时间从3秒降到了", "0.8秒。]]"])},
             "card": {"title": T("Clean Up Text", "文字整理"), "w": 380,
                      "body": [{"t": "rows", "rows": T(
-                         [["Join Lines", "The new office opens on Monday, October 6. Bring your badge…"],
+                         [["Join Lines", "The new office opens on Monday, October 6…"],
                           ["Remove Extra Spaces", "The new office opens on Monday, Oct-…"],
-                          ["Sort Lines", "ober 6. Bring your badge and update…"]],
+                          ["Sort Lines", "ober 6. Bring your badge…"]],
                          [["合并换行", "我们用React重写了前端，页面加载时间从3秒降到了0.8秒。"],
                           ["中英文空格", "我们用 React 重写了前端，\n页面加载时间从 3 秒降到了…"],
                           ["转为繁体", "我們用React重寫了前端，\n頁面加載時間從3秒降到了…"],
@@ -414,13 +416,14 @@ DATA = {
               "选中一列值（每行一个），<b>加上单引号和逗号</b>，正好放进 SQL 的 IN 列表，单引号自动转义。"),
             T("Or double-quote them, make a JSON array, join them with commas, add or remove numbering, remove quotes, reverse or shuffle them.",
               "也可以加双引号、转 JSON 数组、用逗号连起来、加序号或者去掉序号、去掉引号、倒序、打乱。"),
-            T("A single line separated by commas, 、 or semicolons is split into lines.", "一行里用逗号、顿号、分号隔开的，可以拆成多行。"),
+            T("A single line separated by commas, semicolons, tabs or vertical bars (Chinese punctuation too) is split into lines.",
+              "一行里用逗号、顿号、分号、竖线或者制表符隔开的，可以拆成多行。"),
             T("Copy any version, or put it in place of the selection.", "每一种都可以复制，也可以直接替换原文。"),
         ],
         "scene": {
             "src": {"kind": "text", "app": T("TextEdit", "文本编辑"), "title": "refunds.sql", "mono": True, "cap": T("Select a column of values", "选中一列值"),
                     "sub": T("Pasted from a spreadsheet, one per line.", "从表格里粘过来的，一行一个。"),
-                    "lines": [T("-- orders to refund", "-- 要退款的订单"), "SELECT * FROM orders", "WHERE id IN (", "  [[A-1024", "A-1031", "A-1047", "B-2002]]", ");"]},
+                    "lines": [T("-- orders to refund", "-- 要退款的订单"), "SELECT * FROM orders", "WHERE id IN (", "  [[A-1024", "  A-1031", "  A-1047", "  B-2002]]", ");"]},
             "card": {"title": T("Lines", "按行处理"), "w": 380,
                      "body": [{"t": "rows", "rows": [
                          [T("Comma-Separated", "逗号隔开"), "A-1024, A-1031, A-1047, B-2002"],
@@ -444,7 +447,7 @@ DATA = {
     "reminder": {
         "chips": [T("“Friday at 3 pm”", "「周五下午 3 点」"), T("Reminders", "提醒事项"), T("Calendar", "日历")],
         "points": [
-            T("Select a sentence such as “明天下午 3 点和设计组过一遍截图” and Pop <b>picks out the time and the task</b>. It knows Chinese phrases for today, tomorrow, weekdays and next week, dates, “in 3 days”, “in half an hour”, morning, afternoon and evening, half past and a quarter past.",
+            T("Select a sentence with a time in it, such as “明天下午 3 点和设计组过一遍截图” (go over the screenshots with the design team tomorrow at 3 pm), and Pop <b>picks out the time and the task</b>. It knows Chinese phrases for today, tomorrow, weekdays and next week, dates, “in 3 days”, “in half an hour”, morning, afternoon and evening, half past and a quarter past.",
               "选中一句话，比如「明天下午 3 点和设计组过一遍截图」「周五之前交周报」「半小时后给妈妈打电话」，Pop <b>认出时间和要做的事</b>：今天明天后天、周几和下周几、几月几号、几天后、半小时后、上午下午晚上几点几分、几点半、一刻都认得。"),
             T("English sentences such as “tomorrow at 3pm” are read by the system’s date detection.", "英文交给系统识别（tomorrow at 3pm）。"),
             T("Change the to-do, date and time if you like, then add it to Reminders, where a time gets an alert, or to Calendar, where a day without a time becomes an all-day event. The original sentence goes into the notes.",
@@ -590,18 +593,10 @@ DATA = {
                               T("[[Good tools disappear: you notice the work, not the tool.]]", "[[好用的工具会隐形：你看到的是活儿，不是工具。]]"),
                               T("The best ones fit the hand so well that you forget they’re there.", "最好的那些顺手到让人忘了它们的存在。")],
                     "pic": "mug"},
-            "card": {"title": T("Pop 收集箱.md", "Pop 收集箱.md"), "sub": T("in Documents", "在「文稿」里"), "w": 330, "at": "right",
-                     "body": [{"t": "text", "mono": True, "muted": True, "size": "s",
-                               "text": T("# Pop 收集箱\n\n## 2026-09-29 21:05 · Notes\n\nAsk Sam about the heater",
-                                         "# Pop 收集箱\n\n## 2026-09-29 21:05 · 备忘录\n\n问一下房东暖气的事")},
-                              {"t": "text", "mono": True, "size": "s", "hide": True,
-                               "text": T("{+## 2026-09-30 16:14 · Safari\n\nGood tools disappear: you notice the work, not the tool.+}",
-                                         "{+## 2026-09-30 16:14 · Safari浏览器\n\n好用的工具会隐形：你看到的是活儿，不是工具。+}")}]},
+            # Pop shows no card here: the text is appended to Documents › Pop 收集箱.md with a short notice.
             "steps": [
                 {"cap": T("It’s added to your Inbox", "记进收集箱"), "sub": T("No window to open: just a short note.", "不用打开窗口，只提示一句。"),
-                 "acts": [["toast", T("Added to Inbox", "已记到收集箱")], ["show", 1]], "hold": 1600},
-                {"cap": T("Under the date, time and app", "写着日期、时间和来源"), "sub": T("Documents › Pop 收集箱.md, plain Markdown.", "「文稿/Pop 收集箱.md」，普通的 Markdown。"),
-                 "acts": [["move", "b:1"]], "hold": 1800},
+                 "acts": [["toast", T("Added to Inbox", "已记到收集箱"), 2000]], "hold": 1200},
             ],
         },
     },
