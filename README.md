@@ -2,13 +2,14 @@
 
 The website for whrss9527's Mac apps — [Pop](https://github.com/whrss9527/pop), [Meno](https://github.com/whrss9527/meno), [Stox](https://github.com/whrss9527/stox) and [Proxi](https://github.com/whrss9527/proxi) — served at **https://whrss.com**. The blog that used to live there moves to **https://blog.whrss.com**.
 
-Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, scroll motion, the 404 page and the four interactive app demos; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
+Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, scroll motion, the 404 page, the four interactive app demos and the plugin animations; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
 
 ## Structure
 
 ```
 index.html              Home
 pop/ meno/ stox/ proxi/ App pages: hero, features, requirements, install and update, FAQ
+pop/plugins/            Pop's plugins: a gallery, and a page per plugin with an animated how-to (see "Plugin pages")
 privacy/<app>/          Privacy policy per app (for the Mac App Store, Setapp and users)
 support/                How to get help: GitHub issues per app, email
 zh/...                  The same pages in Simplified Chinese: zh/, zh/pop/, zh/privacy/pop/, zh/support/ ...
@@ -17,6 +18,7 @@ assets/site.css         The only stylesheet: tokens on :root, light and dark via
 assets/site.js          Remembers the language picked in the language menu; closes open menus
 assets/motion.js        Scroll motion: reveals, the pinned feature demos, parallax, the condensing bars
 assets/<app>-demo.js/.css Interactive recreations of Pop, Meno, Stox and Proxi (sample data; loaded on its app's pages and the home page)
+assets/pop-plugins.js/.css The plugin gallery's filter and the plugin pages' animations (Pop's ring, cards and screen effects; sample data)
 assets/icons/           App icons (256 px, from each app's repository)
 assets/og/              Open Graph images, 1200 × 630, per page and language (rendered by scripts/og/render.js)
 assets/favicon.svg, assets/apple-touch-icon.png
@@ -39,6 +41,7 @@ scripts/site/common.py       <head> (canonical, hreflang), header with the langu
 scripts/site/home.py         Home, both languages
 scripts/site/apps.py         App pages: layout and English text
 scripts/site/apps_zh.py      App pages: Chinese text
+scripts/site/pop_plugin*.py  Pop's plugin gallery and pages; plugin_data/ holds each plugin's text and animation
 scripts/site/privacy.py      Privacy policies: layout and English text (and the date)
 scripts/site/privacy_zh.py   Privacy policies: Chinese text
 scripts/site/support.py      Support page, both languages, and the 404 page
@@ -93,9 +96,83 @@ Demos are built lazily: each is built when it comes within a screen of the viewp
 
 Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Stox "English, 简体中文"; Meno "English, 简体中文, 繁體中文"; Proxi "English, 简体中文". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
 
+### Plugin pages
+
+Pop's plugins (the separate plugin bundles Pop installs on demand) each have a page, and there is a gallery of all of them:
+
+```
+pop/plugins/              Gallery: how plugins work, filter by category, search (assets/pop-plugins.js)
+pop/plugins/<slug>/       One page per plugin: art, an animated how-to, what it does, how to install it
+zh/pop/plugins/...        The same in Chinese
+```
+
+The Pop page has a Plugins section (a drifting wall of every plugin, linking to the gallery). The pages come from:
+
+```
+scripts/site/pop_plugins.py        The catalog: id, category, action IDs, accepted content, names and summaries
+scripts/site/pop_plugin_glyphs.py  One line icon per plugin (24 × 24 SVG, after the SF Symbol Pop uses)
+scripts/site/pop_plugin_pages.py   The gallery, the plugin pages and the Pop page section
+scripts/site/plugin_data/*.py      Per plugin: chips, points and the animation (any module in the folder)
+assets/pop-plugins.js / .css       The gallery filter and the animation player; the art, the stage, the pictures
+```
+
+The catalog is copied from Pop (`Pop/Plugins/PluginCatalog.swift`, the English strings from `en.lproj/Localizable.strings`, `accepts` from each plugin's `PluginInfo`; the order within a category follows the plugin table in Pop's `docs/guide.md`). `SYNCED_WITH` in `pop_plugins.py` is the Pop version the pages were last checked against; a daily routine compares it with Pop's latest release and, when Pop has moved on, opens a pull request that brings the catalog and the pages up to date. When Pop adds, renames or removes a plugin, update `pop_plugins.py`, add a glyph and a `plugin_data` entry; the build fails if a plugin has no entry or an entry is malformed (`scripts/site/plugin_check.py`). While working on a few entries, `python3 scripts/site/pop_plugin_pages.py --only qrCode,hash` checks and writes just those pages. A page's address is the plugin ID in lower case with dashes (`qrCode` → `/pop/plugins/qr-code/`).
+
+**An entry** in `plugin_data/<module>.py` (`DATA = {plugin id: entry}`). Any text that differs between the languages is written `T("English", "中文")`:
+
+| Key | What |
+| --- | --- |
+| `chips` | Three short labels that float around the plugin's art (formats, options, “Offline”…) |
+| `points` | 3–5 sentences for “What it does”, from Pop's changelog and guide; `<b>` and `<code>` allowed |
+| `scene` | The animation, below |
+
+**The scene** plays as chapters, one per step in the list beside it: 1 select something, 2 hold the right mouse button, 3 swipe to the plugin on Pop's ring (these three are shared, with the captions from `pop_plugin_pages.py`), then one chapter per item in `steps`. It loops, pauses offscreen and when the play button is pressed; clicking a step plays from there (earlier chapters are applied instantly). With reduced motion nothing plays: the steps pick which chapter's end state is shown.
+
+| Key | What |
+| --- | --- |
+| `src` | What's on screen. `kind`: `text` (a document window: `app` for the menu bar, `title`, `lines`, `mono`), `web` (a browser: `url`, `lines`, optional `pic` art and `more` lines), `files` (Finder: `app` is the folder, `files`), `image` (an image viewer: `art`) or `desk` (a quiet window, optional `title` and `lines`; nothing is selected). `cap` / `sub` replace the first step's caption; `sum` replaces the text in the ring's centre; `raw` shows `**`, backticks and `#` as typed (for Markdown sources) |
+| `slot` | Which ring slot holds the plugin, 0 (top) to 7 clockwise; default 2 (right) |
+| `label` | The action's name on the ring and the card, when the plugin has several (“Compress” for Zip and Unzip) |
+| `card` | The result card: `title` (default: the plugin's name), `sub`, `w` (width in points, default 380), `at` (`pointer`, `center`, `left`, `right`), `body` (blocks), `btns` (footer buttons), `tint` (the index of the tinted button) |
+| `fx` | A screen effect instead of, or before, a card: `{"name": …}` (below). A scene may have neither, when Pop only shows a toast |
+| `steps` | `[{"cap": …, "sub": …, "acts": [...], "hold": ms}]`; the card or effect appears at the start of the first |
+| `tall` | A taller stage, for long cards |
+
+In `lines` and most text: `[[selected]]` (the selection; it may span lines), `{{target}}` (something an effect aims at), `**bold**`, `` `code` ``, `==highlight==`, `{+inserted+}`, `{-deleted-}`. A line starting `# ` is a heading. **Files**: `{"name", "kind", "sel", "art"}`; `kind` is `folder`, `app` (with `c1`, `c2`, `glyph`), `photo` and `video` (with `art`), `audio`, `font`, `zip`, or empty for a document tinted by its extension. **Pictures** (`art`), drawn in CSS: `landscape`, `beach`, `sunset`, `city`, `portrait`, `flower`, `mug`, `screen`, `doc`, `logo`, `forest`, `waves`.
+
+**Blocks** (`{"t": type, …}`; `"hide": true` keeps one hidden until shown):
+
+| Type | Keys |
+| --- | --- |
+| `text` | `text`, `mono`, `muted`, `size` (`s`, `l`, `xl`), `type` (typed out as it appears) |
+| `note`, `big` | A small grey line; a large centred value (`text`, `sub`) |
+| `rows` | `rows`: `[[label, value, tone?]]` (`warn`, `ok`, `hl`), `mono` (default true), `copy` (copy icons, default true) |
+| `code` | `text`, `lang` (`ts`, `swift`, `go`, `kt`, `sql`, `json`, `yaml`, `xml`, `md`, `plain`) |
+| `seg`, `chips` | `items`, `on` (index; for chips a list), `label`, `ctl` (the index of a `panes` block it switches) |
+| `panes` | `panes`: a list of block lists, `on`; one shows at a time |
+| `list` | `items`: `{title, sub, right, icon (emoji or SVG), file (a file icon), sw (a colour), chk (checkbox), on, tone, btn}`, `dense` |
+| `diff`, `table` | `lines`: `[["+"|"-"|" ", text]]`; `head`, `rows` |
+| `chart` | `kind` (`bar`, `hbar`, `line`, `pie`), `data`: `[[label, value, shown?]]`, `title`, `multi` (a colour per bar) |
+| `swatches`, `grid` | `items`: `[[colour, label]]`; `items` (characters), `cols`, `on` |
+| `qr`, `barcode` | `text`, `caption`, `small` |
+| `bar` | A progress bar: `label`, `right`, `from`, `to`, `dur`, `count` (`"%s%"` counts `c0`→`c1`), `done` |
+| `stats` | `items`: `[[value, unit, label]]`; numbers count up |
+| `dial` | A ring: `text`, `sub`, `from`, `to`, `dur`, `secs` + `run` (a countdown) |
+| `thumbs` | `items`: `{art, label, chk, best}`, `cols` |
+| `img` | `art`, `ar` (aspect ratio), `h`, `mods` (`frame`, `frame2`, `cutout`, `blue`, `white`, `red`, `grid3`, `grid2`, `mosaic`, `round`, `gray`, `warm`), `mark` (watermark text), `over` (HTML on top), `caption` |
+| `field`, `slider`, `wave` | `label`, `value`, `ph`, `type`, `mono`; `label`, `value` 0–1, `right`; `n`, `live` |
+| `hours` | Time zones: `rows`: `[[city, time, offset hours, note]]`, `at` 0–1 |
+| `sep`, `html` | A rule; raw HTML (`html`) |
+
+**Acts** (in `steps[].acts`, run in order): `["click", sel, effects?]` (moves the pointer there and clicks; segments, chips, checkboxes and list rows react by themselves), `["hover", sel]`, `["move", sel, fx?, fy?, ms?]` or `["move", x, y, ms?]` (fractions of the element or the stage), `["type", block, text]`, `["key", "⌘C"]`, `["wait", ms]`, or any effect. Selectors: `btn:N` (footer button), `btn:B.N`, `opt:B.N`, `row:B.N`, `chk:B.N`, `cell:B.N`, `th:B.N` (the Nth item in block B), `b:B` (block B), `x` (the close button), or a CSS selector in the stage. **Effects**: `["toast", text, ms?]` (it stays longer for longer text), `["show", B]`, `["hide", B]`, `["swap", B, i]` (a `panes` block), `["set", B, block]`, `["close"]`, `["card", card]` (a new card), `["file", file]` (a new file in Finder; `at`, `replace`), `["grid", files]` (Finder shows these instead), `["rename", [[i, name]]]`, `["notify", title, body]` (a notification), `["mb", "cup"|"headphones"|"timer"|"mic"|"rec", on?]` (a menu bar icon), `["win", "left"|"right"|"max"|"center"|"third"]` (moves the window), `["replace", text]` (the result replaces the selection in the document and the card closes, as Replace does; lines fill the selected lines), `["prop", B or sel, "--at"|"--v", value]` (slides a `hours` moment, a `slider` or a `bar` with its own transition), `["text", B or sel, text]` (new text, flashed), `["fx", command, arg]`.
+
+**Screen effects** (`fx.name`) and their commands: `region` (drag out an area: `target` selector or `rect` `[x, y, w, h]` fractions, `hint`, `keep`; then `["fx", "rec", secs]` to record it, `["fx", "scroll", ms]` to scroll under it, `["fx", "dimOff"]`), `pen` (`tool` i, `color`, `draw` `{shape: oval|rect|line|arrow|scribble, target | rect, hl, color, ms}`, `fade`, `end`), `spotlight` and `pointer` (follow the pointer; `end`), `zoom` (`k`; `zoom` k, `end`), `camera` (`drag` [x, y], `grow`, `shape` "square"), `keys` (`key` "⌘C"), `large` (`text`), `tele` (`lines`; `speed` rate, `pause`), `ruler` (`box`; `box` [x, y, w, h]), `recorder` (`secs`), `lock` (`title`, `sub`, `btn`); every effect has `end`.
+
+Write it the way Pop works (read the plugin's source in Pop's `PluginBundles/<Name>/` and its changelog entry), with Pop's own wording for buttons and options in each language, and sample content that reads naturally in each language. The neutral voice of the rest of the site applies: say what the plugin does, without comparing it to other products.
+
 ### Open Graph images
 
-Each page declares `og:image` (and `twitter:card`): the app's own image on its pages, the home image elsewhere. The PNGs in `assets/og/` are rendered from the site itself, so they show the recreated UI and never a screenshot:
+Each page declares `og:image` (and `twitter:card`): the app's own image on its pages (Pop's on its plugin pages), the home image elsewhere. The PNGs in `assets/og/` are rendered from the site itself, so they show the recreated UI and never a screenshot:
 
 ```sh
 python3 -m http.server 8000 &

@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>字符信息 · Pop 插件</title>
+<meta name="description" content="查看每个字符的 Unicode 码点、名称和编码；找出并去掉零宽空格这类看不见的字符">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/char-info/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/char-info/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/char-info/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/char-info/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="字符信息 · Pop 插件">
+<meta property="og:description" content="查看每个字符的 Unicode 码点、名称和编码；找出并去掉零宽空格这类看不见的字符">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/char-info/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-developer">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/char-info/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/char-info/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#developer">开发</a></nav>
+        <p class="plp-cat">Pop 插件 · 开发</p>
+        <h1>字符信息</h1>
+        <p class="lede">查看每个字符的 Unicode 码点、名称和编码；找出并去掉零宽空格这类看不见的字符。</p>
+        <div class="plp-meta"><span><b>处理</b> 选中的文字</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-developer" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17.6 4.6-12.2 4.6 12.2M4.6 13.4h6"/><circle cx="16.6" cy="14.2" r="3.6"/><path d="m19.2 16.8 2.2 2.2"/></svg></span><span class="pa-chip c1"><i></i>U+200B</span><span class="pa-chip c2"><i></i>UTF-8 · UTF-16</span><span class="pa-chip c3"><i></i>看不见的字符</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-developer"><ol class="pla-steps"><li><span class="pla-st"><span><strong>选中几个字符</strong></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「字符信息」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>码点、名称、编码</strong><small>带肤色的表情拆开列出。</small></span></span></li><li><span class="pla-st"><span><strong>藏着看不见的字符</strong><small>两个零宽空格。</small></span></span></li><li><span class="pla-st"><span><strong>去掉后替换原文</strong><small>也可以去掉后复制。</small></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"字符信息","glyph":"<path d=\"m3 17.6 4.6-12.2 4.6 12.2M4.6 13.4h6\"/><circle cx=\"16.6\" cy=\"14.2\" r=\"3.6\"/><path d=\"m19.2 16.8 2.2 2.2\"/>","scene":{"src":{"kind":"text","app":"信息","lines":["老陈：明天中午一起吃饭？","小林：[[好的​​👍🏽]]"]},"card":{"w":400,"btns":["复制码点","去掉后替换原文","去掉后复制"],"tint":1,"body":[{"t":"rows","rows":[["好","U+597D · CJK UNIFIED IDEOGRAPH-597D\nUTF-8 E5 A5 BD"],["的","U+7684 · CJK UNIFIED IDEOGRAPH-7684\nUTF-8 E7 9A 84"],["零宽空格","U+200B · 零宽空格\nUTF-8 E2 80 8B"],["👍🏽","U+1F44D U+1F3FD · THUMBS UP SIGN + EMOJI MODIFIER FITZPATRICK TYPE-4\nUTF-8 F0 9F 91 8D F0 9F 8F BD · UTF-16 D83D DC4D D83C DFFD"]]},{"t":"note","text":"有 2 个看不见的字符：零宽空格 ×2"}]},"steps":[{"acts":[["wait",700]]},{"acts":[["move","row:0.2",0.4,0.5],["text",".pl-card .pl-row[data-i=\"2\"] .pl-row-l","零宽空格"],["text",".pl-card [data-b=\"1\"] p","有 2 个看不见的字符：零宽空格 ×2"],["wait",1000]]},{"acts":[["click","btn:1",["replace","好的👍🏽"]]]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「字符信息」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>选中几个字符，看每个字符的 <b>Unicode 码点、名称和 UTF-8 编码</b>，表情这类 U+FFFF 以外的字符还有 UTF-16；带肤色的表情会拆开列出。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>能找出零宽空格、不换行空格、BOM、双向控制符这类<b>看不见的字符</b>，从网页、聊天软件复制的文字里常有。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>可以去掉后替换原文，也可以去掉后复制；不换行空格换成普通空格。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>20 个字以内逐个列出，更长的文字只检查看不见的字符。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「字符信息」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「字符信息」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=charInfo</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=charInfo" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多开发</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-developer" href="../hash/" data-cat="developer" data-k="Hash 哈希 Compute MD5, SHA-1, SHA-256 and SHA-512 of text or files 计算文字或文件的 MD5、SHA-1、SHA-256、SHA-512 hash hash Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10.4 7.2 9.2 16.8M14.8 7.2l-1.2 9.6M7.4 10.2h9.6M7 13.8h9.6"/></svg></span><div><h3>哈希</h3><p>计算文字或文件的 MD5、SHA-1、SHA-256、SHA-512</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../qr-code/" data-cat="developer" data-k="QR Code 二维码 Generate a QR code from text or a link (letters and digits can also become a barcode); with an image selected, read the QR codes and barcodes in it 把文字或链接生成二维码（英文字母和数字还能生成条形码）；选中图片时识别里面的二维码和条形码 qrCode qr-code Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.6" y="3.6" width="6.6" height="6.6" rx="1.4"/><rect x="13.8" y="3.6" width="6.6" height="6.6" rx="1.4"/><rect x="3.6" y="13.8" width="6.6" height="6.6" rx="1.4"/><rect x="6" y="6" width="1.8" height="1.8" fill="currentColor" stroke="none"/><rect x="16.2" y="6" width="1.8" height="1.8" fill="currentColor" stroke="none"/><rect x="6" y="16.2" width="1.8" height="1.8" fill="currentColor" stroke="none"/><path d="M13.8 13.8h2.6v2.6M20.4 13.8v.1M13.8 20.4h.1M17.6 17.6h2.8v2.8h-2.8z"/></svg></span><div><h3>二维码</h3><p>把文字或链接生成二维码（英文字母和数字还能生成条形码）；选中图片时识别里面的二维码和条形码</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../base64-image/" data-cat="developer" data-k="Base64 Image Base64 图片 Show Base64 or data: image data as an image to copy, save or pin 把 Base64 或 data: 开头的图片数据显示成图片，可以复制、保存、贴到屏幕 base64Image base64-image Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="4" width="18.8" height="16" rx="2.4"/><rect x="5.4" y="6.8" width="13.2" height="10.4" rx="1"/><path d="m5.8 15.6 3.4-3.2 2.6 2.4 1.8-1.6 4.6 3.6"/><circle cx="14.6" cy="9.6" r="1.1"/></svg></span><div><h3>Base64 图片</h3><p>把 Base64 或 data: 开头的图片数据显示成图片，可以复制、保存、贴到屏幕</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../random/" data-cat="developer" data-k="Random 随机生成 Generate UUIDs, passwords and random numbers to paste into the current field 生成 UUID、密码和随机数字，可以直接粘贴到当前输入框 random random Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.4" y="3.4" width="17.2" height="17.2" rx="4"/><circle cx="8.2" cy="8.2" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.8" cy="8.2" r="1.25" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.25" fill="currentColor" stroke="none"/><circle cx="8.2" cy="15.8" r="1.25" fill="currentColor" stroke="none"/><circle cx="15.8" cy="15.8" r="1.25" fill="currentColor" stroke="none"/></svg></span><div><h3>随机生成</h3><p>生成 UUID、密码和随机数字，可以直接粘贴到当前输入框</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../link-inspect/" data-cat="developer" data-k="Parse Link 链接解析 Split a link into scheme, host, path and decoded parameters, and remove tracking parameters such as utm_source 拆开链接的协议、主机、路径和每个参数（解码后），去掉 utm_source 这类跟踪参数 linkInspect link-inspect Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10.2 13.8a4.2 4.2 0 0 0 6 .2l3-3a4.2 4.2 0 0 0-6-6l-1.6 1.6"/><path d="M13.8 10.2a4.2 4.2 0 0 0-6-.2l-3 3a4.2 4.2 0 0 0 6 6l1.6-1.6"/></svg></span><div><h3>链接解析</h3><p>拆开链接的协议、主机、路径和每个参数（解码后），去掉 utm_source 这类跟踪参数</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-developer" href="../jwt-decode/" data-cat="developer" data-k="Decode JWT JWT 解码 Decode the selected JWT and list claims such as issuer and expiry (decoding only; the signature isn’t verified) 解码选中的 JWT，列出签发者、过期时间等声明（只解码，不验证签名） jwtDecode jwt-decode Developer 开发"><span class="ptile cat-developer" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.6" cy="12" r="4.2"/><path d="M11.8 12h9.2M18.2 12v3.6M15.4 12v2.6"/><circle cx="7.6" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></span><div><h3>JWT 解码</h3><p>解码选中的 JWT，列出签发者、过期时间等声明（只解码，不验证签名）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-developer" href="../json-types/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-developer is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M10 7.4c-1.1 0-1.5.5-1.5 1.5v1.5c0 .9-.4 1.4-1.2 1.6.8.2 1.2.7 1.2 1.6v1.5c0 1 .4 1.5 1.5 1.5M14 7.4c1.1 0 1.5.5 1.5 1.5v1.5c0 .9.4 1.4 1.2 1.6-.8.2-1.2.7-1.2 1.6v1.5c0 1-.4 1.5-1.5 1.5"/></svg></span><span><small>上一个</small><strong>JSON 转代码</strong></span></a>
+        <a class="glass next cat-screen" href="../table-ocr/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-screen is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4V5a2 2 0 0 1 2-2h2.4M16.6 3H19a2 2 0 0 1 2 2v2.4M21 16.6V19a2 2 0 0 1-2 2h-2.4M7.4 21H5a2 2 0 0 1-2-2v-2.4"/><rect x="6.6" y="7.4" width="10.8" height="9.2" rx="1.2"/><path d="M6.6 10.6h10.8M6.6 13.6h10.8M10.4 7.4v9.2"/></svg></span><span><small>下一个</small><strong>识别表格</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 101 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/char-info/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

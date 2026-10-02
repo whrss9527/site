@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../assets/pop-plugins.css">
+<script src="../../../assets/pop-plugins.js" defer></script>
+<title>Compare Text · a Pop plugin</title>
+<meta name="description" content="Compare the selected text with the text on the clipboard and mark deletions and additions">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/pop/plugins/text-diff/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/text-diff/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/text-diff/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/text-diff/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Compare Text · a Pop plugin">
+<meta property="og:description" content="Compare the selected text with the text on the clipboard and mark deletions and additions">
+<meta property="og:url" content="https://whrss.com/pop/plugins/text-diff/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-en.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop: an interactive recreation of the app, with sample data">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../assets/site.css">
+<script src="../../../assets/site.js" defer></script>
+<script src="../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-text">
+<a class="skip" href="#main">Skip to content</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="Main">
+    <a href="../../" aria-current="page"><img src="../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="Language: English" title="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">EN</span></summary>
+      <div class="panel lang-list" role="group" aria-label="Language">
+        <a href="./" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="../../../zh/pop/plugins/text-diff/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>Menu</summary>
+      <nav class="panel nav-list" aria-label="Main">
+    <a href="../../" aria-current="page"><img src="../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">Blog</a>
+    <a href="../../../support/">Support</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../zh/pop/plugins/text-diff/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>简体中文</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop plugins">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">Plugins</a>
+    <div class="ln-links"><a href="#how">How to use</a><a href="#details">Details</a><a href="#install">Install</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="Download Pop">Download</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="Breadcrumb"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">Plugins</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#text">Text</a></nav>
+        <p class="plp-cat">Pop plugin · Text</p>
+        <h1>Compare Text</h1>
+        <p class="lede">Compare the selected text with the text on the clipboard and mark deletions and additions.</p>
+        <div class="plp-meta"><span><b>Works with</b> Selected text</span><span>Free</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">See how it works</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>Download Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-text" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M12 4v16"/><path d="M5.6 12h3.8M14.6 12h3.8M16.5 10.1v3.8"/></svg></span><span class="pa-chip c1"><i></i>Clipboard ↔ selection</span><span class="pa-chip c2"><i></i>Changed words marked</span><span class="pa-chip c3"><i></i>Copy the diff</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">How to use it</h2>
+        <p>Select something, hold the right mouse button, swipe. The animation plays the steps one after another; click a step to see it again.</p></div>
+      <div class="howto cat-text"><ol class="pla-steps"><li><span class="pla-st"><span><strong>Copy one version, select the other</strong><small>It compares the selection with the clipboard.</small></span></span></li><li><span class="pla-st"><span><strong>Hold the right mouse button</strong><small>About a quarter of a second. A short click still opens the usual menu.</small></span></span></li><li><span class="pla-st"><span><strong>Swipe to “Compare Text” and let go</strong><small>It sits on the ring where you put it, and it’s always in All Actions.</small></span></span></li><li><span class="pla-st"><span><strong>See what changed</strong><small>Red was copied; green is selected.</small></span></span></li><li><span class="pla-st"><span><strong>Copy the differences</strong></span></span></li></ol><figure class="pla" data-lang="en" data-icon="../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"Compare Text","glyph":"<rect x=\"3\" y=\"4\" width=\"18\" height=\"16\" rx=\"3\"/><path d=\"M12 4v16\"/><path d=\"M5.6 12h3.8M14.6 12h3.8M16.5 10.1v3.8\"/>","scene":{"src":{"kind":"text","app":"Notes","title":"Invite","lines":["# Draft · copied","The launch review is on Tuesday at 10 am.","Please bring the latest numbers.","# Final","[[The launch review is on Thursday at 2 pm.","Please bring the latest numbers.","Dial-in details are in the invite.]]"]},"card":{"title":"Compare Text","w":390,"at":"right","btns":["Copy"],"body":[{"t":"diff","lines":[["-","The launch review is on {-Tuesday-} at {-10 am-}."],["+","The launch review is on {+Thursday+} at {+2 pm+}."],[" ","Please bring the latest numbers."],["+","{+Dial-in details are in the invite.+}"]]},{"t":"note","text":"Clipboard → selection: 1 line removed, 2 lines added. Red is only on the clipboard; green is only in the selection."}]},"steps":[{"acts":[],"hold":2000},{"acts":[["click","btn:0",["toast","Copied"]]]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../assets/icons/pop.png" alt="" width="40" height="40"><p>An animated demo of Compare Text appears here when JavaScript is on; the steps beside it say the same.</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">What it does</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>Copy one version, select the other, and Pop <b>compares them line by line</b>.</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>Removed lines are red, added lines green, and the words that changed within a line (characters, in Chinese) are darker.</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>Long stretches that are the same fold away. Copy the differences as text.</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>When the two are identical, Pop just says so.</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">Install it</h2>
+        <p>Plugins aren’t part of the Pop download. Install this one when you need it.</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>From Settings</h3>
+          <p>In Pop’s Settings › Actions, find “Compare Text” under Plugins at the top and click Install. It downloads from Pop’s GitHub release in a few seconds and works right away, without a restart.</p></div>
+        <div class="plp-way glass"><h3><span>2</span>Or from the ring</h3>
+          <p>Open All Actions on the ring and search for “Compare Text”. Plugins that aren’t installed are listed after your actions: click it to install, and it runs right away if it can handle what you selected.</p></div>
+        <div class="plp-way glass"><h3><span>3</span>Then use it your way</h3>
+          <p>Put it on the ring in Settings › Ring, give it a shortcut, or run it from Shortcuts and scripts with its link:</p>
+          <div class="cmd"><code>pop://run?plugin=textDiff</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=textDiff" data-done="Copied" hidden>Copy</button></div></div>
+      </div>
+      <p class="note rv">Uninstall it from the same list when you no longer need it: the plugin and its settings are deleted. After Pop updates, installed plugins are updated with it, and with iCloud sync on, what you install syncs to your other Macs.</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">More in Text</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-text" href="../screenshot-translate/" data-cat="text" data-k="Translate Screenshot 截图翻译 Select an area of the screen, recognize its text and translate it (offline) 框选屏幕上的一块区域，识别里面的文字并翻译（离线） screenshotTranslate screenshot-translate Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8V5.5a2 2 0 0 1 2-2H8M16 3.5h2.5a2 2 0 0 1 2 2V8M20.5 16v2.5a2 2 0 0 1-2 2H16M8 20.5H5.5a2 2 0 0 1-2-2V16"/><path d="m6.6 15.4 2.3-6.6 2.3 6.6M7.4 13.2h3"/><path d="M15.4 8v1.2M12.8 9.6h5.4M17 9.6c-.5 2.4-1.9 4.4-4 5.6M13.8 11.6c.8 1.6 2.2 2.9 4.2 3.6"/></svg></span><div><h3>Translate Screenshot</h3><p>Select an area of the screen, recognize its text and translate it (offline)</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../speak/" data-cat="text" data-k="Speak 朗读 Read the selected text aloud with a system voice; use it again while speaking to stop. It can also save the speech as an audio file 用系统语音朗读选中的文字，朗读中再用一次就停止；也能读出来存成音频文件 speak speak Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 9.4h3.3l4.6-4.1v13.4l-4.6-4.1H3.8Z"/><path d="M15.2 9.2a4 4 0 0 1 0 5.6M18 6.6a7.7 7.7 0 0 1 0 10.8"/></svg></span><div><h3>Speak</h3><p>Read the selected text aloud with a system voice; use it again while speaking to stop. It can also save the speech as an audio file</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../web-capture/" data-cat="text" data-k="Save Web Page 网页存档 Save the whole page at the selected URL to Downloads as one long PDF (with selectable, searchable text) or a long image, or save just the article text as Markdown 把选中的网址整页存成一页长 PDF（文字能选、能搜）、一张长图，或者只把正文存成 Markdown，放在「下载」里 webCapture web-capture Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h7.3l4.8 4.8v11.7a1.5 1.5 0 0 1-1.5 1.5H6.2a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 6.2 3Z"/><path d="M13.3 3v4.9h4.9"/><path d="M11.5 10.2v6.6M8.8 14.2l2.7 2.7 2.7-2.7"/></svg></span><div><h3>Save Web Page</h3><p>Save the whole page at the selected URL to Downloads as one long PDF (with selectable, searchable text) or a long image, or save just the article text as Markdown</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../text-image/" data-cat="text" data-k="Text to Image 文字转图片 Lay out the selected text as a long image that reads well on a phone (1080 pixels wide) on a white, cream or dark background; copy it, save it or pin it to the screen 把选中的文字排成一张手机上看着舒服的长图（宽 1080 像素），白底、米黄、深色三种底色，可以复制、存储或贴到屏幕上 textImage text-image Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="11" rx="2.2"/><path d="m4.4 12.2 4.3-4 3.4 3.1 2.2-1.9 5.3 4.2"/><circle cx="15.6" cy="6.8" r="1.3"/><path d="M5 17.6h14M5 20.8h9"/></svg></span><div><h3>Text to Image</h3><p>Lay out the selected text as a long image that reads well on a phone (1080 pixels wide) on a white, cream or dark background; copy it, save it or pin it to the screen</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../large-type/" data-cat="text" data-k="Large Type 大字显示 Show the selected text across the whole screen, handy for showing someone a phone number, Wi-Fi password or pickup code; click or press any key to close 把选中的文字铺满整个屏幕，给别人看电话号码、Wi-Fi 密码、取件码都方便；点一下或按任意键关闭 largeType large-type Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m2.8 19 5.2-14 5.2 14M4.7 14.2h6.6"/><path d="m14.2 19 3.4-8.8L21 19M15.4 16.1h4.4"/></svg></span><div><h3>Large Type</h3><p>Show the selected text across the whole screen, handy for showing someone a phone number, Wi-Fi password or pickup code; click or press any key to close</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-text" href="../font-preview/" data-cat="text" data-k="Font Preview 字体预览 Show the selected text (or a sample) in every font on your Mac, filter by Chinese, Western, monospaced or favorite fonts and only those that can show all of it; copy the font name or CSS, or copy it as an image; select font files to preview and install them 用这台 Mac 上的每一种字体显示选中的文字（没选中时用示例），按中文、西文、等宽、收藏筛选，只看能完整显示的；复制字体名、CSS，或者复制成图片；选中字体文件时先预览再安装 fontPreview font-preview Text 文字"><span class="ptile cat-text" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 18.5 4.8-13 4.8 13M5.3 14h6"/><path d="M20.5 11.2v7.3M20.5 13.4a3 3 0 1 0 0 3"/></svg></span><div><h3>Font Preview</h3><p>Show the selected text (or a sample) in every font on your Mac, filter by Chinese, Western, monospaced or favorite fonts and only those that can show all of it; copy the font name or CSS, or copy it as an image; select font files to preview and install them</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="Previous and next plugin" style="margin-top:28px">
+        <a class="glass prev cat-text" href="../spell-check/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-text is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3 13.6 2.6-7 2.6 7M3.8 11.6h3.6M10.4 6.6v7M10.4 9.4c.4-.6 1-.9 1.8-.9 1.3 0 2 1 2 2.5s-.7 2.6-2 2.6c-.8 0-1.4-.3-1.8-.9"/><circle cx="17.2" cy="16.8" r="4"/><path d="m15.4 16.9 1.3 1.3 2.4-2.6"/></svg></span><span><small>Previous</small><strong>Spell Check</strong></span></a>
+        <a class="glass next cat-text" href="../emoji-symbols/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-text is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.8"/><path d="M8.2 14.2a4.6 4.6 0 0 0 7.6 0"/><circle cx="9.1" cy="9.8" r="1.05" fill="currentColor" stroke="none"/><circle cx="14.9" cy="9.8" r="1.05" fill="currentColor" stroke="none"/></svg></span><span><small>Next</small><strong>Emoji & Symbols</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">All 101 plugins</a> · <a href="../../">About Pop</a> · <a href="https://github.com/whrss9527/pop/issues">Pop issues on GitHub</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>Native Mac apps for the menu bar. Free and open source.</p>
+      </div>
+      <div>
+        <h2>Apps</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>Privacy</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>More</h2>
+        <ul>
+          <li><a href="../../../support/">Support</a></li>
+          <li><a href="https://blog.whrss.com">Blog</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. This site uses no cookies, no analytics and no third-party requests.</p>
+      <nav class="footer-lang" aria-label="Language"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="./" hreflang="en" lang="en" data-lang="en" aria-current="true"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="../../../zh/pop/plugins/text-diff/" hreflang="zh-CN" lang="zh-CN" data-lang="zh"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -16,7 +16,7 @@ BLOG = "https://blog.whrss.com"
 LANG_KEY = "lang"   # localStorage key for the visitor's chosen language ("en" or "zh")
 
 APPS = {
-    "pop":   {"name": "Pop",   "repo": "pop",   "min": "macOS 15", "pitch": "Long-press right click: translate, convert and 80+ tools in one swipe.", "zh": "长按右键，一划即达：翻译、换算和 80 多个小工具。"},
+    "pop":   {"name": "Pop",   "repo": "pop",   "min": "macOS 15", "pitch": "Long-press right click: translate, convert and 120+ tools in one swipe.", "zh": "长按右键，一划即达：翻译、换算和 120 多个小工具。"},
     "meno":  {"name": "Meno",  "repo": "meno",  "min": "macOS 14", "pitch": "A calm menu bar, made with glass: hide, stash and call back icons.", "zh": "安静的菜单栏，由玻璃打造：隐藏、收起、随时唤回图标。"},
     "stox":  {"name": "Stox",  "repo": "stox",  "min": "macOS 13", "pitch": "A-share, Hong Kong and US quotes at a glance; gone in one click.", "zh": "A 股、港股、美股，一眼看盘，一键隐身。"},
     "proxi": {"name": "Proxi", "repo": "proxi", "min": "macOS 14", "pitch": "A proxy switch for developers: system proxy, Terminal, git and npm in one click.", "zh": "开发者的代理开关：系统代理、终端、git 和 npm，一键切换。"},
@@ -110,9 +110,10 @@ def head(c, title, desc, body_class="", alternates=True, extra_head=""):
         alts = (f'\n<link rel="alternate" hreflang="en" href="{ORIGIN}{c.path_for("en")}">'
                 f'\n<link rel="alternate" hreflang="zh-CN" href="{ORIGIN}{c.path_for("zh")}">'
                 f'\n<link rel="alternate" hreflang="x-default" href="{ORIGIN}{c.path_for("en")}">')
-    # Open Graph image (assets/og/, rendered by scripts/og/render.js): the app's own for an app page,
-    # the home page's for everything else.
-    og = c.en_path.strip("/") if c.en_path.strip("/") in APPS else "home"
+    # Open Graph image (assets/og/, rendered by scripts/og/render.js): the app's own for an app page
+    # and the pages under it (Pop's plugins), the home page's for everything else.
+    top = c.en_path.strip("/").split("/")[0]
+    og = top if top in APPS else "home"
     name = APPS[og]["name"] if og in APPS else "whrss"
     og_alt = c.t(f"{name}: an interactive recreation of the app, with sample data" if og in APPS else "Pop, Meno, Stox and Proxi, Mac apps for the menu bar",
                  f"{name}：应用界面的可交互还原，示例数据" if og in APPS else "Pop、Meno、Stox、Proxi：住在菜单栏里的 Mac 应用")
@@ -211,8 +212,10 @@ def local_nav(c, key):
     (like the product bars on apple.com). The global header above it scrolls away."""
     t = c.t
     a = APPS[key]
-    links = "".join(f'<a href="#{i}">{l}</a>' for i, l in (
-        ("features", t("Features", "功能")), ("specs", t("Specs", "规格")), ("faq", t("Questions", "常见问题"))))
+    sections = [("features", t("Features", "功能")), ("specs", t("Specs", "规格")), ("faq", t("Questions", "常见问题"))]
+    if key == "pop":
+        sections.insert(1, ("plugins", t("Plugins", "插件")))
+    links = "".join(f'<a href="#{i}">{l}</a>' for i, l in sections)
     return f"""<nav class="localnav" aria-label="{a['name']}">
   <div class="wrap">
     <a class="ln-title" href="#main"><img src="{c.to("assets/icons/" + key + ".png")}" alt="" width="24" height="24"><span>{a['name']}</span></a>

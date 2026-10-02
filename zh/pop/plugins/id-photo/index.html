@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>证件照 · Pop 插件</title>
+<meta name="description" content="把人像照片换成白底、蓝底或红底，按人脸位置裁成一寸、二寸（300 dpi）；在本机处理，另存一份放在原图旁边">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/id-photo/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/id-photo/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/id-photo/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/id-photo/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="证件照 · Pop 插件">
+<meta property="og:description" content="把人像照片换成白底、蓝底或红底，按人脸位置裁成一寸、二寸（300 dpi）；在本机处理，另存一份放在原图旁边">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/id-photo/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-screen">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/id-photo/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/id-photo/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#screen">屏幕与图片</a></nav>
+        <p class="plp-cat">Pop 插件 · 屏幕与图片</p>
+        <h1>证件照</h1>
+        <p class="lede">把人像照片换成白底、蓝底或红底，按人脸位置裁成一寸、二寸（300 dpi）；在本机处理，另存一份放在原图旁边。</p>
+        <div class="plp-meta"><span><b>处理</b> 图片文件</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-screen" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4.4" y="2.8" width="15.2" height="18.4" rx="2.4"/><circle cx="12" cy="10" r="3.1"/><path d="M6.8 18.6c.9-2.6 2.8-3.9 5.2-3.9s4.3 1.3 5.2 3.9"/></svg></span><span class="pa-chip c1"><i></i>白底 · 蓝底 · 红底</span><span class="pa-chip c2"><i></i>一寸、二寸</span><span class="pa-chip c3 is-mono"><i></i>300 dpi</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-screen"><ol class="pla-steps"><li><span class="pla-st"><span><strong>在访达里选中一张人像照片</strong></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「证件照」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>蓝底，一寸</strong><small>在本机抠图，按人脸裁好。</small></span></span></li><li><span class="pla-st"><span><strong>也可以换白底、红底</strong></span></span></li><li><span class="pla-st"><span><strong>另存一份</strong></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"证件照","glyph":"<rect x=\"4.4\" y=\"2.8\" width=\"15.2\" height=\"18.4\" rx=\"2.4\"/><circle cx=\"12\" cy=\"10\" r=\"3.1\"/><path d=\"M6.8 18.6c.9-2.6 2.8-3.9 5.2-3.9s4.3 1.3 5.2 3.9\"/>","scene":{"src":{"kind":"files","files":[{"name":"自拍.jpg","kind":"photo","art":"portrait","sel":true},{"name":"Beach.heic","kind":"photo","art":"beach"},{"name":"签证申请表.pdf"}]},"card":{"w":350,"sub":"自拍.jpg","btns":["存到原图旁边"],"tint":0,"body":[{"t":"panes","on":1,"panes":[[{"t":"html","html":"<div style=\"display:flex;justify-content:center;padding:10px 0;border-radius:8px;background:var(--pl-fill)\"><div class=\"pl-img is-white\" style=\"--ar:295/413;width:108px;border-radius:3px\"><span class=\"pl-art pl-art-portrait\" style=\"inset:auto;left:-55%;top:-14.6%;width:210%;height:118%\"><i class=\"body\"><\/i><i class=\"head\"><\/i><i class=\"hair\"><\/i><\/span><\/div><\/div>"}],[{"t":"html","html":"<div style=\"display:flex;justify-content:center;padding:10px 0;border-radius:8px;background:var(--pl-fill)\"><div class=\"pl-img is-blue\" style=\"--ar:295/413;width:108px;border-radius:3px\"><span class=\"pl-art pl-art-portrait\" style=\"inset:auto;left:-55%;top:-14.6%;width:210%;height:118%\"><i class=\"body\"><\/i><i class=\"head\"><\/i><i class=\"hair\"><\/i><\/span><\/div><\/div>"}],[{"t":"html","html":"<div style=\"display:flex;justify-content:center;padding:10px 0;border-radius:8px;background:var(--pl-fill)\"><div class=\"pl-img is-red\" style=\"--ar:295/413;width:108px;border-radius:3px\"><span class=\"pl-art pl-art-portrait\" style=\"inset:auto;left:-55%;top:-14.6%;width:210%;height:118%\"><i class=\"body\"><\/i><i class=\"head\"><\/i><i class=\"hair\"><\/i><\/span><\/div><\/div>"}]]},{"t":"seg","label":"底色","items":["白底","蓝底","红底"],"on":1,"ctl":0},{"t":"html","html":"<div style=\"display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:11.5px\"><span class=\"pl-btn\">一寸 ⌄<\/span><span class=\"pl-chk\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m5 12.5 4.5 4.5L19 7.5\" stroke-width=\"2.4\"/><\/svg><\/span><span>另存 6 寸冲印排版<\/span><\/div>"},{"t":"note","text":"一寸 295×413 像素（300 dpi）；另存一份放在原图旁边，原图不动"}]},"steps":[{"acts":[],"hold":1400},{"acts":[["click","opt:1.0"],["wait",900],["click","opt:1.2"],["wait",900],["click","opt:1.1"]]},{"acts":[["click","btn:0"],["close"],["file",{"name":"自拍 蓝底 一寸.jpg","kind":"photo","art":"portrait","at":1}],["toast","已存成「自拍 蓝底 一寸.jpg」"]]}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「证件照」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>选中一张人像照片，做成<b>证件照</b>：换成白底、蓝底或红底，按人脸的位置裁好。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>小一寸、一寸、大一寸、小二寸、二寸，带 300 dpi，打印出来正好是标准尺寸；也可以保持原尺寸只换底色。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>勾上「另存 6 寸冲印排版」，再存一张排满的 6 寸相纸（一寸 12 张、二寸 4 张），带裁切线，直接拿去冲印。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>抠图和找人脸都<b>在本机进行</b>，不上传照片；另存一份放在原图旁边，原图不动。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「证件照」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「证件照」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=idPhoto</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=idPhoto" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多屏幕与图片</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-screen" href="../table-ocr/" data-cat="screen" data-k="Recognize Table 识别表格 Recognize a table in a screenshot or image as a Markdown table, CSV or tab-separated text (macOS 26; earlier versions recognize plain text) 识别截图或图片里的表格，转成 Markdown 表格、CSV 或者制表符分隔（macOS 26；更早的系统按普通文字识别） tableOCR table-ocr Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4V5a2 2 0 0 1 2-2h2.4M16.6 3H19a2 2 0 0 1 2 2v2.4M21 16.6V19a2 2 0 0 1-2 2h-2.4M7.4 21H5a2 2 0 0 1-2-2v-2.4"/><rect x="6.6" y="7.4" width="10.8" height="9.2" rx="1.2"/><path d="M6.6 10.6h10.8M6.6 13.6h10.8M10.4 7.4v9.2"/></svg></span><div><h3>识别表格</h3><p>识别截图或图片里的表格，转成 Markdown 表格、CSV 或者制表符分隔（macOS 26；更早的系统按普通文字识别）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-screen" href="../scan-code/" data-cat="screen" data-k="Scan Code 扫码 Select a QR code or barcode on screen to read it; links can be opened and Wi-Fi codes show the password 框选屏幕上的二维码或条形码，识别里面的内容；链接可以直接打开，Wi-Fi 二维码列出密码 scanCode scan-code Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.4V5a2 2 0 0 1 2-2h2.4M16.6 3H19a2 2 0 0 1 2 2v2.4M21 16.6V19a2 2 0 0 1-2 2h-2.4M7.4 21H5a2 2 0 0 1-2-2v-2.4"/><rect x="7" y="7" width="4" height="4" rx=".8"/><rect x="13" y="7" width="4" height="4" rx=".8"/><rect x="7" y="13" width="4" height="4" rx=".8"/><path d="M13 13h1.6v1.6M17 13v.1M13 17h.1M15.6 15.6H17V17h-1.4z"/></svg></span><div><h3>扫码</h3><p>框选屏幕上的二维码或条形码，识别里面的内容；链接可以直接打开，Wi-Fi 二维码列出密码</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-screen" href="../beautify/" data-cat="screen" data-k="Beautify Screenshot 截图美化 Put a screenshot on a gradient background with padding, rounded corners and a shadow, optionally filled out to 1:1, 4:3 or 16:9, so it looks good in posts and slides. Uses the selected image, or lets you select an area of the screen first 给截图加上渐变背景、留白、圆角和阴影，可以补成 1:1、4:3、16:9，发文章、做演示更好看；选中图片就用它，没选中就先框选屏幕上的一块 beautify beautify Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="3.6" width="18.8" height="16.8" rx="3.6"/><rect x="6.2" y="7.4" width="11.6" height="9.2" rx="1.6"/><path d="m19 1.4.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5Z"/></svg></span><div><h3>截图美化</h3><p>给截图加上渐变背景、留白、圆角和阴影，可以补成 1:1、4:3、16:9，发文章、做演示更好看；选中图片就用它，没选中就先框选屏幕上的一块</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-screen" href="../remove-background/" data-cat="screen" data-k="Remove Background 抠图 Remove the background of the selected image, keeping only people, animals or objects (offline) 去掉选中图片的背景，只留下人、动物或物品（离线） removeBackground remove-background Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m4.2 19.8 10.6-10.6M13.2 7.6l3.2 3.2"/><path d="m16.4 2.8.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8Z"/><path d="m20 9.6.5 1.3 1.3.5-1.3.5-.5 1.3-.5-1.3-1.3-.5 1.3-.5Z"/><path d="m8.6 3.6.5 1.2 1.2.5-1.2.5-.5 1.2-.5-1.2-1.2-.5 1.2-.5Z"/></svg></span><div><h3>抠图</h3><p>去掉选中图片的背景，只留下人、动物或物品（离线）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-screen" href="../image-convert/" data-cat="screen" data-k="Convert Images 图片转换 Convert the selected images to PNG, JPEG or HEIC, halve their size, compress them (or under a given size), rotate, flip, or remove location and capture info; results are saved next to the originals 把选中的图片文件转成 PNG、JPEG、HEIC，缩小一半、压缩体积或者压到指定大小以内，旋转、左右翻转，或者去掉照片里的位置和拍摄信息；结果存在原图旁边 imageConvert image-convert Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.2 5.6 16.8 3a1.6 1.6 0 0 1 2 1.1l2.4 9a1.6 1.6 0 0 1-1.1 2l-1.6.4"/><rect x="2.8" y="8.4" width="13.6" height="12" rx="1.8"/><path d="m3.2 18.6 3.8-3.6 3 2.6 1.8-1.6 4.2 3.4"/><circle cx="12.2" cy="12.4" r="1.2"/></svg></span><div><h3>图片转换</h3><p>把选中的图片文件转成 PNG、JPEG、HEIC，缩小一半、压缩体积或者压到指定大小以内，旋转、左右翻转，或者去掉照片里的位置和拍摄信息；结果存在原图旁边</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-screen" href="../stitch-images/" data-cat="screen" data-k="Stitch Images 拼接图片 Stitch the selected images vertically or horizontally in file name order, or make an animated image, saved next to the first one 把选中的几张图片按文件名的顺序竖着或者横着拼成一张，或者合成一张动图，存在第一张旁边 stitchImages stitch-images Screen & Images 屏幕与图片"><span class="ptile cat-screen" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2.8" width="14" height="8.6" rx="1.8"/><rect x="5" y="12.6" width="14" height="8.6" rx="1.8"/><path d="m5.6 9.8 3.4-3 2.4 2.2 1.6-1.4 5.4 3.4M5.6 19.6l3.4-3 2.4 2.2 1.6-1.4 5.4 3.4"/></svg></span><div><h3>拼接图片</h3><p>把选中的几张图片按文件名的顺序竖着或者横着拼成一张，或者合成一张动图，存在第一张旁边</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-screen" href="../watermark/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-screen is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 16.2c2.2-.4 3.2-2.8 3.6-5.8.3-2.4-.1-4.6-1.2-4.6-1.7 0-1.4 6.4.4 9.6 1.1 2 2.8 1.6 3.8-.4.8-1.6 1.2-4 2.4-4 1 0 .4 3.6 1.6 3.6s1.6-2.6 2.8-2.6c.9 0 .8 2.2 1.8 2.2.8 0 1.4-.8 2-1.6"/><path d="M3.2 20h17.6"/></svg></span><span><small>上一个</small><strong>加水印</strong></span></a>
+        <a class="glass next cat-screen" href="../crop-image/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-screen is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.4 2.6v13.6a1.4 1.4 0 0 0 1.4 1.4h13.6"/><path d="M2.6 6.4h13.6a1.4 1.4 0 0 1 1.4 1.4v13.6"/></svg></span><span><small>下一个</small><strong>裁剪图片</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 101 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/id-photo/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
