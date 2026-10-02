@@ -586,9 +586,9 @@ DATA = {
                               {"name": T("Lease.pdf", "租房合同.pdf"), "sel": True}, {"name": T("Payslip.pdf", "工资条.pdf")}]},
             "card": {"w": 340, "sub": T("2 files", "2 个文件"), "btns": [T("Watermark 2 Files", "给 2 个文件加水印")], "tint": 0,
                      "body": [{"t": "panes", "panes": [
-                                  [{"t": "img", "art": "portrait", "ar": "16/10", "over": both(wm, T("For this purpose only. Not valid for any other use.", "仅供办理业务使用，他用无效"), .3)}],
-                                  [{"t": "img", "art": "portrait", "ar": "16/10", "over": both(wm, T("For the apartment lease only", "仅供租房使用，他用无效"), .3)}],
-                                  [{"t": "img", "art": "portrait", "ar": "16/10", "over": both(wm, T("For the apartment lease only", "仅供租房使用，他用无效"), .55)}]]},
+                                  [{"t": "img", "art": "portrait", "ar": "2/1", "over": both(wm, T("For this purpose only. Not valid for any other use.", "仅供办理业务使用，他用无效"), .3)}],
+                                  [{"t": "img", "art": "portrait", "ar": "2/1", "over": both(wm, T("For the apartment lease only", "仅供租房使用，他用无效"), .3)}],
+                                  [{"t": "img", "art": "portrait", "ar": "2/1", "over": both(wm, T("For the apartment lease only", "仅供租房使用，他用无效"), .55)}]]},
                               {"t": "field", "value": T("For this purpose only. Not valid for any other use.", "仅供办理业务使用，他用无效"), "ph": T("Watermark text", "水印文字")},
                               {"t": "slider", "label": T("Light", "淡"), "value": .4, "right": T("Strong", "浓")},
                               {"t": "note", "text": T("Tiled diagonally across the image (every page of a PDF) and saved as a copy named “Name Watermark” next to the original, which stays unchanged",

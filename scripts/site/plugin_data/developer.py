@@ -410,11 +410,9 @@ DATA = {
             "src": {"kind": "text", "app": T("Messages", "信息"), "cap": T("Select a few characters", "选中几个字符"),
                     "lines": [T("Ben: Lunch tomorrow at 12?", "老陈：明天中午一起吃饭？"), T("Ada: [[OK" + ZWSP * 2 + "👍🏽]]", "小林：[[好的" + ZWSP * 2 + "👍🏽]]")]},
             "card": {"w": 400, "btns": [T("Copy Code Points", "复制码点"), T("Remove and Replace", "去掉后替换原文"), T("Remove and Copy", "去掉后复制")], "tint": 1,
-                     "body": [{"t": "rows", "rows": T([
-                         ["O", "U+004F · LATIN CAPITAL LETTER O\nUTF-8 4F"],
-                         ["K", "U+004B · LATIN CAPITAL LETTER K\nUTF-8 4B"]], [
-                         ["好", "U+597D · CJK UNIFIED IDEOGRAPH-597D\nUTF-8 E5 A5 BD"],
-                         ["的", "U+7684 · CJK UNIFIED IDEOGRAPH-7684\nUTF-8 E7 9A 84"]]) + [
+                     "body": [{"t": "rows", "rows": [
+                         T(["O", "U+004F · LATIN CAPITAL LETTER O\nUTF-8 4F"], ["好", "U+597D · CJK UNIFIED IDEOGRAPH-597D\nUTF-8 E5 A5 BD"]),
+                         T(["K", "U+004B · LATIN CAPITAL LETTER K\nUTF-8 4B"], ["的", "U+7684 · CJK UNIFIED IDEOGRAPH-7684\nUTF-8 E7 9A 84"]),
                          [T("Zero-width space", "零宽空格"), T("U+200B · Zero-width space\nUTF-8 E2 80 8B", "U+200B · 零宽空格\nUTF-8 E2 80 8B")],
                          ["👍🏽", "U+1F44D U+1F3FD · THUMBS UP SIGN + EMOJI MODIFIER FITZPATRICK TYPE-4\nUTF-8 F0 9F 91 8D F0 9F 8F BD · UTF-16 D83D DC4D D83C DFFD"]]},
                               {"t": "note", "text": T("2 invisible characters: Zero-width space ×2", "有 2 个看不见的字符：零宽空格 ×2")}]},
