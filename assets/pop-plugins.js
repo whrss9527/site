@@ -81,7 +81,7 @@
       chars: "%s characters", items: "%s items", item: "1 item", image: "Image", images: "%s images", nothing: "Nothing selected",
       link: "Link", folder: "Folder", file: "File", app: "App",
       slots: ["Translate", "Search", "Dictionary", "Open Link", "All Actions", "Clipboard", "Screenshot OCR", "Pick Color"],
-      menus: ["File", "Edit", "View", "Window"], clock: "Wed 4:14 PM", finder: "Finder",
+      menus: ["File", "Edit", "View", "Window"], clock: "Wed 4:14 PM", finder: "Finder", notes: "Notes",
       side: ["Recents", "Desktop", "Documents", "Downloads"], fav: "Favorites", search: "Search actions",
       copied: "Copied", close: "Close", rec: "Recording", stop: "Stop", paused: "Paused",
       region: "Drag to select an area", locked: "Keyboard locked", endClean: "End Cleaning",
@@ -92,7 +92,7 @@
       chars: "%s 字", items: "%s 项", item: "1 项", image: "图片", images: "%s 张图片", nothing: "未选中内容",
       link: "链接", folder: "文件夹", file: "文件", app: "App",
       slots: ["翻译", "搜索", "词典", "打开链接", "全部功能", "剪贴板", "截图识字", "屏幕取色"],
-      menus: ["文件", "编辑", "显示", "窗口"], clock: "周三 16:14", finder: "访达",
+      menus: ["文件", "编辑", "显示", "窗口"], clock: "周三 16:14", finder: "访达", notes: "备忘录",
       side: ["最近使用", "桌面", "文稿", "下载"], fav: "个人收藏", search: "搜索功能",
       copied: "已复制", close: "关闭", rec: "正在录制", stop: "停止", paused: "已暂停",
       region: "拖动选择一块区域", locked: "键盘已锁住", endClean: "结束清洁",
@@ -445,7 +445,7 @@
       st.className = "pl-stage" + (this.ff ? " is-ff" : "") + (this.playing ? "" : " is-paused") + (sc.tall ? " is-tall" : "");
       var src = sc.src || { kind: "desk" };
       var menus = (src.menus || s.menus).map(function (m) { return '<span class="pl-mb-i">' + esc(m) + "</span>"; }).join("");
-      var appName = src.kind === "files" ? s.finder : (src.app || "Notes");
+      var appName = src.kind === "files" ? s.finder : (src.app || s.notes);
       st.innerHTML =
         '<div class="pl-mb"><span class="pl-mb-i pl-mb-app">' + esc(appName) + "</span>" + menus + '<span class="pl-mb-fill"></span>' +
         '<span class="pl-mb-x"></span><span class="pl-mb-i pl-mb-icon"><img src="' + esc(this.icon) + '" alt="" width="16" height="16"></span>' +
@@ -493,14 +493,14 @@
           if (/^# /.test(l) && !raw) return "<h4>" + marks(l.slice(2)) + "</h4>";
           return "<p>" + marks(l, raw) + "</p>";
         }).join("");
-        return '<div class="pl-win pl-text">' + bar(src.title || src.app || "Notes") + '<div class="pl-doc' + (src.mono ? " is-mono" : "") + '">' + body + "</div></div>";
+        return '<div class="pl-win pl-text">' + bar(src.title || src.app || s.notes) + '<div class="pl-doc' + (src.mono ? " is-mono" : "") + '">' + body + "</div></div>";
       }
       if (k === "image") {
         return '<div class="pl-win pl-viewer">' + bar(src.title || "Preview") + '<div class="pl-vbody"><div class="pl-shot">' + art(src.art || "landscape") +
           (src.overlay ? '<div class="pl-shot-o">' + src.overlay + "</div>" : "") + "</div></div></div>";
       }
       // desk: a quiet window to hold right click over
-      return '<div class="pl-win pl-quiet">' + bar(src.title || "Notes") + '<div class="pl-doc">' +
+      return '<div class="pl-win pl-quiet">' + bar(src.title || s.notes) + '<div class="pl-doc">' +
         (src.lines ? src.lines.map(function (l) { return "<p>" + marks(l) + "</p>"; }).join("") : '<i class="pl-ph" style="width:62%"></i><i class="pl-ph" style="width:84%"></i><i class="pl-ph" style="width:70%"></i><i class="pl-ph" style="width:40%"></i>') + "</div></div>";
     },
 
@@ -684,6 +684,7 @@
       }
       if (src.kind === "files") {
         var n = (src.files || []).filter(function (f) { return f.sel; });
+        if (!n.length) return s.nothing;
         if (n.length === 1) return n[0].name;
         var photos = n.every(function (f) { return (f.kind || "") === "photo" || /\.(jpe?g|png|heic)$/i.test(f.name); });
         return photos ? fmt(s.images, n.length) : fmt(s.items, n.length);

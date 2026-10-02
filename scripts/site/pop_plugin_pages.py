@@ -412,7 +412,7 @@ def build_all():
     import plugin_check
     problems, missing = plugin_check.check_all(DATA, ps)
     if missing:
-        print(f"plugin pages: no plugin_data entry for {len(missing)} plugin(s), using a plain page: " + ", ".join(missing))
+        problems.append(f"no plugin_data entry for: {', '.join(missing)}")
     if problems:
         raise SystemExit("plugin pages:\n  " + "\n  ".join(problems))
     for lang in ("en", "zh"):

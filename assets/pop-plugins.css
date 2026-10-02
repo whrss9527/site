@@ -1043,3 +1043,5 @@
 /* Long toasts wrap. */
 .pl-toast { white-space: normal; width: max-content; max-width: min(86%, 420px); text-align: center; line-height: 1.35; }
 .pl-b-text p.pl-mono { font-size: 12px; }
+/* A selected app keeps its colours; the selection shows around it. */
+.pl-file.is-sel > .pl-fi-app { background: linear-gradient(145deg, var(--a1), var(--a2)); box-shadow: 0 0 0 3px var(--pl-fill-2), inset 0 1px 0 rgba(255, 255, 255, 0.4); }
