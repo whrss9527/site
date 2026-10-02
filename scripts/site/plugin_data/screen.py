@@ -267,6 +267,44 @@ def wm(text, alpha):
 # ---------------------------------------------------------------- Image Colors: the main colours of the sunset photo
 SUNSET = [("#E0679B", 27), ("#5B4BB7", 24), ("#2D2346", 18), ("#FFB36B", 14), ("#FFE2A3", 10), ("#3C2D5A", 7)]
 
+# ---------------------------------------------------------------- Picture in Picture
+# The windows on screen as Pop's chooser shows them (its own demo: a call, a live stream, a build, Settings),
+# the one under the pointer first. The pictures are drawn in CSS (pl-pic-*), the call with the camera bubble's person.
+def pip_meet(name):
+    return ('<span class="pl-pic-meet"><span class="pl-person"><i class="room"></i><i class="lamp"></i><i class="body"></i>'
+            f'<i class="head"></i><i class="hair"></i></span><b>{name}</b></span>')
+
+
+PIP_TERM = ('<span class="pl-pic-term"><span>$ npm run build</span><span>&gt; vite build</span><span class="ok">✓ 1204 modules transformed.</span>'
+            '<span>dist/assets/index.js 143.2 kB</span><span class="ok">✓ built in 3.81s</span></span>')
+PIP_WINDOWS = [  # (app, title, icon colours, picture)
+    (T("FaceTime", "FaceTime 通话"), T("Weekly product sync", "产品周会"), ("#6be38a", "#1fae4b"), T(pip_meet("Maya"), pip_meet("李华"))),
+    ("Safari", T("Launch event live", "发布会直播"), ("#4fb3ff", "#1f6fd8"), '<span class="pl-pic-live"></span>'),
+    (T("Terminal", "终端"), "npm run build", ("#55555c", "#1d1d20"), PIP_TERM),
+    (T("System Settings", "系统设置"), "", ("#b4b6bd", "#6b6e76"), ART["screen"]),
+]
+
+
+def pip_title(k, i):
+    app, title = PIP_WINDOWS[k][0], PIP_WINDOWS[k][1]
+    app, title = _pick(app, i), _pick(title, i)
+    return f"{app} — {title}" if title else app
+
+
+def _pick(x, i):
+    return x[i] if isinstance(x, T) else x
+
+
+PIP_TILES = {"t": "html", "html": T(*[
+    '<div class="pl-pips">' + "".join(
+        f'<div class="pl-pipt{" is-on" if k == 0 else ""}"><div>{_pick(w[3], i)}</div>'
+        f'<span><i style="--c1:{w[2][0]};--c2:{w[2][1]}"></i><em>{pip_title(k, i)}</em></span></div>'
+        for k, w in enumerate(PIP_WINDOWS)) + "</div>"
+    for i in (0, 1)])}
+PIP_MENU = T(["Small", "Medium", "Large", "-", "✓ Opaque", "Slightly Transparent", "Half Transparent", "-", "Go to Window", "Close"],
+             ["小", "中", "大", "-", "✓ 不透明", "透明一点", "半透明", "-", "回到窗口", "关闭小窗"])
+
+
 DATA = {
     "removeBackground": {
         "chips": [T("People, pets, things", "人、动物、物品"), T("Offline", "离线"), T("Transparent PNG", "透明 PNG")],
@@ -722,6 +760,40 @@ DATA = {
                 {"cap": T("Click a swatch to copy it", "点色块就复制"),
                  "acts": [["click", ".pl-sw:nth-child(1) i", ["toast", T("Copied", "已复制")]], ["wait", 300],
                           ["click", ".pl-b-rows .pl-row[data-i=\"3\"] .pl-ib", ["toast", T("Copied", "已复制")]]]},
+            ],
+        },
+    },
+    "windowPiP": {
+        "chips": [T("Floats above everything", "一直浮在最上面"), T("Up to 4 at once", "最多同时开 4 个"), T("Drag · scroll · double-click", "拖动 · 滚动 · 双击")],
+        "points": [
+            T("Float a <b>live view of any window</b> in a corner of the screen, above all other windows; it stays in sight when you switch apps or desktops, or go full screen. Keep an eye on a video, a call, a download or a build while you work.",
+              "把任意一个窗口的画面<b>实时放进屏幕角落的小窗</b>，一直浮在别的窗口上面，切到别的 App、别的桌面、全屏的 App 里也看得到：边干活边看着视频、会议、下载或者编译的进度。"),
+            T("Choose the window in the card: each has a thumbnail, and the one under the pointer comes first. The view keeps the window’s proportions in the bottom-right corner; open another and it stacks above, up to four at once.",
+              "先在卡片里选窗口：每个窗口都有缩略图，指针下的那个排第一个。小窗按原来窗口的比例放在屏幕右下角，再开一个就往上摞，最多同时开 4 个。"),
+            T("<b>Drag</b> to move it, <b>scroll</b> to resize it (the size is remembered) and <b>double-click</b> to go back to the window, even a minimized one. Right-click to change its size or opacity, or close it.",
+              "<b>拖动</b>换位置，<b>滚动</b>换大小（下次还是这么大），<b>双击</b>回到原来的窗口（最小化了也会还原）；右键可以换大小、调透明度、关闭。"),
+            T("When the original window closes, the view says so and goes away. It needs the Screen &amp; System Audio Recording permission.",
+              "原来的窗口关掉了，小窗说一声就收起。需要「录屏与系统录音」权限。"),
+        ],
+        "scene": {
+            "src": {"kind": "desk", "app": "Pages", "title": T("Q4 plan", "第四季度计划"),
+                    "lines": [T("**Goals**", "**目标**"), T("Ship the new onboarding by November", "11 月前上线新的引导流程"),
+                              T("The call is still going in another window…", "另一个窗口里还开着会……")]},
+            "card": {"w": 400, "at": "center", "btns": [T("Float Window", "放进小窗")], "tint": 0,
+                     "body": [{"t": "note", "text": T("Choose a window to float a live view of it in a corner of the screen. Double-click the view to go back to the window",
+                                                      "选一个窗口，它的画面会一直浮在屏幕角落；双击小窗回到原来的窗口")},
+                              PIP_TILES]},
+            "steps": [
+                {"cap": T("Choose a window", "选一个窗口"), "sub": T("The one under the pointer comes first.", "指针下的那个排第一个。"),
+                 "acts": [["move", ".pl-pipt:nth-child(2)", 0.5, 0.5], ["wait", 400], ["move", ".pl-pipt:nth-child(1)", 0.5, 0.45], ["wait", 300]]},
+                {"cap": T("It floats in the corner", "它浮在屏幕角落"), "sub": T("Above every window, even full-screen apps.", "浮在所有窗口上面，全屏的 App 里也在。"),
+                 "acts": [["click", ".pl-pipt.is-on", [["close"], ["fx", "start", {"name": "pip", "html": PIP_WINDOWS[0][3], "w": 190,
+                                                                                    "title": T("FaceTime — Weekly product sync", "FaceTime 通话 — 产品周会")}]]]],
+                 "hold": 1200},
+                {"cap": T("Drag it anywhere, scroll to resize", "拖动换位置，滚动换大小"), "sub": T("Double-click it to go back to the window.", "双击回到原来的窗口。"),
+                 "acts": [["fx", "hover"], ["fx", "drag", [0.96, 0.1]], ["fx", "grow", 1.25]], "hold": 1000},
+                {"cap": T("Right-click for size and opacity", "右键换大小、透明度"),
+                 "acts": [["fx", "menu", PIP_MENU], ["click", ".pl-pmenu .i5", ["fx", "alpha", 0.5]]], "hold": 1500},
             ],
         },
     },

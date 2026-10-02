@@ -131,6 +131,8 @@
     trash: svg('<path d="M5 7h14M10 7V5h4v2M7 7l.8 12h8.4L17 7"/>'),
     kbd: svg('<rect x="2.4" y="6" width="19.2" height="12" rx="2.4"/><path d="M6 9.4h.1M9.4 9.4h.1M12.8 9.4h.1M16.2 9.4h.1M6 12.4h.1M9.4 12.4h.1M12.8 12.4h.1M16.2 12.4h1.8M7.6 15.2h8.8"/>'),
     sound: svg('<path d="M4 9.4h3.2L11.6 5v14l-4.4-4.4H4Z"/><path d="M15 9a4.2 4.2 0 0 1 0 6"/>'),
+    goTo: svg('<path d="M10.4 4.6H6.6a2 2 0 0 0-2 2v10.8a2 2 0 0 0 2 2h10.8a2 2 0 0 0 2-2v-3.8"/><path d="M13.8 4.6h5.6v5.6M19.4 4.6l-7.8 7.8"/>', 2.2),
+    xs: svg('<path d="m6.5 6.5 11 11M17.5 6.5l-11 11"/>', 2.6),
     gear: svg('<circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M6 18l1.6-1.6M16.4 7.6 18 6"/>')
   };
 
@@ -1032,7 +1034,7 @@
         else if (op === "file") await this.addFile(e[1]);
         else if (op === "notify") await this.notify(e[1], e[2]);
         else if (op === "mb") this.mbIcon(e[1], e[2]);
-        else if (op === "fx") await this.fxCmd(e[1], e[2]);
+        else if (op === "fx") { if (e[1] === "start") await this.fxStart(e[2]); else await this.fxCmd(e[1], e[2]); }
         else if (op === "win") this.winTo(e[1]);
         else if (op === "grid") await this.setGrid(e[1]);
         else if (op === "replace") await this.replaceSel(e[1]);
@@ -1303,6 +1305,25 @@
         await this.wait(400);
         return;
       }
+      if (name === "pip") {
+        // Picture in Picture: a live view of a window, floating in the bottom-right corner above everything else.
+        o.innerHTML = '<div class="pl-pip"><div class="pl-pip-v">' + (fx.html || "") + '</div><span class="pl-pip-t">' + esc(fx.title || "") + '</span><span class="pl-pip-b is-back">' + I.goTo + '</span><span class="pl-pip-b is-x">' + I.xs + "</span></div>";
+        L.appendChild(o);
+        var pp = this.bubble = o.querySelector(".pl-pip"), pw = Math.round(Math.min(fx.w || 190, W * 0.46)), ph = Math.round(pw * (fx.ar || 0.5625));
+        pp.style.width = pw + "px"; pp.style.height = ph + "px";
+        pp.style.left = (W - pw - 12) + "px"; pp.style.top = (H - ph - 12) + "px";
+        void o.offsetWidth; o.classList.add("is-on");
+        await this.wait(600);
+        return;
+      }
+      if (name === "banner") {
+        // A banner at the top of the screen (Break Reminder); ["fx", "html", …] changes what it says, ["fx", "count", …] counts down.
+        o.innerHTML = '<div class="pl-banner">' + (fx.html || "") + "</div>";
+        L.appendChild(o);
+        void o.offsetWidth; o.classList.add("is-on");
+        await this.wait(550);
+        return;
+      }
       if (name === "lock") {
         o.innerHTML = '<div class="pl-lock"><span class="pl-lock-ic">' + I.kbd + "</span><strong>" + esc(fx.title || s.locked) + "</strong><span>" + esc(fx.sub || "") + '</span><div class="pl-dial is-sm"><svg viewBox="0 0 120 120"><circle class="tr" cx="60" cy="60" r="52"/><circle class="v" cx="60" cy="60" r="52" pathLength="1"/></svg><div><strong>60</strong></div></div><span class="pl-btn is-tint">' + esc(fx.btn || s.endClean) + "</span></div>";
         L.appendChild(o);
@@ -1411,17 +1432,70 @@
       }
       if (cmd === "drag" && this.bubble) {
         var b = this.bubble, x0 = parseFloat(b.style.left), y0 = parseFloat(b.style.top), to = arg || [24, H - 150];
-        await this.move(x0 + 60, y0 + 60);
+        var hw = b.offsetWidth / 2, hh = b.offsetHeight / 2;
+        if (to[0] <= 1 && to[1] <= 1) to = [to[0] * (W - hw * 2), to[1] * (H - hh * 2)];
+        await this.move(x0 + hw, y0 + hh);
         this.cursor.classList.add("is-down");
         await this.anim(900, function (p) {
           var e = ease(p), x = lerp(x0, to[0], e), y = lerp(y0, to[1], e);
           b.style.left = x + "px"; b.style.top = y + "px";
-          self.at = { x: x + 60, y: y + 60 }; self.place();
+          self.at = { x: x + hw, y: y + hh }; self.place();
         });
         this.cursor.classList.remove("is-down");
         return;
       }
+      if (cmd === "grow" && this.bubble && this.bubble.classList.contains("pl-pip")) {
+        // Scrolling over the floating window resizes it around its centre, within the screen.
+        var g = this.bubble, gw = g.offsetWidth, gh = g.offsetHeight, nw = Math.min(gw * (arg || 1.3), W * 0.7), nh = nw * gh / gw;
+        var gx = parseFloat(g.style.left), gy = parseFloat(g.style.top);
+        await this.move(gx + gw / 2, gy + gh / 2);
+        await this.key("⇅");
+        g.style.width = nw.toFixed(1) + "px"; g.style.height = nh.toFixed(1) + "px";
+        g.style.left = clamp(gx - (nw - gw) / 2, 8, W - nw - 8).toFixed(1) + "px"; g.style.top = clamp(gy - (nh - gh) / 2, 30, H - nh - 8).toFixed(1) + "px";
+        await this.wait(500);
+        return;
+      }
       if (cmd === "grow" && this.bubble) { this.bubble.classList.add("is-big"); await this.wait(500); return; }
+      if (cmd === "hover" && this.bubble) { this.bubble.classList.toggle("is-hover", arg !== false); await this.wait(250); return; }
+      if (cmd === "menu") {
+        // A context menu at the pointer: item names, "-" for a separator, "✓ " in front of a checked one.
+        var om = o.querySelector(".pl-pmenu"), mn = el("div", "pl-pmenu"), mi2 = 0;
+        if (om) om.remove();
+        mn.innerHTML = arg.map(function (x) {
+          if (x === "-") return "<hr>";
+          var on = x.indexOf("✓ ") === 0;
+          return '<span class="i' + (mi2++) + (on ? " is-on" : "") + '">' + esc(on ? x.slice(2) : x) + "</span>";
+        }).join("");
+        o.appendChild(mn);
+        mn.style.left = clamp(this.at.x + 4, 6, W - mn.offsetWidth - 6) + "px";
+        mn.style.top = clamp(this.at.y + 4, 28, H - mn.offsetHeight - 6) + "px";
+        void mn.offsetWidth; mn.classList.add("is-on");
+        await this.wait(450);
+        return;
+      }
+      if (cmd === "alpha" && this.bubble) {
+        var pm = o.querySelector(".pl-pmenu");
+        if (pm) { pm.classList.remove("is-on"); setTimeout(function () { pm.remove(); }, 200); }
+        this.bubble.style.opacity = arg;
+        await this.wait(450);
+        return;
+      }
+      if (cmd === "html") {
+        var bn = o.querySelector(".pl-banner");
+        if (bn) bn.innerHTML = arg;
+        await this.wait(350);
+        return;
+      }
+      if (cmd === "count") {
+        // A break counting down in the banner: [length in seconds, from, to, ms]; the time and the ring follow.
+        var cd = o.querySelector(".pl-cd"), rv = o.querySelector(".pl-ring .v"), tot = arg[0];
+        await this.anim(arg[3] || 2000, function (p) {
+          var left = Math.max(0, Math.ceil(lerp(arg[1], arg[2], p)));
+          if (cd) cd.textContent = Math.floor(left / 60) + ":" + (left % 60 < 10 ? "0" : "") + (left % 60);
+          if (rv) rv.style.strokeDashoffset = (left / tot).toFixed(4);
+        });
+        return;
+      }
       if (cmd === "shape" && this.bubble) { this.bubble.classList.add("is-" + arg); await this.wait(500); return; }
       if (cmd === "speed" && this.tele) { this.tele.rate = arg; o.querySelector(".pl-tele-sp").textContent = (arg / 0.018).toFixed(1) + "×"; await this.wait(300); return; }
       if (cmd === "pause" && this.tele) { this.tele.paused = !this.tele.paused; o.classList.toggle("is-paused", this.tele.paused); await this.wait(300); return; }

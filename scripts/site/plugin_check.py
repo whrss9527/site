@@ -10,7 +10,8 @@ BLOCKS = {"text", "note", "big", "rows", "code", "seg", "chips", "panes", "list"
 EFFECTS = {"toast", "show", "hide", "swap", "set", "close", "card", "file", "grid", "rename", "notify", "mb", "win", "fx",
            "sel", "addClass", "wait", "replace", "prop", "text"}
 ACTS = {"click", "hover", "move", "type", "key", "wait"} | EFFECTS
-FX = {"region", "pen", "spotlight", "pointer", "zoom", "camera", "keys", "large", "tele", "ruler", "recorder", "lock"}
+FX = {"region", "pen", "spotlight", "pointer", "zoom", "camera", "keys", "large", "tele", "ruler", "recorder", "lock",
+      "pip", "banner"}
 ARTS = {"landscape", "beach", "sunset", "city", "portrait", "flower", "mug", "screen", "doc", "logo", "forest", "waves"}
 SEL = re.compile(r"^(btn|opt|row|chk|cell|th|b):\d+(\.\d+)?$|^x$|^[.#\[]")
 CJK = re.compile(r"[　-〿㐀-鿿＀-￯]")
@@ -61,6 +62,12 @@ def check_act(a, path, out):
         for e in effs:
             if not e or e[0] not in EFFECTS:
                 out.append(f"{path}: unknown effect {e!r:.60}")
+    if a[0] == "fx" and len(a) > 2 and a[1] == "start" and (a[2] or {}).get("name") not in FX:
+        out.append(f"{path}: unknown fx {a[2]!r:.60}")
+    if a[0] == "click" and len(a) > 2:
+        for e in (a[2] if a[2] and isinstance(a[2][0], (list, tuple)) else [a[2]]):
+            if e and e[0] == "fx" and len(e) > 2 and e[1] == "start" and (e[2] or {}).get("name") not in FX:
+                out.append(f"{path}: unknown fx {e[2]!r:.60}")
     if a[0] in ("set", "card"):
         blocks = [a[2]] if a[0] == "set" else a[1].get("body", [])
         for i, b in enumerate(blocks):

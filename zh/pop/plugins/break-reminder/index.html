@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__motion)document.documentElement.classList.add("rv-done")},3000)</script>
+<link rel="stylesheet" href="../../../../assets/pop-plugins.css">
+<script src="../../../../assets/pop-plugins.js" defer></script>
+<title>休息提醒 · Pop 插件</title>
+<meta name="description" content="连续用电脑一段时间提醒你起来活动、看看远处；离开一会儿就算休息过了，看视频、开会时不打扰">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f2f3f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121315" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://whrss.com/zh/pop/plugins/break-reminder/">
+<link rel="alternate" hreflang="en" href="https://whrss.com/pop/plugins/break-reminder/">
+<link rel="alternate" hreflang="zh-CN" href="https://whrss.com/zh/pop/plugins/break-reminder/">
+<link rel="alternate" hreflang="x-default" href="https://whrss.com/pop/plugins/break-reminder/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="休息提醒 · Pop 插件">
+<meta property="og:description" content="连续用电脑一段时间提醒你起来活动、看看远处；离开一会儿就算休息过了，看视频、开会时不打扰">
+<meta property="og:url" content="https://whrss.com/zh/pop/plugins/break-reminder/">
+<meta property="og:image" content="https://whrss.com/assets/og/pop-zh.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pop：应用界面的可交互还原，示例数据">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../../../../assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../../../../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="../../../../assets/site.css">
+<script src="../../../../assets/site.js" defer></script>
+<script src="../../../../assets/motion.js" defer></script>
+</head>
+<body class="app-pop app-page plp-page cat-files">
+<a class="skip" href="#main">跳到正文</a>
+<header class="menubar">
+  <div class="wrap">
+    <a class="brand" href="../../../"><span class="brand-mark" aria-hidden="true"><span></span></span>whrss</a>
+    <nav class="nav" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    </nav>
+    <details class="lang-menu">
+      <summary aria-label="语言：简体中文" title="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><span class="lang-code" aria-hidden="true">中文</span></summary>
+      <div class="panel lang-list" role="group" aria-label="语言">
+        <a href="../../../../pop/plugins/break-reminder/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+        <a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a>
+      </div>
+    </details>
+    <details class="nav-menu">
+      <summary>菜单</summary>
+      <nav class="panel nav-list" aria-label="主导航">
+    <a href="../../" aria-current="page"><img src="../../../../assets/icons/pop.png" alt="" width="18" height="18">Pop</a>
+    <a href="../../../meno/"><img src="../../../../assets/icons/meno.png" alt="" width="18" height="18">Meno</a>
+    <a href="../../../stox/"><img src="../../../../assets/icons/stox.png" alt="" width="18" height="18">Stox</a>
+    <a href="../../../proxi/"><img src="../../../../assets/icons/proxi.png" alt="" width="18" height="18">Proxi</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a href="https://blog.whrss.com">博客</a>
+    <a href="../../../support/">支持</a>
+    <a href="https://github.com/whrss9527">GitHub</a>
+    <span class="sep" aria-hidden="true"></span>
+    <a class="lang-link" href="../../../../pop/plugins/break-reminder/" hreflang="en" lang="en" data-lang="en"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg>English</a>
+      </nav>
+    </details>
+  </div>
+</header>
+<nav class="localnav" aria-label="Pop 插件">
+  <div class="wrap">
+    <a class="ln-title" href="../../"><img src="../../../../assets/icons/pop.png" alt="" width="24" height="24"><span>Pop</span></a>
+    <a class="ln-sub" href="../">插件</a>
+    <div class="ln-links"><a href="#how">怎么用</a><a href="#details">功能</a><a href="#install">安装</a></div>
+    <a class="btn btn-primary btn-xs" href="https://github.com/whrss9527/pop/releases/latest" aria-label="下载 Pop">下载</a>
+  </div>
+</nav>
+<main id="main">
+  <section class="plp-hero">
+    <div class="wrap">
+      <div class="hero-copy">
+        <nav class="crumbs" aria-label="位置"><a href="../../">Pop</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../">插件</a><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg><a href="../#files">文件和系统</a></nav>
+        <p class="plp-cat">Pop 插件 · 文件和系统</p>
+        <h1>休息提醒</h1>
+        <p class="lede">连续用电脑一段时间提醒你起来活动、看看远处；离开一会儿就算休息过了，看视频、开会时不打扰。</p>
+        <div class="plp-meta"><span><b>处理</b> 随时可用，不用选中内容</span><span>免费</span></div>
+        <div class="actions">
+          <a class="btn btn-primary btn-lg" href="#how">看看怎么用</a>
+          <a class="btn btn-glass btn-lg" href="https://github.com/whrss9527/pop/releases/latest"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10"/></svg>下载 Pop</a>
+        </div>
+      </div>
+      <div class="plp-art"><div class="pa cat-files" aria-hidden="true"><div class="pa-glow"></div><div class="pa-rings"><i></i><i></i><i></i><b style="--a:40deg;--r:41%"></b><b style="--a:220deg;--r:51%"></b></div><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.8" cy="4.4" r="1.9"/><path d="M12.8 7.8 11.2 13.6l2.8 3-.6 4.6M11.2 13.6l-1.8 3.8-3 3.2M7.4 11.6l2.6-3.2 2.8-.6 2 3.4 3 1.2"/></svg></span><span class="pa-chip c1"><i></i>每 45 分钟</span><span class="pa-chip c2"><i></i>离开就算休息</span><span class="pa-chip c3"><i></i>开会时不打扰</span></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <div class="howto-h rv"><h2 id="how-title">怎么用</h2>
+        <p>选中内容，按住右键，一划。动画按步骤播放，点一下某一步可以从那里重看。</p></div>
+      <div class="howto cat-files"><ol class="pla-steps"><li><span class="pla-st"><span><strong>什么都不用选</strong><small>在哪儿都能用。</small></span></span></li><li><span class="pla-st"><span><strong>按住鼠标右键</strong><small>大约 0.25 秒。轻点一下还是平常的右键菜单。</small></span></span></li><li><span class="pla-st"><span><strong>划向「休息提醒」，松开</strong><small>它在圆盘上你放的那一格，「全部功能」里也随时找得到。</small></span></span></li><li><span class="pla-st"><span><strong>打开它</strong><small>每 45 分钟休息 5 分钟，都可以改。</small></span></span></li><li><span class="pla-st"><span><strong>45 分钟后，屏幕上方提醒你</strong><small>离开一会儿就算休息过了。</small></span></span></li><li><span class="pla-st"><span><strong>休息一下</strong><small>上方的小条倒计时，Esc 提前结束。</small></span></span></li><li><span class="pla-st"><span><strong>休息完了响一声</strong></span></span></li></ol><figure class="pla" data-lang="zh" data-icon="../../../../assets/icons/pop.png"><script type="application/json" class="pla-data">{"name":"休息提醒","glyph":"<circle cx=\"13.8\" cy=\"4.4\" r=\"1.9\"/><path d=\"M12.8 7.8 11.2 13.6l2.8 3-.6 4.6M11.2 13.6l-1.8 3.8-3 3.2M7.4 11.6l2.6-3.2 2.8-.6 2 3.4 3 1.2\"/>","scene":{"src":{"kind":"desk","app":"Numbers 表格","title":"第四季度预算","lines":["**市场** · 128,000","**差旅** · 46,500"]},"card":{"w":360,"btns":["现在休息","完成"],"tint":1,"body":[{"t":"html","html":"<div style=\"display:flex;align-items:center;gap:8px;font-size:12.5px\"><span style=\"flex:1\">连续用电脑一段时间后提醒我休息<\/span><span class=\"pl-sw2\"><\/span><\/div>"},{"t":"html","html":"<div style=\"display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4;color:var(--pl-l2)\"><span style=\"color:var(--pl-l2);flex:none;margin-top:1px\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.6\"/><path d=\"M12 7.4V12l3 2\"/><\/svg><\/span><span>没开。打开以后，连续用电脑 45 分钟会提醒你休息 5 分钟。<\/span><\/div>"},{"t":"html","html":"<div style=\"display:flex;flex-direction:column;gap:6px\"><div class=\"pl-seg-row\"><span class=\"pl-lab\">每隔<\/span><span class=\"pl-btn\" style=\"gap:6px\">45 分钟<svg viewBox=\"0 0 24 24\" width=\"11\" height=\"11\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 9.5 4-3.5 4 3.5M8 14.5l4 3.5 4-3.5\"/><\/svg><\/span><\/div><div class=\"pl-seg-row\"><span class=\"pl-lab\">休息<\/span><span class=\"pl-btn\" style=\"gap:6px\">5 分钟<svg viewBox=\"0 0 24 24\" width=\"11\" height=\"11\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 9.5 4-3.5 4 3.5M8 14.5l4 3.5 4-3.5\"/><\/svg><\/span><\/div><\/div>"},{"t":"html","html":"<label style=\"display:flex;align-items:center;gap:7px;font-size:12px\"><span class=\"pl-chk\"><\/span>休息时盖住屏幕<\/label>"},{"t":"note","text":"离开电脑 3 分钟以上（休息时长更长时按休息时长）就算休息过了，合上盖子睡着的时间也算，回来重新计时；有 App 在放视频、开视频会议（不让屏幕变暗）时不提醒，这段时间也不算休息。"}]},"steps":[{"acts":[["click",".pl-sw2",[["addClass",".pl-sw2","is-on"],["set",1,{"t":"html","html":"<div style=\"display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4\"><span style=\"color:var(--pl-accent);flex:none;margin-top:1px\"><svg viewBox=\"0 0 24 24\" width=\"15\" height=\"15\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"8.6\"/><path d=\"M12 7.4V12l3 2\"/><\/svg><\/span><span>已经连续用了不到一分钟，45 分钟后提醒休息<\/span><\/div>"}]]]],"hold":1400},{"acts":[["click","btn:1",[["close"],["fx","start",{"name":"banner","html":"<div class=\"pl-bn\"><span class=\"pl-bn-ic\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13.8\" cy=\"4.4\" r=\"1.9\"/><path d=\"M12.8 7.8 11.2 13.6l2.8 3-.6 4.6M11.2 13.6l-1.8 3.8-3 3.2M7.4 11.6l2.6-3.2 2.8-.6 2 3.4 3 1.2\"/><\/svg><\/span><div class=\"pl-bn-t\"><strong>该休息一下了<\/strong><span>已经连续用了 47 分钟，起来活动活动、看看远处<\/span><\/div><\/div><div class=\"pl-bn-btns\"><span class=\"pl-btn\">跳过<\/span><span class=\"pl-btn\">5 分钟后提醒<\/span><span class=\"pl-btn is-tint\">休息 5 分钟<\/span><\/div>"}]]]],"hold":1600},{"acts":[["click",".pl-banner .pl-btn.is-tint",["fx","html","<div class=\"pl-bn is-row\"><svg class=\"pl-ring\" viewBox=\"0 0 28 28\" aria-hidden=\"true\"><circle class=\"tr\" cx=\"14\" cy=\"14\" r=\"11.5\"/><circle class=\"v\" cx=\"14\" cy=\"14\" r=\"11.5\" pathLength=\"1\"/><\/svg><div class=\"pl-bn-t\"><strong>休息中，还剩 <span class=\"pl-cd\">5:00<\/span><\/strong><span>看看 6 米外的地方，眨眨眼<\/span><\/div><span class=\"pl-btn\">结束休息<\/span><\/div>"]],["fx","count",[300,300,293,2600]]],"hold":600},{"acts":[["fx","html","<div class=\"pl-bn is-row\"><span class=\"pl-bn-ic is-ok\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.7\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9.4\" fill=\"currentColor\" stroke=\"none\"/><path d=\"m7.6 12.2 3 3 5.8-6\" stroke=\"#fff\" stroke-width=\"2.2\"/><\/svg><\/span><div class=\"pl-bn-t\"><strong>休息好了，接着忙吧<\/strong><\/div><\/div>"]],"hold":1600}]}}</script><noscript><div class="demo-nojs glass"><img src="../../../../assets/icons/pop.png" alt="" width="40" height="40"><p>打开 JavaScript 后，这里会播放「休息提醒」的动画演示；旁边的步骤说的是同一件事。</p></div></noscript></figure></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="details" aria-labelledby="details-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="details-title">能做什么</h2></div>
+      <div class="plp-details rv-group"><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>打开以后，连续用电脑 45 分钟（20 分钟到 1 个半小时可选）就在<b>屏幕上方</b>提醒你休息一下，可以马上休息、5 分钟后再提醒或者跳过。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>休息 20 秒到 10 分钟，倒计时显示在上方的小条里，也可以选<b>「休息时盖住屏幕」</b>，按 Esc 随时提前结束；休息完了响一声。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p><b>离开电脑</b>够久（一次休息的时长，至少 3 分钟）就算休息过了，合上盖子睡着的时间也算在里面，回来重新计时。</p></div><div class="plp-point glass"><span class="n"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></span><p>有 App 在放视频、开视频会议时不提醒，那段时间也不算休息。Pop 下次启动时接着计时。</p></div></div>
+    </div>
+  </section>
+
+  <section class="section-tight" id="install" aria-labelledby="install-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="install-title">安装</h2>
+        <p>插件不跟着 Pop 一起下载，要用时再装。</p></div>
+      <div class="plp-install rv-group">
+        <div class="plp-way glass"><h3><span>1</span>在设置里装</h3>
+          <p>在 Pop 的「设置 → 功能」最上面的「插件」里找到「休息提醒」，点「安装」：从 Pop 的 GitHub 发布页下载，几秒就好，装好就能用，不用重启。</p></div>
+        <div class="plp-way glass"><h3><span>2</span>或者在圆盘上装</h3>
+          <p>在圆盘的「全部功能」里搜「休息提醒」：没装的插件列在后面，点一下就装上，能处理当前选中的内容时直接运行。</p></div>
+        <div class="plp-way glass"><h3><span>3</span>然后，怎么顺手怎么用</h3>
+          <p>在「设置 → 圆盘」里把它放上圆盘、给它设个快捷键，或者在快捷指令和脚本里用它的链接：</p>
+          <div class="cmd"><code>pop://run?plugin=breakReminder</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="pop://run?plugin=breakReminder" data-done="已复制" hidden>复制</button></div></div>
+      </div>
+      <p class="note rv">不用了在同一个列表里点「卸载」，插件和它的设置一起删掉。Pop 更新后，装着的插件会跟着换成新版本；打开 iCloud 同步的话，装了哪些会同步到你的其他 Mac。</p>
+    </div>
+  </section>
+
+  <section class="section-tight" aria-labelledby="more-title">
+    <div class="wrap">
+      <div class="section-head rv"><h2 id="more-title">更多文件和系统</h2></div>
+      <div class="plg-grid rv-group"><a class="plg-card glass cat-files" href="../folder-tree/" data-cat="files" data-k="Folder Tree 目录结构 Write the structure of the selected folder as a tree or Markdown list for docs, READMEs or sharing 把选中文件夹里的目录结构写成树形或者 Markdown 列表，贴进文档、README 或者发给别人 folderTree folder-tree Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="3" width="6.4" height="4.8" rx="1.2"/><rect x="12.4" y="9.6" width="8.8" height="4.8" rx="1.2"/><rect x="12.4" y="16.2" width="8.8" height="4.8" rx="1.2"/><path d="M6 7.8v10.8h6.4M6 12h6.4"/></svg></span><div><h3>目录结构</h3><p>把选中文件夹里的目录结构写成树形或者 Markdown 列表，贴进文档、README 或者发给别人</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-files" href="../code-stats/" data-cat="files" data-k="Lines of Code 代码行数 Count code files and lines per language in the selected folders; copy as a Markdown table 按语言统计选中的文件夹里有多少个代码文件、多少行，可以复制成 Markdown 表格 codeStats code-stats Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20.4h16"/><rect x="5" y="13" width="3" height="4.6" rx=".8"/><rect x="10.5" y="9.4" width="3" height="8.2" rx=".8"/><rect x="16" y="11.4" width="3" height="6.2" rx=".8"/><path d="m8.4 3.6-2.2 2.2 2.2 2.2M15.6 3.6l2.2 2.2-2.2 2.2M13 3.2l-2 5.2"/></svg></span><div><h3>代码行数</h3><p>按语言统计选中的文件夹里有多少个代码文件、多少行，可以复制成 Markdown 表格</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-files" href="../compare-files/" data-cat="files" data-k="Compare Files 对比文件 Compare the two selected text files (code, Markdown, config, CSV…), marking removed and added lines and the changed words in them; the older file by modification date is the original 对比选中的两个文本文件（代码、Markdown、配置、CSV……），标出删去和新增的行，改动的地方逐词标出；按修改时间，旧的当原文 compareFiles compare-files Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9.4 6.4V5a2 2 0 0 1 2-2h5.2l3.6 3.6V15a2 2 0 0 1-2 2h-1.4"/><rect x="3.8" y="6.4" width="11.4" height="14.6" rx="2"/><path d="M6.6 11h5.8M6.6 14h5.8M6.6 17h3.6"/></svg></span><div><h3>对比文件</h3><p>对比选中的两个文本文件（代码、Markdown、配置、CSV……），标出删去和新增的行，改动的地方逐词标出；按修改时间，旧的当原文</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-files" href="../batch-rename/" data-cat="files" data-k="Batch Rename 批量重命名 Rename the selected files together: numbering, find and replace, prefix and suffix, photo capture date, case. Preview first and undo afterwards. 给选中的文件统一改名：编号、替换文字、加前后缀、按照片的拍摄时间、改大小写，先看预览再改，改完可以撤销 batchRename batch-rename Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="6.4" width="15.6" height="11.2" rx="2.4"/><path d="M6 12h.1M9 12h.1M12 12h.1"/><path d="m20.6 5.6-4.8 4.8-1.8.6.6-1.8 4.8-4.8a.9.9 0 0 1 1.2 1.2Z"/></svg></span><div><h3>批量重命名</h3><p>给选中的文件统一改名：编号、替换文字、加前后缀、按照片的拍摄时间、改大小写，先看预览再改，改完可以撤销</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-files" href="../zip/" data-cat="files" data-k="Zip and Unzip 压缩和解压 Compress the selected files or folders into a zip in the same folder, or extract the selected zip files into folders next to them 把选中的文件或文件夹压缩成 zip，存在原来的文件夹里；把选中的 zip 解压到旁边的同名文件夹里 zip zip Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6.2 3h7.3l4.8 4.8v11.7a1.5 1.5 0 0 1-1.5 1.5H6.2a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 6.2 3Z"/><path d="M10.6 3v1.6h1.6v1.6h-1.6v1.6h1.6v1.6h-1.6V11"/><rect x="9.8" y="11" width="3.2" height="4.4" rx="1"/></svg></span><div><h3>压缩和解压</h3><p>把选中的文件或文件夹压缩成 zip，存在原来的文件夹里；把选中的 zip 解压到旁边的同名文件夹里</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a><a class="plg-card glass cat-files" href="../open-in-terminal/" data-cat="files" data-k="Open in Terminal 在终端打开 Open the selected folder in Terminal (for files, the folder they’re in) 在「终端」里打开选中的文件夹（选中文件时打开它所在的文件夹） openInTerminal open-in-terminal Files & System 文件和系统"><span class="ptile cat-files" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.6" y="3.8" width="18.8" height="16.4" rx="3"/><path d="m6.6 9.2 3 2.8-3 2.8M11.6 15.4h5.4"/></svg></span><div><h3>在终端打开</h3><p>在「终端」里打开选中的文件夹（选中文件时打开它所在的文件夹）</p></div><svg class="go" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <nav class="plp-nav rv" aria-label="上一个和下一个插件" style="margin-top:28px">
+        <a class="glass prev cat-files" href="../timer/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg></span><span class="ptile cat-files is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13.4" r="7.8"/><path d="M12 13.4V9.2M9.6 2.8h4.8M18.6 6.6l1.4-1.4"/></svg></span><span><small>上一个</small><strong>计时器</strong></span></a>
+        <a class="glass next cat-files" href="../focus-sounds/"><span class="arr"><svg viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg></span><span class="ptile cat-files is-sm" aria-hidden="true"><svg class="glyph" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 15v-3a8.4 8.4 0 0 1 16.8 0v3"/><rect x="3.6" y="13.6" width="4.2" height="7" rx="1.6"/><rect x="16.2" y="13.6" width="4.2" height="7" rx="1.6"/></svg></span><span><small>下一个</small><strong>白噪音</strong></span></a>
+      </nav>
+      <p class="small muted" style="margin-top:28px;text-align:center"><a href="../">全部 105 个插件</a> · <a href="../../">关于 Pop</a> · <a href="https://github.com/whrss9527/pop/issues">GitHub 上的 Pop issue</a></p>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h2>whrss</h2>
+        <p>住在菜单栏里的原生 Mac 小工具，开源免费。</p>
+      </div>
+      <div>
+        <h2>应用</h2>
+        <ul><li><a href="../../">Pop</a></li><li><a href="../../../meno/">Meno</a></li><li><a href="../../../stox/">Stox</a></li><li><a href="../../../proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>隐私政策</h2>
+        <ul><li><a href="../../../privacy/pop/">Pop</a></li><li><a href="../../../privacy/meno/">Meno</a></li><li><a href="../../../privacy/stox/">Stox</a></li><li><a href="../../../privacy/proxi/">Proxi</a></li></ul>
+      </div>
+      <div>
+        <h2>更多</h2>
+        <ul>
+          <li><a href="../../../support/">支持</a></li>
+          <li><a href="https://blog.whrss.com">博客</a></li>
+          <li><a href="https://github.com/whrss9527">GitHub</a></li>
+          <li><a href="mailto:whrss9527@gmail.com">whrss9527@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="fine">© 2026 whrss9527. 本站不使用 Cookie，不做统计，也不从第三方加载任何内容。</p>
+      <nav class="footer-lang" aria-label="语言"><svg class="globe" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7.5"/><path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z"/></svg><ul><li><a href="../../../../pop/plugins/break-reminder/" hreflang="en" lang="en" data-lang="en"><span>English</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li><li><a href="./" hreflang="zh-CN" lang="zh-CN" data-lang="zh" aria-current="true"><span>简体中文</span><svg class="check" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg></a></li></ul></nav>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

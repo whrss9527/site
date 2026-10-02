@@ -9,9 +9,9 @@ import re
 
 # The Pop version this catalog and the plugin pages were last checked against (the top section of Pop's
 # CHANGELOG.md). A daily routine compares it with Pop's latest release and opens a pull request to catch up.
-SYNCED_WITH = "0.59.0"
+SYNCED_WITH = "0.63.0"
 
-SLUGS = {"airDrop": "airdrop"}
+SLUGS = {"airDrop": "airdrop", "windowPiP": "window-pip"}
 
 
 class P:
@@ -182,6 +182,10 @@ PLUGINS = [
       "Time Zones", "时区换算",
       "Select a time such as “3pm PST” or “9 pm Beijing time” to see it in the cities you use. Drag the slider to try other times and find when everyone is at work",
       "选中「3pm PST」「北京时间晚上 9 点」这样的时间，换算成常用的几个城市的时间；拖动滑块看别的时刻，找大家都在上班的时间开会"),
+    P("calendar", "convert", "calendar", ["calendar"], [],
+      "Calendar", "万年历",
+      "A month calendar with lunar dates, solar terms and festivals; select a date, festival or lunar date to jump to that day",
+      "月历上每天写着农历、节气和节日；选中一个日期、节日或者农历日子，翻到那一天"),
     P("numberConvert", "convert", "number.circle", ["numberConvert"], ["number"],
       "Numbers", "数字转换",
       "Bases, thousands separators, RMB in words",
@@ -296,6 +300,10 @@ PLUGINS = [
       "Screen Ruler", "屏幕标尺",
       "Freeze the screen and measure distances from the pointer to the edges around it; drag to measure an area; click to copy the size",
       "定格屏幕，量出指针处到上下左右边缘的距离，拖动量一块区域的宽高；单击复制尺寸"),
+    P("windowPiP", "screen", "pip", ["windowPiP"], [],
+      "Picture in Picture", "窗口画中画",
+      "Float a live view of any window in a corner of the screen, above all other windows, to keep an eye on a video, a call or a download while you work; drag to move it, scroll to resize it and double-click to go back to the window",
+      "把一个窗口的画面实时放进屏幕角落的小窗，一直浮在别的窗口上面：边干活边看着视频、会议、下载进度；拖动换位置，滚动换大小，双击回到原来的窗口"),
     # recording
     P("screenRecord", "recording", "record.circle", ["screenRecord"], [],
       "Record Screen", "录屏",
@@ -426,6 +434,10 @@ PLUGINS = [
       "Sound Devices", "声音设备",
       "Switch where sound plays and which microphone is used in one go: speakers, headphones, AirPods, displays or AirPlay, and adjust the volume or mute",
       "一下子换声音从哪出、用哪个麦克风：扬声器、耳机、AirPods、显示器、AirPlay，还能调音量、静音"),
+    P("bluetooth", "files", "dot.radiowaves.left.and.right", ["bluetooth"], [],
+      "Bluetooth Devices", "蓝牙设备",
+      "Connect or disconnect paired Bluetooth devices in one go: AirPods and other headphones, keyboards, mice, trackpads and game controllers, with the battery level of connected keyboards and mice",
+      "一下子连接、断开配对过的蓝牙设备：AirPods 和别的耳机、键盘、鼠标、触控板、手柄，连着的键盘鼠标写着电量"),
     P("resolution", "files", "display", ["resolution"], [],
       "Resolution", "分辨率",
       "Change each display’s resolution (what it looks like) and refresh rate, or pick the main display; after a change on an external display, click Keep within 15 seconds or it switches back",
@@ -442,6 +454,10 @@ PLUGINS = [
       "Timer", "计时器",
       "Countdown: choose a duration, or select text such as “25 min” or “1:30” to start right away. Plays a sound and sends a notification when time’s up. There’s also a Pomodoro timer: 25 minutes of focus, then a 5-minute break, over and over",
       "倒计时：选一个时长，或者选中「25 分钟」「1:30」这样的文字直接开始；到点时响一声、发通知。也有番茄钟：专注 25 分钟、休息 5 分钟，一直循环"),
+    P("breakReminder", "files", "figure.walk", ["breakReminder"], [],
+      "Break Reminder", "休息提醒",
+      "Reminds you to take a break after a stretch at the computer; stepping away counts as a break, and it stays quiet during videos and meetings",
+      "连续用电脑一段时间提醒你起来活动、看看远处；离开一会儿就算休息过了，看视频、开会时不打扰"),
     P("focusSounds", "files", "headphones", ["focusSounds"], [],
       "White Noise", "白噪音",
       "Play white, pink or brown noise, rain or waves to cover the chatter around you while you focus or nap, with a volume control and a sleep timer. The sound is generated on your Mac and keeps playing after you close the card; pause or stop it from the headphones icon in the menu bar",
