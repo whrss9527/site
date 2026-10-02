@@ -46,11 +46,12 @@
   function lerp(a, b, p) { return a + (b - a) * p; }
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
   // Inline marks in sample text: [[selected]], {{target}}, **bold**, `code`, {+inserted+}, {-deleted-}, ==highlight==
-  function marks(t) {
-    return esc(t)
+  function marks(t, raw) {
+    var h = esc(t)
       .replace(/\[\[([\s\S]+?)\]\]/g, '<span class="pl-sel">$1</span>')
-      .replace(/\{\{([\s\S]+?)\}\}/g, '<span class="pl-tgt">$1</span>')
-      .replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
+      .replace(/\{\{([\s\S]+?)\}\}/g, '<span class="pl-tgt">$1</span>');
+    if (raw) return h;
+    return h.replace(/\*\*([^*]+)\*\*/g, "<b>$1</b>")
       .replace(/`([^`]+)`/g, "<code>$1</code>")
       .replace(/\{\+([\s\S]+?)\+\}/g, "<ins>$1</ins>")
       .replace(/\{-([\s\S]+?)-\}/g, "<del>$1</del>")
@@ -68,7 +69,8 @@
         open[o] = a >= 0 && a > b;
         if (open[o]) l = l + c;
       });
-      return l;
+      // An empty line inside a selection stays empty.
+      return l === "[[]]" || l === "{{}}" ? "" : l;
     });
   }
 
@@ -481,10 +483,11 @@
           '<div class="pl-page"><div class="pl-page-in">' + lines + (src.pic ? '<div class="pl-pic">' + art(src.pic) + "</div>" : "") + (src.more ? (src.more.map(function (l) { return "<p>" + marks(l) + "</p>"; }).join("")) : "") + "</div></div></div>";
       }
       if (k === "text") {
+        var raw = !!src.raw;
         var body = spanLines(src.lines || []).map(function (l) {
           if (l === "") return '<p class="pl-gap"></p>';
-          if (/^# /.test(l)) return "<h4>" + marks(l.slice(2)) + "</h4>";
-          return "<p>" + marks(l) + "</p>";
+          if (/^# /.test(l) && !raw) return "<h4>" + marks(l.slice(2)) + "</h4>";
+          return "<p>" + marks(l, raw) + "</p>";
         }).join("");
         return '<div class="pl-win pl-text">' + bar(src.title || src.app || "Notes") + '<div class="pl-doc' + (src.mono ? " is-mono" : "") + '">' + body + "</div></div>";
       }
@@ -962,7 +965,7 @@
       switch (op) {
         case "wait": await this.wait(a[1]); break;
         case "move":
-          if (typeof a[1] === "string") { var tn = this.find(a[1]); if (tn) await this.moveTo(tn, a[2], a[3]); }
+          if (typeof a[1] === "string") { var tn = this.find(a[1]); if (tn) await this.moveTo(tn, a[2], a[3], a[4]); }
           else await this.move(this.W * a[1], this.H * a[2], a[3]);
           break;
         case "click": case "hover":
@@ -1022,6 +1025,9 @@
         else if (op === "fx") await this.fxCmd(e[1], e[2]);
         else if (op === "win") this.winTo(e[1]);
         else if (op === "grid") await this.setGrid(e[1]);
+        else if (op === "replace") await this.replaceSel(e[1]);
+        else if (op === "prop") this.prop(e[1], e[2], e[3]);
+        else if (op === "text") { var tx = typeof e[1] === "number" ? this.find("b:" + e[1]) : this.find(e[1]); if (tx) { tx.innerHTML = marks(e[2]); tx.classList.remove("is-flash"); void tx.offsetWidth; tx.classList.add("is-flash"); } }
         else if (op === "rename") await this.rename(e[1]);
         else if (op === "sel") { var sn = this.find(e[1]); if (sn) this.pressed(sn); }
         else if (op === "addClass") { var an = this.find(e[1]); if (an) an.classList.add(e[2]); }
@@ -1038,10 +1044,40 @@
     setBlock: function (b, spec) {
       var old = this.find("b:" + b);
       if (!old) return;
+      var was = old.__spec;
+      if (was && was.t === spec.t && /^(hours|slider|bar)$/.test(spec.t)) { this.morph(old, spec); return; }
       var n = this.block(spec, b);
       old.parentNode.replaceChild(n, old);
       this.blocks[b] = n;
       this.reveal(b);
+    },
+    // A new state for a time strip, slider or bar, reached with the block's own transition instead of a redraw.
+    morph: function (n, spec) {
+      var fresh = this.block(spec, n.getAttribute("data-b"));
+      n.__spec = spec;
+      function flashText(a, bNew) {
+        if (!a || !bNew || a.innerHTML === bNew.innerHTML) return;
+        a.innerHTML = bNew.innerHTML;
+        a.classList.remove("is-flash"); void a.offsetWidth; a.classList.add("is-flash");
+      }
+      if (spec.t === "hours") {
+        var box = n.querySelector(".pl-hours");
+        box.style.setProperty("--at", spec.at || 0.5);
+        var rows = n.querySelectorAll(".pl-hr"), nrows = fresh.querySelectorAll(".pl-hr");
+        each(nrows, function (r, i) {
+          if (!rows[i]) return;
+          flashText(rows[i].querySelector(".pl-hr-t"), r.querySelector(".pl-hr-t"));
+          rows[i].querySelector(".pl-hr-c").innerHTML = r.querySelector(".pl-hr-c").innerHTML;
+          rows[i].querySelector(".pl-hr-s").innerHTML = r.querySelector(".pl-hr-s").innerHTML;
+        });
+      } else if (spec.t === "slider") {
+        n.querySelector(".pl-sl i").style.setProperty("--v", spec.value == null ? 0.5 : spec.value);
+        flashText(n.querySelector(".pl-sl-v"), fresh.querySelector(".pl-sl-v"));
+        n.querySelector(".pl-lab").innerHTML = fresh.querySelector(".pl-lab").innerHTML;
+      } else {
+        n.querySelector(".pl-track i").style.setProperty("--v", spec.to == null ? 1 : spec.to);
+        n.querySelector(".pl-prog-h").innerHTML = fresh.querySelector(".pl-prog-h").innerHTML;
+      }
     },
     closeCard: async function () {
       var c = this.card;
@@ -1090,6 +1126,31 @@
       else if (f.at != null && grid.children[f.at]) grid.insertBefore(n, grid.children[f.at]);
       else grid.appendChild(n);
       await this.wait(500);
+    },
+    // Replace (⌘↩ on Pop's cards): the result goes back into the document in place of the selection.
+    replaceSel: async function (text) {
+      var sels = this.stage.querySelectorAll(".pl-sel");
+      if (!sels.length) return;
+      var first = sels[0], lines = String(text).split("\n");
+      // A multi-line result fills the selected lines in order; extra selected lines are removed.
+      each(sels, function (x, i) {
+        var p = x.closest("p");
+        if (i < lines.length) {
+          x.className = "pl-sel pl-repl";
+          x.innerHTML = i === sels.length - 1 ? lines.slice(i).map(esc).join("<br>") : esc(lines[i]);
+        } else if (p && p.textContent === x.textContent) p.remove();
+        else x.remove();
+      });
+      if (this.card) await this.closeCard();
+      await this.wait(700);
+    },
+    // Sets a CSS property on block B (or a selector), so it moves with the block's own transition:
+    // ["prop", 2, "--at", 0.4] slides the Time Zones moment, ["prop", 3, "--v", 0.7] a slider or bar.
+    prop: function (b, name, value) {
+      var n = typeof b === "number" ? this.find("b:" + b) : this.find(b);
+      if (!n) return;
+      var t = n.querySelector(".pl-hours, .pl-sl i, .pl-track i") || n;
+      t.style.setProperty(name, value);
     },
     // Finder: replace every item (after tidying, zipping…), or rename some of them.
     setGrid: async function (files) {

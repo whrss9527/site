@@ -8,7 +8,7 @@ KINDS = {"text", "web", "files", "image", "desk", "none"}
 BLOCKS = {"text", "note", "big", "rows", "code", "seg", "chips", "panes", "list", "diff", "table", "chart", "swatches",
           "grid", "qr", "barcode", "bar", "stats", "dial", "thumbs", "img", "field", "slider", "wave", "hours", "sep", "html"}
 EFFECTS = {"toast", "show", "hide", "swap", "set", "close", "card", "file", "grid", "rename", "notify", "mb", "win", "fx",
-           "sel", "addClass", "wait"}
+           "sel", "addClass", "wait", "replace", "prop", "text"}
 ACTS = {"click", "hover", "move", "type", "key", "wait"} | EFFECTS
 FX = {"region", "pen", "spotlight", "pointer", "zoom", "camera", "keys", "large", "tele", "ruler", "recorder", "lock"}
 ARTS = {"landscape", "beach", "sunset", "city", "portrait", "flower", "mug", "screen", "doc", "logo", "forest", "waves"}

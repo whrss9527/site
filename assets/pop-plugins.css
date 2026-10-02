@@ -1022,3 +1022,19 @@
   .plg-search { flex: 1 1 0; }
   .plg-q { height: 34px; }
 }
+
+/* Rows: the label column is as wide as the longest label (up to 45%), and values may run over several lines. */
+@supports (grid-template-columns: subgrid) {
+  .pl-rows { display: grid; grid-template-columns: minmax(56px, max-content) minmax(0, 1fr) auto; row-gap: 5px; column-gap: 8px; }
+  .pl-row { display: grid; grid-column: 1 / -1; grid-template-columns: subgrid; align-items: baseline; }
+  .pl-row-l { max-width: 150px; }
+}
+.pl-row-v { white-space: pre-wrap; }
+/* Replace: the result lands in the document. */
+.pl-sel.pl-repl { animation: pl-repl 1.4s ease-out forwards; background: none; }
+@keyframes pl-repl { 0% { background: var(--pl-selbg); } 100% { background: transparent; } }
+.pl-stage.is-ff .pl-sel.pl-repl { animation: none; background: none; }
+.pl-b .is-flash, .pl-card .is-flash { animation: pl-flash2 1.1s ease-out; border-radius: 4px; }
+@keyframes pl-flash2 { 0% { background: var(--pl-accent-40); } 100% { background: transparent; } }
+.pl-track i { transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.pl-hr-t.is-flash, .pl-sl-v.is-flash { animation: pl-flash2 1.1s ease-out; border-radius: 4px; }
