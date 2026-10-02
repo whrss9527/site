@@ -1,4 +1,5 @@
 """Plugin pages: convert plugins. See __init__.py and the README ("Plugin pages")."""
+import datetime
 from html import escape
 
 from . import T
@@ -80,6 +81,121 @@ def wt_hours(k):
 
 def wt_slider(k):
     return {"t": "slider", "label": "", "value": WT_SLIDER[k][0], "right": WT_SLIDER[k][1]}
+
+
+# ---------------------------------------------------------------- Calendar
+# October and November 2026 as Pop draws them, with today on October 1 as in Pop's own demo. The lunar months and
+# the solar terms are from Pop's tables (LunarTable.swift, SolarTerms.swift). The English page starts the week on
+# Sunday, the Chinese one on Monday; lunar day and month names stay in Chinese in both, as in Pop.
+CAL_TODAY = datetime.date(2026, 10, 1)
+CAL_LUNAR_MONTHS = [(datetime.date(2026, 9, 11), "八月"), (datetime.date(2026, 10, 10), "九月"),
+                    (datetime.date(2026, 11, 9), "十月"), (datetime.date(2026, 12, 9), "冬月")]
+CAL_FESTIVALS = {(10, 1): T("National Day", "国庆节"), (10, 18): T("Double Ninth Festival", "重阳节")}
+CAL_TERMS = {(10, 8): T("Cold Dew", "寒露"), (10, 23): T("Frost’s Descent", "霜降"), (11, 7): T("Start of Winter", "立冬"),
+             (11, 22): T("Minor Snow", "小雪"), (12, 7): T("Major Snow", "大雪")}
+CAL_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+CAL_DAYS = [("Monday", "星期一"), ("Tuesday", "星期二"), ("Wednesday", "星期三"), ("Thursday", "星期四"), ("Friday", "星期五"),
+            ("Saturday", "星期六"), ("Sunday", "星期日")]
+CAL_HEADS = (["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], ["一", "二", "三", "四", "五", "六", "日"])
+CAL_SVG = ('<span class="pl-btn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" '
+           'stroke-linecap="round" stroke-linejoin="round"><path d="{d}"/></svg></span>')
+CAL_PREV, CAL_NEXT = CAL_SVG.format(d="m14.5 6-6 6 6 6"), CAL_SVG.format(d="m9.5 6 6 6-6 6")
+
+
+def _lunar_day(n):
+    digits = ["", "一", "二", "三", "四", "五", "六", "七", "八", "九", "十"]
+    if n <= 10:
+        return "初" + digits[n]
+    if n < 20:
+        return "十" + digits[n - 10]
+    if n == 20:
+        return "二十"
+    return "廿" + digits[n - 20] if n < 30 else "三十"
+
+
+def _lunar(d):
+    """(month name, day) of the lunar date."""
+    start, month = max(x for x in CAL_LUNAR_MONTHS if x[0] <= d)
+    return month, (d - start).days + 1
+
+
+def _cal_note(d, i):
+    """What a day's cell says under the date: a festival, a solar term, the lunar month on its first day, or the lunar day."""
+    key = (d.month, d.day)
+    if key in CAL_FESTIVALS:
+        return "fe", CAL_FESTIVALS[key][i]
+    if key in CAL_TERMS:
+        return "st", CAL_TERMS[key][i]
+    month, n = _lunar(d)
+    return ("lm", month) if n == 1 else ("", _lunar_day(n))
+
+
+def cal_head(first, sel):
+    def make(i):
+        title = f"{CAL_MONTHS[first.month - 1]} {first.year}" if i == 0 else f"{first.year}年{first.month}月"
+        last = (first.replace(day=28) + datetime.timedelta(days=4)).replace(day=1) - datetime.timedelta(days=1)
+        a, b = _lunar(first)[0], _lunar(last)[0]
+        sub = "丙午年 " + (a if a == b else f"{a}—{b}")
+        off = " is-off" if sel == CAL_TODAY else ""
+        today = ("Today", "今天")[i]
+        return (f'<div class="pl-cal-h"><div><strong>{title}</strong><small>{sub}</small></div>{CAL_PREV}'
+                f'<span class="pl-btn{off}">{today}</span>{CAL_NEXT}</div>')
+    return {"t": "html", "html": T(make(0), make(1))}
+
+
+def cal_grid(first, sel):
+    def make(i):
+        lead = (first.weekday() + 1) % 7 if i == 0 else first.weekday()
+        start = first - datetime.timedelta(days=lead)
+        cells = []
+        for k in range(42):
+            d = start + datetime.timedelta(days=k)
+            kind, note = _cal_note(d, i)
+            cls = "".join(c for c, on in ((" out", d.month != first.month), (" we", d.weekday() >= 5), (" today", d == CAL_TODAY),
+                                         (" is-on", d == sel)) if on)
+            cells.append(f'<span class="pl-cell{cls}" data-d="{d.isoformat()}"><b>{d.day}</b><i class="{kind}">{note}</i></span>')
+        heads = "".join(f'<span class="pl-cal-w">{h}</span>' for h in CAL_HEADS[i])
+        return f'<div class="pl-cal"><div class="pl-cal-g">{heads}{"".join(cells)}</div></div>'
+    return {"t": "html", "html": T(make(0), make(1))}
+
+
+def cal_detail(d):
+    def make(i):
+        days = (d - CAL_TODAY).days
+        wd = CAL_DAYS[d.weekday()][i]
+        month, n = _lunar(d)
+        lunar = "丙午年（马年）" + month + _lunar_day(n)
+        event = CAL_FESTIVALS.get((d.month, d.day)) or CAL_TERMS.get((d.month, d.day))
+        week, yday = d.isocalendar()[1], d.timetuple().tm_yday
+        nxt = min(datetime.date(2026, m, dd) for (m, dd) in CAL_TERMS if datetime.date(2026, m, dd) > d)
+        term = CAL_TERMS[(nxt.month, nxt.day)][i]
+        gap = (nxt - d).days
+        if i == 0:
+            head = f"{wd}, {CAL_MONTHS[d.month - 1]} {d.day}, {d.year}"
+            rel = "Today" if days == 0 else f"In {days} days"
+            lines = [f"Lunar: {lunar}", f"Week {week} · Day {yday} of the year",
+                     f"Next solar term: {term} on {CAL_MONTHS[nxt.month - 1]} {nxt.day}, in {gap} days"]
+        else:
+            head = f"{d.year}年{d.month}月{d.day}日 {wd}"
+            rel = "今天" if days == 0 else f"{days} 天后"
+            lines = [f"农历{lunar}", f"第 {week} 周 · 全年第 {yday} 天", f"下一个节气：{term}，{nxt.month}月{nxt.day}日，还有 {gap} 天"]
+        ev = f'<span class="fe">{event[i]}</span>' if event else ""
+        em = '<em class="is-today">' if days == 0 else "<em>"
+        return (f'<div class="pl-cal-dt"><div><strong>{head}</strong>{em}{rel}</em></div>'
+                f'<span>{lines[0]}</span>{ev}<span class="mu">{lines[1]}</span><span class="mu">{lines[2]}</span></div>')
+    return {"t": "html", "html": T(make(0), make(1))}
+
+
+_CHK = ('<span class="pl-chk is-on"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.4" '
+        'stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>')
+# Pop lays the footer out on one line in Chinese; in English the key hint goes on a line of its own.
+CAL_FOOT = {"t": "html", "html": T(
+    f'<div class="pl-cal-f"><label>{_CHK}Lunar Dates &amp; Solar Terms</label><span class="sp"></span><span class="pl-btn">Copy</span>'
+    '<span class="br"></span><small>Arrows: day · Page Up/Down: month · T: today</small></div>',
+    f'<div class="pl-cal-f is-one"><label>{_CHK}农历和节气</label><span class="sp"></span><small>方向键换一天 · PageUp/Down 换月 · T 今天</small>'
+    '<span class="pl-btn">复制</span></div>')}
+OCT, NOV = datetime.date(2026, 10, 1), datetime.date(2026, 11, 1)
+D18, D23, N23 = datetime.date(2026, 10, 18), datetime.date(2026, 10, 23), datetime.date(2026, 11, 23)
 
 
 DATA = {
@@ -439,6 +555,43 @@ DATA = {
                 {"cap": T("Find when everyone’s at work", "找大家都在上班的时间"),
                  "acts": [["click", "btn:4.0", [["set", 3, wt_slider(2)], ["set", 2, wt_hours(2)]]]], "hold": 1800},
                 {"cap": T("Copy every city’s time", "复制各地的时间"), "acts": [["click", "btn:1", ["toast", COPIED]]]},
+            ],
+        },
+    },
+    "calendar": {
+        "chips": [T("Lunar dates & solar terms", "农历和节气"), T("Jump to a festival", "翻到节日"), "1900–2100"],
+        "points": [
+            T("A <b>month calendar</b> with each day’s Chinese lunar date, solar term and festival: lunar festivals such as the Spring Festival and Mid-Autumn, and dates such as New Year’s Day, National Day and Mother’s Day. Today is marked.",
+              "<b>一个月的月历</b>，每天写着农历、节气和节日（春节、中秋这些农历节日，元旦、国庆、母亲节这些公历节日），今天的日期标出来。"),
+            T("Select text such as “2026-10-01”, “October 1”, “Mid-Autumn Festival”, “冬至” or “农历八月十五” and it <b>jumps to that day</b>; festivals and lunar dates go to the next one from today.",
+              "选中「2026-10-01」「10月1日」「中秋节」「冬至」「农历八月十五」这样的文字再用，<b>直接翻到那一天</b>；节日、农历日子翻到今天以后最近的那次。"),
+            T("Below the month: the weekday, how far the day is from today, the week number and the next solar term.",
+              "下面写着选中的那天是星期几、离今天几天、第几周，还有下一个节气在哪天。"),
+            T("Arrow keys move a day, Page Up and Page Down change the month, T goes back to today and ⌘C copies the day. Turn off lunar dates and solar terms to see just the Gregorian calendar.",
+              "方向键换一天，PageUp、PageDown 换月，T 回到今天，⌘C 复制这一天；农历和节气可以关掉，只看公历。"),
+            T("Solar terms fall on their day in Beijing time; every one from 1900 to 2100 was checked against an astronomical algorithm.",
+              "节气按北京时间算到哪一天，1900 到 2100 年每一个都和天文算法对过。"),
+        ],
+        "scene": {
+            "tall": True,
+            "src": {"kind": "text", "app": T("Notes", "备忘录"), "cap": T("Select a date or a festival", "选中一个日期或者节日"),
+                    "sub": T("Or nothing, to see this month.", "什么都不选，就看这个月。"),
+                    "lines": [T("# Autumn plans", "# 秋天的安排"), T("Visit Grandma on the [[Double Ninth Festival]]", "[[重阳节]]回去看外婆"),
+                              T("Book the train tickets a week ahead", "提前一周买好火车票")]},
+            "card": {"w": 380, "at": "center", "body": [cal_head(OCT, D18), cal_grid(OCT, D18), {"t": "sep"}, cal_detail(D18), CAL_FOOT]},
+            "steps": [
+                {"cap": T("It opens on that day", "直接翻到那一天"), "sub": T("The next Double Ninth Festival from today.", "今天以后最近的那个重阳节。"),
+                 "acts": [["move", "[data-d='2026-10-18']", 0.5, 0.6]], "hold": 1800},
+                {"cap": T("Click a day for its details", "点一天看看"), "sub": T("Solar terms in green, festivals in red.", "绿色的是节气，红色的是节日。"),
+                 "acts": [["click", "[data-d='2026-10-23']", ["set", 3, cal_detail(D23)]]], "hold": 1600},
+                {"cap": T("Page Down for the next month", "PageDown 换到下个月"),
+                 "acts": [["key", T("Page Down", "PageDown"), [["set", 0, cal_head(NOV, N23)], ["set", 1, cal_grid(NOV, N23)], ["set", 3, cal_detail(N23)]]]],
+                 "hold": 1600},
+                {"cap": T("T goes back to today", "按 T 回到今天"),
+                 "acts": [["key", "T", [["set", 0, cal_head(OCT, CAL_TODAY)], ["set", 1, cal_grid(OCT, CAL_TODAY)], ["set", 3, cal_detail(CAL_TODAY)]]]],
+                 "hold": 1400},
+                {"cap": T("⌘C copies the day", "⌘C 复制这一天"), "sub": T("With its lunar date and festival.", "连同农历和节日。"),
+                 "acts": [["key", "⌘C", [["close"], ["toast", COPIED]]]]},
             ],
         },
     },

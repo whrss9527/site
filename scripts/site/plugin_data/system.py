@@ -35,6 +35,11 @@ IC = {
     "gear": '<circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M6 6l1.6 1.6M16.4 16.4 18 18M6 18l1.6-1.6M16.4 7.6 18 6"/>',
     "people": '<circle cx="9" cy="8.5" r="3"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><circle cx="16.5" cy="9" r="2.5"/><path d="M16 14a4.6 4.6 0 0 1 5 4.6"/>',
     "timer": '<circle cx="12" cy="13.4" r="7.8"/><path d="M12 13.4V9.2M9.6 2.8h4.8"/>',
+    "headphones": '<path d="M3.6 15v-3a8.4 8.4 0 0 1 16.8 0v3"/><rect x="3.6" y="13.6" width="4.2" height="7" rx="1.6"/><rect x="16.2" y="13.6" width="4.2" height="7" rx="1.6"/>',
+    "trackpad": '<rect x="2.6" y="4.4" width="15.4" height="11.4" rx="2"/><path d="m13.8 21-2.2-3.2a1.2 1.2 0 0 1 1.9-1.4l.9 1v-6.2a1.2 1.2 0 0 1 2.4 0v3.4l3 .6a1.5 1.5 0 0 1 1.2 1.7L20.4 21"/>',
+    "clock": '<circle cx="12" cy="12" r="8.6"/><path d="M12 7.4V12l3 2"/>',
+    "walk": '<circle cx="13.8" cy="4.4" r="1.9"/><path d="M12.8 7.8 11.2 13.6l2.8 3-.6 4.6M11.2 13.6l-1.8 3.8-3 3.2M7.4 11.6l2.6-3.2 2.8-.6 2 3.4 3 1.2"/>',
+    "checkFill": '<circle cx="12" cy="12" r="9.4" fill="currentColor" stroke="none"/><path d="m7.6 12.2 3 3 5.8-6" stroke="#fff" stroke-width="2.2"/>',
 }
 
 
@@ -97,6 +102,89 @@ def _buttons(btns, tint=None, note=None, text=None, dim=False):
             n = '<span style="flex:1"></span>'
         return f'<div style="display:flex;align-items:center;gap:8px">{n}{b}</div>'
     return {"t": "html", "html": _both(make)}
+
+
+# ---------------------------------------------------------------- Bluetooth Devices
+# Pop's own sample devices (DemoBluetooth): connected ones first, then by name. A row's control is Connect,
+# Disconnect, or a spinner while it connects.
+BT = {
+    "airpods": ("AirPods Pro", "airpods", None),
+    "keyboard": ("Magic Keyboard", "keyboard", 72),
+    "trackpad": ("Magic Trackpad", "trackpad", None),
+    "wh": ("WH-1000XM5", "headphones", None),
+}
+
+
+def _bt_list(connected, connecting=()):
+    order = sorted(BT, key=lambda k: (k not in connected, BT[k][0].lower()))
+
+    def make(i):
+        rows = []
+        for k in order:
+            name, ic, battery = BT[k]
+            on = k in connected
+            if k in connecting:
+                status, ctl = ("Connecting…", "正在连接…")[i], '<span style="width:44px;display:grid;place-items:center"><span class="pl-spin"></span></span>'
+            elif on:
+                status = (f"Connected · Battery {battery}%", f"已连接 · 电量 {battery}%")[i] if battery else ("Connected", "已连接")[i]
+                ctl = f'<span class="pl-btn">{("Disconnect", "断开")[i]}</span>'
+            else:
+                status, ctl = ("Not Connected", "未连接")[i], f'<span class="pl-btn">{("Connect", "连接")[i]}</span>'
+            color = "var(--pl-accent)" if on else "var(--pl-l2)"
+            rows.append(f'<div class="pl-li" data-n="{k}"><span class="pl-li-ic" style="color:{color}">{_svg(IC[ic])}</span>'
+                        f'<span class="pl-li-t"><span>{name}</span><small>{status}</small></span>{ctl}</div>')
+        return '<div class="pl-list">' + "".join(rows) + "</div>"
+    return {"t": "html", "html": _both(make)}
+
+
+# ---------------------------------------------------------------- Break Reminder
+def _br_switch(on):
+    return {"t": "html", "html": _both(lambda i: (
+        '<div style="display:flex;align-items:center;gap:8px;font-size:12.5px"><span style="flex:1">'
+        f'{("Remind me to take breaks", "连续用电脑一段时间后提醒我休息")[i]}</span><span class="pl-sw2{" is-on" if on else ""}"></span></div>'))}
+
+
+def _br_status(text, on):
+    tone = "var(--pl-accent)" if on else "var(--pl-l2)"
+    return {"t": "html", "html": _both(lambda i: (
+        f'<div style="display:flex;align-items:flex-start;gap:8px;font-size:12px;line-height:1.4{"" if on else ";color:var(--pl-l2)"}">'
+        f'<span style="color:{tone};flex:none;margin-top:1px">{_svg(IC["clock"], 1.7, 15)}</span><span>{_pick(text, i)}</span></div>'))}
+
+
+def _popup(label, value, i):
+    """A pop-up menu (a SwiftUI Picker) with its label."""
+    arrows = _svg('<path d="m8 9.5 4-3.5 4 3.5M8 14.5l4 3.5 4-3.5"/>', 2, 11)
+    return (f'<div class="pl-seg-row"><span class="pl-lab">{_pick(label, i)}</span>'
+            f'<span class="pl-btn" style="gap:6px">{_pick(value, i)}{arrows}</span></div>')
+
+
+BR_PICKERS = {"t": "html", "html": _both(lambda i: '<div style="display:flex;flex-direction:column;gap:6px">' + _popup(T("Every", "每隔"), T("45 min", "45 分钟"), i)
+                                         + _popup(T("Break", "休息"), T("5 min", "5 分钟"), i) + "</div>")}
+BR_COVER = {"t": "html", "html": T(
+    '<label style="display:flex;align-items:center;gap:7px;font-size:12px"><span class="pl-chk"></span>Cover the screen during breaks</label>',
+    '<label style="display:flex;align-items:center;gap:7px;font-size:12px"><span class="pl-chk"></span>休息时盖住屏幕</label>')}
+
+
+def _banner(i, kind):
+    if kind == "due":
+        return (f'<div class="pl-bn"><span class="pl-bn-ic">{_svg(IC["walk"], 1.8)}</span><div class="pl-bn-t">'
+                f'<strong>{("Time for a Break", "该休息一下了")[i]}</strong>'
+                f'<span>{("You’ve been at it for 47 min. Get up, move around and look into the distance", "已经连续用了 47 分钟，起来活动活动、看看远处")[i]}</span></div></div>'
+                '<div class="pl-bn-btns">' + "".join(f'<span class="pl-btn{" is-tint" if k == 2 else ""}">{x}</span>' for k, x in enumerate(
+                    (("Skip", "In 5 Minutes", "Take a 5 min Break"), ("跳过", "5 分钟后提醒", "休息 5 分钟"))[i])) + "</div>")
+    if kind == "break":
+        ring = ('<svg class="pl-ring" viewBox="0 0 28 28" aria-hidden="true"><circle class="tr" cx="14" cy="14" r="11.5"/>'
+                '<circle class="v" cx="14" cy="14" r="11.5" pathLength="1"/></svg>')
+        left = ("On a break, {} left", "休息中，还剩 {}")[i].format('<span class="pl-cd">5:00</span>')
+        return (f'<div class="pl-bn is-row">{ring}<div class="pl-bn-t"><strong>{left}</strong>'
+                f'<span>{("Look at something 20 feet away and blink", "看看 6 米外的地方，眨眨眼")[i]}</span></div>'
+                f'<span class="pl-btn">{("End Break", "结束休息")[i]}</span></div>')
+    return (f'<div class="pl-bn is-row"><span class="pl-bn-ic is-ok">{_svg(IC["checkFill"])}</span>'
+            f'<div class="pl-bn-t"><strong>{("Break’s over. Back to it!", "休息好了，接着忙吧")[i]}</strong></div></div>')
+
+
+def banner(kind):
+    return _both(lambda i: _banner(i, kind))
 
 
 # ---------------------------------------------------------------- Window Layout
@@ -593,6 +681,33 @@ DATA = {
             ],
         },
     },
+    "bluetooth": {
+        "chips": [T("Connect · Disconnect", "连接 · 断开"), "AirPods", T("Battery level", "电量")],
+        "points": [
+            T("Lists your <b>paired</b> headphones, AirPods, keyboards, mice, trackpads and game controllers, connected ones first.",
+              "列出<b>配对过的</b>耳机、AirPods、键盘、鼠标、触控板、手柄，连着的排在前面。"),
+            T("<b>Connect or disconnect</b> one with a click, without opening System Settings. A spinner shows while it connects; if it can’t, the card says to check that the device is on, nearby and not connected to another device.",
+              "点一下就<b>连接或者断开</b>，不用打开系统设置；连接要等一会儿时转着圈，连不上会说一句（确认它开着、在附近、没连着别的设备）。"),
+            T("Connected Magic Keyboard, Mouse and Trackpad show their <b>battery level</b>.", "连着的妙控键盘、鼠标、触控板写着<b>电量</b>。"),
+            T("macOS asks once for Bluetooth access the first time; if it was denied, the card tells you where to turn it on. New devices are paired in Bluetooth Settings first.",
+              "第一次用时 macOS 会问一次蓝牙权限，没给的话卡片上告诉你去哪里打开；新设备先在「蓝牙设置」里配对。"),
+        ],
+        "scene": {
+            "src": {"kind": "desk", "app": T("FaceTime", "FaceTime 通话"), "title": T("Weekly sync", "周会"),
+                    "lines": [T("**10:00** · starts in 2 minutes", "**10:00** · 两分钟后开始"), T("Headphones on, then join", "戴上耳机再进会")]},
+            "card": {"w": 360, "btns": [T("Bluetooth Settings", "蓝牙设置"), T("Done", "完成")], "tint": 1,
+                     "body": [_bt_list({"airpods", "keyboard"})]},
+            "steps": [
+                {"cap": T("Your paired devices", "配对过的设备"), "sub": T("Connected ones first, with the keyboard’s battery level.", "连着的排在前面，键盘写着电量。"),
+                 "acts": [["move", "[data-n='wh']", 0.4, 0.5], ["wait", 500]]},
+                {"cap": T("Click Connect", "点「连接」"), "sub": T("A moment later, the headphones are connected.", "等一会儿就连上了。"),
+                 "acts": [["click", "[data-n='wh'] .pl-btn", ["set", 0, _bt_list({"airpods", "keyboard"}, {"wh"})]], ["wait", 1100],
+                          ["set", 0, _bt_list({"airpods", "keyboard", "wh"})]], "hold": 1400},
+                {"cap": T("Click Disconnect to let go of one", "点「断开」放开一个"),
+                 "acts": [["click", "[data-n='airpods'] .pl-btn", ["set", 0, _bt_list({"keyboard", "wh"})]]], "hold": 1500},
+            ],
+        },
+    },
     "resolution": {
         "chips": [T("Looks like 2560 × 1440", "看起来像 2560 × 1440"), T("Refresh rate", "刷新率"), T("Keep within 15 s", "15 秒内点「保留」")],
         "points": [
@@ -708,6 +823,41 @@ DATA = {
                           ["toast", T("Time’s up: Your 25 min timer is done", "时间到：25 分钟的计时到了")]], "hold": 900},
                 {"cap": T("Or start a Pomodoro", "或者开始番茄钟"), "sub": T("25 minutes of focus, then a 5-minute break.", "专注 25 分钟，休息 5 分钟。"),
                  "acts": [["card", TIMER_CARD], ["click", "btn:8", [["close"], ["toast", T("Pomodoro started: focus for 25 minutes", "番茄钟开始：先专注 25 分钟")]]]]},
+            ],
+        },
+    },
+    "breakReminder": {
+        "chips": [T("Every 45 min", "每 45 分钟"), T("Stepping away counts", "离开就算休息"), T("Quiet in meetings", "开会时不打扰")],
+        "points": [
+            T("Once it’s on, a reminder appears <b>at the top of the screen</b> after 45 minutes at the computer (20 minutes to an hour and a half, your choice): take a break, get reminded again in 5 minutes, or skip.",
+              "打开以后，连续用电脑 45 分钟（20 分钟到 1 个半小时可选）就在<b>屏幕上方</b>提醒你休息一下，可以马上休息、5 分钟后再提醒或者跳过。"),
+            T("Breaks last 20 seconds to 10 minutes, counting down in the banner, or <b>covering the screen</b> if you choose; Esc ends one early, and a sound plays when it’s over.",
+              "休息 20 秒到 10 分钟，倒计时显示在上方的小条里，也可以选<b>「休息时盖住屏幕」</b>，按 Esc 随时提前结束；休息完了响一声。"),
+            T("<b>Stepping away</b> for as long as a break (at least 3 minutes) counts as one, time asleep with the lid closed included, and the clock restarts when you’re back.",
+              "<b>离开电脑</b>够久（一次休息的时长，至少 3 分钟）就算休息过了，合上盖子睡着的时间也算在里面，回来重新计时。"),
+            T("No reminders while an app is playing video or in a video call, and that time doesn’t count as a break. Pop picks up the count the next time it starts.",
+              "有 App 在放视频、开视频会议时不提醒，那段时间也不算休息。Pop 下次启动时接着计时。"),
+        ],
+        "scene": {
+            "src": {"kind": "desk", "app": T("Numbers", "Numbers 表格"), "title": T("Q4 budget", "第四季度预算"),
+                    "lines": [T("**Marketing** · 128,000", "**市场** · 128,000"), T("**Travel** · 46,500", "**差旅** · 46,500")]},
+            "card": {"w": 360, "btns": [T("Take a Break Now", "现在休息"), T("Done", "完成")], "tint": 1,
+                     "body": [_br_switch(False),
+                              _br_status(T("Off. When it’s on, you’ll get a reminder to take a 5 min break after 45 min at the computer.",
+                                           "没开。打开以后，连续用电脑 45 分钟会提醒你休息 5 分钟。"), False),
+                              BR_PICKERS, BR_COVER,
+                              {"t": "note", "text": T("Stepping away for 3 minutes or more (or the break length, if longer) counts as a break, including time the Mac spends asleep, and the clock restarts when you’re back. No reminders while an app keeps the display awake, such as during a video or a video call, and that time doesn’t count as a break.",
+                                                      "离开电脑 3 分钟以上（休息时长更长时按休息时长）就算休息过了，合上盖子睡着的时间也算，回来重新计时；有 App 在放视频、开视频会议（不让屏幕变暗）时不提醒，这段时间也不算休息。")}]},
+            "steps": [
+                {"cap": T("Turn it on", "打开它"), "sub": T("Every 45 minutes, a 5-minute break; both can be changed.", "每 45 分钟休息 5 分钟，都可以改。"),
+                 "acts": [["click", ".pl-sw2", [["addClass", ".pl-sw2", "is-on"],
+                                                ["set", 1, _br_status(T("You’ve been at it for under a minute. Break reminder in 45 min", "已经连续用了不到一分钟，45 分钟后提醒休息"), True)]]]],
+                 "hold": 1400},
+                {"cap": T("45 minutes later, a reminder at the top", "45 分钟后，屏幕上方提醒你"), "sub": T("Stepping away for a while counts as a break.", "离开一会儿就算休息过了。"),
+                 "acts": [["click", "btn:1", [["close"], ["fx", "start", {"name": "banner", "html": banner("due")}]]]], "hold": 1600},
+                {"cap": T("Take a break", "休息一下"), "sub": T("The banner counts down; Esc ends it early.", "上方的小条倒计时，Esc 提前结束。"),
+                 "acts": [["click", ".pl-banner .pl-btn.is-tint", ["fx", "html", banner("break")]], ["fx", "count", [300, 300, 293, 2600]]], "hold": 600},
+                {"cap": T("A sound when it’s over", "休息完了响一声"), "acts": [["fx", "html", banner("done")]], "hold": 1600},
             ],
         },
     },
