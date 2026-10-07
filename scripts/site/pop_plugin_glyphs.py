@@ -119,6 +119,9 @@ G = {
     "mediaInfo": '<path d="M12 18H4.6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10.4a2 2 0 0 1 2 2v5.4"/><path d="M6 3v15M13.6 3v8M2.6 7.2H6M2.6 13.8H6M13.6 7.2H17"/><circle cx="17.6" cy="17.4" r="4"/><path d="M17.6 16.6v2.8"/><circle cx="17.6" cy="15" r=".6" ' + F + '/>',
     "subtitles": '<rect x="2.6" y="4.6" width="18.8" height="14.8" rx="3"/><path d="M10.4 10.2a2.4 2.4 0 1 0 0 3.6M17 10.2a2.4 2.4 0 1 0 0 3.6"/>',
     "encryptFiles": '<path d="M12.4 21H6.2a1.5 1.5 0 0 1-1.5-1.5v-15A1.5 1.5 0 0 1 6.2 3h7.3l4.8 4.8v2"/><path d="M13.3 3v4.9h4.9"/><rect x="13.6" y="14.6" width="7.6" height="6.2" rx="1.4"/><path d="M15.4 14.6v-1.6a2 2 0 0 1 4 0v1.6"/>',
+    "mouseWheel": '<rect x="6" y="2" width="12" height="20" rx="6"/><path d="M12 2v7M6 10h12"/><rect x="11" y="5" width="2" height="4" rx="1"/>',
+    "holdToQuit": '<path d="M9 9V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V9Z"/>',
+    "sleepTimer": '<path d="M14 3a9 9 0 1 0 7 13 8 8 0 0 1-7-13Z"/><path d="M17 3h4l-4 5h4M18 11h3l-3 4h3"/>',
 }
 
 
