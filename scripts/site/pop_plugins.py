@@ -9,7 +9,7 @@ import re
 
 # The Pop version this catalog and the plugin pages were last checked against (the top section of Pop's
 # CHANGELOG.md). A daily routine compares it with Pop's latest release and opens a pull request to catch up.
-SYNCED_WITH = "0.63.0"
+SYNCED_WITH = "0.67.1"
 
 SLUGS = {"airDrop": "airdrop", "windowPiP": "window-pip"}
 
@@ -494,6 +494,18 @@ PLUGINS = [
       "Encrypt Files", "加密打包",
       "Put the selected files and folders into a password-protected (AES-256) disk image that opens on any Mac with a double-click and the password; use it before sending files or saving them to a USB drive or cloud storage",
       "把选中的文件和文件夹放进一个用密码加密（AES-256）的磁盘映像，在任何一台 Mac 上双击、输入密码就能打开；发给别人、存到 U 盘或者网盘前用"),
+    P("mouseWheel", "files", "computermouse", ["mouseWheel"], [],
+      "Mouse Wheel", "鼠标滚轮",
+      "Reverse the scroll direction of a mouse wheel while the trackpad keeps natural scrolling, or make it scroll faster; only wheel mice change, trackpads and Magic Mouse stay as they are",
+      "把鼠标滚轮的方向反过来（触控板还是自然滚动），也可以让它滚得快一点；只改滚轮鼠标，触控板、妙控鼠标照旧"),
+    P("holdToQuit", "files", "command", ["holdToQuit"], [],
+      "Hold to Quit", "长按 ⌘Q 退出",
+      "Quit apps only after holding ⌘Q for a moment (or pressing it twice), so a stray ⌘Q never closes a whole app; some apps can still quit right away",
+      "按住 ⌘Q 一会儿（或者连按两下）才退出 App，误按一下不会关掉整个 App；可以让有的 App 照旧一按就退出"),
+    P("sleepTimer", "files", "moon.zzz", ["sleepTimer"], [],
+      "Sleep Timer", "定时睡眠",
+      "Put your Mac to sleep, turn off the display, lock the screen or shut down after a while or at a set time. A last-minute note lets you postpone or cancel, and the volume fades out before sleep or shutdown",
+      "过一会儿或者到几点让 Mac 睡眠、熄屏、锁屏或者关机；最后一分钟提示，可以推迟、取消，睡眠、关机前慢慢把音量调小"),
 ]
 
 
