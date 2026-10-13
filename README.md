@@ -26,6 +26,7 @@ CNAME                   whrss.com (kept for reference; see "Custom domain" below
 robots.txt, sitemap.xml
 scripts/site/           The page generator (see "Editing pages")
 scripts/check_links.py  Checks links, #anchors, no requests to other origins, and the language pairs
+scripts/check_generated.py  Checks committed pages against an isolated rebuild
 scripts/og/render.js    Renders assets/og/*.png from the site's own demos (Node + Playwright; not needed to build)
 .github/workflows/pages.yml  Deploys to GitHub Pages on every push to main
 ```
@@ -55,6 +56,12 @@ python3 scripts/site/build.py     # rewrites every page and sitemap.xml (lastmod
 python3 scripts/check_links.py
 git diff                          # review what changed
 ```
+
+Before submitting a pull request, run `python3 scripts/check_generated.py` and
+`python3 scripts/check_links.py`. The first check rebuilds in a temporary copy,
+using the date already in `sitemap.xml`, and detects changed, missing or obsolete
+generated pages without modifying the checkout. Both checks run automatically
+on pull requests and before the main branch deploys to Pages.
 
 Edit the English and Chinese text together: the two versions of a page must say the same thing. For the privacy policies that is a requirement, not a nicety. If you edit an HTML file by hand, make the same change in the generator, or the next build undoes it.
 

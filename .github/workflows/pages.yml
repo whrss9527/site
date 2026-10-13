@@ -25,6 +25,9 @@ jobs:
       - name: Check out
         uses: actions/checkout@v7
 
+      - name: Check generated pages
+        run: python3 scripts/check_generated.py
+
       - name: Check links and external requests
         run: python3 scripts/check_links.py
 
