@@ -123,7 +123,29 @@ scripts/site/plugin_data/*.py      Per plugin: chips, points and the animation (
 assets/pop-plugins.js / .css       The gallery filter and the animation player; the art, the stage, the pictures
 ```
 
-The catalog is copied from Pop (`Pop/Plugins/PluginCatalog.swift`, the English strings from `en.lproj/Localizable.strings`, `accepts` from each plugin's `PluginInfo`; the order within a category follows the plugin table in Pop's `docs/guide.md`). `SYNCED_WITH` in `pop_plugins.py` is the Pop version the pages were last checked against; a daily routine compares it with Pop's latest release and, when Pop has moved on, opens a pull request that brings the catalog and the pages up to date. When Pop adds, renames or removes a plugin, update `pop_plugins.py`, add a glyph and a `plugin_data` entry; the build fails if a plugin has no entry or an entry is malformed (`scripts/site/plugin_check.py`). While working on a few entries, `python3 scripts/site/pop_plugin_pages.py --only qrCode,hash` checks and writes just those pages. A page's address is the plugin ID in lower case with dashes (`qrCode` → `/pop/plugins/qr-code/`).
+The catalog is copied from Pop (`Pop/Plugins/PluginCatalog.swift`, the English strings from `en.lproj/Localizable.strings`, independently distributed bundles' `plugin.json`, and `accepts` from each plugin's `PluginInfo`; the order within a category follows the plugin table in Pop's `docs/guide.md`). `SYNCED_WITH` in `pop_plugins.py` is the published stable Pop version the catalog was last checked against. Updates are manual; this repository does not run a daily catalog sync or automatically open update pull requests. When Pop adds, renames or removes a plugin, update `pop_plugins.py`, add a glyph and a `plugin_data` entry; the build fails if a plugin has no entry or an entry is malformed (`scripts/site/plugin_check.py`). While working on a few entries, `python3 scripts/site/pop_plugin_pages.py --only qrCode,hash` checks and writes just those pages. A page's address is the plugin ID in lower case with dashes (`qrCode` → `/pop/plugins/qr-code/`).
+
+`scripts/check_pop_catalog.py` compares IDs, names, action IDs and summaries in
+both languages. It accepts one saved GitHub stable-release response, its plugin
+manifest and a local Pop checkout containing that exact tag. It verifies the
+manifest's published SHA256 and build/source match, reads source at the tag
+without switching the Pop checkout, and reports added, removed or changed
+entries. It writes no catalog files: exit 0 means no drift, 1 means drift and
+2 means the input or source cannot be verified. Beta, draft, mismatched data and
+unsupported source formats fail instead of silently updating the site.
+
+For example, after saving `gh api repos/whrss9527/pop/releases/latest` to
+`/tmp/pop-release.json`, downloading that release's `plugins-VERSION.json` and
+fetching its stable tag into a Pop checkout:
+
+```sh
+python3 scripts/check_pop_catalog.py --pop-repo ../pop \
+  --release /tmp/pop-release.json --manifest /tmp/plugins-VERSION.json
+```
+
+The last successful comparison is recorded in
+`scripts/site/pop_catalog_baseline.json`: all 108 entries match stable 0.70.0.
+This checks catalog metadata, not the visual accuracy of every plugin animation.
 
 **An entry** in `plugin_data/<module>.py` (`DATA = {plugin id: entry}`). Any text that differs between the languages is written `T("English", "中文")`:
 

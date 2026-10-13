@@ -1,0 +1,15 @@
+{
+  "version": "0.70.0",
+  "source_sha": "045c5d1b42ff683ba7e917f19cdf157ad7afe496",
+  "manifest_sha256": "263e4a3e7790e9f7b9cc1b3c92cf7c59c96108daceb06af3b1ab3149103da5bc",
+  "source_files_sha256": {
+    "Pop/Plugins/PluginCatalog.swift": "ef3994bed8ae298f744361f757c7642eb677efc1b26e6900e5c623d6b0f0e775",
+    "Pop/Resources/en.lproj/Localizable.strings": "1e2ad024ac765267d812ff838bba7265c12064818a0614520b1be5cba8023c5f",
+    "Pop/Core/AppSettings.swift": "ba9c46c47e26b3266a9aad558e50b3139cedcba424ba2de4efc5a05d49ca34f1",
+    "PluginBundles/SleepTimer/plugin.json": "4cd3968c209c00e70933e19c60ff55f69abd6a2602c54940fcaf6a44f7489ce3"
+  },
+  "plugins": 108,
+  "added": [],
+  "removed": [],
+  "changes": []
+}
