@@ -268,6 +268,7 @@ POP = {
     "update_note": "Pop checks GitHub Releases at launch and every 6 hours (you can turn this off, and opt out of betas). “Update Now” downloads the new version, verifies its SHA-256 checksum and code signature — it must be signed with the same certificate — then replaces Pop and relaunches. Settings, plugins and history are kept.",
     "faq": [
         ("Is it free?", "Yes. Pop is free and open source under GPL-3.0: no account, no subscription, no in-app purchases."),
+        ("How do I automate Zen and scenes?", "Install Meno 0.13 or later, then in Shortcuts add Set Zen Mode or Apply Saved Scene from Apps › Meno. Save a scene in Meno before selecting it. Both actions open Meno and return a Boolean result. Enabling Zen and applying scenes require Accessibility; disabling Zen remains available. Rename a scene freely; choose another scene if it was deleted."),
         ("Why does it need Accessibility?", [
             "macOS only lets apps with Accessibility access watch mouse buttons system-wide, read the selection in other apps and paste into them. Pop needs exactly that: to notice a long right-click, read what you selected, and put results back when you choose “Replace”.",
             "For the same reason Pop can’t be in the Mac App Store — the sandbox doesn’t allow it — so it’s distributed on GitHub and here."]),
@@ -375,6 +376,7 @@ MENO = {
         ("Groups", "Put related items behind one icon; click it to show them in a Shelf right below."),
         ("Show when it changes", "A hidden item appears for a moment when its icon or text changes, like a failed sync."),
         ("Item shortcuts and links", "Open Wi-Fi, Bluetooth or a timer from anywhere. <code>meno://</code> links work in Shortcuts and scripts."),
+        ("Shortcuts actions", "From Meno 0.13, set Zen mode or apply a saved scene from Shortcuts and pass the result to another action."),
         ("Insights, on device", "How often you reveal, your most used items, and suggestions to keep or stash — never leaves your Mac."),
     ],
     "specs": [
@@ -446,7 +448,7 @@ STOX = {
         ("Quiet on battery", "Refreshes once a minute when markets are closed and stops while the Mac sleeps."),
         ("Groups and notes", "Group your watchlist and keep a one-line note on why you’re watching a stock."),
         ("Copy to spreadsheets", "Copy holdings, trades and P&amp;L as tables for Numbers or Excel."),
-        ("Light", "About 30 MB of memory. No sign-up and no API key."),
+        ("Shortcuts", "From Stox 1.6, get a stock price as a number for the next action, or open the quotes panel."),
     ],
     "specs": [
         ("macOS", "13 Ventura or later; Liquid Glass on macOS 26"),
@@ -465,6 +467,7 @@ STOX = {
     "update_note": "Stox checks GitHub Releases at launch and every 6 hours (you can turn it off in About &amp; Updates). When there’s a new version, an Update button appears at the bottom of the panel; Stox verifies the SHA-256 checksum and signature, replaces itself and relaunches, keeping your watchlist and settings.",
     "faq": [
         ("Is it free?", "Yes. Stox is free and open source under GPL-3.0. Quotes come from free public sources, so there’s no sign-up and no API key. A Mac App Store edition is being prepared; the GitHub version stays free."),
+        ("How do I use Shortcuts?", "With Stox 1.6 or later installed, open Shortcuts and add an action from Apps › Stox: Get Stock Price or Open Quotes Panel. Enter a code such as <code>usAAPL</code> and connect the price to another action. Price queries need a network connection; invalid codes or unavailable quotes report an error. Queries leave your watchlist and clipboard untouched."),
         ("Does it need Accessibility?", "No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync."),
         ("Where do the quotes come from?", "From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice."),
         ("Where are my holdings stored?", f'On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.'),
