@@ -410,7 +410,7 @@ STOX = {
     "desc": "Stox shows China A-share, Hong Kong and US stock quotes in the Mac menu bar, with charts, holdings and P&L, alerts and iCloud sync. Right-click to hide it all. Free and open source.",
     "say": "/stɒks/ — “stocks”, squeezed into four letters.",
     "lede": "China A-share, Hong Kong and US quotes in your menu bar, with holdings and P&amp;L, alerts and iCloud sync. One right-click and only a quiet icon is left.",
-    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "English, 简体中文"],
+    "meta": ["Free and open source", "macOS 13 or later", "Apple silicon and Intel", "English, 简体中文, 繁體中文"],
     "extra_head": STOX_HEAD,
     "stage": lambda r: '<div class="compose stox-stage">' +
         stox_demo(r, "en", "detail", desk=True) +
@@ -454,7 +454,7 @@ STOX = {
         ("macOS", "13 Ventura or later; Liquid Glass on macOS 26"),
         ("Mac", "Universal: Apple silicon and Intel"),
         ("Permissions", "None required. Notifications for alerts; iCloud Drive access only if you turn on sync."),
-        ("Language", "English, 简体中文"),
+        ("Language", "English, 简体中文, 繁體中文"),
         ("Data", "Tencent Finance public quotes, Sina Finance as backup. Hong Kong quotes are delayed about 15 minutes."),
         ("Download", "About 4 MB (<code>Stox.zip</code>)"),
         ("License", "GPL-3.0"),
@@ -471,7 +471,7 @@ STOX = {
         ("Does it need Accessibility?", "No. Stox doesn’t ask for Accessibility or Screen Recording. Its global shortcut uses the standard hot-key API, which needs no permission. It only asks to send notifications, for alerts, and to use iCloud Drive if you turn on sync."),
         ("Where do the quotes come from?", "From Tencent Finance’s public quote service, with Sina Finance as an automatic backup. Hong Kong quotes are delayed about 15 minutes. Data is for reference only and is not investment advice."),
         ("Where are my holdings stored?", f'On your Mac, and in your own iCloud Drive (<code>Stox/sync.json</code>) if you turn on sync. Nothing is sent to me. See the <a href="../privacy/stox/">privacy policy</a>.'),
-        ("Can I use it in English?", "Yes. Stox’s interface is in English and Simplified Chinese and follows your Mac’s language. Names of Chinese stocks stay in Chinese, as the quote sources give them."),
+        ("Can I use it in English?", "Yes. Stox’s interface is in English, Simplified Chinese and Traditional Chinese and follows your Mac’s language. Names of Chinese stocks stay in Chinese, as the quote sources give them."),
     ],
 }
 
