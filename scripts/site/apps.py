@@ -268,7 +268,6 @@ POP = {
     "update_note": "Pop checks GitHub Releases at launch and every 6 hours (you can turn this off, and opt out of betas). “Update Now” downloads the new version, verifies its SHA-256 checksum and code signature — it must be signed with the same certificate — then replaces Pop and relaunches. Settings, plugins and history are kept.",
     "faq": [
         ("Is it free?", "Yes. Pop is free and open source under GPL-3.0: no account, no subscription, no in-app purchases."),
-        ("How do I automate Zen and scenes?", "Install Meno 0.13 or later, then in Shortcuts add Set Zen Mode or Apply Saved Scene from Apps › Meno. Save a scene in Meno before selecting it. Both actions open Meno and return a Boolean result. Enabling Zen and applying scenes require Accessibility; disabling Zen remains available. Rename a scene freely; choose another scene if it was deleted."),
         ("Why does it need Accessibility?", [
             "macOS only lets apps with Accessibility access watch mouse buttons system-wide, read the selection in other apps and paste into them. Pop needs exactly that: to notice a long right-click, read what you selected, and put results back when you choose “Replace”.",
             "For the same reason Pop can’t be in the Mac App Store — the sandbox doesn’t allow it — so it’s distributed on GitHub and here."]),
@@ -395,6 +394,7 @@ MENO = {
     "update_note": "Check for updates in Settings › About, or turn on a daily check in General. “Install and Relaunch” downloads the release from GitHub, verifies its checksum, version and code signature, replaces Meno and opens it again.",
     "faq": [
         ("Is it free?", "Yes. Meno is free and open source under GPL-3.0, with no account and nothing to buy."),
+        ("How do I automate Zen and scenes?", "Install Meno 0.13 or later, then in Shortcuts add Set Zen Mode or Apply Saved Scene from Apps › Meno. Save a scene in Meno before selecting it. Both actions open Meno and return a Boolean result. Enabling Zen and applying scenes require Accessibility; disabling Zen remains available. Rename a scene freely; choose another scene if it was deleted."),
         ("Why does it need Accessibility?", "Meno reads menu bar items through each app’s accessibility tree, opens them from the Shelf, Quick Open and shortcuts, and arranges them by performing ⌘-drags for you. macOS allows all three only with Accessibility access."),
         ("What is Screen Recording for?", "It’s optional. With it, the Shelf shows the real artwork of hidden items and Meno notices when their icons change (macOS 14–26). Only menu bar items are captured, and nothing is recorded or saved. Without it, Meno shows app icons."),
         ("Does Meno go online?", f'Only to ask GitHub for the latest release — when you check, or once a day if you turned that on — and to download a release you chose to install. No analytics, no accounts. See the <a href="../privacy/meno/">privacy policy</a>.'),
