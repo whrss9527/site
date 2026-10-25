@@ -1,6 +1,6 @@
 # whrss.com
 
-The website for whrss9527's Mac apps — [Pop](https://github.com/whrss9527/pop), [Meno](https://github.com/whrss9527/meno), [Stox](https://github.com/whrss9527/stox) and [Proxi](https://github.com/whrss9527/proxi) — served at **https://whrss.com**. The blog that used to live there moves to **https://blog.whrss.com**.
+The website for whrss9527's Mac apps — [Pop](https://github.com/whrss9527/pop), [Meno](https://github.com/whrss9527/meno), [Stox](https://github.com/whrss9527/stox) and [Proxi](https://github.com/whrss9527/proxi) — served at **https://whrss.com**. The blog now lives at **https://blog.whrss.com**, in the separate [blog repository](https://github.com/whrss9527/blog).
 
 Plain HTML and CSS, in English and Simplified Chinese. The pages are committed as HTML and served as they are; a small Python script (standard library only) regenerates them. No framework, little JavaScript (the language menu, scroll motion, the 404 page, the four interactive app demos and the plugin animations; everything works without it), and no requests to other origins (no CDNs, web fonts or analytics), which is what the privacy policies promise.
 
@@ -22,7 +22,7 @@ assets/pop-plugins.js/.css The plugin gallery's filter and the plugin pages' ani
 assets/icons/           App icons (256 px, from each app's repository)
 assets/og/              Open Graph images, 1200 × 630, per page and language (rendered by scripts/og/render.js)
 assets/favicon.svg, assets/apple-touch-icon.png
-CNAME                   whrss.com (kept for reference; see "Custom domain" below)
+CNAME                   whrss.com (kept for reference; see "Domain maintenance" below)
 robots.txt, sitemap.xml
 scripts/site/           The page generator (see "Editing pages")
 scripts/check_links.py  Checks links, #anchors, no requests to other origins, and the language pairs
@@ -101,7 +101,7 @@ Demos are built lazily: each is built when it comes within a screen of the viewp
 | Stox | `figure.sxd` | `detail`, `list`, `search`, `kline`, `book`, `holdings`, `calendar` | The menu bar panel: watchlist, charts, order book, holdings and the P&L calendar, in English or Chinese as the app shows them | Note |
 | Proxi | `figure.pxd` | `panel`, `profiles`, `detect`, `automation`, `general`, `sync`, `diagnostics` | The menu bar panel with sample profiles (a corporate proxy, Charles, Proxyman, mitmproxy), the right-click menu, and the settings window: Proxy Profiles with the Detect sheet, Automation, General, Hotkey, iCloud Sync, Diagnose and About, in English or Chinese as the app shows them | Note |
 
-Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Stox "English, 简体中文"; Meno "English, 简体中文, 繁體中文"; Proxi "English, 简体中文". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
+Interface languages are stated briefly, in the spec rows and the hero lines: Pop and Proxi "English, 简体中文"; Meno and Stox "English, 简体中文, 繁體中文". The pages don't carry version-by-version language history. The Proxi demo shows English on the English page.
 
 ### Plugin pages
 
@@ -222,32 +222,32 @@ Use a real server rather than opening the files directly, so that `/pop/` resolv
 
 ## Deployment
 
-`.github/workflows/pages.yml` runs on every push to `main` (and by hand from the Actions tab). It checks the links, copies the site into `_site/` without `README.md`, `scripts/` and `.github/`, and deploys it with `actions/upload-pages-artifact` and `actions/deploy-pages`.
+`.github/workflows/pages.yml` runs on every push to `main` (and by hand from the Actions tab). It checks generated-page consistency and links, copies the site into `_site/` without `README.md`, `scripts/` and `.github/`, and deploys it with `actions/upload-pages-artifact` and `actions/deploy-pages`.
 
-## Owner checklist
+## Domain maintenance
 
-1. **Pages source.** Repository Settings → Pages → *Build and deployment* → Source: **GitHub Actions**.
-2. **Push `main`.** The first run of *Deploy to GitHub Pages* publishes the site at `https://whrss9527.github.io/site/`. Leave *Custom domain* **empty** for now: as soon as it is set, GitHub redirects the github.io address to `whrss.com`, which still shows the blog until step 4 is done.
-3. **Move the blog first.** whrss.com currently points at the blog (through Cloudflare). Before changing the apex records, note where they point today, create `blog.whrss.com` for the same server, and make sure the blog server answers for `blog.whrss.com` with a valid certificate. Otherwise the blog goes offline when the apex moves.
-4. **DNS for whrss.com** (at your DNS provider, currently Cloudflare):
+The domain migration is complete: this repository serves `https://whrss.com`,
+and the separate static [blog](https://github.com/whrss9527/blog) serves
+`https://blog.whrss.com`. Both use GitHub Pages; the blog no longer needs the
+old goblog server. The steps below describe ongoing maintenance.
 
-   | Type  | Name  | Value |
-   | ----- | ----- | ----- |
-   | A     | `@`   | `185.199.108.153` |
-   | A     | `@`   | `185.199.109.153` |
-   | A     | `@`   | `185.199.110.153` |
-   | A     | `@`   | `185.199.111.153` |
-   | AAAA  | `@`   | `2606:50c0:8000::153` |
-   | AAAA  | `@`   | `2606:50c0:8001::153` |
-   | AAAA  | `@`   | `2606:50c0:8002::153` |
-   | AAAA  | `@`   | `2606:50c0:8003::153` |
-   | CNAME | `www` | `whrss9527.github.io` |
-   | A / CNAME | `blog` | the blog server (what `@` points to today) |
-
-   Remove any other A, AAAA or CNAME records for `@` and `www`. On Cloudflare, set the GitHub records to **DNS only** (grey cloud): GitHub has to see its own IPs to issue the certificate. If the domain has CAA records, allow `letsencrypt.org`.
-5. **Custom domain.** Only now set Settings → Pages → *Custom domain* to `whrss.com` and save (the `CNAME` file is **ignored** for Actions-based Pages). Optionally verify the domain first in your account's Settings → Pages → *Verified domains*, which stops anyone else from claiming it.
-6. **HTTPS.** When Settings → Pages shows the certificate as issued (minutes to about an hour after DNS resolves), tick **Enforce HTTPS**. `www.whrss.com` then redirects to `whrss.com`.
-7. **Check.** `https://whrss.com`, `https://www.whrss.com`, `https://blog.whrss.com`, and an old blog URL such as `https://whrss.com/posts/<slug>`: addresses that only existed on the blog (`/posts/`, `/feed`, `/tags/`, `/archives`, `/page/`, `/search`) are sent to the same path on blog.whrss.com by the 404 page; anything else shows the 404 page with a link. RSS readers don't run that script, so feed subscribers need the new feed address `https://blog.whrss.com/feed`.
+1. **Site changes.** Open a pull request and pass the generated-page and link
+   checks. After review and merge into `main`, the Pages workflow deploys the
+   committed pages. Check its result in Actions before treating a change as live.
+2. **Site domain.** Keep this repository's Pages source set to **GitHub Actions**,
+   its custom domain set to `whrss.com`, and **Enforce HTTPS** enabled. The
+   `CNAME` file records the domain; Actions-based Pages takes its custom domain
+   from repository settings. Domain, DNS and HTTPS changes are owner operations.
+3. **Blog domain.** Maintain `blog.whrss.com` through the blog repository's
+   [Pages deployment instructions](https://github.com/whrss9527/blog#发布到-github-pages一次性设置).
+   Content and feed changes belong there, not in this site's page generator.
+4. **Check after a domain change.** Check `https://whrss.com`,
+   `https://www.whrss.com`, `https://blog.whrss.com`, and a known old blog URL such
+   as `https://whrss.com/posts/<slug>`. This site's 404 page sends legacy blog
+   paths such as `/posts/`, `/feed`, `/tags/`, `/archives`, `/page/` and `/search`
+   to the same path on `blog.whrss.com`; other paths show the 404 page. This
+   redirect needs JavaScript, so RSS readers should use the blog's canonical
+   Atom URL, `https://blog.whrss.com/feed.xml` (the blog also keeps `/feed`).
 
 ## Privacy policies
 
