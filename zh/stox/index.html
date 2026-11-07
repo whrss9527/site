@@ -146,11 +146,11 @@
       <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
-          <dl class="specs"><dt>macOS</dt><dd>13 Ventura 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel</dd><dt>权限</dt><dd>无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。</dd><dt>语言</dt><dd>简体中文、繁體中文、English</dd><dt>数据</dt><dd>腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。</dd><dt>下载</dt><dd>约 4 MB（<code>Stox.zip</code>）</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
+          <dl class="specs"><dt>macOS</dt><dd>13 Ventura 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel</dd><dt>权限</dt><dd>无需特殊权限。提醒需要通知权限；只有开启同步时才需要访问 iCloud 云盘。</dd><dt>语言</dt><dd>简体中文、繁體中文、English</dd><dt>数据</dt><dd>腾讯财经公开行情，新浪财经作为备用。港股行情延时约 15 分钟。</dd><dt>下载</dt><dd><code>Stox.dmg</code>（通用版）</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
         </div>
         <div class="panel-block glass">
           <h2>安装与更新</h2>
-          <ol class="steps"><li>从最新版本下载 <code>Stox.zip</code> 并解压。</li><li>把 <strong>Stox.app</strong> 拖进“应用程序”文件夹，双击打开。从 0.46.0 起，发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>Stox 只出现在菜单栏里：左键打开面板，右键隐藏行情。设置和退出在面板底部。</li></ol>
+          <ol class="steps"><li>从最新版本下载 <code>Stox.dmg</code>，打开磁盘映像。</li><li>把 <strong>Stox.app</strong> 拖进“应用程序”文件夹，双击打开。从 0.46.0 起，发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>Stox 只出现在菜单栏里：左键打开面板，右键隐藏行情。设置和退出在面板底部。</li></ol>
           <p class="install-way">也可以用 Homebrew 代替第 1、2 步：</p>
           <div class="cmd"><code>brew install --cask whrss9527/tap/stox</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/stox" data-done="已复制" hidden>复制</button></div>
           <p class="note">Stox 在启动时和之后每 6 小时检查一次 GitHub Releases（可以在“关于与更新”里关闭）。有新版本时，面板底部会出现“更新”按钮；Stox 会校验 SHA-256 校验和与签名，替换自己并重新打开，自选和设置都会保留。</p>

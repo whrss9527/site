@@ -146,11 +146,11 @@
       <div class="info-grid rv-group">
         <div class="panel-block glass">
           <h2 id="req-title">系统要求</h2>
-          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel（也提供单一架构版本）</dd><dt>权限</dt><dd>安装命令行工具需要管理员密码，修改系统代理时 macOS 也可能要求输入。定位权限只用于读取 Wi-Fi 名称、按网络自动切换。不需要辅助功能权限。</dd><dt>语言</dt><dd>English、简体中文</dd><dt>下载</dt><dd><code>Proxi-macos.zip</code>（通用版），或 <code>-arm64</code> / <code>-x86_64</code> 版</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
+          <dl class="specs"><dt>macOS</dt><dd>14 Sonoma 或更新；macOS 26 上为 Liquid Glass</dd><dt>Mac</dt><dd>通用：Apple 芯片与 Intel（也提供单一架构版本）</dd><dt>权限</dt><dd>安装命令行工具需要管理员密码，修改系统代理时 macOS 也可能要求输入。定位权限只用于读取 Wi-Fi 名称、按网络自动切换。不需要辅助功能权限。</dd><dt>语言</dt><dd>English、简体中文</dd><dt>下载</dt><dd><code>Proxi-macos.dmg</code>（通用版）；另有单一架构 ZIP 版</dd><dt>许可证</dt><dd>GPL-3.0</dd></dl>
         </div>
         <div class="panel-block glass">
           <h2>安装与更新</h2>
-          <ol class="steps"><li>从最新版本下载 <code>Proxi-macos.zip</code> 并解压。</li><li>把 <strong>Proxi.app</strong> 拖进“应用程序”文件夹，双击打开。发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>在设置 › 代理配置里添加你的代理服务器（或者点“自动检测”），选好生效范围，打开开关。</li></ol>
+          <ol class="steps"><li>从最新版本下载 <code>Proxi-macos.dmg</code>，打开磁盘映像。</li><li>把 <strong>Proxi.app</strong> 拖进“应用程序”文件夹，双击打开。发布的版本都用 Developer ID 签名并通过苹果公证。</li><li>在设置 › 代理配置里添加你的代理服务器（或者点“自动检测”），选好生效范围，打开开关。</li></ol>
           <p class="install-way">也可以用 Homebrew 代替第 1、2 步：</p>
           <div class="cmd"><code>brew install --cask whrss9527/tap/proxi</code><button type="button" class="btn btn-glass btn-xs copy" data-copy="brew install --cask whrss9527/tap/proxi" data-done="已复制" hidden>复制</button></div>
           <p class="note">Proxi 在启动时和之后每 6 小时检查一次 GitHub Releases（可以关闭）。点“更新”会下载适合你芯片的版本，比对 SHA-256，替换 Proxi 并重新打开；只会安装同一开发者签名的更新。配置和设置都会保留。</p>
