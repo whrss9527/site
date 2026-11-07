@@ -115,14 +115,14 @@ def page(zh):
     t = c.t
     facts = [
         (ICON_SHIELD, t("Signed and notarized", "签名并经过公证"),
-         t("Current releases are signed with a Developer ID and notarized by Apple. Download, unzip, double-click.",
-           "现在发布的版本都用 Developer ID 签名并通过苹果公证。下载、解压、双击就能打开。")),
+         t("Current releases are signed with a Developer ID and notarized by Apple. Open the DMG and drag the app into Applications.",
+           "现在发布的版本都用 Developer ID 签名并通过苹果公证。打开 DMG，把应用拖进“应用程序”即可。")),
         (ICON_UPDATE, t("Updates itself", "一键更新"),
          t("Each app checks GitHub Releases, verifies the SHA-256 checksum and code signature, replaces itself and relaunches.",
            "直接从 GitHub Releases 检查新版本，比对 SHA-256 校验和与代码签名，替换后自动重新打开。")),
         (ICON_LOCK, t("Private by default", "数据留在你这儿"),
-         t("No accounts, no analytics, no servers of mine. Your data stays on your Mac or in your own iCloud.",
-           "不用注册，没有统计，也没有我的服务器。数据只在你的 Mac 或你自己的 iCloud 里。")),
+         t("No accounts or usage telemetry. Local tools run on your Mac; online features connect to their services. See each app’s privacy policy for details.",
+           "不用注册，不上传使用情况统计。本地工具在 Mac 上运行；联网功能会连接相应服务，详见各应用的隐私说明。")),
         (ICON_CODE, t("Open source", "开源"),
          t("All four are free software under GPL-3.0. Read the code, build it yourself, send a fix.",
            "四个应用都以 GPL-3.0 开源。可以读代码、自己编译，也欢迎提交修改。")),
